@@ -7,14 +7,14 @@ namespace Nelibur.ServiceModel.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public sealed class SoapService : ISoapService
     {
-        public Message Process(Message message)
+        public void Process(Message message)
         {
-            return SoapServiceProcessor.Process(message);
+            SoapServiceProcessor.Process(message);
         }
 
-        public void ProcessWithoutResonse(Message message)
+        public Message ProcessWithResponse(Message message)
         {
-            SoapServiceProcessor.ProcessWithoutResonse(message);
+            return SoapServiceProcessor.ProcessWithResponse(message);
         }
     }
 }

@@ -6,11 +6,11 @@ namespace Nelibur.ServiceModel.Contracts
     [ServiceContract]
     public interface ISoapService
     {
-        [OperationContract(Action = ServiceMetadata.Operations.Process,
-            ReplyAction = ServiceMetadata.Operations.ProcessResponse)]
-        Message Process(Message message);
+        [OperationContract(Action = ServiceMetadata.Operations.Process)]
+        void Process(Message message);
 
-        [OperationContract(Action = ServiceMetadata.Operations.ProcessWithoutResponse)]
-        void ProcessWithoutResonse(Message message);
+        [OperationContract(Action = ServiceMetadata.Operations.ProcessWithResponse,
+            ReplyAction = ServiceMetadata.Operations.ProcessResponse)]
+        Message ProcessWithResponse(Message message);
     }
 }

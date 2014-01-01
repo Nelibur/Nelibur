@@ -13,7 +13,7 @@ namespace Nelibur.ServiceModel.Clients
         public static void Delete<TRequest>(TRequest request)
             where TRequest : class
         {
-            ProcessWithoutResonse(request, OperationTypeHeader.Delete);
+            Process(request, OperationTypeHeader.Delete);
         }
 
         public static Task DeleteAsync<TRequest>(TRequest request)
@@ -26,7 +26,7 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class
             where TResponse : class
         {
-            return Process<TRequest, TResponse>(request, OperationTypeHeader.Get);
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Get);
         }
 
         public static Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
@@ -39,14 +39,14 @@ namespace Nelibur.ServiceModel.Clients
         public static void Post<TRequest>(TRequest request)
             where TRequest : class
         {
-            ProcessWithoutResonse(request, OperationTypeHeader.Post);
+            Process(request, OperationTypeHeader.Post);
         }
 
         public static TResponse Post<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
-            return Process<TRequest, TResponse>(request, OperationTypeHeader.Post);
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Post);
         }
 
         public static Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
@@ -65,14 +65,14 @@ namespace Nelibur.ServiceModel.Clients
         public static void Put<TRequest>(TRequest request)
             where TRequest : class
         {
-            ProcessWithoutResonse(request, OperationTypeHeader.Put);
+            Process(request, OperationTypeHeader.Put);
         }
 
         public static TResponse Put<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
-            return Process<TRequest, TResponse>(request, OperationTypeHeader.Put);
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Put);
         }
 
         public static Task PutAsync<TRequest>(TRequest request)
@@ -91,47 +91,48 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateMessage<TRequest>(
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
-            Message message = Message.CreateMessage(messageVersion, ServiceMetadata.Operations.Process, request);
+            Message message = Message.CreateMessage(
+                messageVersion, ServiceMetadata.Operations.Process, request);
             var contentTypeHeader = new ContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;
         }
 
-        private static Message CreateOneWayMessage<TRequest>(
+        private static Message CreateMessageWithResponse<TRequest>(
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, ServiceMetadata.Operations.ProcessWithoutResponse, request);
+                messageVersion, ServiceMetadata.Operations.ProcessWithResponse, request);
             var contentTypeHeader = new ContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;
         }
 
-        private static TResponse Process<TRequest, TResponse>(TRequest request, MessageHeader operationType)
+        private static void Process<TRequest>(TRequest request, MessageHeader operationType)
             where TRequest : class
-            where TResponse : class
         {
             using (var factory = new ChannelFactory<ISoapService>(EndpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateMessage(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                Message result = channel.Process(message);
-                return result.GetBody<TResponse>();
+                channel.Process(message);
             }
         }
 
-        private static void ProcessWithoutResonse<TRequest>(TRequest request, MessageHeader operationType)
+        private static TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, MessageHeader operationType)
             where TRequest : class
+            where TResponse : class
         {
             using (var factory = new ChannelFactory<ISoapService>(EndpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
-                Message message = CreateOneWayMessage(request, operationType, messageVersion);
+                Message message = CreateMessageWithResponse(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                channel.ProcessWithoutResonse(message);
+                Message result = channel.ProcessWithResponse(message);
+                return result.GetBody<TResponse>();
             }
         }
     }
