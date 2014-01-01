@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Threading;
 using Nelibur.Core.DataStructures.Queues;
 using Nelibur.Core.Extensions;
+using Nelibur.Core.Logging;
 
 namespace Nelibur.Core.Threading.Processors
 {
     public abstract class TaskProcessor<TTask> : IDisposable
     {
-//        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private readonly ILog _log;
         private readonly BlockingQueue<TTask> _queue = new BlockingQueue<TTask>();
         private volatile bool _isRun = true;
         private Thread _workThread;
 
         protected TaskProcessor()
         {
+            _log = LogManager.GetLogger(GetType());
             Initialise();
         }
 
@@ -78,12 +80,12 @@ namespace Nelibur.Core.Threading.Processors
                     {
                         continue;
                     }
-//                    _log.Debug("Processing task: {0}", task);
+                    _log.DebugFormat("Processing task: {0}", task);
                     ProcessTaskCore(task);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-//                    _log.Error(ex);
+                    _log.Error(ex);
                 }
             }
         }

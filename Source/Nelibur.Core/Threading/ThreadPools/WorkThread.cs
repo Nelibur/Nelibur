@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using System.Threading;
+using Nelibur.Core.Logging;
 using Nelibur.Core.Threading.ThreadPools.TaskItems;
 using Nelibur.Core.Threading.ThreadPools.TaskQueueControllers;
 
@@ -8,7 +9,7 @@ namespace Nelibur.Core.Threading.ThreadPools
 {
     internal sealed class WorkThread
     {
-        //        private static readonly Logger _log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog _log = LogManager.GetLogger(typeof(WorkThread));
         private readonly ITaskQueueController _taskQueueController;
         private readonly Thread _thread;
         private volatile bool _isRun = true;
@@ -53,9 +54,9 @@ namespace Nelibur.Core.Threading.ThreadPools
                     }
                     ProcessItem(workItem);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    //                    _log.Error(ex);
+                    _log.Error(ex);
                 }
             }
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Linq.Expressions;
 using Nelibur.Core.DataStructures;
+using Nelibur.Core.Logging;
 
 namespace Nelibur.Core.Extensions
 {
@@ -25,9 +26,9 @@ namespace Nelibur.Core.Extensions
                             {
                                 handlerTemp.EndInvoke(ar);
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                //                                LogManager.GetCurrentClassLogger().Error(ex);
+                                LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
                             }
                         },
                     null);
@@ -54,9 +55,9 @@ namespace Nelibur.Core.Extensions
                             {
                                 handlerTemp.EndInvoke(ar);
                             }
-                            catch (Exception)
+                            catch (Exception ex)
                             {
-                                //                                LogManager.GetCurrentClassLogger().Error(ex);
+                                LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
                             }
                         },
                     null);
