@@ -34,14 +34,35 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceModel\Clients\SoapServiceClient.cs" />
+    <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
+    <Compile Include="ServiceModel\Contracts\ServiceMetadata.cs" />
+    <Compile Include="ServiceModel\Services\Headers\ContentTypeHeader.cs" />
+    <Compile Include="ServiceModel\Services\Headers\OperationTypeHeader.cs" />
+    <Compile Include="ServiceModel\Services\Maps\IRequestProcessorContext.cs" />
+    <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
+    <Compile Include="ServiceModel\Services\Maps\RequestMetadataMap.cs" />
+    <Compile Include="ServiceModel\Services\Maps\RequestProcessorContext.cs" />
+    <Compile Include="ServiceModel\Services\Maps\RequestProcessorMap.cs" />
+    <Compile Include="ServiceModel\Services\Operations\IRequestOperation.cs" />
+    <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
+    <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
+    <Compile Include="ServiceModel\Services\SoapService.cs" />
+    <Compile Include="ServiceModel\Services\SoapServiceProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
+      <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
+      <Name>Nelibur.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
