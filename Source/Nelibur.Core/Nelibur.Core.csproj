@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{71FF2315-9038-4F0C-A145-00CADF3E881B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Nelibur.Core</RootNamespace>
+    <AssemblyName>Nelibur.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Out\Debug\Nelibur.Core\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Out\Release\Nelibur.Core\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DataStructures\Bag.cs" />
+    <Compile Include="DataStructures\Queues\BlockingQueue.cs" />
+    <Compile Include="Extensions\BagExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
+    <Compile Include="Extensions\DisposableExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\IntExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="IFluent.cs" />
+    <Compile Include="Patterns\Visitor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Threading\Processors\TaskProcessor.cs" />
+    <Compile Include="Threading\ThreadPools\ExtendedThreadPool.cs" />
+    <Compile Include="Threading\ThreadPools\IExtendedThreadPool.cs" />
+    <Compile Include="Threading\ThreadPools\MultiThreadingCapacity.cs" />
+    <Compile Include="Threading\ThreadPools\TaskItems\ITaskItem.cs" />
+    <Compile Include="Threading\ThreadPools\TaskItems\IWorkItem.cs" />
+    <Compile Include="Threading\ThreadPools\TaskItems\TaskItemPriority.cs" />
+    <Compile Include="Threading\ThreadPools\TaskItems\WorkItem.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueueControllers\BoundedTaskQueueController.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueueControllers\DefaultTaskQueueController.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueueControllers\ITaskQueueController.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueueControllers\TaskQueueController.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueues\DefaultTaskQueue.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueues\ITaskQueue.cs" />
+    <Compile Include="Threading\ThreadPools\TaskQueues\PriorityTaskQueue.cs" />
+    <Compile Include="Threading\ThreadPools\WorkThread.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur.Core", "Source\Nelibur.Core\Nelibur.Core.csproj", "{71FF2315-9038-4F0C-A145-00CADF3E881B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur", "Source\Nelibur\Nelibur.csproj", "{FD85B6D0-7260-4991-804B-981F8DB6592E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9110C2BA-5CAE-464B-95D0-9086CA945516}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Source\UnitTests\UnitTests.csproj", "{9D380F52-0A3D-452E-8F39-6131E070578C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7D59BB46-2426-4015-9E52-969228E3D6A6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71FF2315-9038-4F0C-A145-00CADF3E881B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71FF2315-9038-4F0C-A145-00CADF3E881B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71FF2315-9038-4F0C-A145-00CADF3E881B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71FF2315-9038-4F0C-A145-00CADF3E881B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD85B6D0-7260-4991-804B-981F8DB6592E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD85B6D0-7260-4991-804B-981F8DB6592E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD85B6D0-7260-4991-804B-981F8DB6592E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD85B6D0-7260-4991-804B-981F8DB6592E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D380F52-0A3D-452E-8F39-6131E070578C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D380F52-0A3D-452E-8F39-6131E070578C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D380F52-0A3D-452E-8F39-6131E070578C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D380F52-0A3D-452E-8F39-6131E070578C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9D380F52-0A3D-452E-8F39-6131E070578C} = {9110C2BA-5CAE-464B-95D0-9086CA945516}
+	EndGlobalSection
+EndGlobal
