@@ -16,34 +16,34 @@ Sample Message based service in WCF
 WCF's ServiceContract
 
 ```csharp
-    [ServiceContract]
-    public interface ISoapService
-    {
-        [OperationContract(Action = ServiceMetadata.Operations.Process)]
-        void Process(Message message);
+[ServiceContract]
+public interface ISoapService
+{
+	[OperationContract(Action = ServiceMetadata.Operations.Process)]
+	void Process(Message message);
 
-        [OperationContract(Action = ServiceMetadata.Operations.ProcessWithResponse,
-            ReplyAction = ServiceMetadata.Operations.ProcessResponse)]
-        Message ProcessWithResponse(Message message);
-    }
+	[OperationContract(Action = ServiceMetadata.Operations.ProcessWithResponse,
+		ReplyAction = ServiceMetadata.Operations.ProcessResponse)]
+	Message ProcessWithResponse(Message message);
+}
 ```
 	
 WCF's soap service
 
 ```csharp
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public sealed class SampleSoapService : ISoapService
-    {
-        public void Process(Message message)
-        {
-            SoapServiceProcessor.Process(message);
-        }
+[ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
+public sealed class SampleSoapService : ISoapService
+{
+	public void Process(Message message)
+	{
+		SoapServiceProcessor.Process(message);
+	}
 
-        public Message ProcessWithResponse(Message message)
-        {
-            return SoapServiceProcessor.ProcessWithResponse(message);
-        }
-    }
+	public Message ProcessWithResponse(Message message)
+	{
+		return SoapServiceProcessor.ProcessWithResponse(message);
+	}
+}
 ```
 
 Request binding on appropriate Processor
@@ -59,8 +59,10 @@ new SoapServiceProcessor()
 Processor example
 
 ```csharp
-public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>,
-									IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
+public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
+									IGetWithResponse<GetClientRequest>,
+									IDelete<DeleteClientRequest>,
+									IPutWithResponse<UpdateClientRequest>
 {
 	private static List<Client> _clients = new List<Client>();
 
