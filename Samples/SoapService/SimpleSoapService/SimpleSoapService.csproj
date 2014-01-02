@@ -4,59 +4,62 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FD85B6D0-7260-4991-804B-981F8DB6592E}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{88B5F79B-8758-4ADC-9538-DF1A98245CD5}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Nelibur</RootNamespace>
-    <AssemblyName>Nelibur</AssemblyName>
+    <RootNamespace>SimpleSoapService</RootNamespace>
+    <AssemblyName>SimpleSoapService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\Out\Debug\Nelibur\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\Out\Release\Nelibur\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientProcessor.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceModel\Clients\SoapServiceClient.cs" />
-    <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
-    <Compile Include="ServiceModel\Contracts\ServiceMetadata.cs" />
-    <Compile Include="ServiceModel\Services\Headers\ContentTypeHeader.cs" />
-    <Compile Include="ServiceModel\Services\Headers\OperationTypeHeader.cs" />
-    <Compile Include="ServiceModel\Services\Maps\IRequestProcessorContext.cs" />
-    <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
-    <Compile Include="ServiceModel\Services\Maps\RequestMetadataMap.cs" />
-    <Compile Include="ServiceModel\Services\Maps\RequestProcessorContext.cs" />
-    <Compile Include="ServiceModel\Services\Maps\RequestProcessorMap.cs" />
-    <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
-    <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
-    <Compile Include="ServiceModel\Services\SoapService.cs" />
-    <Compile Include="ServiceModel\Services\SoapServiceProcessor.cs" />
+    <Compile Include="SampleSoapService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
-      <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
-      <Name>Nelibur.Core</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\Nelibur\Nelibur.csproj">
+      <Project>{fd85b6d0-7260-4991-804b-981f8db6592e}</Project>
+      <Name>Nelibur</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimpleSoapContracts\SimpleSoapContracts.csproj">
+      <Project>{00f3fecc-5e62-4652-bd8e-f00bea22e639}</Project>
+      <Name>SimpleSoapContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

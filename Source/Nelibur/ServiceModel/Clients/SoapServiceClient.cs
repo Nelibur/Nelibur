@@ -8,7 +8,7 @@ namespace Nelibur.ServiceModel.Clients
 {
     public class SoapServiceClient
     {
-        private const string EndpointConfigurationName = "SoapService";
+        private const string EndpointConfigurationName = "NeliburSoapService";
 
         public static void Delete<TRequest>(TRequest request)
             where TRequest : class
