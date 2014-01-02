@@ -7,9 +7,7 @@ What to read
 ============
 
  * [Message based web service in WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
- * [Extended Thread Pool](http://www.codeproject.com/Articles/27358/Extended-Thread-Pool)
- * [Dynamic Visitor Pattern](http://www.codeproject.com/Articles/563043/Dynamic-Visitor-Pattern)
- * [Simple Password Generator](http://www.codeproject.com/Tips/428262/Simple-Password-Generator)
+ * [How to create message based web servcie in WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
  
 Sample Message based service in WCF
 ===================
