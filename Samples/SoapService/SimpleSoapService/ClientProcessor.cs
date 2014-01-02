@@ -6,8 +6,10 @@ using SimpleSoapContracts.Contracts;
 
 namespace SimpleSoapService
 {
-    public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>,
-                                        IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
+    public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
+        IGetWithResponse<GetClientRequest>,
+        IDelete<DeleteClientRequest>,
+        IPutWithResponse<UpdateClientRequest>
     {
         private static List<Client> _clients = new List<Client>();
 
