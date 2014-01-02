@@ -49,78 +49,78 @@ WCF's soap service
 Request binding on appropriate Processor
 
 ```csharp
-    new SoapServiceProcessor()
-        .Bind<CreateClientRequest, ClientProcessor>()
-        .Bind<UpdateClientRequest, ClientProcessor>()
-        .Bind<DeleteClientRequest, ClientProcessor>()
-        .Bind<GetClientRequest, ClientProcessor>();
+new SoapServiceProcessor()
+	.Bind<CreateClientRequest, ClientProcessor>()
+	.Bind<UpdateClientRequest, ClientProcessor>()
+	.Bind<DeleteClientRequest, ClientProcessor>()
+	.Bind<GetClientRequest, ClientProcessor>();
 ```
 	
 Processor example
 
 ```csharp
-    public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>,
-                                        IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
-    {
-        private static List<Client> _clients = new List<Client>();
+public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>,
+									IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
+{
+	private static List<Client> _clients = new List<Client>();
 
-        public void Delete(DeleteClientRequest request)
-        {
-            _clients = _clients.Where(x => x.Id != request.Id).ToList();
-        }
+	public void Delete(DeleteClientRequest request)
+	{
+		_clients = _clients.Where(x => x.Id != request.Id).ToList();
+	}
 
-        public object GetWithResponse(GetClientRequest request)
-        {
-            Client client = _clients.Single(x => x.Id == request.Id);
-            return new ClientResponse { Id = client.Id, Email = client.Email };
-        }
+	public object GetWithResponse(GetClientRequest request)
+	{
+		Client client = _clients.Single(x => x.Id == request.Id);
+		return new ClientResponse { Id = client.Id, Email = client.Email };
+	}
 
-        public object PostWithResponse(CreateClientRequest request)
-        {
-            var client = new Client
-                {
-                    Id = Guid.NewGuid(),
-                    Email = request.Email
-                };
-            _clients.Add(client);
-            return new ClientResponse { Id = client.Id, Email = client.Email };
-        }
+	public object PostWithResponse(CreateClientRequest request)
+	{
+		var client = new Client
+			{
+				Id = Guid.NewGuid(),
+				Email = request.Email
+			};
+		_clients.Add(client);
+		return new ClientResponse { Id = client.Id, Email = client.Email };
+	}
 
-        public object PutWithResponse(UpdateClientRequest request)
-        {
-            Client client = _clients.Single(x => x.Id == request.Id);
-            client.Email = request.Email;
-            return new ClientResponse { Id = client.Id, Email = client.Email };
-        }
-    }
+	public object PutWithResponse(UpdateClientRequest request)
+	{
+		Client client = _clients.Single(x => x.Id == request.Id);
+		client.Email = request.Email;
+		return new ClientResponse { Id = client.Id, Email = client.Email };
+	}
+}
 ```	
 
 Sample Message based Client in WCF
 ==================================
 
 ```csharp
-            var createRequest = new CreateClientRequest
-                {
-                    Email = "email@email.com"
-                };
-            ClientResponse response = SoapServiceClient.Post<CreateClientRequest, ClientResponse>(createRequest);
+var createRequest = new CreateClientRequest
+	{
+		Email = "email@email.com"
+	};
+ClientResponse response = SoapServiceClient.Post<CreateClientRequest, ClientResponse>(createRequest);
 
-            var updateRequest = new UpdateClientRequest
-                {
-                    Email = "new@email.com",
-                    Id = response.Id
-                };
-            response = SoapServiceClient.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+var updateRequest = new UpdateClientRequest
+	{
+		Email = "new@email.com",
+		Id = response.Id
+	};
+response = SoapServiceClient.Put<UpdateClientRequest, ClientResponse>(updateRequest);
 
-            var getClientRequest = new GetClientRequest
-                {
-                    Id = response.Id
-                };
-            response = SoapServiceClient.Get<GetClientRequest, ClientResponse>(getClientRequest);
+var getClientRequest = new GetClientRequest
+	{
+		Id = response.Id
+	};
+response = SoapServiceClient.Get<GetClientRequest, ClientResponse>(getClientRequest);
 
-            var deleteRequest = new DeleteClientRequest
-                {
-                    Id = response.Id
-                };
-            SoapServiceClient.Delete(deleteRequest);
+var deleteRequest = new DeleteClientRequest
+	{
+		Id = response.Id
+	};
+SoapServiceClient.Delete(deleteRequest);
 ```	
