@@ -6,7 +6,7 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RequestProcessorMap
     {
-        private static readonly Dictionary<Type, IRequestProcessorContext> _repository =
+        private readonly Dictionary<Type, IRequestProcessorContext> _repository =
             new Dictionary<Type, IRequestProcessorContext>();
 
         public void Add<TRequest, TProcessor>()

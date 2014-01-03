@@ -52,7 +52,6 @@
     <Compile Include="ServiceModel\Services\Maps\RequestProcessorMap.cs" />
     <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
     <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
-    <Compile Include="ServiceModel\Services\SoapService.cs" />
     <Compile Include="ServiceModel\Services\SoapServiceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>

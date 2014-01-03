@@ -7,7 +7,7 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RequestMetadataMap
     {
-        private static readonly Dictionary<string, Type> _requestTypes =
+        private readonly Dictionary<string, Type> _requestTypes =
             new Dictionary<string, Type>();
 
         public void Add<TRequest>()
