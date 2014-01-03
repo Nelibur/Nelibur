@@ -99,28 +99,30 @@ Sample Message based Client in WCF
 ==================================
 
 ```csharp
+var client = new SoapServiceClient("NeliburSoapService");
+
 var createRequest = new CreateClientRequest
-	{
-		Email = "email@email.com"
-	};
-ClientResponse response = SoapServiceClient.Post<CreateClientRequest, ClientResponse>(createRequest);
+    {
+        Email = "email@email.com"
+    };
+ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
 
 var updateRequest = new UpdateClientRequest
-	{
-		Email = "new@email.com",
-		Id = response.Id
-	};
-response = SoapServiceClient.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+    {
+        Email = "new@email.com",
+        Id = response.Id
+    };
+response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
 
 var getClientRequest = new GetClientRequest
-	{
-		Id = response.Id
-	};
-response = SoapServiceClient.Get<GetClientRequest, ClientResponse>(getClientRequest);
+    {
+        Id = response.Id
+    };
+response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
 
 var deleteRequest = new DeleteClientRequest
-	{
-		Id = response.Id
-	};
-SoapServiceClient.Delete(deleteRequest);
+    {
+        Id = response.Id
+    };
+client.Delete(deleteRequest);
 ```	

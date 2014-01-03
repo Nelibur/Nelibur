@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Configuration;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
 using Nelibur.ServiceModel.Contracts;
@@ -6,82 +7,95 @@ using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public class SoapServiceClient
+    public sealed class SoapServiceClient
     {
-        private const string EndpointConfigurationName = "NeliburSoapService";
+        private readonly string _endpointConfigurationName;
 
-        public static void Delete<TRequest>(TRequest request)
+        /// <summary>
+        ///     Create new instance of <see cref="SoapServiceClient" /> .
+        /// </summary>
+        /// <param name="endpointConfigurationName">WCF's endpoint name.</param>
+        public SoapServiceClient(string endpointConfigurationName)
+        {
+            if (string.IsNullOrWhiteSpace(endpointConfigurationName))
+            {
+                throw new ConfigurationErrorsException("Invalid endpointConfigurationName: Is null or empty");
+            }
+            _endpointConfigurationName = endpointConfigurationName;
+        }
+
+        public void Delete<TRequest>(TRequest request)
             where TRequest : class
         {
             Process(request, OperationTypeHeader.Delete);
         }
 
-        public static Task DeleteAsync<TRequest>(TRequest request)
+        public Task DeleteAsync<TRequest>(TRequest request)
             where TRequest : class
         {
             return Task.Run(() => Delete(request));
         }
 
-        public static TResponse Get<TRequest, TResponse>(TRequest request)
+        public TResponse Get<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Get);
         }
 
-        public static Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
             return Task.Run(() => Get<TRequest, TResponse>(request));
         }
 
-        public static void Post<TRequest>(TRequest request)
+        public void Post<TRequest>(TRequest request)
             where TRequest : class
         {
             Process(request, OperationTypeHeader.Post);
         }
 
-        public static TResponse Post<TRequest, TResponse>(TRequest request)
+        public TResponse Post<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Post);
         }
 
-        public static Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
             return Task.Run(() => Post<TRequest, TResponse>(request));
         }
 
-        public static Task PostAsync<TRequest>(TRequest request)
+        public Task PostAsync<TRequest>(TRequest request)
             where TRequest : class
         {
             return Task.Run(() => Post(request));
         }
 
-        public static void Put<TRequest>(TRequest request)
+        public void Put<TRequest>(TRequest request)
             where TRequest : class
         {
             Process(request, OperationTypeHeader.Put);
         }
 
-        public static TResponse Put<TRequest, TResponse>(TRequest request)
+        public TResponse Put<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Put);
         }
 
-        public static Task PutAsync<TRequest>(TRequest request)
+        public Task PutAsync<TRequest>(TRequest request)
             where TRequest : class
         {
             return Task.Run(() => Put(request));
         }
 
-        public static Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
@@ -110,10 +124,10 @@ namespace Nelibur.ServiceModel.Clients
             return message;
         }
 
-        private static void Process<TRequest>(TRequest request, MessageHeader operationType)
+        private void Process<TRequest>(TRequest request, MessageHeader operationType)
             where TRequest : class
         {
-            using (var factory = new ChannelFactory<ISoapService>(EndpointConfigurationName))
+            using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateMessage(request, operationType, messageVersion);
@@ -122,11 +136,11 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
-        private static TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, MessageHeader operationType)
+        private TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, MessageHeader operationType)
             where TRequest : class
             where TResponse : class
         {
-            using (var factory = new ChannelFactory<ISoapService>(EndpointConfigurationName))
+            using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateMessageWithResponse(request, operationType, messageVersion);
