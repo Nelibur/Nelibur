@@ -1,51 +1,31 @@
 ﻿using System;
-using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
-using System.Xml;
-using Nelibur.ServiceModel.Contracts;
-using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    internal sealed class RequestMetadata : IRequestMetadata
+    internal abstract class RequestMetadata : IRequestMetadata
     {
-        private readonly MessageVersion _messageVersion;
-        private readonly object _request;
-
-        private RequestMetadata(Message message, Type targetType)
+        protected RequestMetadata(Type targetType)
         {
-            _messageVersion = message.Version;
             Type = targetType;
-            _request = GetBody(message, targetType);
-            OperationType = SoapOperationTypeHeader.ReadHeader(message);
         }
 
-        public string OperationType { get; private set; }
+        public abstract string OperationType { get; protected set; }
 
         public Type Type { get; private set; }
 
-        public TRequest GetRequest<TRequest>()
+        public abstract TRequest GetRequest<TRequest>();
+
+        public abstract Message GetResponse(object response);
+
+        internal static IRequestMetadata FromRestMessage(Message message, Type targetType)
         {
-            return (TRequest)_request;
+            return new RestRequestMetadata(message, targetType);
         }
 
-        public Message GetResponse(object response)
+        internal static IRequestMetadata FromSoapMessage(Message message, Type targetType)
         {
-            return Message.CreateMessage(_messageVersion, ServiceMetadata.Operations.ProcessResponse, response);
-        }
-
-        internal static IRequestMetadata FromMessage(Message message, Type targetType)
-        {
-            return new RequestMetadata(message, targetType);
-        }
-
-        private static object GetBody(Message message, Type targetType)
-        {
-            using (XmlDictionaryReader reader = message.GetReaderAtBodyContents())
-            {
-                var serializer = new DataContractSerializer(targetType);
-                return serializer.ReadObject(reader);
-            }
+            return new SoapRequestMetadata(message, targetType);
         }
     }
 }

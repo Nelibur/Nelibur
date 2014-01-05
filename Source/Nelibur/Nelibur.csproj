@@ -57,6 +57,7 @@
     <Compile Include="ServiceModel\Services\Maps\IRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessorContext.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
+    <Compile Include="ServiceModel\Services\Maps\SoapRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadataMap.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestProcessorContext.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestProcessorMap.cs" />

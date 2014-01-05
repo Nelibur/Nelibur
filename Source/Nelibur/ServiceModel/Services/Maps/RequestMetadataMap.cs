@@ -10,25 +10,25 @@ namespace Nelibur.ServiceModel.Services.Maps
         private readonly Dictionary<string, Type> _requestTypes =
             new Dictionary<string, Type>();
 
-        public void Add<TRequest>()
+        internal void Add<TRequest>()
             where TRequest : class
         {
             Type requestType = typeof(TRequest);
             _requestTypes[requestType.Name] = requestType;
         }
 
-        public IRequestMetadata FromMessage(Message message)
+        internal IRequestMetadata FromMessage(Message message)
         {
             string typeName = SoapContentTypeHeader.ReadHeader(message);
             Type targetType = _requestTypes[typeName];
-            return RequestMetadata.FromMessage(message, targetType);
+            return RequestMetadata.FromSoapMessage(message, targetType);
         }
 
-        public IRequestMetadata FromRestMessage(Message message)
+        internal IRequestMetadata FromRestMessage(Message message)
         {
             string typeName = RestContentTypeHeader.ReadHeader(message);
             Type targetType = _requestTypes[typeName];
-            return RestRequestMetadata.FromMessage(message, targetType);
+            return RequestMetadata.FromRestMessage(message, targetType);
         }
     }
 }
