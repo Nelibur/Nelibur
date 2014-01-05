@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ServiceModel.Channels;
-using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Maps
@@ -16,7 +15,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             _creator = creator;
         }
 
-        public void Process(RequestMetadata metadata)
+        public void Process(IRequestMetadata metadata)
         {
             switch (metadata.OperationType)
             {
@@ -35,7 +34,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             }
         }
 
-        public Message ProcessWithResponse(RequestMetadata metadata)
+        public Message ProcessWithResponse(IRequestMetadata metadata)
         {
             switch (metadata.OperationType)
             {
@@ -53,57 +52,57 @@ namespace Nelibur.ServiceModel.Services.Maps
             }
         }
 
-        private void Delete(RequestMetadata metadata)
+        private void Delete(IRequestMetadata metadata)
         {
             var service = (IDelete<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Delete(request);
         }
 
-        private Message DeleteWithResponse(RequestMetadata metadata)
+        private Message DeleteWithResponse(IRequestMetadata metadata)
         {
             var service = (IDeleteWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.DeleteWithResponse(request);
-            return Message.CreateMessage(metadata.MessageVersion, ServiceMetadata.Operations.ProcessResponse, result);
+            return metadata.GetResponse(result);
         }
 
-        private Message GetWithResponse(RequestMetadata metadata)
+        private Message GetWithResponse(IRequestMetadata metadata)
         {
             var service = (IGetWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.GetWithResponse(request);
-            return Message.CreateMessage(metadata.MessageVersion, ServiceMetadata.Operations.ProcessResponse, result);
+            return metadata.GetResponse(result);
         }
 
-        private void Post(RequestMetadata metadata)
+        private void Post(IRequestMetadata metadata)
         {
             var service = (IPost<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Post(request);
         }
 
-        private Message PostWithResponse(RequestMetadata metadata)
+        private Message PostWithResponse(IRequestMetadata metadata)
         {
             var service = (IPostWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PostWithResponse(request);
-            return Message.CreateMessage(metadata.MessageVersion, ServiceMetadata.Operations.ProcessResponse, result);
+            return metadata.GetResponse(result);
         }
 
-        private void Put(RequestMetadata metadata)
+        private void Put(IRequestMetadata metadata)
         {
             var service = (IPut<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Put(request);
         }
 
-        private Message PutWithResponse(RequestMetadata metadata)
+        private Message PutWithResponse(IRequestMetadata metadata)
         {
             var service = (IPutWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PutWithResponse(request);
-            return Message.CreateMessage(metadata.MessageVersion, ServiceMetadata.Operations.ProcessResponse, result);
+            return metadata.GetResponse(result);
         }
     }
 }

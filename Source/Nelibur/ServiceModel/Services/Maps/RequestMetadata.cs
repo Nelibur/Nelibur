@@ -2,42 +2,41 @@
 using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.Xml;
+using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    internal sealed class RequestMetadata
+    internal sealed class RequestMetadata : IRequestMetadata
     {
-        private readonly Message _message;
+        private readonly MessageVersion _messageVersion;
         private readonly object _request;
 
-        private RequestMetadata(Message message, object request, Type type, string operationType)
+        private RequestMetadata(Message message, Type targetType)
         {
-            _message = message;
-            _request = request;
-            Type = type;
-            OperationType = operationType;
-        }
-
-        public MessageVersion MessageVersion
-        {
-            get { return _message.Version; }
+            _messageVersion = message.Version;
+            Type = targetType;
+            _request = GetBody(message, targetType);
+            OperationType = OperationTypeHeader.ReadHeader(message);
         }
 
         public string OperationType { get; private set; }
 
         public Type Type { get; private set; }
 
-        public static RequestMetadata FromMessage(Message message, Type targetType)
-        {
-            object request = GetBody(message, targetType);
-            string operationType = OperationTypeHeader.ReadHeader(message);
-            return new RequestMetadata(message, request, targetType, operationType);
-        }
-
         public TRequest GetRequest<TRequest>()
         {
             return (TRequest)_request;
+        }
+
+        public Message GetResponse(object response)
+        {
+            return Message.CreateMessage(_messageVersion, ServiceMetadata.Operations.ProcessResponse, response);
+        }
+
+        internal static IRequestMetadata FromMessage(Message message, Type targetType)
+        {
+            return new RequestMetadata(message, targetType);
         }
 
         private static object GetBody(Message message, Type targetType)

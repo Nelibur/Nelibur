@@ -4,7 +4,7 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal interface IRequestProcessorContext
     {
-        void Process(RequestMetadata metadata);
-        Message ProcessWithResponse(RequestMetadata metadata);
+        void Process(IRequestMetadata metadata);
+        Message ProcessWithResponse(IRequestMetadata metadata);
     }
 }

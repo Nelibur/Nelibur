@@ -5,26 +5,26 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services
 {
-    public sealed class SoapServiceProcessor
+    public sealed class RestServcieProcessor
     {
         private static readonly RequestProcessorMap _requestProcessors = new RequestProcessorMap();
         private static readonly RequestMetadataMap _requests = new RequestMetadataMap();
 
         public static void Process(Message message)
         {
-            IRequestMetadata requestMetaData = _requests.FromMessage(message);
+            IRequestMetadata requestMetaData = _requests.FromRestMessage(message);
             IRequestProcessorContext context = _requestProcessors.Get(requestMetaData.Type);
             context.Process(requestMetaData);
         }
 
         public static Message ProcessWithResponse(Message message)
         {
-            IRequestMetadata requestMetaData = _requests.FromMessage(message);
+            IRequestMetadata requestMetaData = _requests.FromRestMessage(message);
             IRequestProcessorContext context = _requestProcessors.Get(requestMetaData.Type);
             return context.ProcessWithResponse(requestMetaData);
         }
 
-        public SoapServiceProcessor Bind<TRequest, TProcessor>()
+        public RestServcieProcessor Bind<TRequest, TProcessor>()
             where TRequest : class
             where TProcessor : IRequestOperation, new()
         {
@@ -33,7 +33,7 @@ namespace Nelibur.ServiceModel.Services
             return this;
         }
 
-        public SoapServiceProcessor Bind<TRequest, TProcessor>(Func<TProcessor> creator)
+        public RestServcieProcessor Bind<TRequest, TProcessor>(Func<TProcessor> creator)
             where TRequest : class
             where TProcessor : IRequestOperation
         {

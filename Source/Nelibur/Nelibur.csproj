@@ -36,6 +36,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -43,18 +44,26 @@
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceModel\Clients\RestServiceClient.cs" />
     <Compile Include="ServiceModel\Clients\SoapServiceClient.cs" />
+    <Compile Include="ServiceModel\Contracts\IRestService.cs" />
     <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
     <Compile Include="ServiceModel\Contracts\ServiceMetadata.cs" />
     <Compile Include="ServiceModel\Services\Headers\ContentTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\OperationTypeHeader.cs" />
+    <Compile Include="ServiceModel\Services\Headers\RestContentDataHeader.cs" />
+    <Compile Include="ServiceModel\Services\Headers\RestContentTypeHeader.cs" />
+    <Compile Include="ServiceModel\Services\Headers\RestHttpRequestHeader.cs" />
+    <Compile Include="ServiceModel\Services\Maps\IRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessorContext.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadataMap.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestProcessorContext.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestProcessorMap.cs" />
+    <Compile Include="ServiceModel\Services\Maps\RestRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
     <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
+    <Compile Include="ServiceModel\Services\RestServcieProcessor.cs" />
     <Compile Include="ServiceModel\Services\SoapServiceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
