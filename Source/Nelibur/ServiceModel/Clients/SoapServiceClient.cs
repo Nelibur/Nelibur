@@ -27,7 +27,7 @@ namespace Nelibur.ServiceModel.Clients
         public void Delete<TRequest>(TRequest request)
             where TRequest : class
         {
-            Process(request, OperationTypeHeader.Delete);
+            Process(request, SoapOperationTypeHeader.Delete);
         }
 
         public Task DeleteAsync<TRequest>(TRequest request)
@@ -40,7 +40,7 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class
             where TResponse : class
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Get);
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get);
         }
 
         public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
@@ -53,14 +53,14 @@ namespace Nelibur.ServiceModel.Clients
         public void Post<TRequest>(TRequest request)
             where TRequest : class
         {
-            Process(request, OperationTypeHeader.Post);
+            Process(request, SoapOperationTypeHeader.Post);
         }
 
         public TResponse Post<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Post);
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
         }
 
         public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
@@ -79,14 +79,14 @@ namespace Nelibur.ServiceModel.Clients
         public void Put<TRequest>(TRequest request)
             where TRequest : class
         {
-            Process(request, OperationTypeHeader.Put);
+            Process(request, SoapOperationTypeHeader.Put);
         }
 
         public TResponse Put<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationTypeHeader.Put);
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
         public Task PutAsync<TRequest>(TRequest request)
@@ -107,7 +107,7 @@ namespace Nelibur.ServiceModel.Clients
         {
             Message message = Message.CreateMessage(
                 messageVersion, ServiceMetadata.Operations.Process, request);
-            var contentTypeHeader = new ContentTypeHeader(typeof(TRequest));
+            var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;
@@ -118,7 +118,7 @@ namespace Nelibur.ServiceModel.Clients
         {
             Message message = Message.CreateMessage(
                 messageVersion, ServiceMetadata.Operations.ProcessWithResponse, request);
-            var contentTypeHeader = new ContentTypeHeader(typeof(TRequest));
+            var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;

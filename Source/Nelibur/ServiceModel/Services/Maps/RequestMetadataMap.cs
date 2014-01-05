@@ -19,7 +19,7 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public IRequestMetadata FromMessage(Message message)
         {
-            string typeName = ContentTypeHeader.ReadHeader(message);
+            string typeName = SoapContentTypeHeader.ReadHeader(message);
             Type targetType = _requestTypes[typeName];
             return RequestMetadata.FromMessage(message, targetType);
         }

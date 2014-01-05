@@ -4,35 +4,35 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Headers
 {
-    internal sealed class OperationTypeHeader : MessageHeader
+    internal sealed class SoapOperationTypeHeader : MessageHeader
     {
         private const string NameValue = "nelibur-operation-type";
         private const string NamespaceValue = "http://nelibur/" + NameValue;
         private readonly string _actionType;
 
-        private OperationTypeHeader(string action)
+        private SoapOperationTypeHeader(string action)
         {
             _actionType = action;
         }
 
-        public static OperationTypeHeader Delete
+        public static SoapOperationTypeHeader Delete
         {
-            get { return new OperationTypeHeader(OperationType.Delete); }
+            get { return new SoapOperationTypeHeader(OperationType.Delete); }
         }
 
-        public static OperationTypeHeader Get
+        public static SoapOperationTypeHeader Get
         {
-            get { return new OperationTypeHeader(OperationType.Get); }
+            get { return new SoapOperationTypeHeader(OperationType.Get); }
         }
 
-        public static OperationTypeHeader Post
+        public static SoapOperationTypeHeader Post
         {
-            get { return new OperationTypeHeader(OperationType.Post); }
+            get { return new SoapOperationTypeHeader(OperationType.Post); }
         }
 
-        public static OperationTypeHeader Put
+        public static SoapOperationTypeHeader Put
         {
-            get { return new OperationTypeHeader(OperationType.Put); }
+            get { return new SoapOperationTypeHeader(OperationType.Put); }
         }
 
         public override string Name

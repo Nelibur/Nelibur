@@ -17,7 +17,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             _messageVersion = message.Version;
             Type = targetType;
             _request = GetBody(message, targetType);
-            OperationType = OperationTypeHeader.ReadHeader(message);
+            OperationType = SoapOperationTypeHeader.ReadHeader(message);
         }
 
         public string OperationType { get; private set; }

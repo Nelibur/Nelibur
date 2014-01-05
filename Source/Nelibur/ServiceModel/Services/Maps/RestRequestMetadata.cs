@@ -9,7 +9,7 @@ using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    public sealed class RestRequestMetadata : IRequestMetadata
+    internal sealed class RestRequestMetadata : IRequestMetadata
     {
         private readonly object _request;
 
