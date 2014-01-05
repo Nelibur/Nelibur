@@ -7,7 +7,8 @@ What to read
 ============
 
  * [Message based web service in WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
- * [How to create message based web servcie in WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
+ * [How to create message based web Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
+ * [How to create message based web Servcie Client on pure WCF](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
  
 Sample Message based service in WCF
 ===================
