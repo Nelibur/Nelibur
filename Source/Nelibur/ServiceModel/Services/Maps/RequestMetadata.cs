@@ -3,7 +3,7 @@ using System.ServiceModel.Channels;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    internal abstract class RequestMetadata : IRequestMetadata
+    internal abstract class RequestMetadata
     {
         protected RequestMetadata(Type targetType)
         {
@@ -14,18 +14,18 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public Type Type { get; private set; }
 
-        public abstract TRequest GetRequest<TRequest>();
-
-        public abstract Message GetResponse(object response);
-
-        internal static IRequestMetadata FromRestMessage(Message message, Type targetType)
+        public static RequestMetadata FromRestMessage(Message message, Type targetType)
         {
             return new RestRequestMetadata(message, targetType);
         }
 
-        internal static IRequestMetadata FromSoapMessage(Message message, Type targetType)
+        public static RequestMetadata FromSoapMessage(Message message, Type targetType)
         {
             return new SoapRequestMetadata(message, targetType);
         }
+
+        public abstract TRequest GetRequest<TRequest>();
+
+        public abstract Message GetResponse(object response);
     }
 }

@@ -12,14 +12,14 @@ namespace Nelibur.ServiceModel.Services
 
         public static void Process(Message message)
         {
-            IRequestMetadata requestMetaData = _requests.FromRestMessage(message);
+            RequestMetadata requestMetaData = _requests.FromRestMessage(message);
             IRequestProcessorContext context = _requestProcessors.Get(requestMetaData.Type);
             context.Process(requestMetaData);
         }
 
         public static Message ProcessWithResponse(Message message)
         {
-            IRequestMetadata requestMetaData = _requests.FromRestMessage(message);
+            RequestMetadata requestMetaData = _requests.FromRestMessage(message);
             IRequestProcessorContext context = _requestProcessors.Get(requestMetaData.Type);
             return context.ProcessWithResponse(requestMetaData);
         }

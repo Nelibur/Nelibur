@@ -54,7 +54,6 @@
     <Compile Include="ServiceModel\Services\Headers\RestContentDataHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\RestContentTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\RestHttpRequestHeader.cs" />
-    <Compile Include="ServiceModel\Services\Maps\IRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessorContext.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\SoapRequestMetadata.cs" />
