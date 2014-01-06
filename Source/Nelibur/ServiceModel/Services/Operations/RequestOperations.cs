@@ -13,6 +13,12 @@
         void Delete(TRequest request);
     }
 
+    public interface IGet<in TRequest> : IRequestOperation
+        where TRequest : class
+    {
+        void Get(TRequest request);
+    }
+
     public interface IPost<in TRequest> : IRequestOperation
         where TRequest : class
     {

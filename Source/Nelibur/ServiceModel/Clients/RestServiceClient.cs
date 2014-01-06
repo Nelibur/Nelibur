@@ -25,9 +25,19 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, OperationType.Delete);
         }
 
+        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Delete);
+        }
+
         protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
+        }
+
+        protected override void GetCore<TRequest>(TRequest request)
+        {
+            Process(request, OperationType.Get);
         }
 
         protected override void PostCore<TRequest>(TRequest request)
@@ -98,6 +108,9 @@ namespace Nelibur.ServiceModel.Clients
                 IRestService channel = factory.CreateChannel();
                 switch (operationType)
                 {
+                    case OperationType.Get:
+                        channel.Get(message);
+                        break;
                     case OperationType.Post:
                         channel.Post(message);
                         break;
@@ -127,12 +140,15 @@ namespace Nelibur.ServiceModel.Clients
                 switch (operationType)
                 {
                     case OperationType.Get:
-                        response = channel.Get(message);
+                        response = channel.GetWithResponse(message);
                         break;
                     case OperationType.Post:
                         response = channel.PostWithResponse(message);
                         break;
                     case OperationType.Put:
+                        response = channel.PutWithResponse(message);
+                        break;
+                    case OperationType.Delete:
                         response = channel.PutWithResponse(message);
                         break;
                     default:

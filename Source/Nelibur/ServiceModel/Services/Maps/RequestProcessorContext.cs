@@ -19,6 +19,9 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             switch (metadata.OperationType)
             {
+                case OperationType.Get:
+                    Get(metadata);
+                    break;
                 case OperationType.Post:
                     Post(metadata);
                     break;
@@ -65,6 +68,13 @@ namespace Nelibur.ServiceModel.Services.Maps
             var request = metadata.GetRequest<TRequest>();
             object result = service.DeleteWithResponse(request);
             return metadata.CreateResponse(result);
+        }
+
+        private void Get(RequestMetadata metadata)
+        {
+            var service = (IGet<TRequest>)_creator();
+            var request = metadata.GetRequest<TRequest>();
+            service.Get(request);
         }
 
         private Message GetWithResponse(RequestMetadata metadata)

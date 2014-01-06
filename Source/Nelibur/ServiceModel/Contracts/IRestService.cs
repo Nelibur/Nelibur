@@ -14,8 +14,17 @@ namespace Nelibur.ServiceModel.Contracts
         void Delete(Message message);
 
         [OperationContract]
+        [WebInvoke(Method = OperationType.Delete,
+            RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        Message DeleteWithResponse(Message message);
+
+        [OperationContract]
         [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        Message Get(Message message);
+        void Get(Message message);
+
+        [OperationContract]
+        [WebGet(RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        Message GetWithResponse(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Post,

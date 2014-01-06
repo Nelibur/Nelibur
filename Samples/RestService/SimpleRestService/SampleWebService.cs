@@ -13,7 +13,17 @@ namespace SimpleRestService
             RestServcieProcessor.Process(message);
         }
 
-        public Message Get(Message message)
+        public Message DeleteWithResponse(Message message)
+        {
+            return RestServcieProcessor.ProcessWithResponse(message);
+        }
+
+        public void Get(Message message)
+        {
+            RestServcieProcessor.Process(message);
+        }
+
+        public Message GetWithResponse(Message message)
         {
             return RestServcieProcessor.ProcessWithResponse(message);
         }

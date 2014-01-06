@@ -32,6 +32,19 @@ namespace Nelibur.ServiceModel.Clients
             return Task.Run(() => Delete(request));
         }
 
+        public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
+            where TResponse : class
+        {
+            return Task.Run(() => DeleteCore<TRequest, TResponse>(request));
+        }
+
+        public void Get<TRequest>(TRequest request)
+            where TRequest : class
+        {
+            GetCore(request);
+        }
+
         public TResponse Get<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class
@@ -101,9 +114,16 @@ namespace Nelibur.ServiceModel.Clients
         protected abstract void DeleteCore<TRequest>(TRequest request)
             where TRequest : class;
 
+        protected abstract TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+            where TRequest : class
+            where TResponse : class;
+
         protected abstract TResponse GetCore<TRequest, TResponse>(TRequest request)
             where TRequest : class
             where TResponse : class;
+
+        protected abstract void GetCore<TRequest>(TRequest request)
+            where TRequest : class;
 
         protected abstract void PostCore<TRequest>(TRequest request)
             where TRequest : class;

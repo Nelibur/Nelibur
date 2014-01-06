@@ -20,9 +20,19 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, SoapOperationTypeHeader.Delete);
         }
 
+        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete);
+        }
+
         protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get);
+        }
+
+        protected override void GetCore<TRequest>(TRequest request)
+        {
+            Process(request, SoapOperationTypeHeader.Get);
         }
 
         protected override void PostCore<TRequest>(TRequest request)
