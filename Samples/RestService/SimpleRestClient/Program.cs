@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 using Nelibur.ServiceModel.Clients;
 using SimpleRestContracts.Contracts;
 
@@ -8,6 +11,7 @@ namespace SimpleRestClient
     {
         private static void Main()
         {
+            //            PerformanceTest();
             var client = new RestServiceClient("NeliburRestService");
 
             var createRequest = new CreateClientRequest
@@ -15,7 +19,9 @@ namespace SimpleRestClient
                     Email = "email@email.com"
                 };
             Console.WriteLine("POST Request: {0}", createRequest);
+
             ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+
             Console.WriteLine("POST Response: {0}\n", response);
 
             var updateRequest = new UpdateClientRequest
@@ -44,6 +50,27 @@ namespace SimpleRestClient
             client.Delete(deleteRequest);
 
             Console.ReadKey();
+        }
+
+        private static void PerformanceTest()
+        {
+            var client = new RestServiceClient("NeliburRestService");
+
+            var createRequest = new CreateClientRequest
+                {
+                    Email = "email@email.com"
+                };
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            Task<ClientResponse>[] tasks = Enumerable
+                .Range(0, 100000)
+                .ToList()
+                .Select(x => Task.Run(() => client.Post<CreateClientRequest, ClientResponse>(createRequest))).ToArray();
+
+            Task.WaitAll(tasks);
+
+            Console.WriteLine("Total: {0} ms", stopwatch.Elapsed.TotalMilliseconds);
         }
     }
 }
