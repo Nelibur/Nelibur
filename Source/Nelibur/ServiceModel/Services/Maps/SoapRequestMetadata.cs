@@ -26,7 +26,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             return (TRequest)_request;
         }
 
-        public override Message GetResponse(object response)
+        public override Message CreateResponse(object response)
         {
             return Message.CreateMessage(_messageVersion, ServiceMetadata.Operations.ProcessResponse, response);
         }

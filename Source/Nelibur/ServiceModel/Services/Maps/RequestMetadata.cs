@@ -26,6 +26,6 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public abstract TRequest GetRequest<TRequest>();
 
-        public abstract Message GetResponse(object response);
+        public abstract Message CreateResponse(object response);
     }
 }

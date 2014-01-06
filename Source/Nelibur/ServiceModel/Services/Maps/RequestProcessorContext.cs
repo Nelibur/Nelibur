@@ -64,7 +64,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             var service = (IDeleteWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.DeleteWithResponse(request);
-            return metadata.GetResponse(result);
+            return metadata.CreateResponse(result);
         }
 
         private Message GetWithResponse(RequestMetadata metadata)
@@ -72,7 +72,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             var service = (IGetWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.GetWithResponse(request);
-            return metadata.GetResponse(result);
+            return metadata.CreateResponse(result);
         }
 
         private void Post(RequestMetadata metadata)
@@ -87,7 +87,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             var service = (IPostWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PostWithResponse(request);
-            return metadata.GetResponse(result);
+            return metadata.CreateResponse(result);
         }
 
         private void Put(RequestMetadata metadata)
@@ -102,7 +102,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             var service = (IPutWithResponse<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PutWithResponse(request);
-            return metadata.GetResponse(result);
+            return metadata.CreateResponse(result);
         }
     }
 }

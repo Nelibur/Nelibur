@@ -26,7 +26,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             return (TRequest)_request;
         }
 
-        public override Message GetResponse(object response)
+        public override Message CreateResponse(object response)
         {
             var serializer = new DataContractJsonSerializer(response.GetType());
             return WebOperationContext.Current.CreateJsonResponse(response, serializer);
