@@ -16,15 +16,10 @@ namespace Nelibur.ServiceModel.Services.Maps
         internal RestRequestMetadata(Message message, Type targetType) : base(targetType)
         {
             OperationType = GetOperationType(message);
-            _request = GetBody(message, targetType);
+            _request = CreateRequest(message, targetType);
         }
 
         public override string OperationType { get; protected set; }
-
-        public override TRequest GetRequest<TRequest>()
-        {
-            return (TRequest)_request;
-        }
 
         public override Message CreateResponse(object response)
         {
@@ -32,27 +27,26 @@ namespace Nelibur.ServiceModel.Services.Maps
             return WebOperationContext.Current.CreateJsonResponse(response, serializer);
         }
 
-        private static string GetOperationType(Message message)
+        public override TRequest GetRequest<TRequest>()
         {
-            var httpReq = (HttpRequestMessageProperty)message.Properties[HttpRequestMessageProperty.Name];
-            return httpReq.Method;
+            return (TRequest)_request;
         }
 
-        private object GetBody(Message message, Type targetType)
+        private static object CraeteRequestFromHeader(Message message, Type targetType)
         {
-            if (OperationType == Operations.OperationType.Get)
+            string content = RestContentDataHeader.ReadHeader(message);
+            byte[] bytes = Encoding.UTF8.GetBytes(content);
+
+            using (var stream = new MemoryStream(bytes))
             {
-                string content = RestContentDataHeader.ReadHeader(message);
-                byte[] bytes = Encoding.UTF8.GetBytes(content);
-
-                using (var stream = new MemoryStream(bytes))
-                {
-                    var serializer = new DataContractJsonSerializer(targetType);
-                    stream.Position = 0;
-                    return serializer.ReadObject(stream);
-                }
+                var serializer = new DataContractJsonSerializer(targetType);
+                stream.Position = 0;
+                return serializer.ReadObject(stream);
             }
+        }
 
+        private static object CreateRequestFromContent(Message message, Type targetType)
+        {
             using (var stream = new MemoryStream())
             {
                 XmlDictionaryWriter writer = JsonReaderWriterFactory.CreateJsonWriter(stream);
@@ -62,6 +56,22 @@ namespace Nelibur.ServiceModel.Services.Maps
                 stream.Position = 0;
                 return serializer.ReadObject(stream);
             }
+        }
+
+        private static string GetOperationType(Message message)
+        {
+            var httpReq = (HttpRequestMessageProperty)message.Properties[HttpRequestMessageProperty.Name];
+            return httpReq.Method;
+        }
+
+        private object CreateRequest(Message message, Type targetType)
+        {
+            if (OperationType == Operations.OperationType.Get)
+            {
+                return CraeteRequestFromHeader(message, targetType);
+            }
+
+            return CreateRequestFromContent(message, targetType);
         }
     }
 }

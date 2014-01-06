@@ -24,8 +24,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             return new SoapRequestMetadata(message, targetType);
         }
 
-        public abstract TRequest GetRequest<TRequest>();
-
         public abstract Message CreateResponse(object response);
+        public abstract TRequest GetRequest<TRequest>();
     }
 }

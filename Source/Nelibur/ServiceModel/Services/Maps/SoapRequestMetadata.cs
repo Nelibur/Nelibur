@@ -15,23 +15,23 @@ namespace Nelibur.ServiceModel.Services.Maps
         internal SoapRequestMetadata(Message message, Type targetType) : base(targetType)
         {
             _messageVersion = message.Version;
-            _request = GetBody(message, targetType);
+            _request = CreateRequest(message, targetType);
             OperationType = SoapOperationTypeHeader.ReadHeader(message);
         }
 
         public override string OperationType { get; protected set; }
-
-        public override TRequest GetRequest<TRequest>()
-        {
-            return (TRequest)_request;
-        }
 
         public override Message CreateResponse(object response)
         {
             return Message.CreateMessage(_messageVersion, ServiceMetadata.Operations.ProcessResponse, response);
         }
 
-        private static object GetBody(Message message, Type targetType)
+        public override TRequest GetRequest<TRequest>()
+        {
+            return (TRequest)_request;
+        }
+
+        private static object CreateRequest(Message message, Type targetType)
         {
             using (XmlDictionaryReader reader = message.GetReaderAtBodyContents())
             {

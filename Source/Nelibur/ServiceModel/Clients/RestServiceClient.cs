@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
@@ -52,7 +53,6 @@ namespace Nelibur.ServiceModel.Clients
         private static Message AddMessageHeaders<TRequest>(TRequest request, string operationType, Message message)
         {
             var messageProperty = new HttpRequestMessageProperty();
-
             var typeHeader = new RestContentTypeHeader(typeof(TRequest));
             messageProperty.Headers.Add(typeHeader.Name, typeHeader.Value);
 
@@ -68,16 +68,15 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateMessage<TRequest>(TRequest request, string operationType)
         {
             var serializer = new DataContractJsonSerializer(typeof(TRequest));
-            Message message = Message.CreateMessage(MessageVersion.None, "*", request, serializer);
-            message.Properties.Add(
-                WebBodyFormatMessageProperty.Name,
-                new WebBodyFormatMessageProperty(WebContentFormat.Json));
+            var bodyFormat = new WebBodyFormatMessageProperty(WebContentFormat.Json);
 
+            Message message = Message.CreateMessage(MessageVersion.None, "*", request, serializer);
+            message.Properties.Add(WebBodyFormatMessageProperty.Name, bodyFormat);
             message = AddMessageHeaders(request, operationType, message);
             return message;
         }
 
-        private static TResponse GetContent<TResponse>(Message message)
+        private static TResponse GetResponse<TResponse>(Message message)
         {
             using (var stream = new MemoryStream())
             {
@@ -108,6 +107,10 @@ namespace Nelibur.ServiceModel.Clients
                     case OperationType.Delete:
                         channel.Delete(message);
                         break;
+                    default:
+                        string errorMessage = string.Format(
+                            "OperationType {0} with void return is absent", operationType);
+                        throw new InvalidOperationException(errorMessage);
                 }
             }
         }
@@ -120,7 +123,7 @@ namespace Nelibur.ServiceModel.Clients
             {
                 Message message = CreateMessage(request, operationType);
                 IRestService channel = factory.CreateChannel();
-                Message response = null;
+                Message response;
                 switch (operationType)
                 {
                     case OperationType.Get:
@@ -132,8 +135,12 @@ namespace Nelibur.ServiceModel.Clients
                     case OperationType.Put:
                         response = channel.PutWithResponse(message);
                         break;
+                    default:
+                        string errorMessage = string.Format(
+                            "OperationType {0} with Response return is absent", operationType);
+                        throw new InvalidOperationException(errorMessage);
                 }
-                return GetContent<TResponse>(response);
+                return GetResponse<TResponse>(response);
             }
         }
     }
