@@ -4,13 +4,13 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    internal sealed class RequestProcessorContext<TRequest, TProcessor> : IRequestProcessorContext
+    internal sealed class RequestProcessor<TRequest, TProcessor> : IRequestProcessor
         where TRequest : class
         where TProcessor : IRequestOperation
     {
         private readonly Func<TProcessor> _creator;
 
-        public RequestProcessorContext(Func<TProcessor> creator)
+        public RequestProcessor(Func<TProcessor> creator)
         {
             _creator = creator;
         }

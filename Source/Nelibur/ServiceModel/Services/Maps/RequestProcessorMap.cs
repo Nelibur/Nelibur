@@ -6,15 +6,15 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RequestProcessorMap
     {
-        private readonly Dictionary<Type, IRequestProcessorContext> _repository =
-            new Dictionary<Type, IRequestProcessorContext>();
+        private readonly Dictionary<Type, IRequestProcessor> _repository =
+            new Dictionary<Type, IRequestProcessor>();
 
         public void Add<TRequest, TProcessor>()
             where TRequest : class
             where TProcessor : IRequestOperation, new()
         {
             Type requestType = typeof(TRequest);
-            IRequestProcessorContext context = new RequestProcessorContext<TRequest, TProcessor>(() => new TProcessor());
+            IRequestProcessor context = new RequestProcessor<TRequest, TProcessor>(() => new TProcessor());
             _repository[requestType] = context;
         }
 
@@ -23,11 +23,11 @@ namespace Nelibur.ServiceModel.Services.Maps
             where TProcessor : IRequestOperation
         {
             Type requestType = typeof(TRequest);
-            IRequestProcessorContext context = new RequestProcessorContext<TRequest, TProcessor>(creator);
+            IRequestProcessor context = new RequestProcessor<TRequest, TProcessor>(creator);
             _repository[requestType] = context;
         }
 
-        public IRequestProcessorContext Get(Type requestType)
+        public IRequestProcessor Get(Type requestType)
         {
             return _repository[requestType];
         }
