@@ -23,7 +23,7 @@ namespace SimpleRestService
             BindRequestToProcessors();
             _service = new WebServiceHost(typeof(SampleWebService));
             _service.Open();
-            Console.WriteLine("SampleWebService is running");
+            Console.WriteLine("Sample REST Service is running");
             Console.WriteLine("Press any key to exit\n");
             Console.ReadKey();
             _service.Close();

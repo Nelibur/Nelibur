@@ -23,9 +23,7 @@ namespace SimpleRestService
         {
             Console.WriteLine("GetWithResponse Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
-            var response = new ClientResponse { Id = client.Id, Email = client.Email };
-            Console.WriteLine("GetWithResponse Response: {0}\n", response);
-            return response;
+            return new ClientResponse { Id = client.Id, Email = client.Email };
         }
 
         public object PostWithResponse(CreateClientRequest request)
@@ -37,9 +35,7 @@ namespace SimpleRestService
                     Email = request.Email
                 };
             _clients.Add(client);
-            var response = new ClientResponse { Id = client.Id, Email = client.Email };
-            Console.WriteLine("PostWithResponse Response: {0}\n", response);
-            return response;
+            return new ClientResponse { Id = client.Id, Email = client.Email };
         }
 
         public object PutWithResponse(UpdateClientRequest request)
@@ -47,9 +43,7 @@ namespace SimpleRestService
             Console.WriteLine("PutWithResponse Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
             client.Email = request.Email;
-            var response = new ClientResponse { Id = client.Id, Email = client.Email };
-            Console.WriteLine("PutWithResponse Response: {0}\n", response);
-            return response;
+            return new ClientResponse { Id = client.Id, Email = client.Email };
         }
     }
 }

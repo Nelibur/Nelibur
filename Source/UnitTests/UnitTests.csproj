@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ForTest.cs" />
     <Compile Include="Nelibur.Core\DataStructures\BagTests.cs" />
     <Compile Include="Nelibur.Core\Extensions\BagExtensionsTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\CollectionExtensionsTests.cs" />
