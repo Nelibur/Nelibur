@@ -1,9 +1,7 @@
-﻿using System.Configuration;
-using System.IO;
+﻿using System.IO;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
-using System.Threading.Tasks;
 using System.Xml;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
@@ -11,99 +9,44 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public class RestServiceClient
+    public sealed class RestServiceClient : ServiceClient
     {
-        private readonly string _endpointConfigurationName;
-
         /// <summary>
         ///     Create new instance of <see cref="SoapServiceClient" /> .
         /// </summary>
         /// <param name="endpointConfigurationName">WCF's endpoint name.</param>
-        public RestServiceClient(string endpointConfigurationName)
+        public RestServiceClient(string endpointConfigurationName) : base(endpointConfigurationName)
         {
-            if (string.IsNullOrWhiteSpace(endpointConfigurationName))
-            {
-                throw new ConfigurationErrorsException("Invalid endpointConfigurationName: Is null or empty");
-            }
-            _endpointConfigurationName = endpointConfigurationName;
         }
 
-        public void Delete<TRequest>(TRequest request)
-            where TRequest : class
+        protected override void DeleteCore<TRequest>(TRequest request)
         {
             Process(request, OperationType.Delete);
         }
 
-        public Task DeleteAsync<TRequest>(TRequest request)
-            where TRequest : class
-        {
-            return Task.Run(() => Delete(request));
-        }
-
-        public TResponse Get<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
+        protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
         }
 
-        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
-        {
-            return Task.Run(() => Get<TRequest, TResponse>(request));
-        }
-
-        public void Post<TRequest>(TRequest request)
-            where TRequest : class
+        protected override void PostCore<TRequest>(TRequest request)
         {
             Process(request, OperationType.Post);
         }
 
-        public TResponse Post<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
+        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Post);
         }
 
-        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
-        {
-            return Task.Run(() => Post<TRequest, TResponse>(request));
-        }
-
-        public Task PostAsync<TRequest>(TRequest request)
-            where TRequest : class
-        {
-            return Task.Run(() => Post(request));
-        }
-
-        public void Put<TRequest>(TRequest request)
-            where TRequest : class
+        protected override void PutCore<TRequest>(TRequest request)
         {
             Process(request, OperationType.Put);
         }
 
-        public TResponse Put<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
+        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Put);
-        }
-
-        public Task PutAsync<TRequest>(TRequest request)
-            where TRequest : class
-        {
-            return Task.Run(() => Put(request));
-        }
-
-        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class
-        {
-            return Task.Run(() => Put<TRequest, TResponse>(request));
         }
 
         private static Message AddMessageHeaders<TRequest>(TRequest request, string operationType, Message message)

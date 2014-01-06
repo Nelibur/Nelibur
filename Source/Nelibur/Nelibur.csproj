@@ -45,6 +45,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceModel\Clients\RestServiceClient.cs" />
+    <Compile Include="ServiceModel\Clients\ServiceClient.cs" />
     <Compile Include="ServiceModel\Clients\SoapServiceClient.cs" />
     <Compile Include="ServiceModel\Contracts\IRestService.cs" />
     <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
