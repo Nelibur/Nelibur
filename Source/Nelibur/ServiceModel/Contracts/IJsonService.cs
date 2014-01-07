@@ -6,7 +6,7 @@ using Nelibur.ServiceModel.Services.Operations;
 namespace Nelibur.ServiceModel.Contracts
 {
     [ServiceContract]
-    public interface IRestService
+    public interface IJsonService
     {
         [OperationContract]
         [WebInvoke(Method = OperationType.Delete,

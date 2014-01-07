@@ -6,7 +6,7 @@ using Nelibur.ServiceModel.Services;
 namespace SimpleRestService
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public sealed class SampleWebService : IRestService
+    public sealed class SampleWebService : IJsonService
     {
         public void Delete(Message message)
         {

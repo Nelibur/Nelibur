@@ -12,7 +12,7 @@ namespace SimpleRestClient
         private static void Main()
         {
             //            PerformanceTest();
-            var client = new RestServiceClient("NeliburRestService");
+            var client = new JsonServiceClient("NeliburRestService");
 
             var createRequest = new CreateClientRequest
                 {
@@ -54,7 +54,7 @@ namespace SimpleRestClient
 
         private static void PerformanceTest()
         {
-            var client = new RestServiceClient("NeliburRestService");
+            var client = new JsonServiceClient("NeliburRestService");
 
             var createRequest = new CreateClientRequest
                 {

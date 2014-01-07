@@ -10,13 +10,13 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public sealed class RestServiceClient : ServiceClient
+    public sealed class JsonServiceClient : ServiceClient
     {
         /// <summary>
         ///     Create new instance of <see cref="SoapServiceClient" /> .
         /// </summary>
         /// <param name="endpointConfigurationName">WCF's endpoint name.</param>
-        public RestServiceClient(string endpointConfigurationName) : base(endpointConfigurationName)
+        public JsonServiceClient(string endpointConfigurationName) : base(endpointConfigurationName)
         {
         }
 
@@ -102,10 +102,10 @@ namespace Nelibur.ServiceModel.Clients
         private void Process<TRequest>(TRequest request, string operationType)
             where TRequest : class
         {
-            using (var factory = new WebChannelFactory<IRestService>(_endpointConfigurationName))
+            using (var factory = new WebChannelFactory<IJsonService>(_endpointConfigurationName))
             {
                 Message message = CreateMessage(request, operationType);
-                IRestService channel = factory.CreateChannel();
+                IJsonService channel = factory.CreateChannel();
                 switch (operationType)
                 {
                     case OperationType.Get:
@@ -132,10 +132,10 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class
             where TResponse : class
         {
-            using (var factory = new WebChannelFactory<IRestService>(_endpointConfigurationName))
+            using (var factory = new WebChannelFactory<IJsonService>(_endpointConfigurationName))
             {
                 Message message = CreateMessage(request, operationType);
-                IRestService channel = factory.CreateChannel();
+                IJsonService channel = factory.CreateChannel();
                 Message response;
                 switch (operationType)
                 {
