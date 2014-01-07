@@ -17,18 +17,18 @@ namespace Nelibur.ServiceModel.Services.Maps
             _requestTypes[requestType.Name] = requestType;
         }
 
-        internal RequestMetadata FromMessage(Message message)
-        {
-            string typeName = SoapContentTypeHeader.ReadHeader(message);
-            Type targetType = _requestTypes[typeName];
-            return RequestMetadata.FromSoapMessage(message, targetType);
-        }
-
         internal RequestMetadata FromRestMessage(Message message)
         {
             string typeName = RestContentTypeHeader.ReadHeader(message);
             Type targetType = _requestTypes[typeName];
             return RequestMetadata.FromRestMessage(message, targetType);
+        }
+
+        internal RequestMetadata FromSoapMessage(Message message)
+        {
+            string typeName = SoapContentTypeHeader.ReadHeader(message);
+            Type targetType = _requestTypes[typeName];
+            return RequestMetadata.FromSoapMessage(message, targetType);
         }
     }
 }

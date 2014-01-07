@@ -3,6 +3,13 @@ using System.Collections.Generic;
 
 namespace Nelibur.Core.Patterns
 {
+    /// <summary>
+    ///     Visitor pattern.
+    /// </summary>
+    /// <remarks>
+    ///     I don't like to put more than one class in a CS file, but considering I'm expecting
+    ///     users to add this file to their projects, so the single file will be the best choise.
+    /// </remarks>
     public static class Visitor
     {
         public static IFuncVisitor<TBase, TResult> For<TBase, TResult>()
