@@ -7,10 +7,10 @@ namespace SimpleRestContracts.Contracts
     public sealed class ClientResponse
     {
         [DataMember]
-        public Guid Id { get; set; }
+        public string Email { get; set; }
 
         [DataMember]
-        public string Email { get; set; }
+        public Guid Id { get; set; }
 
         public override string ToString()
         {
