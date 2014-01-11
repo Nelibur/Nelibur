@@ -1,6 +1,6 @@
 ﻿namespace Nelibur.ServiceModel.Contracts
 {
-    internal static class ServiceMetadata
+    internal static class SoapServiceMetadata
     {
         internal static class Operations
         {

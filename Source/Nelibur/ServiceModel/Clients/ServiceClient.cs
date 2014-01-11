@@ -1,25 +1,9 @@
-﻿using System.Configuration;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Nelibur.ServiceModel.Clients
 {
     public abstract class ServiceClient
     {
-        protected readonly string _endpointConfigurationName;
-
-        /// <summary>
-        ///     Create new instance of <see cref="SoapServiceClient" /> .
-        /// </summary>
-        /// <param name="endpointConfigurationName">WCF's endpoint name.</param>
-        protected ServiceClient(string endpointConfigurationName)
-        {
-            if (string.IsNullOrWhiteSpace(endpointConfigurationName))
-            {
-                throw new ConfigurationErrorsException("Invalid endpointConfigurationName: Is null or empty");
-            }
-            _endpointConfigurationName = endpointConfigurationName;
-        }
-
         public void Delete<TRequest>(TRequest request)
             where TRequest : class
         {

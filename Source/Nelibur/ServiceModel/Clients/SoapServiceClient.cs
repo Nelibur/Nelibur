@@ -1,4 +1,5 @@
-﻿using System.ServiceModel;
+﻿using System.Configuration;
+using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
@@ -7,12 +8,19 @@ namespace Nelibur.ServiceModel.Clients
 {
     public sealed class SoapServiceClient : ServiceClient
     {
+        private readonly string _endpointConfigurationName;
+
         /// <summary>
         ///     Create new instance of <see cref="SoapServiceClient" /> .
         /// </summary>
         /// <param name="endpointConfigurationName">WCF's endpoint name.</param>
-        public SoapServiceClient(string endpointConfigurationName) : base(endpointConfigurationName)
+        public SoapServiceClient(string endpointConfigurationName)
         {
+            if (string.IsNullOrWhiteSpace(endpointConfigurationName))
+            {
+                throw new ConfigurationErrorsException("Invalid endpointConfigurationName: Is null or empty");
+            }
+            _endpointConfigurationName = endpointConfigurationName;
         }
 
         protected override void DeleteCore<TRequest>(TRequest request)
@@ -59,7 +67,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, ServiceMetadata.Operations.Process, request);
+                messageVersion, SoapServiceMetadata.Operations.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -70,7 +78,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, ServiceMetadata.Operations.ProcessWithResponse, request);
+                messageVersion, SoapServiceMetadata.Operations.ProcessWithResponse, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);

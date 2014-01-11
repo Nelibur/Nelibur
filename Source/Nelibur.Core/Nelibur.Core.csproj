@@ -35,6 +35,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
@@ -49,6 +50,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\UriBuilderExtensions.cs" />
     <Compile Include="IFluent.cs" />
     <Compile Include="Logging\InternalLoggers\NullLogFactory.cs" />
     <Compile Include="Logging\ILog.cs" />

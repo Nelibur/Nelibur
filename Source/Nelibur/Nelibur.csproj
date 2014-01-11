@@ -34,9 +34,12 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -49,13 +52,12 @@
     <Compile Include="ServiceModel\Clients\SoapServiceClient.cs" />
     <Compile Include="ServiceModel\Contracts\IJsonService.cs" />
     <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
-    <Compile Include="ServiceModel\Contracts\ServiceMetadata.cs" />
+    <Compile Include="ServiceModel\Contracts\RestServiceMetadata.cs" />
+    <Compile Include="ServiceModel\Contracts\SoapServiceMetadata.cs" />
     <Compile Include="ServiceModel\Services\ServiceProcessor.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapContentTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapOperationTypeHeader.cs" />
-    <Compile Include="ServiceModel\Services\Headers\RestContentDataHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\RestContentTypeHeader.cs" />
-    <Compile Include="ServiceModel\Services\Headers\RestHttpRequestHeader.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessor.cs" />
     <Compile Include="ServiceModel\Services\Maps\RequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Maps\SoapRequestMetadata.cs" />

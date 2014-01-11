@@ -2,19 +2,21 @@
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Web;
-using System.Text;
 using System.Xml;
-using Nelibur.ServiceModel.Services.Headers;
+using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RestRequestMetadata : RequestMetadata
     {
         private readonly object _request;
+        private readonly WebOperationContext _webOperationContext;
 
         internal RestRequestMetadata(Message message, Type targetType) : base(targetType)
         {
+            _webOperationContext = WebOperationContext.Current;
             OperationType = GetOperationType(message);
             _request = CreateRequest(message, targetType);
         }
@@ -24,25 +26,12 @@ namespace Nelibur.ServiceModel.Services.Maps
         public override Message CreateResponse(object response)
         {
             var serializer = new DataContractJsonSerializer(response.GetType());
-            return WebOperationContext.Current.CreateJsonResponse(response, serializer);
+            return _webOperationContext.CreateJsonResponse(response, serializer);
         }
 
         public override TRequest GetRequest<TRequest>()
         {
             return (TRequest)_request;
-        }
-
-        private static object CraeteRequestFromHeader(Message message, Type targetType)
-        {
-            string content = RestContentDataHeader.ReadHeader(message);
-            byte[] bytes = Encoding.UTF8.GetBytes(content);
-
-            using (var stream = new MemoryStream(bytes))
-            {
-                var serializer = new DataContractJsonSerializer(targetType);
-                stream.Position = 0;
-                return serializer.ReadObject(stream);
-            }
         }
 
         private static object CreateRequestFromContent(Message message, Type targetType)
@@ -64,14 +53,30 @@ namespace Nelibur.ServiceModel.Services.Maps
             return httpReq.Method;
         }
 
+        private object CraeteRequestFromUrl(Type targetType)
+        {
+            UriTemplateMatch templateMatch = _webOperationContext.IncomingRequest.UriTemplateMatch;
+            string requestData = templateMatch.QueryParameters[RestServiceMetadata.ParamNames.Request];
+            var serializer = new DataContractJsonSerializer(targetType);
+            var converter = new QueryStringConverter();
+            object rawObj = converter.ConvertStringToValue(requestData, typeof(byte[]));
+            return serializer.ReadObject(new MemoryStream((byte[])rawObj));
+        }
+
         private object CreateRequest(Message message, Type targetType)
         {
-            if (OperationType == Operations.OperationType.Get)
+            if (IsRequestByUrl())
             {
-                return CraeteRequestFromHeader(message, targetType);
+                return CraeteRequestFromUrl(targetType);
             }
 
             return CreateRequestFromContent(message, targetType);
+        }
+
+        private bool IsRequestByUrl()
+        {
+            return OperationType == Operations.OperationType.Get ||
+                OperationType == Operations.OperationType.Delete;
         }
     }
 }

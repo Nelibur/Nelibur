@@ -3,7 +3,7 @@ using System.ServiceModel.Channels;
 
 namespace Nelibur.ServiceModel.Services.Headers
 {
-    internal sealed class RestContentTypeHeader : RestHttpRequestHeader
+    internal sealed class RestContentTypeHeader
     {
         private const string NameValue = "nelibur-content-type";
 
@@ -12,12 +12,12 @@ namespace Nelibur.ServiceModel.Services.Headers
             Value = contentType.Name;
         }
 
-        public override string Name
+        public string Name
         {
             get { return NameValue; }
         }
 
-        public override string Value { get; protected set; }
+        public string Value { get; private set; }
 
         internal static string ReadHeader(Message value)
         {
