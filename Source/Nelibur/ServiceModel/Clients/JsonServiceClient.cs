@@ -3,11 +3,11 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
-using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Contracts;
+using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Headers;
 using Nelibur.ServiceModel.Services.Operations;
 
@@ -15,6 +15,8 @@ namespace Nelibur.ServiceModel.Clients
 {
     public sealed class JsonServiceClient : ServiceClient
     {
+        private static readonly JsonDataSerializer _jsondataSerializer = new JsonDataSerializer();
+        private static readonly QueryStringSerializer _queryStringSerializer = new QueryStringSerializer();
         private readonly bool _disposeHandler;
         private readonly HttpClientHandler _httpClientHandler;
         private readonly Uri _serviceAddress;
@@ -114,27 +116,14 @@ namespace Nelibur.ServiceModel.Clients
 
         private static StringContent CreateContent<T>(T value)
         {
-            using (var stream = new MemoryStream())
-            {
-                var serializer = new DataContractJsonSerializer(typeof(T));
-                serializer.WriteObject(stream, value);
-                string content = Encoding.UTF8.GetString(stream.ToArray());
-                var result = new StringContent(content, Encoding.UTF8, "application/json");
-                return result;
-            }
+            string content = _jsondataSerializer.ToString(value);
+            return new StringContent(content, Encoding.UTF8, "application/json");
         }
 
         private static NameValueCollection CreateQueryCollection<TRequest>(TRequest request)
             where TRequest : class
         {
-            string requestValue;
-            using (var stream = new MemoryStream())
-            {
-                var serializer = new DataContractJsonSerializer(typeof(TRequest));
-                serializer.WriteObject(stream, request);
-                var converter = new QueryStringConverter();
-                requestValue = converter.ConvertValueToString(stream.ToArray(), typeof(byte[]));
-            }
+            string requestValue = _queryStringSerializer.ToUrl(request);
             return new NameValueCollection { { RestServiceMetadata.ParamNames.Request, requestValue } };
         }
 
@@ -219,28 +208,28 @@ namespace Nelibur.ServiceModel.Clients
 
             using (HttpClient client = CreateHttpClient<TRequest>())
             {
-                Task<HttpResponseMessage> responseTask;
+                HttpResponseMessage responseTask;
 
                 switch (operationType)
                 {
                     case OperationType.Get:
-                        responseTask = client.GetAsync(urlRequest);
+                        responseTask = await client.GetAsync(urlRequest);
                         break;
                     case OperationType.Post:
-                        responseTask = client.PostAsync(urlRequest, CreateContent(request));
+                        responseTask = await client.PostAsync(urlRequest, CreateContent(request));
                         break;
                     case OperationType.Put:
-                        responseTask = client.PutAsync(urlRequest, CreateContent(request));
+                        responseTask = await client.PutAsync(urlRequest, CreateContent(request));
                         break;
                     case OperationType.Delete:
-                        responseTask = client.DeleteAsync(urlRequest);
+                        responseTask = await client.DeleteAsync(urlRequest);
                         break;
                     default:
                         string errorMessage = string.Format(
                             "OperationType {0} with Response return is absent", operationType);
                         throw new InvalidOperationException(errorMessage);
                 }
-                using (Stream stream = await (await responseTask).Content.ReadAsStreamAsync())
+                using (Stream stream = await responseTask.Content.ReadAsStreamAsync())
                 {
                     var serializer = new DataContractJsonSerializer(typeof(TResponse));
                     return (TResponse)serializer.ReadObject(stream);

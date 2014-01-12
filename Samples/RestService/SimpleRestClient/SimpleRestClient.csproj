@@ -64,6 +64,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Source\Nelibur.Core\Nelibur.Core.csproj">
+      <Project>{71FF2315-9038-4F0C-A145-00CADF3E881B}</Project>
+      <Name>Nelibur.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Source\Nelibur\Nelibur.csproj">
       <Project>{FD85B6D0-7260-4991-804B-981F8DB6592E}</Project>
       <Name>Nelibur</Name>

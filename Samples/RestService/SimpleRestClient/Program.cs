@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using NLog;
+using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Clients;
 using SimpleRestClient.Properties;
 using SimpleRestContracts.Contracts;
@@ -15,7 +13,7 @@ namespace SimpleRestClient
         private static void Main()
         {
             AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
-            //            PerformanceTest();
+            //                        PerformanceTest();
 
             var client = new JsonServiceClient(Settings.Default.ServiceAddress);
 
@@ -52,7 +50,7 @@ namespace SimpleRestClient
 
         private static void PerformanceTest()
         {
-            var client = new JsonServiceClient(Settings.Default.ServiceAddress, new HttpClientHandler(), false);
+            var client = new JsonServiceClient(Settings.Default.ServiceAddress);
 
             var createRequest = new CreateClientRequest
                 {
@@ -61,13 +59,8 @@ namespace SimpleRestClient
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            Task<ClientResponse>[] tasks = Enumerable
-                .Range(0, 1000)
-                .ToList()
-                .Select(x => client.PostAsync<CreateClientRequest, ClientResponse>(createRequest))
-                .ToArray();
-
-            Task.WaitAll(tasks);
+            1000.Times()
+                .Iter(x => client.Post<CreateClientRequest, ClientResponse>(createRequest));
 
             Console.WriteLine("Total: {0} ms", stopwatch.Elapsed.TotalMilliseconds);
         }

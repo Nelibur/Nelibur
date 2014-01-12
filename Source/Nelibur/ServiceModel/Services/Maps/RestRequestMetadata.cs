@@ -2,15 +2,16 @@
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Web;
 using System.Xml;
 using Nelibur.ServiceModel.Contracts;
+using Nelibur.ServiceModel.Serializers;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RestRequestMetadata : RequestMetadata
     {
+        private static readonly QueryStringSerializer _queryStringSerializer = new QueryStringSerializer();
         private readonly object _request;
         private readonly WebOperationContext _webOperationContext;
 
@@ -57,10 +58,7 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             UriTemplateMatch templateMatch = _webOperationContext.IncomingRequest.UriTemplateMatch;
             string requestData = templateMatch.QueryParameters[RestServiceMetadata.ParamNames.Request];
-            var serializer = new DataContractJsonSerializer(targetType);
-            var converter = new QueryStringConverter();
-            object rawObj = converter.ConvertStringToValue(requestData, typeof(byte[]));
-            return serializer.ReadObject(new MemoryStream((byte[])rawObj));
+            return _queryStringSerializer.ToObject(targetType, requestData);
         }
 
         private object CreateRequest(Message message, Type targetType)
