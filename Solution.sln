@@ -40,6 +40,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRestClient", "Samples
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ArchitectureOverview", "Source\ArchitectureOverview\ArchitectureOverview.modelproj", "{685B309C-BE23-47AF-965B-8D80EB44D1BE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTests", "Source\SpecFlowTests\SpecFlowTests.csproj", "{606698F0-75EF-43C6-8CC1-D29C951F69B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,12 +92,17 @@ Global
 		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{9D380F52-0A3D-452E-8F39-6131E070578C} = {9110C2BA-5CAE-464B-95D0-9086CA945516}
+		{606698F0-75EF-43C6-8CC1-D29C951F69B5} = {9110C2BA-5CAE-464B-95D0-9086CA945516}
 		{2753E3C4-2A11-4A50-818B-5EDB5B0EC63F} = {1CFC4D1F-73AE-4FE7-BB52-95DCEFC34A7E}
 		{5484D5C5-A1B7-431F-BA24-46FD8F534CA8} = {1CFC4D1F-73AE-4FE7-BB52-95DCEFC34A7E}
 		{8A61EE73-A55E-483F-9432-6C3A69738016} = {1CFC4D1F-73AE-4FE7-BB52-95DCEFC34A7E}
