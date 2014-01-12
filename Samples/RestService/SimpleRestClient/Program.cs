@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using NLog;
 using Nelibur.ServiceModel.Clients;
 using SimpleRestClient.Properties;
 using SimpleRestContracts.Contracts;
@@ -12,6 +14,7 @@ namespace SimpleRestClient
     {
         private static void Main()
         {
+            AppDomain.CurrentDomain.UnhandledException += UnhandledExceptionHandler;
             //            PerformanceTest();
 
             var client = new JsonServiceClient(Settings.Default.ServiceAddress);
@@ -49,7 +52,7 @@ namespace SimpleRestClient
 
         private static void PerformanceTest()
         {
-            var client = new JsonServiceClient("NeliburRestService");
+            var client = new JsonServiceClient(Settings.Default.ServiceAddress, new HttpClientHandler(), false);
 
             var createRequest = new CreateClientRequest
                 {
@@ -59,13 +62,32 @@ namespace SimpleRestClient
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             Task<ClientResponse>[] tasks = Enumerable
-                .Range(0, 100000)
+                .Range(0, 1000)
                 .ToList()
-                .Select(x => Task.Run(() => client.Post<CreateClientRequest, ClientResponse>(createRequest))).ToArray();
+                .Select(x => client.PostAsync<CreateClientRequest, ClientResponse>(createRequest))
+                .ToArray();
 
             Task.WaitAll(tasks);
 
             Console.WriteLine("Total: {0} ms", stopwatch.Elapsed.TotalMilliseconds);
+        }
+
+        private static void UnhandledExceptionHandler(object sender, UnhandledExceptionEventArgs e)
+        {
+            Logger logger = LogManager.GetCurrentClassLogger();
+            var exception = e.ExceptionObject as Exception;
+
+            if (exception == null)
+            {
+                logger.Error("Unhandled non-CLR exception occured ({0})", e.ExceptionObject);
+            }
+            else
+            {
+                logger.Error(
+                    "Domain unhandled exception of type {0} occured ({1})",
+                    e.GetType().Name,
+                    e.ExceptionObject);
+            }
         }
     }
 }

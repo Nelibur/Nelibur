@@ -1,6 +1,7 @@
 ﻿using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.Threading.Tasks;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
 
@@ -23,14 +24,29 @@ namespace Nelibur.ServiceModel.Clients
             _endpointConfigurationName = endpointConfigurationName;
         }
 
+        protected override Task DeleteAsyncCore<TRequest>(TRequest request)
+        {
+            return Task.Run(() => DeleteCore(request));
+        }
+
+        protected override Task<TResponse> DeleteAsyncCore<TRequest, TResponse>(TRequest request)
+        {
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete));
+        }
+
         protected override void DeleteCore<TRequest>(TRequest request)
         {
             Process(request, SoapOperationTypeHeader.Delete);
         }
 
-        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        protected override Task GetAsyncCore<TRequest>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete);
+            return Task.Run(() => GetCore(request));
+        }
+
+        protected override Task<TResponse> GetAsyncCore<TRequest, TResponse>(TRequest request)
+        {
+            return Task.Run(() => GetCore<TRequest, TResponse>(request));
         }
 
         protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
@@ -43,24 +59,34 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, SoapOperationTypeHeader.Get);
         }
 
+        protected override Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
+        {
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post));
+        }
+
+        protected override Task PostAsyncCore<TRequest>(TRequest request)
+        {
+            return Task.Run(() => PostCore(request));
+        }
+
         protected override void PostCore<TRequest>(TRequest request)
         {
             Process(request, SoapOperationTypeHeader.Post);
         }
 
-        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
+        protected override Task PutAsyncCore<TRequest>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
+            return Task.Run(() => PutCore(request));
+        }
+
+        protected override Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
+        {
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
         protected override void PutCore<TRequest>(TRequest request)
         {
             Process(request, SoapOperationTypeHeader.Put);
-        }
-
-        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
-        {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
         private static Message CreateMessage<TRequest>(
