@@ -15,8 +15,6 @@ namespace Nelibur.ServiceModel.Clients
 {
     public sealed class JsonServiceClient : ServiceClient
     {
-        private static readonly JsonDataSerializer _jsondataSerializer = new JsonDataSerializer();
-        private static readonly QueryStringSerializer _queryStringSerializer = new QueryStringSerializer();
         private readonly bool _disposeHandler;
         private readonly HttpClientHandler _httpClientHandler;
         private readonly Uri _serviceAddress;
@@ -116,14 +114,14 @@ namespace Nelibur.ServiceModel.Clients
 
         private static StringContent CreateContent<T>(T value)
         {
-            string content = _jsondataSerializer.ToString(value);
+            string content = JsonDataSerializer.ToString(value);
             return new StringContent(content, Encoding.UTF8, "application/json");
         }
 
         private static NameValueCollection CreateQueryCollection<TRequest>(TRequest request)
             where TRequest : class
         {
-            string requestValue = _queryStringSerializer.ToUrl(request);
+            string requestValue = QueryStringSerializer.ToUrl(request);
             return new NameValueCollection { { RestServiceMetadata.ParamNames.Request, requestValue } };
         }
 

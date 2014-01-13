@@ -11,7 +11,6 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RestRequestMetadata : RequestMetadata
     {
-        private static readonly QueryStringSerializer _queryStringSerializer = new QueryStringSerializer();
         private readonly object _request;
         private readonly WebOperationContext _webOperationContext;
 
@@ -58,7 +57,7 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             UriTemplateMatch templateMatch = _webOperationContext.IncomingRequest.UriTemplateMatch;
             string requestData = templateMatch.QueryParameters[RestServiceMetadata.ParamNames.Request];
-            return _queryStringSerializer.ToObject(targetType, requestData);
+            return QueryStringSerializer.ToObject(targetType, requestData);
         }
 
         private object CreateRequest(Message message, Type targetType)
