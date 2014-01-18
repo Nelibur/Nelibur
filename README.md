@@ -1,7 +1,7 @@
 Nelibur - Message based webservice framework in WCF
 =======
 
-Nelibur is message based webservice framework on pure **WCF**. Nelibur simplifies creating high-performance and message based webservices in WCF and of course **you've all power of WCF.**
+Nelibur is message based webservice framework on pure **WCF**. Nelibur simplifies creating high-performance and message based webservices in WCF and of course **you have all the power of WCF.**
 
 What to read
 ============
