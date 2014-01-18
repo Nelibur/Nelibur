@@ -41,9 +41,9 @@ namespace Nelibur.ServiceModel.Clients
         /// </param>
         public JsonServiceClient(string serviceAddress, HttpClientHandler httpClientHandler, bool disposeHandler)
         {
-            _disposeHandler = disposeHandler;
             _serviceAddress = new Uri(serviceAddress);
             _httpClientHandler = httpClientHandler;
+            _disposeHandler = disposeHandler;
         }
 
         protected override Task DeleteAsyncCore<TRequest>(TRequest request)

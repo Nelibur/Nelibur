@@ -2,15 +2,14 @@
 using System.Collections.Specialized;
 using System.IO;
 using System.Runtime.Serialization.Json;
-using System.ServiceModel.Dispatcher;
+using System.Text;
+using System.Web;
 using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Serializers
 {
-    public sealed class UrlSerializer
+    internal sealed class UrlSerializer
     {
-        private static readonly QueryStringConverter _converter = new QueryStringConverter();
-
         private UrlSerializer(NameValueCollection value)
         {
             QueryParams = value;
@@ -52,35 +51,45 @@ namespace Nelibur.ServiceModel.Serializers
         {
             const string Key = RestServiceMetadata.ParamNames.Request;
             var serializer = new DataContractJsonSerializer(targetType);
-            object rawObj = _converter.ConvertStringToValue(QueryParams[Key], typeof(byte[]));
-            return serializer.ReadObject(new MemoryStream((byte[])rawObj));
+            byte[] rawObj = Encoding.UTF8.GetBytes(UrlDecode(QueryParams[Key]));
+            return serializer.ReadObject(new MemoryStream(rawObj));
         }
 
         public string GetTypeValue()
         {
             const string Key = RestServiceMetadata.ParamNames.Type;
-            return (string)_converter.ConvertStringToValue(QueryParams[Key], typeof(string));
+            return UrlDecode(QueryParams[Key]);
         }
 
         private static NameValueCollection CreateQueryParams<T>(T value)
         {
-            byte[] data = JsonDataSerializer.ToByte(value);
-            string requestData = _converter.ConvertValueToString(data, typeof(byte[]));
+            string data = JsonDataSerializer.ToString(value);
             var result = new NameValueCollection
                 {
                     CreateQueryParams(typeof(T)),
-                    { RestServiceMetadata.ParamNames.Request, requestData }
+                    { RestServiceMetadata.ParamNames.Request, UrlEncode(data) }
                 };
             return result;
         }
 
         private static NameValueCollection CreateQueryParams(Type value)
         {
-            string requestType = value.Name;
             return new NameValueCollection
                 {
-                    { RestServiceMetadata.ParamNames.Type, requestType },
+                    { RestServiceMetadata.ParamNames.Type, UrlEncode(value.Name) },
                 };
+        }
+
+        private static string UrlDecode(string value)
+        {
+            return HttpUtility.UrlDecode(value);
+        }
+
+        /// <remarks>http://stackoverflow.com/questions/602642/server-urlencode-vs-httputility-urlencode</remarks>
+        /// <remarks>http://blogs.msdn.com/b/yangxind/archive/2006/11/09/don-t-use-net-system-uri-unescapedatastring-in-url-decoding.aspx</remarks>
+        private static string UrlEncode(string value)
+        {
+            return Uri.EscapeDataString(value);
         }
     }
 }
