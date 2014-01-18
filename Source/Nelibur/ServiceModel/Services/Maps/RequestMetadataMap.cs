@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Web;
+using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Services.Maps
@@ -19,7 +22,9 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         internal RequestMetadata FromRestMessage(Message message)
         {
-            string typeName = RestContentTypeHeader.ReadHeader(message);
+            UriTemplateMatch templateMatch = WebOperationContext.Current.IncomingRequest.UriTemplateMatch;
+            NameValueCollection queryParams = templateMatch.QueryParameters;
+            string typeName = UrlSerializer.FromQueryParams(queryParams).GetTypeValue();
             Type targetType = _requestTypes[typeName];
             return RequestMetadata.FromRestMessage(message, targetType);
         }

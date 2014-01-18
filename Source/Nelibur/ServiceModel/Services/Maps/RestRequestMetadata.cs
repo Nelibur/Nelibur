@@ -1,10 +1,10 @@
 ﻿using System;
+using System.Collections.Specialized;
 using System.IO;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 using System.Xml;
-using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
 
 namespace Nelibur.ServiceModel.Services.Maps
@@ -56,8 +56,8 @@ namespace Nelibur.ServiceModel.Services.Maps
         private object CraeteRequestFromUrl(Type targetType)
         {
             UriTemplateMatch templateMatch = _webOperationContext.IncomingRequest.UriTemplateMatch;
-            string requestData = templateMatch.QueryParameters[RestServiceMetadata.ParamNames.Request];
-            return QueryStringSerializer.ToObject(targetType, requestData);
+            NameValueCollection queryParams = templateMatch.QueryParameters;
+            return UrlSerializer.FromQueryParams(queryParams).GetRequest(targetType);
         }
 
         private object CreateRequest(Message message, Type targetType)

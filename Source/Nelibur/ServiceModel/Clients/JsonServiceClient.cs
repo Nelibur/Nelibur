@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
-using Nelibur.ServiceModel.Services.Headers;
 using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Clients
@@ -121,17 +120,17 @@ namespace Nelibur.ServiceModel.Clients
         private static NameValueCollection CreateQueryCollection<TRequest>(TRequest request)
             where TRequest : class
         {
-            string requestValue = QueryStringSerializer.ToUrl(request);
-            return new NameValueCollection { { RestServiceMetadata.ParamNames.Request, requestValue } };
+            return UrlSerializer.FromValue(request).QueryParams;
         }
 
-        private HttpClient CreateHttpClient<TRequest>()
-            where TRequest : class
+        private static NameValueCollection CreateQueryCollection(Type value)
         {
-            var client = new HttpClient(_httpClientHandler, _disposeHandler);
-            var typeHeader = new RestContentTypeHeader(typeof(TRequest));
-            client.DefaultRequestHeaders.Add(typeHeader.Name, typeHeader.Value);
-            return client;
+            return UrlSerializer.FromType(value).QueryParams;
+        }
+
+        private HttpClient CreateHttpClient()
+        {
+            return new HttpClient(_httpClientHandler, _disposeHandler);
         }
 
         private string CreateUrlRequest<TRequest>(TRequest request, string operationType, bool responseRequired = true)
@@ -141,14 +140,16 @@ namespace Nelibur.ServiceModel.Clients
             switch (operationType)
             {
                 case OperationType.Post:
-                    builder = responseRequired
+                    builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Operations.PostWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Post);
+                        : builder.AddPath(RestServiceMetadata.Operations.Post))
+                        .AddQuery(CreateQueryCollection(typeof(TRequest)));
                     break;
                 case OperationType.Put:
-                    builder = responseRequired
+                    builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Operations.PutWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Put);
+                        : builder.AddPath(RestServiceMetadata.Operations.Put))
+                        .AddQuery(CreateQueryCollection(typeof(TRequest)));
                     break;
                 case OperationType.Get:
                     builder = (responseRequired
@@ -174,7 +175,7 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class
         {
             string urlRequest = CreateUrlRequest(request, operationType, responseRequired: false);
-            using (HttpClient client = CreateHttpClient<TRequest>())
+            using (HttpClient client = CreateHttpClient())
             {
                 switch (operationType)
                 {
@@ -204,7 +205,7 @@ namespace Nelibur.ServiceModel.Clients
         {
             string urlRequest = CreateUrlRequest(request, operationType);
 
-            using (HttpClient client = CreateHttpClient<TRequest>())
+            using (HttpClient client = CreateHttpClient())
             {
                 HttpResponseMessage responseTask;
 

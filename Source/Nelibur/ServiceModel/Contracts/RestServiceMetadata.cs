@@ -17,6 +17,7 @@
         internal static class ParamNames
         {
             public const string Request = "request";
+            public const string Type = "type";
         }
 
         internal static class UriTemplates
