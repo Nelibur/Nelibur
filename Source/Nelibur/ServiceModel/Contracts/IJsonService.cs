@@ -10,47 +10,47 @@ namespace Nelibur.ServiceModel.Contracts
     {
         [OperationContract]
         [WebInvoke(Method = OperationType.Delete,
-            UriTemplate = RestServiceMetadata.UriTemplates.Delete,
+            UriTemplate = RestServiceMetadata.UriTemplate.Delete,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void Delete(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Delete,
-            UriTemplate = RestServiceMetadata.UriTemplates.DeleteWithResponse,
+            UriTemplate = RestServiceMetadata.UriTemplate.DeleteWithResponse,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Message DeleteWithResponse(Message message);
 
         [OperationContract]
-        [WebGet(UriTemplate = RestServiceMetadata.UriTemplates.Get,
+        [WebGet(UriTemplate = RestServiceMetadata.UriTemplate.Get,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void Get(Message message);
 
         [OperationContract]
-        [WebGet(UriTemplate = RestServiceMetadata.UriTemplates.GetWithResponse,
+        [WebGet(UriTemplate = RestServiceMetadata.UriTemplate.GetWithResponse,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Message GetWithResponse(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Post,
-            UriTemplate = RestServiceMetadata.UriTemplates.Post,
+            UriTemplate = RestServiceMetadata.UriTemplate.Post,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void Post(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Post,
-            UriTemplate = RestServiceMetadata.UriTemplates.PostWithResponse,
+            UriTemplate = RestServiceMetadata.UriTemplate.PostWithResponse,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Message PostWithResponse(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Put,
-            UriTemplate = RestServiceMetadata.UriTemplates.Put,
+            UriTemplate = RestServiceMetadata.UriTemplate.Put,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         void Put(Message message);
 
         [OperationContract]
         [WebInvoke(Method = OperationType.Put,
-            UriTemplate = RestServiceMetadata.UriTemplates.PutWithResponse,
+            UriTemplate = RestServiceMetadata.UriTemplate.PutWithResponse,
             RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         Message PutWithResponse(Message message);
     }

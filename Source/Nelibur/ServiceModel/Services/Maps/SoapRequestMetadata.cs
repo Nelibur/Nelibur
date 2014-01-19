@@ -23,7 +23,7 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public override Message CreateResponse(object response)
         {
-            return Message.CreateMessage(_messageVersion, SoapServiceMetadata.Operations.ProcessResponse, response);
+            return Message.CreateMessage(_messageVersion, SoapServiceMetadata.Action.ProcessResponse, response);
         }
 
         public override TRequest GetRequest<TRequest>()

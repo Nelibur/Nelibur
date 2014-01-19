@@ -93,7 +93,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, SoapServiceMetadata.Operations.Process, request);
+                messageVersion, SoapServiceMetadata.Action.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -104,7 +104,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, SoapServiceMetadata.Operations.ProcessWithResponse, request);
+                messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);

@@ -2,7 +2,7 @@
 {
     internal static class SoapServiceMetadata
     {
-        internal static class Operations
+        internal static class Action
         {
             public const string Process = "urn:nelibur-process";
             public const string ProcessResponse = "urn:nelibur-procesresponse";

@@ -141,26 +141,26 @@ namespace Nelibur.ServiceModel.Clients
             {
                 case OperationType.Post:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Operations.PostWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Post))
+                        ? builder.AddPath(RestServiceMetadata.Path.PostWithResponse)
+                        : builder.AddPath(RestServiceMetadata.Path.Post))
                         .AddQuery(CreateQueryCollection(typeof(TRequest)));
                     break;
                 case OperationType.Put:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Operations.PutWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Put))
+                        ? builder.AddPath(RestServiceMetadata.Path.PutWithResponse)
+                        : builder.AddPath(RestServiceMetadata.Path.Put))
                         .AddQuery(CreateQueryCollection(typeof(TRequest)));
                     break;
                 case OperationType.Get:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Operations.GetWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Get))
+                        ? builder.AddPath(RestServiceMetadata.Path.GetWithResponse)
+                        : builder.AddPath(RestServiceMetadata.Path.Get))
                         .AddQuery(CreateQueryCollection(request));
                     break;
                 case OperationType.Delete:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Operations.DeleteWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Operations.Delete))
+                        ? builder.AddPath(RestServiceMetadata.Path.DeleteWithResponse)
+                        : builder.AddPath(RestServiceMetadata.Path.Delete))
                         .AddQuery(CreateQueryCollection(request));
                     break;
                 default:
