@@ -21,9 +21,8 @@ namespace Nelibur.Core.Extensions
 
         public static UriBuilder AddQuery(this UriBuilder builder, NameValueCollection queryCollection)
         {
-            string[] query = (from key in queryCollection.AllKeys
-                from value in queryCollection.GetValues(key)
-                select string.Format("{0}={1}", key, value))
+            string[] query = queryCollection
+                .AllKeys.Select(key => string.Format("{0}={1}", key, queryCollection[key]))
                 .ToArray();
             builder.Query = string.Join("&", query);
             return builder;

@@ -63,6 +63,7 @@
     <Compile Include="Nelibur.Core\Extensions\ObjectExtensionsTests.cs" />
     <Compile Include="Nelibur.Core\Patterns\VisitorTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />
+    <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

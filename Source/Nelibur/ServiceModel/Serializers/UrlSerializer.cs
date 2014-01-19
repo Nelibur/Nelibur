@@ -47,7 +47,7 @@ namespace Nelibur.ServiceModel.Serializers
             return new UrlSerializer(collection);
         }
 
-        public object GetRequest(Type targetType)
+        public object GetRequestValue(Type targetType)
         {
             const string Key = RestServiceMetadata.ParamName.Request;
             var serializer = new DataContractJsonSerializer(targetType);

@@ -4,9 +4,14 @@ using System.Text;
 
 namespace Nelibur.ServiceModel.Serializers
 {
-    public static class JsonDataSerializer
+    internal static class JsonDataSerializer
     {
-        public static byte[] ToByte<T>(T value)
+        public static string ToString<T>(T value)
+        {
+            return Encoding.UTF8.GetString(ToByte(value));
+        }
+
+        private static byte[] ToByte<T>(T value)
         {
             using (var stream = new MemoryStream())
             {
@@ -14,11 +19,6 @@ namespace Nelibur.ServiceModel.Serializers
                 serializer.WriteObject(stream, value);
                 return stream.ToArray();
             }
-        }
-
-        public static string ToString<T>(T value)
-        {
-            return Encoding.UTF8.GetString(ToByte(value));
         }
     }
 }

@@ -57,7 +57,7 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             UriTemplateMatch templateMatch = _webOperationContext.IncomingRequest.UriTemplateMatch;
             NameValueCollection queryParams = templateMatch.QueryParameters;
-            return UrlSerializer.FromQueryParams(queryParams).GetRequest(targetType);
+            return UrlSerializer.FromQueryParams(queryParams).GetRequestValue(targetType);
         }
 
         private object CreateRequest(Message message, Type targetType)
