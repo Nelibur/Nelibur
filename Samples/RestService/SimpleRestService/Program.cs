@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Web;
-using Nelibur.ServiceModel.Services;
+using Nelibur.ServiceModel.Services.Processors;
 using SimpleRestContracts.Contracts;
 
 namespace SimpleRestService

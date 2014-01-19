@@ -21,4 +21,3 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("dc2314a4-82a2-4691-b274-f983a0c7d4f6")]
 [assembly: InternalsVisibleTo("UnitTests")]
-

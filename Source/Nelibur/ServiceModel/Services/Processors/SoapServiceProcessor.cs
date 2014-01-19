@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Services.Maps;
 
-namespace Nelibur.ServiceModel.Services
+namespace Nelibur.ServiceModel.Services.Processors
 {
     public sealed class SoapServiceProcessor : ServiceProcessor
     {

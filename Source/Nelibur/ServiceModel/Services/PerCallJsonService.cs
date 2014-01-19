@@ -3,10 +3,10 @@ using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Processors;
 
-namespace SimpleRestService
+namespace Nelibur.ServiceModel.Services
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public sealed class SampleWebService : IJsonService
+    public sealed class PerCallJsonService : IJsonService
     {
         public void Delete(Message message)
         {

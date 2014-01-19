@@ -2,6 +2,12 @@
 {
     internal static class RestServiceMetadata
     {
+        internal static class ParamName
+        {
+            public const string Request = "request";
+            public const string Type = "type";
+        }
+
         internal static class Path
         {
             public const string Delete = "Delete";
@@ -12,12 +18,6 @@
             public const string PostWithResponse = "PostWithResponse";
             public const string Put = "Put";
             public const string PutWithResponse = "PutWithResponse";
-        }
-
-        internal static class ParamName
-        {
-            public const string Request = "request";
-            public const string Type = "type";
         }
 
         internal static class UriTemplate

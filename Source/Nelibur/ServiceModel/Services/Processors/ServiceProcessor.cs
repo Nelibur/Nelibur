@@ -2,7 +2,7 @@
 using Nelibur.ServiceModel.Services.Maps;
 using Nelibur.ServiceModel.Services.Operations;
 
-namespace Nelibur.ServiceModel.Services
+namespace Nelibur.ServiceModel.Services.Processors
 {
     public abstract class ServiceProcessor
     {
