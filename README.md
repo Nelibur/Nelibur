@@ -3,14 +3,17 @@ Nelibur - Message based webservice framework in WCF
 
 Nelibur is message based webservice framework on pure **WCF**. Nelibur simplifies creating high-performance and message based webservices in WCF and of course **you have all the power of WCF.**
 
+Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
+follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
+
 What to read
 ============
 
  * [SOAP Message based web service on pure WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
  * [How to create REST message based Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-REST-message-based-Servcie-on-pure-WCF)
- * [How to create REST message based Client on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-REST-message-based-Client-on-pure-WCF)
+ * [How to use REST message based Client](https://github.com/Nelibur/Nelibur/wiki/How-to-use-REST-message-based-Client)
  * [How to create SOAP message based Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
- * [How to create SOAP message based Client on pure WCF](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
+ * [How to use SOAP message based Client](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
  
 Sample Message based service in WCF
 ===================
