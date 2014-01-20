@@ -9,13 +9,7 @@ namespace Nelibur.Core.Extensions
         public static UriBuilder AddPath(this UriBuilder builder, string path)
         {
             string currentPath = builder.Path;
-            if (currentPath.EndsWith("/") == false)
-            {
-                currentPath = currentPath + "/";
-            }
-
-            currentPath += path + "/";
-            builder.Path = currentPath;
+            builder.Path = string.Format(currentPath.EndsWith("/") ? "{0}{1}/" : "{0}/{1}/", currentPath, path);
             return builder;
         }
 
