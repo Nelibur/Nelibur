@@ -5,7 +5,8 @@
     <version>$version$</version>
     <authors>$author$</authors>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
+	<licenseUrl>https://github.com/Nelibur/Nelibur/blob/master/LICENSE</licenseUrl>
+    <description>Message based webservice framework with WCF</description>
     <iconUrl>https://1.gravatar.com/avatar/d480d09db613465e3ad18b7552dfef4b?d=https%3A%2F%2Fidenticons.github.com%2Fb7e4d673de432c19bc201d125b55d32e.png&r=x&s=440</iconUrl>
   </metadata>
 </package>

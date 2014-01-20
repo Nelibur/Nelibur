@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Nelibur.Core")]
 [assembly: AssemblyDescription("")]
-[assembly: AssemblyCompany("")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
