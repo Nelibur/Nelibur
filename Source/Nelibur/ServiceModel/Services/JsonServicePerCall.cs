@@ -6,7 +6,7 @@ using Nelibur.ServiceModel.Services.Processors;
 namespace Nelibur.ServiceModel.Services
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public sealed class PerCallJsonService : IJsonService
+    public sealed class JsonServicePerCall : IJsonService
     {
         public void Delete(Message message)
         {

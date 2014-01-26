@@ -6,7 +6,7 @@ using Nelibur.ServiceModel.Services.Processors;
 namespace Nelibur.ServiceModel.Services
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    public sealed class PerCallSoapService : ISoapService
+    public sealed class SoapServicePerCall : ISoapService
     {
         /// <summary>
         ///     Process message without response.
