@@ -24,47 +24,47 @@ public interface IJsonService
 {
     [OperationContract]
     [WebInvoke(Method = OperationType.Delete,
-        UriTemplate = RestServiceMetadata.UriTemplate.Delete,
+        UriTemplate = RestServiceMetadata.Path.Delete,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     void Delete(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Delete,
-        UriTemplate = RestServiceMetadata.UriTemplate.DeleteWithResponse,
+        UriTemplate = RestServiceMetadata.Path.DeleteWithResponse,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     Message DeleteWithResponse(Message message);
 
     [OperationContract]
-    [WebGet(UriTemplate = RestServiceMetadata.UriTemplate.Get,
+    [WebGet(UriTemplate = RestServiceMetadata.Path.Get,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     void Get(Message message);
 
     [OperationContract]
-    [WebGet(UriTemplate = RestServiceMetadata.UriTemplate.GetWithResponse,
+    [WebGet(UriTemplate = RestServiceMetadata.Path.GetWithResponse,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     Message GetWithResponse(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Post,
-        UriTemplate = RestServiceMetadata.UriTemplate.Post,
+        UriTemplate = RestServiceMetadata.Path.Post,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     void Post(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Post,
-        UriTemplate = RestServiceMetadata.UriTemplate.PostWithResponse,
+        UriTemplate = RestServiceMetadata.Path.PostWithResponse,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     Message PostWithResponse(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Put,
-        UriTemplate = RestServiceMetadata.UriTemplate.Put,
+        UriTemplate = RestServiceMetadata.Path.Put,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     void Put(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Put,
-        UriTemplate = RestServiceMetadata.UriTemplate.PutWithResponse,
+        UriTemplate = RestServiceMetadata.Path.PutWithResponse,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
     Message PutWithResponse(Message message);
 }
@@ -78,42 +78,42 @@ public sealed class SampleWebService : IJsonService
 {
     public void Delete(Message message)
     {
-        RestServcieProcessor.Process(message);
+        RestServiceProcessor.Process(message);
     }
 
     public Message DeleteWithResponse(Message message)
     {
-        return RestServcieProcessor.ProcessWithResponse(message);
+        return RestServiceProcessor.ProcessWithResponse(message);
     }
 
     public void Get(Message message)
     {
-        RestServcieProcessor.Process(message);
+        RestServiceProcessor.Process(message);
     }
 
     public Message GetWithResponse(Message message)
     {
-        return RestServcieProcessor.ProcessWithResponse(message);
+        return RestServiceProcessor.ProcessWithResponse(message);
     }
 
     public void Post(Message message)
     {
-        RestServcieProcessor.Process(message);
+        RestServiceProcessor.Process(message);
     }
 
     public Message PostWithResponse(Message message)
     {
-        return RestServcieProcessor.ProcessWithResponse(message);
+        return RestServiceProcessor.ProcessWithResponse(message);
     }
 
     public void Put(Message message)
     {
-        RestServcieProcessor.Process(message);
+        RestServiceProcessor.Process(message);
     }
 
     public Message PutWithResponse(Message message)
     {
-        return RestServcieProcessor.ProcessWithResponse(message);
+        return RestServiceProcessor.ProcessWithResponse(message);
     }
 }
 ```
@@ -121,7 +121,7 @@ public sealed class SampleWebService : IJsonService
 Request binding on appropriate Processor
 
 ```csharp
-new RestServcieProcessor()
+new RestServiceProcessor()
     .Bind<CreateClientRequest, ClientProcessor>()
     .Bind<UpdateClientRequest, ClientProcessor>()
     .Bind<DeleteClientRequest, ClientProcessor>()
