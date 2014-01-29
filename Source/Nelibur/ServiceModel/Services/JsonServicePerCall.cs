@@ -10,42 +10,42 @@ namespace Nelibur.ServiceModel.Services
     {
         public void Delete(Message message)
         {
-            RestServcieProcessor.Process(message);
+            RestServiceProcessor.Process(message);
         }
 
         public Message DeleteWithResponse(Message message)
         {
-            return RestServcieProcessor.ProcessWithResponse(message);
+            return RestServiceProcessor.ProcessWithResponse(message);
         }
 
         public void Get(Message message)
         {
-            RestServcieProcessor.Process(message);
+            RestServiceProcessor.Process(message);
         }
 
         public Message GetWithResponse(Message message)
         {
-            return RestServcieProcessor.ProcessWithResponse(message);
+            return RestServiceProcessor.ProcessWithResponse(message);
         }
 
         public void Post(Message message)
         {
-            RestServcieProcessor.Process(message);
+            RestServiceProcessor.Process(message);
         }
 
         public Message PostWithResponse(Message message)
         {
-            return RestServcieProcessor.ProcessWithResponse(message);
+            return RestServiceProcessor.ProcessWithResponse(message);
         }
 
         public void Put(Message message)
         {
-            RestServcieProcessor.Process(message);
+            RestServiceProcessor.Process(message);
         }
 
         public Message PutWithResponse(Message message)
         {
-            return RestServcieProcessor.ProcessWithResponse(message);
+            return RestServiceProcessor.ProcessWithResponse(message);
         }
     }
 }

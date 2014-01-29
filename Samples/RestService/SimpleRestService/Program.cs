@@ -11,7 +11,7 @@ namespace SimpleRestService
 
         private static void BindRequestToProcessors()
         {
-            new RestServcieProcessor()
+            new RestServiceProcessor()
                 .Bind<CreateClientRequest, ClientProcessor>()
                 .Bind<UpdateClientRequest, ClientProcessor>()
                 .Bind<DeleteClientRequest, ClientProcessor>()

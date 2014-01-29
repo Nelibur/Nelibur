@@ -3,7 +3,7 @@ using Nelibur.ServiceModel.Services.Maps;
 
 namespace Nelibur.ServiceModel.Services.Processors
 {
-    public sealed class RestServcieProcessor : ServiceProcessor
+    public sealed class RestServiceProcessor : ServiceProcessor
     {
         public static void Process(Message message)
         {

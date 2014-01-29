@@ -69,7 +69,7 @@
     <Compile Include="ServiceModel\Services\Maps\RestRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
     <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
-    <Compile Include="ServiceModel\Services\Processors\RestServcieProcessor.cs" />
+    <Compile Include="ServiceModel\Services\Processors\RestServiceProcessor.cs" />
     <Compile Include="ServiceModel\Services\Processors\SoapServiceProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
