@@ -9,7 +9,7 @@ follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
 What to read
 ============
 
- * [SOAP Message based web service on pure WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
+ * [Building SOAP Message Based Web Services with WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
  * [How to create REST message based Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-REST-message-based-Servcie-on-pure-WCF)
  * [How to use REST message based Client](https://github.com/Nelibur/Nelibur/wiki/How-to-use-REST-message-based-Client)
  * [How to create SOAP message based Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
