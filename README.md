@@ -15,6 +15,38 @@ What to read
  * [How to create SOAP message based Servcie on pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
  * [How to use SOAP message based Client](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
 
+Simple RESTful Message based Client
+==================================
+
+```csharp
+var client = new JsonServiceClient("http://localhost:8080/webhost");
+
+var createRequest = new CreateClientRequest
+    {
+        Email = "email@email.com"
+    };
+ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+
+var updateRequest = new UpdateClientRequest
+    {
+        Email = "new@email.com",
+        Id = response.Id
+    };
+response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+
+var getClientRequest = new GetClientRequest
+    {
+        Id = response.Id
+    };
+response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
+
+var deleteRequest = new DeleteClientRequest
+    {
+        Id = response.Id
+    };
+client.Delete(deleteRequest);
+```	 
+ 
 Simple RESTful Message based service on pure WCF
 ===================
 
@@ -169,11 +201,11 @@ public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
 }
 ```
 
-Simple RESTful Message based Client
+Simple SOAP Message based Client
 ==================================
 
 ```csharp
-var client = new JsonServiceClient("http://localhost:8080/webhost");
+var client = new SoapServiceClient("NeliburSoapService");
 
 var createRequest = new CreateClientRequest
     {
@@ -199,7 +231,7 @@ var deleteRequest = new DeleteClientRequest
         Id = response.Id
     };
 client.Delete(deleteRequest);
-```	
+```
  
 Simple SOAP Message based service on pure WCF
 ===================
@@ -285,36 +317,4 @@ public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
 		return new ClientResponse { Id = client.Id, Email = client.Email };
 	}
 }
-```	
-
-Simple SOAP Message based Client
-==================================
-
-```csharp
-var client = new SoapServiceClient("NeliburSoapService");
-
-var createRequest = new CreateClientRequest
-    {
-        Email = "email@email.com"
-    };
-ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
-
-var updateRequest = new UpdateClientRequest
-    {
-        Email = "new@email.com",
-        Id = response.Id
-    };
-response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
-
-var getClientRequest = new GetClientRequest
-    {
-        Id = response.Id
-    };
-response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
-
-var deleteRequest = new DeleteClientRequest
-    {
-        Id = response.Id
-    };
-client.Delete(deleteRequest);
 ```	
