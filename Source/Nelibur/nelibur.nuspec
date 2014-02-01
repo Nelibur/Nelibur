@@ -1,18 +1,20 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>Nelibur</id>
-    <version>$version$</version>
-    <authors>Sergey Morenko</authors>
-	<owners>Sergey Morenko</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-	<licenseUrl>https://github.com/Nelibur/Nelibur/blob/master/LICENSE</licenseUrl>
-	<projectUrl>https://github.com/Nelibur/Nelibur</projectUrl>
-	<description>Nelibur is a message based web service framework on the pure WCF.
-	Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF</description>
-    <iconUrl>http://gravatar.com/avatar/d480d09db613465e3ad18b7552dfef4b</iconUrl>
-	<summary>Opensource message based web service framework on the pure WCF</summary>
-	<language>en-US</language>
-	<tags>JSON SOAP REST Web Service Framework WCF Nelibur</tags>
-  </metadata>
+    <metadata>
+        <id>Nelibur</id>
+        <version>$version$</version>
+        <authors>Sergey Morenko</authors>
+        <owners>Sergey Morenko</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <licenseUrl>https://github.com/Nelibur/Nelibur/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Nelibur/Nelibur</projectUrl>
+        <description>
+            Nelibur is a message based web service framework on the pure WCF.
+            Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF
+        </description>
+        <iconUrl>http://gravatar.com/avatar/d480d09db613465e3ad18b7552dfef4b</iconUrl>
+        <summary>Opensource message based web service framework on the pure WCF</summary>
+        <language>en-US</language>
+        <tags>JSON SOAP REST Web Service Framework WCF Nelibur</tags>
+    </metadata>
 </package>
