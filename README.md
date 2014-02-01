@@ -1,7 +1,7 @@
-Nelibur - Message based webservice framework on pure WCF
+Nelibur - Message based web service framework on the pure WCF
 =======
 
-Nelibur is message based webservice framework on pure **WCF**. Nelibur simplifies creating high-performance and message based webservices with WCF and of course **you have all the power of WCF.**
+Nelibur is message based web service framework on the pure **WCF**. Nelibur simplifies creating high-performance and message based web services and you certainly have **all the power of the WCF**
 
 Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
 follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
@@ -47,7 +47,7 @@ var deleteRequest = new DeleteClientRequest
 client.Delete(deleteRequest);
 ```	 
  
-Simple RESTful Message based service on pure WCF
+Simple RESTful Message based service on the pure WCF
 ===================
 
 ```csharp
@@ -233,7 +233,7 @@ var deleteRequest = new DeleteClientRequest
 client.Delete(deleteRequest);
 ```
  
-Simple SOAP Message based service on pure WCF
+Simple SOAP Message based service on the pure WCF
 ===================
 WCF's ServiceContract
 
