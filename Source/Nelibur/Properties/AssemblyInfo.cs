@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyTitle("Nelibur")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Nelibur is a message based web service framework on the pure WCF")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
