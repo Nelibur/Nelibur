@@ -49,7 +49,7 @@ namespace Nelibur.ServiceModel.Serializers
 
         public object GetRequestValue(Type targetType)
         {
-            const string Key = RestServiceMetadata.ParamName.Request;
+            const string Key = RestServiceMetadata.ParamName.Data;
             var serializer = new DataContractJsonSerializer(targetType);
             byte[] rawObj = Encoding.UTF8.GetBytes(UrlDecode(QueryParams[Key]));
             return serializer.ReadObject(new MemoryStream(rawObj));
@@ -67,7 +67,7 @@ namespace Nelibur.ServiceModel.Serializers
             var result = new NameValueCollection
                 {
                     CreateQueryParams(typeof(T)),
-                    { RestServiceMetadata.ParamName.Request, UrlEncode(data) }
+                    { RestServiceMetadata.ParamName.Data, UrlEncode(data) }
                 };
             return result;
         }

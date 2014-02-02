@@ -4,7 +4,7 @@
     {
         internal static class ParamName
         {
-            public const string Request = "request";
+            public const string Data = "data";
             public const string Type = "type";
         }
 
