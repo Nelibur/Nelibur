@@ -6,9 +6,7 @@ Nelibur is message based web service framework on the pure **WCF**. Nelibur simp
 Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
 follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
 
-<a href="https://www.nuget.org/packages/Nelibur/">
-	<image alt="Nelibur on Nuget" src="https://raw.github.com/Nelibur/Nelibur/master/.nuget/NeliburNuget.png"></image>
-</a>
+![Nelibur on Nuget](https://raw.github.com/Nelibur/Nelibur/master/.nuget/NeliburNuget.png)
 
 What to read
 ============
