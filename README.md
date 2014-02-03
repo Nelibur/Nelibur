@@ -6,6 +6,10 @@ Nelibur is message based web service framework on the pure **WCF**. Nelibur simp
 Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
 follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
 
+<a href="https://www.nuget.org/packages/Nelibur/">
+	<image alt="Nelibur on Nuget" src="https://raw.github.com/Nelibur/Nelibur/master/.nuget/NeliburNuget.png"></image>
+</a>
+
 What to read
 ============
 
@@ -16,8 +20,6 @@ What to read
  * [How to create SOAP message based Servcie on the pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
  * [How to use SOAP message based Client](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
  
-![Nelibur on Nuget](https://raw.github.com/Nelibur/Nelibur/master/.nuget/NeliburNuget.png)
-
 Simple RESTful Message based Client
 ==================================
 
