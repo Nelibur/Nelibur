@@ -16,7 +16,7 @@ What to read
  * [How to create SOAP message based Servcie on the pure WCF](https://github.com/Nelibur/Nelibur/wiki/How-to-create-message-based-web-servcie-in-WCF)
  * [How to use SOAP message based Client](https://github.com/Nelibur/Nelibur/wiki/Wcf-client-for-message-based-web-service)
  
-![Nelibur on Nuget](https://github.com/Nelibur/Nelibur/blob/master/.nuget/NeliburNuget.png)
+![Nelibur on Nuget](https://raw.github.com/Nelibur/Nelibur/master/.nuget/NeliburNuget.png)
 
 Simple RESTful Message based Client
 ==================================
