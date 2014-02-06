@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Web;
+using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
 using SimpleRestContracts.Contracts;
 
@@ -21,7 +22,7 @@ namespace SimpleRestService
         private static void Main()
         {
             BindRequestToProcessors();
-            _service = new WebServiceHost(typeof(SampleWebService));
+            _service = new WebServiceHost(typeof(JsonServicePerCall));
             _service.Open();
             Console.WriteLine("Sample REST Service is running");
             Console.WriteLine("Press any key to exit\n");

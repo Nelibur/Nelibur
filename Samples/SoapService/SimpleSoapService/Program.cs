@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ServiceModel;
+using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
 using SimpleSoapContracts.Contracts;
 
@@ -21,7 +22,7 @@ namespace SimpleSoapService
         private static void Main()
         {
             BindRequestToProcessors();
-            _service = new ServiceHost(typeof(SampleSoapService));
+            _service = new ServiceHost(typeof(SoapServicePerCall));
             _service.Open();
             Console.WriteLine("SampleSoapService is running");
             Console.WriteLine("Press any key to exit\n");

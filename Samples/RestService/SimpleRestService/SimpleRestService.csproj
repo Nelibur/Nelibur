@@ -42,7 +42,6 @@
     <Compile Include="ClientProcessor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SampleWebService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
