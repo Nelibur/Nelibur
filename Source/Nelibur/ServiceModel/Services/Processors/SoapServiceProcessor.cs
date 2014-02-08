@@ -7,16 +7,14 @@ namespace Nelibur.ServiceModel.Services.Processors
     {
         public static void Process(Message message)
         {
-            RequestMetadata requestMetaData = _requests.FromSoapMessage(message);
-            IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
-            processor.Process(requestMetaData);
+            RequestMetadata metadata = _requests.FromSoapMessage(message);
+            Process(metadata);
         }
 
         public static Message ProcessWithResponse(Message message)
         {
-            RequestMetadata requestMetaData = _requests.FromSoapMessage(message);
-            IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
-            return processor.ProcessWithResponse(requestMetaData);
+            RequestMetadata metadata = _requests.FromSoapMessage(message);
+            return ProcessWithResponse(metadata);
         }
     }
 }

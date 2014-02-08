@@ -3,7 +3,7 @@ using System.ServiceModel.Channels;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {
-    internal abstract class RequestMetadata
+    public abstract class RequestMetadata
     {
         protected RequestMetadata(Type targetType)
         {
