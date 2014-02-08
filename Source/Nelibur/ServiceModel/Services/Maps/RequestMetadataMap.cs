@@ -25,15 +25,27 @@ namespace Nelibur.ServiceModel.Services.Maps
             UriTemplateMatch templateMatch = WebOperationContext.Current.IncomingRequest.UriTemplateMatch;
             NameValueCollection queryParams = templateMatch.QueryParameters;
             string typeName = UrlSerializer.FromQueryParams(queryParams).GetTypeValue();
-            Type targetType = _requestTypes[typeName];
+            Type targetType = GetRequestType(typeName);
             return RequestMetadata.FromRestMessage(message, targetType);
         }
 
         internal RequestMetadata FromSoapMessage(Message message)
         {
             string typeName = SoapContentTypeHeader.ReadHeader(message);
-            Type targetType = _requestTypes[typeName];
+            Type targetType = GetRequestType(typeName);
             return RequestMetadata.FromSoapMessage(message, targetType);
+        }
+
+        private Type GetRequestType(string typeName)
+        {
+            Type result;
+            if (_requestTypes.TryGetValue(typeName, out result))
+            {
+                return result;
+            }
+            string errorMessage = string.Format(
+                "Binding on {0} is absent. Use the Bind method on an appropriate ServiceProcessor", typeName);
+            throw new InvalidOperationException(errorMessage);
         }
     }
 }
