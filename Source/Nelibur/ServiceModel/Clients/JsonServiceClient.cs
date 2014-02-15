@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.IO;
 using System.Net.Http;
 using System.Runtime.Serialization.Json;
+using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
 using Nelibur.Core.Extensions;
@@ -48,27 +49,27 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override Task DeleteAsyncCore<TRequest>(TRequest request)
         {
-            return Process(request, OperationType.Delete);
+            return ProcessAsync(request, OperationType.Delete);
         }
 
         protected override Task<TResponse> DeleteAsyncCore<TRequest, TResponse>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Delete);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Delete);
         }
 
         protected override void DeleteCore<TRequest>(TRequest request)
         {
-            DeleteAsyncCore(request).Wait();
+            Process(request, OperationType.Delete);
         }
 
         protected override Task GetAsyncCore<TRequest>(TRequest request)
         {
-            return Process(request, OperationType.Get);
+            return ProcessAsync(request, OperationType.Get);
         }
 
         protected override Task<TResponse> GetAsyncCore<TRequest, TResponse>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Get);
         }
 
         protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
@@ -78,37 +79,37 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override void GetCore<TRequest>(TRequest request)
         {
-            GetAsyncCore(request).Wait();
+            Process(request, OperationType.Get);
         }
 
         protected override Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Post);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Post);
         }
 
         protected override Task PostAsyncCore<TRequest>(TRequest request)
         {
-            return Process(request, OperationType.Post);
+            return ProcessAsync(request, OperationType.Post);
         }
 
         protected override void PostCore<TRequest>(TRequest request)
         {
-            PostAsyncCore(request).Wait();
+            Process(request, OperationType.Post);
         }
 
         protected override Task PutAsyncCore<TRequest>(TRequest request)
         {
-            return Process(request, OperationType.Put);
+            return ProcessAsync(request, OperationType.Put);
         }
 
         protected override Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Put);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Put);
         }
 
         protected override void PutCore<TRequest>(TRequest request)
         {
-            PutAsyncCore(request).Wait();
+            Process(request, OperationType.Put);
         }
 
         private static StringContent CreateContent<T>(T value)
@@ -171,7 +172,17 @@ namespace Nelibur.ServiceModel.Clients
             return builder.Uri.ToString();
         }
 
-        private async Task Process<TRequest>(TRequest request, string operationType)
+        private void Process<TRequest>(TRequest request, string operationType)
+            where TRequest : class
+        {
+            HttpResponseMessage response = ProcessAsync(request, operationType).Result;
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new WebFaultException(response.StatusCode);
+            }
+        }
+
+        private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
             where TRequest : class
         {
             string urlRequest = CreateUrlRequest(request, operationType, responseRequired: false);
@@ -180,17 +191,13 @@ namespace Nelibur.ServiceModel.Clients
                 switch (operationType)
                 {
                     case OperationType.Get:
-                        await client.GetAsync(urlRequest);
-                        break;
+                        return await client.GetAsync(urlRequest);
                     case OperationType.Post:
-                        await client.PostAsync(urlRequest, CreateContent(request));
-                        break;
+                        return await client.PostAsync(urlRequest, CreateContent(request));
                     case OperationType.Put:
-                        await client.PutAsync(urlRequest, CreateContent(request));
-                        break;
+                        return await client.PutAsync(urlRequest, CreateContent(request));
                     case OperationType.Delete:
-                        await client.DeleteAsync(urlRequest);
-                        break;
+                        return await client.DeleteAsync(urlRequest);
                     default:
                         string errorMessage = string.Format(
                             "OperationType {0} with Response return is absent", operationType);
@@ -199,7 +206,8 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
-        private async Task<TResponse> ProcessWithResponse<TRequest, TResponse>(TRequest request, string operationType)
+        private async Task<TResponse> ProcessWithResponseAsync<TRequest, TResponse>(
+            TRequest request, string operationType)
             where TRequest : class
             where TResponse : class
         {
@@ -207,28 +215,32 @@ namespace Nelibur.ServiceModel.Clients
 
             using (HttpClient client = CreateHttpClient())
             {
-                HttpResponseMessage responseTask;
+                HttpResponseMessage response;
 
                 switch (operationType)
                 {
                     case OperationType.Get:
-                        responseTask = await client.GetAsync(urlRequest);
+                        response = await client.GetAsync(urlRequest);
                         break;
                     case OperationType.Post:
-                        responseTask = await client.PostAsync(urlRequest, CreateContent(request));
+                        response = await client.PostAsync(urlRequest, CreateContent(request));
                         break;
                     case OperationType.Put:
-                        responseTask = await client.PutAsync(urlRequest, CreateContent(request));
+                        response = await client.PutAsync(urlRequest, CreateContent(request));
                         break;
                     case OperationType.Delete:
-                        responseTask = await client.DeleteAsync(urlRequest);
+                        response = await client.DeleteAsync(urlRequest);
                         break;
                     default:
                         string errorMessage = string.Format(
                             "OperationType {0} with Response return is absent", operationType);
                         throw new InvalidOperationException(errorMessage);
                 }
-                using (Stream stream = await responseTask.Content.ReadAsStreamAsync())
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new WebFaultException(response.StatusCode);
+                }
+                using (Stream stream = await response.Content.ReadAsStreamAsync())
                 {
                     var serializer = new DataContractJsonSerializer(typeof(TResponse));
                     return (TResponse)serializer.ReadObject(stream);
