@@ -20,5 +20,13 @@ namespace SpecFlowTests.Steps.JsonService
             var client = new JsonServiceClient(_settings.JsonServiceAddress);
             client.Post(order);
         }
+
+        [When(@"I send data thru PostAsync action")]
+        public void WhenISendDataThruPostAsyncAction(Table table)
+        {
+            CreateOrderJson order = table.CreateSet<CreateOrderJson>().Single();
+            var client = new JsonServiceClient(_settings.JsonServiceAddress);
+            client.PostAsync(order).Wait();
+        }
     }
 }
