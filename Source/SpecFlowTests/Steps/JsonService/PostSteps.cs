@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Nelibur.ServiceModel.Clients;
-using SpecFlowTests.Properties;
 using SpecFlowTests.Samples.JsonService;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
@@ -10,56 +9,39 @@ namespace SpecFlowTests.Steps.JsonService
 {
     [Scope(Feature = "Post actions")]
     [Binding]
-    public sealed class PostSteps
+    public sealed class PostSteps : JsonServiceActionStep
     {
-        private const string PostResopnseKey = "PostResopnseKey";
-        private readonly Settings _settings = Settings.Default;
-
-        [When(@"I send data thru Post action")]
-        public void WhenISendDataThruPostAction(Table table)
-        {
-            CreateOrderJson order = table.CreateSet<CreateOrderJson>().Single();
-            JsonServiceClient client = GetJsonServiceClient();
-            client.Post(order);
-        }
-
         [When(@"I send data thru PostAsync action")]
         public void WhenISendDataThruPostAsyncAction(Table table)
         {
-            CreateOrderJson order = table.CreateSet<CreateOrderJson>().Single();
-            JsonServiceClient client = GetJsonServiceClient();
+            OrderJson order = table.CreateSet<OrderJson>().Single();
+            JsonServiceClient client = GetClient();
             client.PostAsync(order).Wait();
         }
 
         [When(@"I send data thru PostAsync with response action")]
         public void WhenISendDataThruPostAsyncWithResponseAction(Table table)
         {
-            CreateOrderJson order = table.CreateSet<CreateOrderJson>().Single();
-            JsonServiceClient client = GetJsonServiceClient();
-            bool response = client.PostAsync<CreateOrderJson, bool>(order).Result;
-            ScenarioContext.Current[PostResopnseKey] = response;
+            OrderJson order = table.CreateSet<OrderJson>().Single();
+            JsonServiceClient client = GetClient();
+            bool response = client.PostAsync<OrderJson, bool>(order).Result;
+            ScenarioContext.Current[ResopnseKey] = response;
         }
 
         [When(@"I send data thru Post with response action")]
         public void WhenISendDataThruPostWithResponseAction(Table table)
         {
-            CreateOrderJson order = table.CreateSet<CreateOrderJson>().Single();
-            JsonServiceClient client = GetJsonServiceClient();
-            bool response = client.Post<CreateOrderJson, bool>(order);
-            ScenarioContext.Current[PostResopnseKey] = response;
+            OrderJson order = table.CreateSet<OrderJson>().Single();
+            JsonServiceClient client = GetClient();
+            bool response = client.Post<OrderJson, bool>(order);
+            ScenarioContext.Current[ResopnseKey] = response;
         }
 
         [When(@"response equals '(.*)'")]
         public void WhenResponseEquals(bool response)
         {
-            var actualResponse = (bool)ScenarioContext.Current[PostResopnseKey];
+            var actualResponse = (bool)ScenarioContext.Current[ResopnseKey];
             Assert.Equal(response, actualResponse);
-        }
-
-        private JsonServiceClient GetJsonServiceClient()
-        {
-            var client = new JsonServiceClient(_settings.JsonServiceAddress);
-            return client;
         }
     }
 }
