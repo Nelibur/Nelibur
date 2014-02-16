@@ -45,7 +45,8 @@ namespace SpecFlowTests.Steps.JsonService
         {
             new RestServiceProcessor()
                 .Bind<OrderJson, JsonServiceProcessor>()
-                .Bind<GetOrderJsonById, JsonServiceProcessor>();
+                .Bind<GetOrderJsonById, JsonServiceProcessor>()
+                .Bind<DeleteOrderJsonById, JsonServiceProcessor>();
         }
     }
 }
