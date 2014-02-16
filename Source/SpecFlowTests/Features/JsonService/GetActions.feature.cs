@@ -95,7 +95,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 8
  testRunner.And("I sent data thru Post action", ((string)(null)), table1, "And ");
 #line 11
- testRunner.When("I request data by Id \'1\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I request data by Id \'1\' thru Get action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -108,6 +108,46 @@ this.ScenarioSetup(scenarioInfo);
 #line 12
  testRunner.Then("I get data", ((string)(null)), table2, "Then ");
 #line 15
+ testRunner.And("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Get actions")]
+        [Xunit.TraitAttribute("Description", "GetAsync data with response")]
+        public virtual void GetAsyncDataWithResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetAsync data with response", ((string[])(null)));
+#line 17
+this.ScenarioSetup(scenarioInfo);
+#line 18
+ testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table3.AddRow(new string[] {
+                        "2",
+                        "7",
+                        "5695F19D-2DFF-401A-8F34-EBC161A6EBB5"});
+#line 19
+ testRunner.And("I sent data thru Post action", ((string)(null)), table3, "And ");
+#line 22
+ testRunner.When("I request data by Id \'2\' thru GetAsync action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table4.AddRow(new string[] {
+                        "2",
+                        "7",
+                        "5695F19D-2DFF-401A-8F34-EBC161A6EBB5"});
+#line 23
+ testRunner.Then("I get data", ((string)(null)), table4, "Then ");
+#line 26
  testRunner.And("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();

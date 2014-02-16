@@ -8,6 +8,7 @@ using Xunit;
 
 namespace SpecFlowTests.Steps.JsonService
 {
+    [Scope(Feature = "Get actions")]
     [Binding]
     public sealed class GetSteps : JsonServiceActionStep
     {
@@ -20,8 +21,29 @@ namespace SpecFlowTests.Steps.JsonService
             Assert.True(expected.Equals(actual.Single()));
         }
 
-        [When(@"I request data by Id '(.*)'")]
-        public void WhenIRequestDataById(int id)
+        [Then(@"I request data thru Get action")]
+        public void ThenIRequestDataThruGetAction(Table table)
+        {
+            OrderJson expected = table.CreateSet<OrderJson>().Single();
+            var actual = (List<OrderJson>)ScenarioContext.Current[ResopnseKey];
+            Assert.Equal(1, actual.Count);
+            Assert.True(expected.Equals(actual.Single()));
+        }
+
+        [When(@"I request data by Id '(.*)' thru GetAsync action")]
+        public void WhenIRequestDataByIdThruGetAsyncAction(int id)
+        {
+            var request = new GetOrderJsonById
+                {
+                    Id = id
+                };
+            JsonServiceClient client = GetClient();
+            List<OrderJson> response = client.GetAsync<GetOrderJsonById, List<OrderJson>>(request).Result;
+            ScenarioContext.Current[ResopnseKey] = response;
+        }
+
+        [When(@"I request data by Id '(.*)' thru Get action")]
+        public void WhenIRequestDataByThruIdGetAction(int id)
         {
             var request = new GetOrderJsonById
                 {
