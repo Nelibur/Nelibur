@@ -131,6 +131,68 @@ this.ScenarioSetup(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Delete actions")]
+        [Xunit.TraitAttribute("Description", "Delete data with response")]
+        public virtual void DeleteDataWithResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete data with response", ((string[])(null)));
+#line 22
+this.ScenarioSetup(scenarioInfo);
+#line 23
+ testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table3.AddRow(new string[] {
+                        "5",
+                        "5",
+                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+#line 24
+ testRunner.And("I sent data thru Post action", ((string)(null)), table3, "And ");
+#line 27
+ testRunner.When("I send delete request by Id \'5\' thru Delete with response action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 28
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 29
+ testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Delete actions")]
+        [Xunit.TraitAttribute("Description", "DeleteAsync data with response")]
+        public virtual void DeleteAsyncDataWithResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("DeleteAsync data with response", ((string[])(null)));
+#line 31
+this.ScenarioSetup(scenarioInfo);
+#line 32
+ testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table4.AddRow(new string[] {
+                        "6",
+                        "5",
+                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+#line 33
+ testRunner.And("I sent data thru Post action", ((string)(null)), table4, "And ");
+#line 36
+ testRunner.When("I send delete request by Id \'6\' thru DeleteAsync with response action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 37
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 38
+ testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

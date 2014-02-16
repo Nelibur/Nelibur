@@ -8,6 +8,7 @@ using SpecFlowTests.Properties;
 using SpecFlowTests.Samples.JsonService;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
+using Xunit;
 
 namespace SpecFlowTests.Steps.JsonService
 {
@@ -39,6 +40,13 @@ namespace SpecFlowTests.Steps.JsonService
             OrderJson order = table.CreateSet<OrderJson>().Single();
             JsonServiceClient client = GetClient();
             client.Post(order);
+        }
+
+        [When(@"response equals '(.*)'")]
+        public void WhenResponseEquals(bool response)
+        {
+            var actualResponse = (bool)ScenarioContext.Current[ResopnseKey];
+            Assert.Equal(response, actualResponse);
         }
 
         private static void BindRequestToProcessors()

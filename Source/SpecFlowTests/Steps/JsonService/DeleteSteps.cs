@@ -29,5 +29,29 @@ namespace SpecFlowTests.Steps.JsonService
             JsonServiceClient client = GetClient();
             client.DeleteAsync(request).Wait();
         }
+
+        [When(@"I send delete request by Id '(.*)' thru DeleteAsync with response action")]
+        public void WhenISendDeleteRequestByIdThruDeleteAsyncWithResponseAction(int id)
+        {
+            var request = new DeleteOrderJsonById
+                {
+                    Id = id
+                };
+            JsonServiceClient client = GetClient();
+            bool response = client.DeleteAsync<DeleteOrderJsonById, bool>(request).Result;
+            ScenarioContext.Current[ResopnseKey] = response;
+        }
+
+        [When(@"I send delete request by Id '(.*)' thru Delete with response action")]
+        public void WhenISendDeleteRequestByIdThruDeleteWithResponseAction(int id)
+        {
+            var request = new DeleteOrderJsonById
+                {
+                    Id = id
+                };
+            JsonServiceClient client = GetClient();
+            bool response = client.Delete<DeleteOrderJsonById, bool>(request);
+            ScenarioContext.Current[ResopnseKey] = response;
+        }
     }
 }

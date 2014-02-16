@@ -3,7 +3,6 @@ using Nelibur.ServiceModel.Clients;
 using SpecFlowTests.Samples.JsonService;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
-using Xunit;
 
 namespace SpecFlowTests.Steps.JsonService
 {
@@ -35,13 +34,6 @@ namespace SpecFlowTests.Steps.JsonService
             JsonServiceClient client = GetClient();
             bool response = client.Post<OrderJson, bool>(order);
             ScenarioContext.Current[ResopnseKey] = response;
-        }
-
-        [When(@"response equals '(.*)'")]
-        public void WhenResponseEquals(bool response)
-        {
-            var actualResponse = (bool)ScenarioContext.Current[ResopnseKey];
-            Assert.Equal(response, actualResponse);
         }
     }
 }
