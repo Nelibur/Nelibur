@@ -125,7 +125,6 @@ namespace Nelibur.ServiceModel.Clients
 
         private TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, MessageHeader operationType)
             where TRequest : class
-            where TResponse : class
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {

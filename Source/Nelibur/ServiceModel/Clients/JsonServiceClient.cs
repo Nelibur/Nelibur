@@ -209,7 +209,6 @@ namespace Nelibur.ServiceModel.Clients
         private async Task<TResponse> ProcessWithResponseAsync<TRequest, TResponse>(
             TRequest request, string operationType)
             where TRequest : class
-            where TResponse : class
         {
             string urlRequest = CreateUrlRequest(request, operationType);
 

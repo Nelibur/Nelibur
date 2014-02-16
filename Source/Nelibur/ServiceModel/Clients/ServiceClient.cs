@@ -12,7 +12,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public TResponse Delete<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return DeleteAsyncCore<TRequest, TResponse>(request).Result;
         }
@@ -25,7 +24,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return DeleteAsyncCore<TRequest, TResponse>(request);
         }
@@ -38,7 +36,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public TResponse Get<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return GetCore<TRequest, TResponse>(request);
         }
@@ -51,7 +48,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return GetAsyncCore<TRequest, TResponse>(request);
         }
@@ -64,14 +60,12 @@ namespace Nelibur.ServiceModel.Clients
 
         public TResponse Post<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return PostAsyncCore<TRequest, TResponse>(request).Result;
         }
 
         public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return PostAsyncCore<TRequest, TResponse>(request);
         }
@@ -90,7 +84,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public TResponse Put<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return PutAsyncCore<TRequest, TResponse>(request).Result;
         }
@@ -103,7 +96,6 @@ namespace Nelibur.ServiceModel.Clients
 
         public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
             where TRequest : class
-            where TResponse : class
         {
             return PutAsyncCore<TRequest, TResponse>(request);
         }
@@ -112,8 +104,7 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class;
 
         protected abstract Task<TResponse> DeleteAsyncCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class;
+            where TRequest : class;
 
         protected abstract void DeleteCore<TRequest>(TRequest request)
             where TRequest : class;
@@ -122,19 +113,16 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class;
 
         protected abstract Task<TResponse> GetAsyncCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class;
+            where TRequest : class;
 
         protected abstract TResponse GetCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class;
+            where TRequest : class;
 
         protected abstract void GetCore<TRequest>(TRequest request)
             where TRequest : class;
 
         protected abstract Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class;
+            where TRequest : class;
 
         protected abstract Task PostAsyncCore<TRequest>(TRequest request)
             where TRequest : class;
@@ -146,8 +134,7 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class;
 
         protected abstract Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class
-            where TResponse : class;
+            where TRequest : class;
 
         protected abstract void PutCore<TRequest>(TRequest request)
             where TRequest : class;
