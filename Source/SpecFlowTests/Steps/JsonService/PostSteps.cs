@@ -10,6 +10,18 @@ namespace SpecFlowTests.Steps.JsonService
     [Binding]
     public sealed class PostSteps : JsonServiceActionStep
     {
+        [AfterFeature]
+        public static void AfterFeature()
+        {
+            StopService();
+        }
+
+        [BeforeFeature]
+        public static void BeforeFeature()
+        {
+            StartService();
+        }
+
         [When(@"I send data thru PostAsync action")]
         public void WhenISendDataThruPostAsyncAction(Table table)
         {

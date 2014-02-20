@@ -68,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PostActions.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\JsonService\PutActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PutActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="HelloWorld\HelloWorldFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,11 +89,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Samples\JsonService\OrderJson.cs" />
+    <Compile Include="Samples\JsonService\UpdateOrderJson.cs" />
     <Compile Include="Steps\JsonService\CommonSteps.cs" />
     <Compile Include="Steps\JsonService\DeleteSteps.cs" />
     <Compile Include="Steps\JsonService\GetSteps.cs" />
     <Compile Include="Steps\JsonService\JsonServiceActionStep.cs" />
     <Compile Include="Steps\JsonService\PostSteps.cs" />
+    <Compile Include="Steps\JsonService\PutSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -103,6 +110,10 @@
     <None Include="Features\JsonService\PostActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PostActions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\JsonService\PutActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PutActions.feature.cs</LastGenOutput>
     </None>
     <None Include="HelloWorld\HelloWorldFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

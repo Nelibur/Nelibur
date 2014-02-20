@@ -8,6 +8,18 @@ namespace SpecFlowTests.Steps.JsonService
     [Binding]
     public sealed class DeleteSteps : JsonServiceActionStep
     {
+        [AfterFeature]
+        public static void AfterFeature()
+        {
+            StopService();
+        }
+
+        [BeforeFeature]
+        public static void BeforeFeature()
+        {
+            StartService();
+        }
+
         [When(@"I send delete request by Id '(.*)' thru Delete action")]
         public void WhenISendDeleteRequestByIdThruDeleteAction(int id)
         {

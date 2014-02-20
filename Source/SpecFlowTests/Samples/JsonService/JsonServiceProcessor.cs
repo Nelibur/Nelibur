@@ -8,7 +8,8 @@ namespace SpecFlowTests.Samples.JsonService
         IPostWithResponse<OrderJson>,
         IGetWithResponse<GetOrderJsonById>,
         IDelete<DeleteOrderJsonById>,
-        IDeleteWithResponse<DeleteOrderJsonById>
+        IDeleteWithResponse<DeleteOrderJsonById>,
+        IPut<UpdateOrderJson>
     {
         private static List<OrderJson> _repository = new List<OrderJson>();
 
@@ -38,6 +39,12 @@ namespace SpecFlowTests.Samples.JsonService
         {
             _repository.Add(request);
             return true;
+        }
+
+        public void Put(UpdateOrderJson request)
+        {
+            OrderJson order = _repository.Single(x => x.Id == request.Id);
+            order.Quantity = request.Quantity;
         }
     }
 }

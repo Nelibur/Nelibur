@@ -12,6 +12,18 @@ namespace SpecFlowTests.Steps.JsonService
     [Binding]
     public sealed class GetSteps : JsonServiceActionStep
     {
+        [AfterFeature]
+        public static void AfterFeature()
+        {
+            StopService();
+        }
+
+        [BeforeFeature]
+        public static void BeforeFeature()
+        {
+            StartService();
+        }
+
         [Then(@"I get data")]
         public void ThenIGetData(Table table)
         {
