@@ -30,12 +30,30 @@ namespace SpecFlowTests.Steps.JsonService
             client.Put(request);
         }
 
+        [When(@"I update data thru Put action with response")]
+        public void WhenIUpdateDataThruPutActionWithResponse(Table table)
+        {
+            UpdateOrderJson request = table.CreateSet<UpdateOrderJson>().Single();
+            JsonServiceClient client = GetClient();
+            bool response = client.Put<UpdateOrderJson, bool>(request);
+            ScenarioContext.Current[ResopnseKey] = response;
+        }
+
         [When(@"I update data thru PutAsync action")]
         public void WhenIUpdateDataThruPutAsyncAction(Table table)
         {
             UpdateOrderJson request = table.CreateSet<UpdateOrderJson>().Single();
             JsonServiceClient client = GetClient();
             client.PutAsync(request).Wait();
+        }
+
+        [When(@"I update data thru PutAsync action with response")]
+        public void WhenIUpdateDataThruPutAsyncActionWithResponse(Table table)
+        {
+            UpdateOrderJson request = table.CreateSet<UpdateOrderJson>().Single();
+            JsonServiceClient client = GetClient();
+            bool response = client.PutAsync<UpdateOrderJson, bool>(request).Result;
+            ScenarioContext.Current[ResopnseKey] = response;
         }
     }
 }

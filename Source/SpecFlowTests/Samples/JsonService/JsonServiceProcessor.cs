@@ -9,7 +9,8 @@ namespace SpecFlowTests.Samples.JsonService
         IGetWithResponse<GetOrderJsonById>,
         IDelete<DeleteOrderJsonById>,
         IDeleteWithResponse<DeleteOrderJsonById>,
-        IPut<UpdateOrderJson>
+        IPut<UpdateOrderJson>,
+        IPutWithResponse<UpdateOrderJson>
     {
         private static List<OrderJson> _repository = new List<OrderJson>();
 
@@ -20,8 +21,7 @@ namespace SpecFlowTests.Samples.JsonService
 
         public object DeleteWithResponse(DeleteOrderJsonById request)
         {
-            OrderJson order = _repository.Single(x => x.Id == request.Id);
-            _repository.Remove(order);
+            Delete(request);
             return true;
         }
 
@@ -37,7 +37,7 @@ namespace SpecFlowTests.Samples.JsonService
 
         public object PostWithResponse(OrderJson request)
         {
-            _repository.Add(request);
+            Post(request);
             return true;
         }
 
@@ -45,6 +45,12 @@ namespace SpecFlowTests.Samples.JsonService
         {
             OrderJson order = _repository.Single(x => x.Id == request.Id);
             order.Quantity = request.Quantity;
+        }
+
+        public object PutWithResponse(UpdateOrderJson request)
+        {
+            Put(request);
+            return true;
         }
     }
 }

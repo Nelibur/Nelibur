@@ -89,7 +89,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Quantity",
                         "ProductId"});
             table1.AddRow(new string[] {
-                        "11",
+                        "10",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
 #line 8
@@ -99,7 +99,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Id",
                         "Quantity"});
             table2.AddRow(new string[] {
-                        "11",
+                        "10",
                         "10"});
 #line 11
  testRunner.When("I update data thru Put action", ((string)(null)), table2, "When ");
@@ -125,7 +125,7 @@ this.ScenarioSetup(scenarioInfo);
                         "Quantity",
                         "ProductId"});
             table3.AddRow(new string[] {
-                        "10",
+                        "11",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
 #line 18
@@ -135,11 +135,87 @@ this.ScenarioSetup(scenarioInfo);
                         "Id",
                         "Quantity"});
             table4.AddRow(new string[] {
-                        "10",
+                        "11",
                         "10"});
 #line 21
  testRunner.When("I update data thru PutAsync action", ((string)(null)), table4, "When ");
 #line 24
+ testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("Description", "Put data with response")]
+        public virtual void PutDataWithResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Put data with response", ((string[])(null)));
+#line 26
+this.ScenarioSetup(scenarioInfo);
+#line 27
+ testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table5.AddRow(new string[] {
+                        "12",
+                        "5",
+                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+#line 28
+ testRunner.And("I sent data thru Post action", ((string)(null)), table5, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity"});
+            table6.AddRow(new string[] {
+                        "12",
+                        "10"});
+#line 31
+ testRunner.When("I update data thru Put action with response", ((string)(null)), table6, "When ");
+#line 34
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 35
+ testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.FactAttribute()]
+        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("Description", "PutAsync data with response")]
+        public virtual void PutAsyncDataWithResponse()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PutAsync data with response", ((string[])(null)));
+#line 37
+this.ScenarioSetup(scenarioInfo);
+#line 38
+ testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+            TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity",
+                        "ProductId"});
+            table7.AddRow(new string[] {
+                        "14",
+                        "5",
+                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+#line 39
+ testRunner.And("I sent data thru Post action", ((string)(null)), table7, "And ");
+#line hidden
+            TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Quantity"});
+            table8.AddRow(new string[] {
+                        "14",
+                        "10"});
+#line 42
+ testRunner.When("I update data thru PutAsync action with response", ((string)(null)), table8, "When ");
+#line 45
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
  testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
