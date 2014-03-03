@@ -1,6 +1,6 @@
 ﻿namespace Nelibur.ServiceModel.Services.Operations
 {
-    internal static class OperationType
+    public static class OperationType
     {
         public const string Delete = "DELETE";
         public const string Get = "GET";

@@ -1,14 +1,14 @@
 ﻿namespace Nelibur.ServiceModel.Contracts
 {
-    internal static class RestServiceMetadata
+    public static class RestServiceMetadata
     {
-        internal static class ParamName
+        public static class ParamName
         {
             public const string Data = "data";
             public const string Type = "type";
         }
 
-        internal static class Path
+        public static class Path
         {
             public const string Delete = "Delete";
             public const string DeleteWithResponse = "DeleteWithResponse";
