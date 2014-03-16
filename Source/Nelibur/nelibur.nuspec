@@ -7,7 +7,7 @@
         <owners>Sergey Morenko</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <licenseUrl>https://github.com/Nelibur/Nelibur/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/Nelibur/Nelibur</projectUrl>
+        <projectUrl>http://nelibur.org/</projectUrl>
         <description>
             Nelibur is a message based web service framework on the pure WCF.
             Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF
