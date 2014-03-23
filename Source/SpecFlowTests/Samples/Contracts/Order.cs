@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace SpecFlowTests.Samples.JsonService
+namespace SpecFlowTests.Samples.Contracts
 {
     [DataContract]
-    public sealed class OrderJson
+    public sealed class Order
     {
         [DataMember]
         public int Id { get; set; }
@@ -25,7 +25,7 @@ namespace SpecFlowTests.Samples.JsonService
             {
                 return true;
             }
-            return obj is OrderJson && Equals((OrderJson)obj);
+            return obj is Order && Equals((Order)obj);
         }
 
         public override int GetHashCode()
@@ -39,7 +39,7 @@ namespace SpecFlowTests.Samples.JsonService
             }
         }
 
-        private bool Equals(OrderJson other)
+        private bool Equals(Order other)
         {
             return Id == other.Id && Quantity == other.Quantity && ProductId.Equals(other.ProductId);
         }

@@ -3,9 +3,9 @@ using System.Linq;
 using Nelibur.ServiceModel.Services.Operations;
 using SpecFlowTests.Samples.Contracts;
 
-namespace SpecFlowTests.Samples.JsonService
+namespace SpecFlowTests.Samples.SoapService
 {
-    public sealed class JsonServiceProcessor : IPost<Order>,
+    public sealed class SoapServiceProcessor : IPost<Order>,
         IPostWithResponse<Order>,
         IGetWithResponse<GetOrderById>,
         IDelete<DeleteOrderById>,

@@ -4,6 +4,7 @@ using Nelibur.ServiceModel.Clients;
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
 using SpecFlowTests.Properties;
+using SpecFlowTests.Samples.Contracts;
 using SpecFlowTests.Samples.JsonService;
 
 namespace SpecFlowTests.Steps.JsonService
@@ -36,10 +37,10 @@ namespace SpecFlowTests.Steps.JsonService
         private static void BindRequestToProcessors()
         {
             new RestServiceProcessor()
-                .Bind<OrderJson, JsonServiceProcessor>()
-                .Bind<GetOrderJsonById, JsonServiceProcessor>()
-                .Bind<DeleteOrderJsonById, JsonServiceProcessor>()
-                .Bind<UpdateOrderJson, JsonServiceProcessor>();
+                .Bind<Order, JsonServiceProcessor>()
+                .Bind<GetOrderById, JsonServiceProcessor>()
+                .Bind<DeleteOrderById, JsonServiceProcessor>()
+                .Bind<UpdateOrder, JsonServiceProcessor>();
         }
     }
 }

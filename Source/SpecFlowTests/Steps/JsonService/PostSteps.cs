@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Nelibur.ServiceModel.Clients;
-using SpecFlowTests.Samples.JsonService;
+using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -25,7 +25,7 @@ namespace SpecFlowTests.Steps.JsonService
         [When(@"I send data thru PostAsync action")]
         public void WhenISendDataThruPostAsyncAction(Table table)
         {
-            OrderJson order = table.CreateSet<OrderJson>().Single();
+            Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
             client.PostAsync(order).Wait();
         }
@@ -33,18 +33,18 @@ namespace SpecFlowTests.Steps.JsonService
         [When(@"I send data thru PostAsync with response action")]
         public void WhenISendDataThruPostAsyncWithResponseAction(Table table)
         {
-            OrderJson order = table.CreateSet<OrderJson>().Single();
+            Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
-            bool response = client.PostAsync<OrderJson, bool>(order).Result;
+            bool response = client.PostAsync<Order, bool>(order).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
         [When(@"I send data thru Post with response action")]
         public void WhenISendDataThruPostWithResponseAction(Table table)
         {
-            OrderJson order = table.CreateSet<OrderJson>().Single();
+            Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
-            bool response = client.Post<OrderJson, bool>(order);
+            bool response = client.Post<Order, bool>(order);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

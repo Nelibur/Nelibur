@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using Nelibur.ServiceModel.Clients;
-using SpecFlowTests.Samples.JsonService;
+using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Xunit;
@@ -24,7 +24,7 @@ namespace SpecFlowTests.Steps.JsonService
         [When(@"I send data thru Post action")]
         public void WhenISendDataThruPostAction(Table table)
         {
-            OrderJson order = table.CreateSet<OrderJson>().Single();
+            Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
             client.Post(order);
         }

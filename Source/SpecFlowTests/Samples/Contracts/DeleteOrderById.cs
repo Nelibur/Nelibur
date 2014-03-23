@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace SpecFlowTests.Samples.JsonService
+namespace SpecFlowTests.Samples.Contracts
 {
     [DataContract]
-    public sealed class DeleteOrderJsonById
+    public sealed class DeleteOrderById
     {
         [DataMember]
         public int Id { get; set; }
