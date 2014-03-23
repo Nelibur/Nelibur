@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PutActions.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SoapService\GetActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SoapService\PostActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -103,6 +108,7 @@
     <Compile Include="Steps\JsonService\PostSteps.cs" />
     <Compile Include="Steps\JsonService\PutSteps.cs" />
     <Compile Include="Steps\SoapService\CommonSteps.cs" />
+    <Compile Include="Steps\SoapService\GetSteps.cs" />
     <Compile Include="Steps\SoapService\PostSteps.cs" />
     <Compile Include="Steps\SoapService\SoapServiceActionStep.cs" />
   </ItemGroup>
@@ -123,6 +129,10 @@
     <None Include="Features\JsonService\PutActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PutActions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SoapService\GetActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>GetActions.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\SoapService\PostActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
