@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PutActions.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SoapService\DeleteActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="Features\SoapService\GetActions.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,6 +87,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PostActions.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Features\SoapService\PutActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PutActions.feature</DependentUpon>
     </Compile>
     <Compile Include="HelloWorld\HelloWorldFeature.feature.cs">
       <AutoGen>True</AutoGen>
@@ -103,6 +113,7 @@
     <Compile Include="Samples\SoapService\OrderServiceProcessor.cs" />
     <Compile Include="Steps\JsonService\CommonSteps.cs" />
     <Compile Include="Steps\JsonService\DeleteSteps.cs" />
+    <Compile Include="Steps\SoapService\DeleteSteps.cs" />
     <Compile Include="Steps\JsonService\GetSteps.cs" />
     <Compile Include="Steps\JsonService\JsonServiceActionStep.cs" />
     <Compile Include="Steps\JsonService\PostSteps.cs" />
@@ -110,6 +121,7 @@
     <Compile Include="Steps\SoapService\CommonSteps.cs" />
     <Compile Include="Steps\SoapService\GetSteps.cs" />
     <Compile Include="Steps\SoapService\PostSteps.cs" />
+    <Compile Include="Steps\SoapService\PutSteps.cs" />
     <Compile Include="Steps\SoapService\SoapServiceActionStep.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -130,6 +142,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PutActions.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\SoapService\DeleteActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>DeleteActions.feature.cs</LastGenOutput>
+    </None>
     <None Include="Features\SoapService\GetActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>GetActions.feature.cs</LastGenOutput>
@@ -137,6 +153,10 @@
     <None Include="Features\SoapService\PostActions.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PostActions.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\SoapService\PutActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PutActions.feature.cs</LastGenOutput>
     </None>
     <None Include="HelloWorld\HelloWorldFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
