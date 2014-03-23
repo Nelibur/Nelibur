@@ -1,4 +1,5 @@
-﻿Feature: Delete actions
+﻿@JsonService
+Feature: Delete json actions
 	In order to delete an object instance accordingly with CRUD and message based paradigm
 	As a developer
 	I want to use Delete action

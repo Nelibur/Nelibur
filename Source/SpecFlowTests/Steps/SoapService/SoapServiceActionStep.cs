@@ -1,42 +1,39 @@
-﻿using System;
-using System.ServiceModel.Web;
+﻿using System.ServiceModel;
 using Nelibur.ServiceModel.Clients;
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
-using SpecFlowTests.Properties;
 using SpecFlowTests.Samples.Contracts;
-using SpecFlowTests.Samples.JsonService;
+using SpecFlowTests.Samples.SoapService;
 
-namespace SpecFlowTests.Steps.JsonService
+namespace SpecFlowTests.Steps.SoapService
 {
-    public abstract class JsonServiceActionStep
+    public abstract class SoapServiceActionStep
     {
         protected const string ResopnseKey = "ResopnseKey";
-        private static readonly Settings _settings = Settings.Default;
-        private static WebServiceHost _jsonService;
+        private const string EndpointConfigurationName = "NeliburSoapService";
+        private static ServiceHost _serviceHost;
 
         protected static void StartService()
         {
             BindRequestToProcessors();
-            var address = new Uri(_settings.JsonServiceAddress);
-            _jsonService = new WebServiceHost(typeof(JsonServicePerCall), address);
-            _jsonService.Open();
+            _serviceHost = new ServiceHost(typeof(SoapServicePerCall));
+            _serviceHost.Open();
         }
 
         protected static void StopService()
         {
-            _jsonService.Close();
+            _serviceHost.Close();
         }
 
-        protected JsonServiceClient GetClient()
+        protected SoapServiceClient GetClient()
         {
-            var client = new JsonServiceClient(_settings.JsonServiceAddress);
+            var client = new SoapServiceClient(EndpointConfigurationName);
             return client;
         }
 
         private static void BindRequestToProcessors()
         {
-            new RestServiceProcessor()
+            new SoapServiceProcessor()
                 .Bind<Order, OrderServiceProcessor>()
                 .Bind<GetOrderById, OrderServiceProcessor>()
                 .Bind<DeleteOrderById, OrderServiceProcessor>()

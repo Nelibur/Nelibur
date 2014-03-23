@@ -18,7 +18,7 @@ namespace SpecFlowTests.Features.JsonService
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class PutActionsFeature : Xunit.IUseFixture<PutActionsFeature.FixtureData>, System.IDisposable
+    public partial class PutJsonActionsFeature : Xunit.IUseFixture<PutJsonActionsFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -26,7 +26,7 @@ namespace SpecFlowTests.Features.JsonService
 #line 1 "PutActions.feature"
 #line hidden
         
-        public PutActionsFeature()
+        public PutJsonActionsFeature()
         {
             this.TestInitialize();
         }
@@ -34,8 +34,9 @@ namespace SpecFlowTests.Features.JsonService
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Put actions", "In order to update an object instance accordingly with CRUD and message based par" +
-                    "adigm\r\nAs a developer\r\nI want to use Put action", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Put json actions", "In order to update an object instance accordingly with CRUD and message based par" +
+                    "adigm\r\nAs a developer\r\nI want to use Put action", ProgrammingLanguage.CSharp, new string[] {
+                        "JsonService"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,7 +65,7 @@ namespace SpecFlowTests.Features.JsonService
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void SetFixture(PutActionsFeature.FixtureData fixtureData)
+        public virtual void SetFixture(PutJsonActionsFeature.FixtureData fixtureData)
         {
         }
         
@@ -74,14 +75,14 @@ namespace SpecFlowTests.Features.JsonService
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put json actions")]
         [Xunit.TraitAttribute("Description", "Put data without response")]
         public virtual void PutDataWithoutResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Put data without response", ((string[])(null)));
-#line 6
-this.ScenarioSetup(scenarioInfo);
 #line 7
+this.ScenarioSetup(scenarioInfo);
+#line 8
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -92,7 +93,7 @@ this.ScenarioSetup(scenarioInfo);
                         "10",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 8
+#line 9
  testRunner.And("I sent data thru Post action", ((string)(null)), table1, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
@@ -101,23 +102,23 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "10",
                         "10"});
-#line 11
+#line 12
  testRunner.When("I update data thru Put action", ((string)(null)), table2, "When ");
-#line 14
+#line 15
  testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put json actions")]
         [Xunit.TraitAttribute("Description", "PutAsync data without response")]
         public virtual void PutAsyncDataWithoutResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PutAsync data without response", ((string[])(null)));
-#line 16
-this.ScenarioSetup(scenarioInfo);
 #line 17
+this.ScenarioSetup(scenarioInfo);
+#line 18
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -128,7 +129,7 @@ this.ScenarioSetup(scenarioInfo);
                         "11",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 18
+#line 19
  testRunner.And("I sent data thru Post action", ((string)(null)), table3, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -137,23 +138,23 @@ this.ScenarioSetup(scenarioInfo);
             table4.AddRow(new string[] {
                         "11",
                         "10"});
-#line 21
+#line 22
  testRunner.When("I update data thru PutAsync action", ((string)(null)), table4, "When ");
-#line 24
+#line 25
  testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put json actions")]
         [Xunit.TraitAttribute("Description", "Put data with response")]
         public virtual void PutDataWithResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Put data with response", ((string[])(null)));
-#line 26
-this.ScenarioSetup(scenarioInfo);
 #line 27
+this.ScenarioSetup(scenarioInfo);
+#line 28
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
@@ -164,7 +165,7 @@ this.ScenarioSetup(scenarioInfo);
                         "12",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 28
+#line 29
  testRunner.And("I sent data thru Post action", ((string)(null)), table5, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
@@ -173,25 +174,25 @@ this.ScenarioSetup(scenarioInfo);
             table6.AddRow(new string[] {
                         "12",
                         "10"});
-#line 31
+#line 32
  testRunner.When("I update data thru Put action with response", ((string)(null)), table6, "When ");
-#line 34
- testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 36
  testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Put actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Put json actions")]
         [Xunit.TraitAttribute("Description", "PutAsync data with response")]
         public virtual void PutAsyncDataWithResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PutAsync data with response", ((string[])(null)));
-#line 37
-this.ScenarioSetup(scenarioInfo);
 #line 38
+this.ScenarioSetup(scenarioInfo);
+#line 39
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
@@ -202,7 +203,7 @@ this.ScenarioSetup(scenarioInfo);
                         "14",
                         "5",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 39
+#line 40
  testRunner.And("I sent data thru Post action", ((string)(null)), table7, "And ");
 #line hidden
             TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
@@ -211,11 +212,11 @@ this.ScenarioSetup(scenarioInfo);
             table8.AddRow(new string[] {
                         "14",
                         "10"});
-#line 42
+#line 43
  testRunner.When("I update data thru PutAsync action with response", ((string)(null)), table8, "When ");
-#line 45
- testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 46
+ testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
  testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
@@ -228,12 +229,12 @@ this.ScenarioSetup(scenarioInfo);
             
             public FixtureData()
             {
-                PutActionsFeature.FeatureSetup();
+                PutJsonActionsFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                PutActionsFeature.FeatureTearDown();
+                PutJsonActionsFeature.FeatureTearDown();
             }
         }
     }

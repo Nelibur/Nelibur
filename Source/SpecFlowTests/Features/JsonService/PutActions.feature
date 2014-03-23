@@ -1,4 +1,5 @@
-﻿Feature: Put actions
+﻿@JsonService
+Feature: Put json actions
 	In order to update an object instance accordingly with CRUD and message based paradigm
 	As a developer
 	I want to use Put action

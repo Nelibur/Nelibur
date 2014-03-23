@@ -18,7 +18,7 @@ namespace SpecFlowTests.Features.JsonService
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class GetActionsFeature : Xunit.IUseFixture<GetActionsFeature.FixtureData>, System.IDisposable
+    public partial class GetJsonActionsFeature : Xunit.IUseFixture<GetJsonActionsFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -26,7 +26,7 @@ namespace SpecFlowTests.Features.JsonService
 #line 1 "GetActions.feature"
 #line hidden
         
-        public GetActionsFeature()
+        public GetJsonActionsFeature()
         {
             this.TestInitialize();
         }
@@ -34,8 +34,9 @@ namespace SpecFlowTests.Features.JsonService
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Get actions", "In order to find an object instance accordingly with CRUD and message based parad" +
-                    "igm\r\nAs a developer\r\nI want to use Get action", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Get json actions", "In order to find an object instance accordingly with CRUD and message based parad" +
+                    "igm\r\nAs a developer\r\nI want to use Get action", ProgrammingLanguage.CSharp, new string[] {
+                        "JsonService"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -64,7 +65,7 @@ namespace SpecFlowTests.Features.JsonService
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void SetFixture(GetActionsFeature.FixtureData fixtureData)
+        public virtual void SetFixture(GetJsonActionsFeature.FixtureData fixtureData)
         {
         }
         
@@ -74,14 +75,14 @@ namespace SpecFlowTests.Features.JsonService
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Get actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Get json actions")]
         [Xunit.TraitAttribute("Description", "Get data with response")]
         public virtual void GetDataWithResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get data with response", ((string[])(null)));
-#line 6
-this.ScenarioSetup(scenarioInfo);
 #line 7
+this.ScenarioSetup(scenarioInfo);
+#line 8
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
@@ -89,39 +90,39 @@ this.ScenarioSetup(scenarioInfo);
                         "Quantity",
                         "ProductId"});
             table1.AddRow(new string[] {
-                        "1",
-                        "5",
+                        "107",
+                        "105",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 8
+#line 9
  testRunner.And("I sent data thru Post action", ((string)(null)), table1, "And ");
-#line 11
- testRunner.When("I request data by Id \'1\' thru Get action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 12
+ testRunner.When("I request data by Id \'107\' thru Get action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "Quantity",
                         "ProductId"});
             table2.AddRow(new string[] {
-                        "1",
-                        "5",
+                        "107",
+                        "105",
                         "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
-#line 12
+#line 13
  testRunner.Then("I get data", ((string)(null)), table2, "Then ");
-#line 15
+#line 16
  testRunner.And("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Get actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Get json actions")]
         [Xunit.TraitAttribute("Description", "GetAsync data with response")]
         public virtual void GetAsyncDataWithResponse()
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("GetAsync data with response", ((string[])(null)));
-#line 17
-this.ScenarioSetup(scenarioInfo);
 #line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
  testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
@@ -132,9 +133,9 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "7",
                         "5695F19D-2DFF-401A-8F34-EBC161A6EBB5"});
-#line 19
+#line 20
  testRunner.And("I sent data thru Post action", ((string)(null)), table3, "And ");
-#line 22
+#line 23
  testRunner.When("I request data by Id \'2\' thru GetAsync action", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
@@ -145,9 +146,9 @@ this.ScenarioSetup(scenarioInfo);
                         "2",
                         "7",
                         "5695F19D-2DFF-401A-8F34-EBC161A6EBB5"});
-#line 23
+#line 24
  testRunner.Then("I get data", ((string)(null)), table4, "Then ");
-#line 26
+#line 27
  testRunner.And("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
@@ -160,12 +161,12 @@ this.ScenarioSetup(scenarioInfo);
             
             public FixtureData()
             {
-                GetActionsFeature.FeatureSetup();
+                GetJsonActionsFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                GetActionsFeature.FeatureTearDown();
+                GetJsonActionsFeature.FeatureTearDown();
             }
         }
     }

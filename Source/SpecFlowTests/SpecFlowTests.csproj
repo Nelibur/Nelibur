@@ -73,6 +73,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PutActions.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\SoapService\PostActions.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostActions.feature</DependentUpon>
+    </Compile>
     <Compile Include="HelloWorld\HelloWorldFeature.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -82,7 +87,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Samples\Contracts\DeleteOrderById.cs" />
     <Compile Include="Samples\Contracts\GetOrderById.cs" />
-    <Compile Include="Samples\JsonService\JsonServiceProcessor.cs" />
+    <Compile Include="Samples\JsonService\OrderServiceProcessor.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -90,13 +95,16 @@
     </Compile>
     <Compile Include="Samples\Contracts\Order.cs" />
     <Compile Include="Samples\Contracts\UpdateOrder.cs" />
-    <Compile Include="Samples\SoapService\SoapServiceProcessor.cs" />
+    <Compile Include="Samples\SoapService\OrderServiceProcessor.cs" />
     <Compile Include="Steps\JsonService\CommonSteps.cs" />
     <Compile Include="Steps\JsonService\DeleteSteps.cs" />
     <Compile Include="Steps\JsonService\GetSteps.cs" />
     <Compile Include="Steps\JsonService\JsonServiceActionStep.cs" />
     <Compile Include="Steps\JsonService\PostSteps.cs" />
     <Compile Include="Steps\JsonService\PutSteps.cs" />
+    <Compile Include="Steps\SoapService\CommonSteps.cs" />
+    <Compile Include="Steps\SoapService\PostSteps.cs" />
+    <Compile Include="Steps\SoapService\SoapServiceActionStep.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -116,6 +124,10 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PutActions.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\SoapService\PostActions.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PostActions.feature.cs</LastGenOutput>
+    </None>
     <None Include="HelloWorld\HelloWorldFeature.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>HelloWorldFeature.feature.cs</LastGenOutput>
@@ -126,10 +138,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\SoapService\" />
-    <Folder Include="Steps\SoapService\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
       <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>

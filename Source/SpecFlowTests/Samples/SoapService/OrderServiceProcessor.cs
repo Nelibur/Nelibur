@@ -5,7 +5,7 @@ using SpecFlowTests.Samples.Contracts;
 
 namespace SpecFlowTests.Samples.SoapService
 {
-    public sealed class SoapServiceProcessor : IPost<Order>,
+    public sealed class OrderServiceProcessor : IPost<Order>,
         IPostWithResponse<Order>,
         IGetWithResponse<GetOrderById>,
         IDelete<DeleteOrderById>,

@@ -6,7 +6,7 @@ using TechTalk.SpecFlow.Assist;
 
 namespace SpecFlowTests.Steps.JsonService
 {
-    [Scope(Feature = "Put actions")]
+    [Scope(Feature = "Put json actions")]
     [Binding]
     public sealed class PutSteps : JsonServiceActionStep
     {

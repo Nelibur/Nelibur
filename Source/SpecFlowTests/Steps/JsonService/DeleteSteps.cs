@@ -4,7 +4,7 @@ using TechTalk.SpecFlow;
 
 namespace SpecFlowTests.Steps.JsonService
 {
-    [Scope(Feature = "Delete actions")]
+    [Scope(Feature = "Delete json actions")]
     [Binding]
     public sealed class DeleteSteps : JsonServiceActionStep
     {

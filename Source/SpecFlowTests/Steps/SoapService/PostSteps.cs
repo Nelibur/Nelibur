@@ -4,11 +4,11 @@ using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
-namespace SpecFlowTests.Steps.JsonService
+namespace SpecFlowTests.Steps.SoapService
 {
-    [Scope(Feature = "Post json actions")]
+    [Scope(Feature = "Post soap actions")]
     [Binding]
-    public sealed class PostSteps : JsonServiceActionStep
+    public sealed class PostSteps : SoapServiceActionStep
     {
         [AfterFeature]
         public static void AfterFeature()
@@ -26,7 +26,7 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDataThruPostAsyncAction(Table table)
         {
             Order order = table.CreateSet<Order>().Single();
-            JsonServiceClient client = GetClient();
+            SoapServiceClient client = GetClient();
             client.PostAsync(order).Wait();
         }
 
@@ -34,7 +34,7 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDataThruPostAsyncWithResponseAction(Table table)
         {
             Order order = table.CreateSet<Order>().Single();
-            JsonServiceClient client = GetClient();
+            SoapServiceClient client = GetClient();
             bool response = client.PostAsync<Order, bool>(order).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
@@ -43,7 +43,7 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDataThruPostWithResponseAction(Table table)
         {
             Order order = table.CreateSet<Order>().Single();
-            JsonServiceClient client = GetClient();
+            SoapServiceClient client = GetClient();
             bool response = client.Post<Order, bool>(order);
             ScenarioContext.Current[ResopnseKey] = response;
         }

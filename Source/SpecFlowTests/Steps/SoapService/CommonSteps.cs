@@ -5,18 +5,18 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Xunit;
 
-namespace SpecFlowTests.Steps.JsonService
+namespace SpecFlowTests.Steps.SoapService
 {
-    [Scope(Tag = "JsonService")]
+    [Scope(Tag = "SoapService")]
     [Binding]
-    public sealed class CommonSteps : JsonServiceActionStep
+    public sealed class CommonSteps : SoapServiceActionStep
     {
-        [Given("the Json service was started")]
+        [Given("the Soap service was started")]
         public void StartJsonService()
         {
         }
 
-        [Then("the Json service was stopped")]
+        [Then("the Soap service was stopped")]
         public void StopJsonService()
         {
         }
@@ -26,7 +26,7 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDataThruPostAction(Table table)
         {
             Order order = table.CreateSet<Order>().Single();
-            JsonServiceClient client = GetClient();
+            SoapServiceClient client = GetClient();
             client.Post(order);
         }
 

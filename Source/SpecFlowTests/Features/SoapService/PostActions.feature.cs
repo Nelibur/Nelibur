@@ -11,14 +11,14 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace SpecFlowTests.Features.JsonService
+namespace SpecFlowTests.Features.SoapService
 {
     using TechTalk.SpecFlow;
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class PostJsonActionsFeature : Xunit.IUseFixture<PostJsonActionsFeature.FixtureData>, System.IDisposable
+    public partial class PostSoapActionsFeature : Xunit.IUseFixture<PostSoapActionsFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -26,7 +26,7 @@ namespace SpecFlowTests.Features.JsonService
 #line 1 "PostActions.feature"
 #line hidden
         
-        public PostJsonActionsFeature()
+        public PostSoapActionsFeature()
         {
             this.TestInitialize();
         }
@@ -34,9 +34,9 @@ namespace SpecFlowTests.Features.JsonService
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Post json actions", "In order to create an object instance accordingly with CRUD and message based par" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Post soap actions", "In order to create an object instance accordingly with CRUD and message based par" +
                     "adigm\r\nAs a developer\r\nI want to use Post action", ProgrammingLanguage.CSharp, new string[] {
-                        "JsonService"});
+                        "SoapService"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,7 +65,7 @@ namespace SpecFlowTests.Features.JsonService
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void SetFixture(PostJsonActionsFeature.FixtureData fixtureData)
+        public virtual void SetFixture(PostSoapActionsFeature.FixtureData fixtureData)
         {
         }
         
@@ -75,7 +75,7 @@ namespace SpecFlowTests.Features.JsonService
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Post json actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Post soap actions")]
         [Xunit.TraitAttribute("Description", "Post data without response")]
         public virtual void PostDataWithoutResponse()
         {
@@ -83,7 +83,7 @@ namespace SpecFlowTests.Features.JsonService
 #line 7
 this.ScenarioSetup(scenarioInfo);
 #line 8
- testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the Soap service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -92,17 +92,17 @@ this.ScenarioSetup(scenarioInfo);
             table1.AddRow(new string[] {
                         "1",
                         "5",
-                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+                        "91260A16-B8E9-4AA6-AB3E-4C0354F754B3"});
 #line 9
  testRunner.When("I send data thru Post action", ((string)(null)), table1, "When ");
 #line 12
- testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the Soap service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Post json actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Post soap actions")]
         [Xunit.TraitAttribute("Description", "PostAsync data without response")]
         public virtual void PostAsyncDataWithoutResponse()
         {
@@ -110,7 +110,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 14
 this.ScenarioSetup(scenarioInfo);
 #line 15
- testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the Soap service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -119,17 +119,17 @@ this.ScenarioSetup(scenarioInfo);
             table2.AddRow(new string[] {
                         "1",
                         "5",
-                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+                        "91260A16-B8E9-4AA6-AB3E-4C0354F754B3"});
 #line 16
  testRunner.When("I send data thru PostAsync action", ((string)(null)), table2, "When ");
 #line 19
- testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the Soap service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Post json actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Post soap actions")]
         [Xunit.TraitAttribute("Description", "Post data with response")]
         public virtual void PostDataWithResponse()
         {
@@ -137,7 +137,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 21
 this.ScenarioSetup(scenarioInfo);
 #line 22
- testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the Soap service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -146,19 +146,19 @@ this.ScenarioSetup(scenarioInfo);
             table3.AddRow(new string[] {
                         "1",
                         "5",
-                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+                        "91260A16-B8E9-4AA6-AB3E-4C0354F754B3"});
 #line 23
  testRunner.When("I send data thru Post with response action", ((string)(null)), table3, "When ");
 #line 26
  testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 27
- testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the Soap service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [Xunit.FactAttribute()]
-        [Xunit.TraitAttribute("FeatureTitle", "Post json actions")]
+        [Xunit.TraitAttribute("FeatureTitle", "Post soap actions")]
         [Xunit.TraitAttribute("Description", "PostAsync data with response")]
         public virtual void PostAsyncDataWithResponse()
         {
@@ -166,7 +166,7 @@ this.ScenarioSetup(scenarioInfo);
 #line 29
 this.ScenarioSetup(scenarioInfo);
 #line 30
- testRunner.Given("the Json service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given("the Soap service was started", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
             TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
@@ -175,13 +175,13 @@ this.ScenarioSetup(scenarioInfo);
             table4.AddRow(new string[] {
                         "1",
                         "5",
-                        "5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95"});
+                        "91260A16-B8E9-4AA6-AB3E-4C0354F754B3"});
 #line 31
  testRunner.When("I send data thru PostAsync with response action", ((string)(null)), table4, "When ");
 #line 34
  testRunner.And("response equals \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 35
- testRunner.Then("the Json service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the Soap service was stopped", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
@@ -193,12 +193,12 @@ this.ScenarioSetup(scenarioInfo);
             
             public FixtureData()
             {
-                PostJsonActionsFeature.FeatureSetup();
+                PostSoapActionsFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                PostJsonActionsFeature.FeatureTearDown();
+                PostSoapActionsFeature.FeatureTearDown();
             }
         }
     }

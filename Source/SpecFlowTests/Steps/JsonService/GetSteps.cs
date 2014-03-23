@@ -8,7 +8,7 @@ using Xunit;
 
 namespace SpecFlowTests.Steps.JsonService
 {
-    [Scope(Feature = "Get actions")]
+    [Scope(Feature = "Get json actions")]
     [Binding]
     public sealed class GetSteps : JsonServiceActionStep
     {
