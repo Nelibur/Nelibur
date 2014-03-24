@@ -1,0 +1,99 @@
+﻿<div class="container" id="example">
+    <div class="col-md-12">
+        <div class="row">
+            <h2>Examples</h2>
+        </div>
+        <div class="row">
+            <h3><a data-toggle="collapse" data-target="#rest-service">REST service</a></h3>
+        </div>
+        <div id="rest-service" class="container collapse">
+            <div class="row">
+                <h4>Client example</h4>
+            </div>
+            <div class="row">
+                <p>
+                    Here is a simple example of a REST service client. It should give you the basic idea of how simple it is to use Nelibur.
+                </p>
+                <pre class="prettyprint lang-cs">
+var client = new JsonServiceClient("http://localhost:8080/webhost");
+
+var createRequest = new CreateClientRequest
+{
+    Email = "email@email.com"
+};
+ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+
+var updateRequest = new UpdateClientRequest
+{
+    Email = "new@email.com",
+    Id = response.Id
+};
+response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+
+var getClientRequest = new GetClientRequest
+{
+    Id = response.Id
+};
+response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
+
+var deleteRequest = new DeleteClientRequest
+{
+    Id = response.Id
+};
+client.Delete(deleteRequest);
+                </pre>
+            </div>
+            <div class="row">
+                <h4>Service example</h4>
+            </div>
+            <div class="row">
+                <p>
+                    And here is an example of processor that processes requests from the clients.
+                </p>
+                <pre class="prettyprint">
+public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>, IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
+{
+    private static List<Client> _clients = new List<Client>();
+
+    public void Delete(DeleteClientRequest request)
+    {
+        _clients = _clients.Where(x => x.Id != request.Id).ToList();
+    }
+
+    public object GetWithResponse(GetClientRequest request)
+    {        
+        Client client = _clients.Single(x => x.Id == request.Id);
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
+
+    public object PostWithResponse(CreateClientRequest request)
+    {
+        var client = new Client
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email
+            };
+        _clients.Add(client);
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
+
+    public object PutWithResponse(UpdateClientRequest request)
+    {
+        Client client = _clients.Single(x => x.Id == request.Id);
+        client.Email = request.Email;
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
+}
+</pre>
+            </div>
+            <div class="row">
+                <h4>Further reading</h4>
+            </div>
+            <div class="row">
+                <p>
+                    For additional information please get aquianted with the docs on our <a href="https://github.com/Nelibur/Nelibur#simple-soap-message-based-client">GitHub page</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
