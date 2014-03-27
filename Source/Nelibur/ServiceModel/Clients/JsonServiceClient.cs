@@ -62,6 +62,11 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, OperationType.Delete);
         }
 
+        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Delete);
+        }
+
         protected override Task GetAsyncCore<TRequest>(TRequest request)
         {
             return ProcessAsync(request, OperationType.Get);
@@ -74,7 +79,7 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
         {
-            return GetAsyncCore<TRequest, TResponse>(request).Result;
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
         }
 
         protected override void GetCore<TRequest>(TRequest request)
@@ -92,6 +97,11 @@ namespace Nelibur.ServiceModel.Clients
             return ProcessAsync(request, OperationType.Post);
         }
 
+        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Post);
+        }
+
         protected override void PostCore<TRequest>(TRequest request)
         {
             Process(request, OperationType.Post);
@@ -105,6 +115,11 @@ namespace Nelibur.ServiceModel.Clients
         protected override Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
         {
             return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Put);
+        }
+
+        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Put);
         }
 
         protected override void PutCore<TRequest>(TRequest request)
@@ -166,7 +181,7 @@ namespace Nelibur.ServiceModel.Clients
                     break;
                 default:
                     string errorMessage = string.Format(
-                        "OperationType {0} with void return is absent", operationType);
+                                                        "OperationType {0} with void return is absent", operationType);
                     throw new InvalidOperationException(errorMessage);
             }
             return builder.Uri.ToString();
@@ -200,8 +215,51 @@ namespace Nelibur.ServiceModel.Clients
                         return await client.DeleteAsync(urlRequest);
                     default:
                         string errorMessage = string.Format(
-                            "OperationType {0} with Response return is absent", operationType);
+                                                            "OperationType {0} with Response return is absent",
+                            operationType);
                         throw new InvalidOperationException(errorMessage);
+                }
+            }
+        }
+
+        private TResponse ProcessWithResponse<TRequest, TResponse>(
+            TRequest request, string operationType)
+            where TRequest : class
+        {
+            string urlRequest = CreateUrlRequest(request, operationType);
+
+            using (HttpClient client = CreateHttpClient())
+            {
+                HttpResponseMessage response;
+
+                switch (operationType)
+                {
+                    case OperationType.Get:
+                        response = client.GetAsync(urlRequest).Result;
+                        break;
+                    case OperationType.Post:
+                        response = client.PostAsync(urlRequest, CreateContent(request)).Result;
+                        break;
+                    case OperationType.Put:
+                        response = client.PutAsync(urlRequest, CreateContent(request)).Result;
+                        break;
+                    case OperationType.Delete:
+                        response = client.DeleteAsync(urlRequest).Result;
+                        break;
+                    default:
+                        string errorMessage = string.Format(
+                                                            "OperationType {0} with Response return is absent",
+                            operationType);
+                        throw new InvalidOperationException(errorMessage);
+                }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new WebFaultException(response.StatusCode);
+                }
+                using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+                {
+                    var serializer = new DataContractJsonSerializer(typeof(TResponse));
+                    return (TResponse)serializer.ReadObject(stream);
                 }
             }
         }
@@ -232,7 +290,8 @@ namespace Nelibur.ServiceModel.Clients
                         break;
                     default:
                         string errorMessage = string.Format(
-                            "OperationType {0} with Response return is absent", operationType);
+                                                            "OperationType {0} with Response return is absent",
+                            operationType);
                         throw new InvalidOperationException(errorMessage);
                 }
                 if (!response.IsSuccessStatusCode)

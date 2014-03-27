@@ -39,6 +39,11 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, SoapOperationTypeHeader.Delete);
         }
 
+        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete);
+        }
+
         protected override Task GetAsyncCore<TRequest>(TRequest request)
         {
             return Task.Run(() => GetCore(request));
@@ -69,6 +74,11 @@ namespace Nelibur.ServiceModel.Clients
             return Task.Run(() => PostCore(request));
         }
 
+        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
+        }
+
         protected override void PostCore<TRequest>(TRequest request)
         {
             Process(request, SoapOperationTypeHeader.Post);
@@ -84,6 +94,11 @@ namespace Nelibur.ServiceModel.Clients
             return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
+        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
+        {
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put);
+        }
+
         protected override void PutCore<TRequest>(TRequest request)
         {
             Process(request, SoapOperationTypeHeader.Put);
@@ -93,7 +108,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, SoapServiceMetadata.Action.Process, request);
+                                                    messageVersion, SoapServiceMetadata.Action.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -104,7 +119,9 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
+                                                    messageVersion,
+                SoapServiceMetadata.Action.ProcessWithResponse,
+                request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
