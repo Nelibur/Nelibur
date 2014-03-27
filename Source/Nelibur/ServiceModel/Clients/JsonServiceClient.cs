@@ -222,6 +222,7 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
+        //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
         private TResponse ProcessWithResponse<TRequest, TResponse>(
             TRequest request, string operationType)
             where TRequest : class
