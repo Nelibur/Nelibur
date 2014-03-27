@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Nelibur.ServiceModel.Clients
 {
@@ -61,7 +62,7 @@ namespace Nelibur.ServiceModel.Clients
         public TResponse Post<TRequest, TResponse>(TRequest request)
             where TRequest : class
         {
-            return PostAsyncCore<TRequest, TResponse>(request).Result;
+            return PostCore<TRequest, TResponse>(request);
         }
 
         public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
@@ -85,7 +86,7 @@ namespace Nelibur.ServiceModel.Clients
         public TResponse Put<TRequest, TResponse>(TRequest request)
             where TRequest : class
         {
-            return PutAsyncCore<TRequest, TResponse>(request).Result;
+            return PutCore<TRequest, TResponse>(request);
         }
 
         public Task PutAsync<TRequest>(TRequest request)
@@ -109,6 +110,9 @@ namespace Nelibur.ServiceModel.Clients
         protected abstract void DeleteCore<TRequest>(TRequest request)
             where TRequest : class;
 
+        protected abstract TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+            where TRequest : class;
+
         protected abstract Task GetAsyncCore<TRequest>(TRequest request)
             where TRequest : class;
 
@@ -116,15 +120,6 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class;
 
         protected abstract TResponse GetCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class;
-
-        protected abstract TResponse DeleteCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class;
-
-        protected abstract TResponse PostCore<TRequest, TResponse>(TRequest request)
-            where TRequest : class;
-
-        protected abstract TResponse PutCore<TRequest, TResponse>(TRequest request)
             where TRequest : class;
 
         protected abstract void GetCore<TRequest>(TRequest request)
@@ -136,6 +131,9 @@ namespace Nelibur.ServiceModel.Clients
         protected abstract Task PostAsyncCore<TRequest>(TRequest request)
             where TRequest : class;
 
+        protected abstract TResponse PostCore<TRequest, TResponse>(TRequest request)
+            where TRequest : class;
+
         protected abstract void PostCore<TRequest>(TRequest request)
             where TRequest : class;
 
@@ -143,6 +141,9 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class;
 
         protected abstract Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
+            where TRequest : class;
+
+        protected abstract TResponse PutCore<TRequest, TResponse>(TRequest request)
             where TRequest : class;
 
         protected abstract void PutCore<TRequest>(TRequest request)

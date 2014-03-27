@@ -4,6 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
+
 using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Serializers
@@ -65,19 +66,19 @@ namespace Nelibur.ServiceModel.Serializers
         {
             string data = JsonDataSerializer.ToString(value);
             var result = new NameValueCollection
-                {
-                    CreateQueryParams(typeof(T)),
-                    { RestServiceMetadata.ParamName.Data, UrlEncode(data) }
-                };
+                         {
+                             CreateQueryParams(typeof(T)),
+                             { RestServiceMetadata.ParamName.Data, UrlEncode(data) }
+                         };
             return result;
         }
 
         private static NameValueCollection CreateQueryParams(Type value)
         {
             return new NameValueCollection
-                {
-                    { RestServiceMetadata.ParamName.Type, UrlEncode(value.Name) },
-                };
+                   {
+                       { RestServiceMetadata.ParamName.Type, UrlEncode(value.Name) },
+                   };
         }
 
         private static string UrlDecode(string value)

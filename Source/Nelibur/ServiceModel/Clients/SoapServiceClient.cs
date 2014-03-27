@@ -1,7 +1,9 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
+
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
 
@@ -108,7 +110,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                                                    messageVersion, SoapServiceMetadata.Action.Process, request);
+                messageVersion, SoapServiceMetadata.Action.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -119,7 +121,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(
-                                                    messageVersion,
+                messageVersion,
                 SoapServiceMetadata.Action.ProcessWithResponse,
                 request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));

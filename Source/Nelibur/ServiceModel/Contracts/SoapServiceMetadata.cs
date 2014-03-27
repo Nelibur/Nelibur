@@ -1,4 +1,6 @@
-﻿namespace Nelibur.ServiceModel.Contracts
+﻿using System;
+
+namespace Nelibur.ServiceModel.Contracts
 {
     public static class SoapServiceMetadata
     {

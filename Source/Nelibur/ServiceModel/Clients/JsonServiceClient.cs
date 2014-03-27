@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
+
 using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
@@ -59,7 +60,7 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override void DeleteCore<TRequest>(TRequest request)
         {
-            Process(request, OperationType.Delete);
+            Process(request, OperationType.Delete, responseRequired: false);
         }
 
         protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
@@ -84,7 +85,7 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override void GetCore<TRequest>(TRequest request)
         {
-            Process(request, OperationType.Get);
+            Process(request, OperationType.Get, responseRequired: false);
         }
 
         protected override Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
@@ -104,7 +105,7 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override void PostCore<TRequest>(TRequest request)
         {
-            Process(request, OperationType.Post);
+            Process(request, OperationType.Post, responseRequired: false);
         }
 
         protected override Task PutAsyncCore<TRequest>(TRequest request)
@@ -124,7 +125,7 @@ namespace Nelibur.ServiceModel.Clients
 
         protected override void PutCore<TRequest>(TRequest request)
         {
-            Process(request, OperationType.Put);
+            Process(request, OperationType.Put, responseRequired: false);
         }
 
         private static StringContent CreateContent<T>(T value)
@@ -181,58 +182,20 @@ namespace Nelibur.ServiceModel.Clients
                     break;
                 default:
                     string errorMessage = string.Format(
-                                                        "OperationType {0} with void return is absent", operationType);
+                        "OperationType {0} with void return is absent", operationType);
                     throw new InvalidOperationException(errorMessage);
             }
             return builder.Uri.ToString();
         }
 
-        private void Process<TRequest>(TRequest request, string operationType)
+        private HttpResponseMessage Process<TRequest>(TRequest request, string operationType, bool responseRequired = true)
             where TRequest : class
         {
-            HttpResponseMessage response = ProcessAsync(request, operationType).Result;
-            if (!response.IsSuccessStatusCode)
-            {
-                throw new WebFaultException(response.StatusCode);
-            }
-        }
-
-        private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
-            where TRequest : class
-        {
-            string urlRequest = CreateUrlRequest(request, operationType, responseRequired: false);
-            using (HttpClient client = CreateHttpClient())
-            {
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        return await client.GetAsync(urlRequest);
-                    case OperationType.Post:
-                        return await client.PostAsync(urlRequest, CreateContent(request));
-                    case OperationType.Put:
-                        return await client.PutAsync(urlRequest, CreateContent(request));
-                    case OperationType.Delete:
-                        return await client.DeleteAsync(urlRequest);
-                    default:
-                        string errorMessage = string.Format(
-                                                            "OperationType {0} with Response return is absent",
-                            operationType);
-                        throw new InvalidOperationException(errorMessage);
-                }
-            }
-        }
-
-        //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
-        private TResponse ProcessWithResponse<TRequest, TResponse>(
-            TRequest request, string operationType)
-            where TRequest : class
-        {
-            string urlRequest = CreateUrlRequest(request, operationType);
+            string urlRequest = CreateUrlRequest(request, operationType, responseRequired);
+            HttpResponseMessage response;
 
             using (HttpClient client = CreateHttpClient())
             {
-                HttpResponseMessage response;
-
                 switch (operationType)
                 {
                     case OperationType.Get:
@@ -248,8 +211,7 @@ namespace Nelibur.ServiceModel.Clients
                         response = client.DeleteAsync(urlRequest).Result;
                         break;
                     default:
-                        string errorMessage = string.Format(
-                                                            "OperationType {0} with Response return is absent",
+                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
                             operationType);
                         throw new InvalidOperationException(errorMessage);
                 }
@@ -257,11 +219,47 @@ namespace Nelibur.ServiceModel.Clients
                 {
                     throw new WebFaultException(response.StatusCode);
                 }
-                using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+            }
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
+            where TRequest : class
+        {
+            string urlRequest = CreateUrlRequest(request, operationType, responseRequired: false);
+
+            using (HttpClient client = CreateHttpClient())
+            {
+                switch (operationType)
                 {
-                    var serializer = new DataContractJsonSerializer(typeof(TResponse));
-                    return (TResponse)serializer.ReadObject(stream);
+                    case OperationType.Get:
+                        return await client.GetAsync(urlRequest);
+                    case OperationType.Post:
+                        return await client.PostAsync(urlRequest, CreateContent(request));
+                    case OperationType.Put:
+                        return await client.PutAsync(urlRequest, CreateContent(request));
+                    case OperationType.Delete:
+                        return await client.DeleteAsync(urlRequest);
+                    default:
+                        string errorMessage = string.Format(
+                            "OperationType {0} with Response return is absent",
+                            operationType);
+                        throw new InvalidOperationException(errorMessage);
                 }
+            }
+        }
+
+        //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
+        private TResponse ProcessWithResponse<TRequest, TResponse>(
+            TRequest request, string operationType)
+            where TRequest : class
+        {
+            HttpResponseMessage response = Process(request, operationType);
+
+            using (Stream stream = response.Content.ReadAsStreamAsync().Result)
+            {
+                var serializer = new DataContractJsonSerializer(typeof(TResponse));
+                return (TResponse)serializer.ReadObject(stream);
             }
         }
 
@@ -290,8 +288,7 @@ namespace Nelibur.ServiceModel.Clients
                         response = await client.DeleteAsync(urlRequest);
                         break;
                     default:
-                        string errorMessage = string.Format(
-                                                            "OperationType {0} with Response return is absent",
+                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
                             operationType);
                         throw new InvalidOperationException(errorMessage);
                 }

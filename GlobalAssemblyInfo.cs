@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 
 [assembly: AssemblyProduct("Nelibur Framework")]
 [assembly: AssemblyCopyright("Copyright © Sergey Morenko 2014")]

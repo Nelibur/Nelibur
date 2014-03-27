@@ -1,4 +1,6 @@
-﻿namespace Nelibur.ServiceModel.Services.Operations
+﻿using System;
+
+namespace Nelibur.ServiceModel.Services.Operations
 {
     /// <summary>
     ///     Marker interface.
