@@ -33,11 +33,13 @@ namespace SpecFlowTests.Steps.SoapService
 
         private static void BindRequestToProcessors()
         {
-            new SoapServiceProcessor()
-                .Bind<Order, OrderServiceProcessor>()
-                .Bind<GetOrderById, OrderServiceProcessor>()
-                .Bind<DeleteOrderById, OrderServiceProcessor>()
-                .Bind<UpdateOrder, OrderServiceProcessor>();
+            SoapServiceProcessor.Configure(x =>
+            {
+                x.Bind<Order, OrderServiceProcessor>();
+                x.Bind<GetOrderById, OrderServiceProcessor>();
+                x.Bind<DeleteOrderById, OrderServiceProcessor>();
+                x.Bind<UpdateOrder, OrderServiceProcessor>();
+            });
         }
     }
 }

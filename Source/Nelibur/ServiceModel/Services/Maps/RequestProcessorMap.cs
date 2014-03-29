@@ -10,15 +10,6 @@ namespace Nelibur.ServiceModel.Services.Maps
         private readonly Dictionary<Type, IRequestProcessor> _repository =
             new Dictionary<Type, IRequestProcessor>();
 
-        public void Add<TRequest, TProcessor>()
-            where TRequest : class
-            where TProcessor : IRequestOperation, new()
-        {
-            Type requestType = typeof(TRequest);
-            IRequestProcessor context = new RequestProcessor<TRequest, TProcessor>(() => new TProcessor());
-            _repository[requestType] = context;
-        }
-
         public void Add<TRequest, TProcessor>(Func<TProcessor> creator)
             where TRequest : class
             where TProcessor : IRequestOperation

@@ -7,6 +7,16 @@ namespace Nelibur.ServiceModel.Services.Processors
 {
     public sealed class SoapServiceProcessor : ServiceProcessor
     {
+        private SoapServiceProcessor()
+        {
+        }
+
+        public static IConfiguration Configure(Action<IConfiguration> action)
+        {
+            action(_configuration);
+            return _configuration;
+        }
+
         public static void Process(Message message)
         {
             RequestMetadata metadata = _requests.FromSoapMessage(message);

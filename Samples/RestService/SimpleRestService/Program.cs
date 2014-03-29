@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ServiceModel.Web;
+
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
+
 using SimpleRestContracts.Contracts;
 
 namespace SimpleRestService
@@ -12,11 +14,13 @@ namespace SimpleRestService
 
         private static void BindRequestToProcessors()
         {
-            new RestServiceProcessor()
-                .Bind<CreateClientRequest, ClientProcessor>()
-                .Bind<UpdateClientRequest, ClientProcessor>()
-                .Bind<DeleteClientRequest, ClientProcessor>()
-                .Bind<GetClientRequest, ClientProcessor>();
+            RestServiceProcessor.Configure(x =>
+            {
+                x.Bind<CreateClientRequest, ClientProcessor>();
+                x.Bind<UpdateClientRequest, ClientProcessor>();
+                x.Bind<DeleteClientRequest, ClientProcessor>();
+                x.Bind<GetClientRequest, ClientProcessor>();
+            });
         }
 
         private static void Main()

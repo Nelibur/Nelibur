@@ -56,6 +56,7 @@
     <Compile Include="ServiceModel\Serializers\JsonDataSerializer.cs" />
     <Compile Include="ServiceModel\Serializers\UrlSerializer.cs" />
     <Compile Include="ServiceModel\Services\JsonServicePerCall.cs" />
+    <Compile Include="ServiceModel\Services\Processors\IConfiguration.cs" />
     <Compile Include="ServiceModel\Services\SoapServicePerCall.cs" />
     <Compile Include="ServiceModel\Services\Processors\ServiceProcessor.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapContentTypeHeader.cs" />

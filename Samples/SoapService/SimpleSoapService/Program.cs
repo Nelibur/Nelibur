@@ -12,11 +12,14 @@ namespace SimpleSoapService
 
         private static void BindRequestToProcessors()
         {
-            new SoapServiceProcessor()
-                .Bind<CreateClientRequest, ClientProcessor>()
-                .Bind<UpdateClientRequest, ClientProcessor>()
-                .Bind<DeleteClientRequest, ClientProcessor>()
-                .Bind<GetClientRequest, ClientProcessor>();
+            SoapServiceProcessor.Configure(x =>
+            {
+                x.Bind<CreateClientRequest, ClientProcessor>();
+                x.Bind<UpdateClientRequest, ClientProcessor>();
+                x.Bind<DeleteClientRequest, ClientProcessor>();
+                x.Bind<GetClientRequest, ClientProcessor>();
+            });
+
         }
 
         private static void Main()
