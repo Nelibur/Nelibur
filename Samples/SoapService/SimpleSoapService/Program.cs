@@ -1,7 +1,9 @@
 ﻿using System;
 using System.ServiceModel;
+
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
+
 using SimpleSoapContracts.Contracts;
 
 namespace SimpleSoapService
@@ -19,7 +21,6 @@ namespace SimpleSoapService
                 x.Bind<DeleteClientRequest, ClientProcessor>();
                 x.Bind<GetClientRequest, ClientProcessor>();
             });
-
         }
 
         private static void Main()

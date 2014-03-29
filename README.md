@@ -156,11 +156,13 @@ public sealed class SampleWebService : IJsonService
 Request binding on appropriate Processor
 
 ```csharp
-new RestServiceProcessor()
-    .Bind<CreateClientRequest, ClientProcessor>()
-    .Bind<UpdateClientRequest, ClientProcessor>()
-    .Bind<DeleteClientRequest, ClientProcessor>()
-    .Bind<GetClientRequest, ClientProcessor>();
+RestServiceProcessor.Configure(x =>
+{
+    x.Bind<CreateClientRequest, ClientProcessor>();
+    x.Bind<UpdateClientRequest, ClientProcessor>();
+    x.Bind<DeleteClientRequest, ClientProcessor>();
+    x.Bind<GetClientRequest, ClientProcessor>();
+});
 ```
 
 ClientProcessor is the same
@@ -274,11 +276,13 @@ public sealed class SampleSoapService : ISoapService
 Request binding on appropriate Processor
 
 ```csharp
-new SoapServiceProcessor()
-	.Bind<CreateClientRequest, ClientProcessor>()
-	.Bind<UpdateClientRequest, ClientProcessor>()
-	.Bind<DeleteClientRequest, ClientProcessor>()
-	.Bind<GetClientRequest, ClientProcessor>();
+SoapServiceProcessor.Configure(x =>
+{
+    x.Bind<CreateClientRequest, ClientProcessor>();
+    x.Bind<UpdateClientRequest, ClientProcessor>();
+    x.Bind<DeleteClientRequest, ClientProcessor>();
+    x.Bind<GetClientRequest, ClientProcessor>();
+});
 ```
 	
 Processor example
