@@ -1,7 +1,7 @@
 Nelibur - Message based web service framework on the pure WCF
 =======
 
-Nelibur is message based web service framework on the pure **WCF**. Nelibur simplifies creating high-performance and message based web services and you certainly have **all the power of the WCF**
+Nelibur is message based web service framework on the pure [**WCF**](http://msdn.microsoft.com/en-us/library/ms731082.aspx). Nelibur simplifies creating high-performance and message based web services and you certainly have **all the power of the WCF**
 
 Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
 follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
@@ -53,7 +53,7 @@ client.Delete(deleteRequest);
 Simple RESTful Message based service on the pure WCF
 ===================
 
-The **IJsonService** is flexible, stable and maintainable, we can transfer **any** data, because the service contract depends only from WCF's Message class. "The [Message](http://msdn.microsoft.com/en-us/library/system.servicemodel.channels.message.aspx) class is fundamental to Windows Communication Foundation (WCF). All communication between clients and services ultimately results in Message instances being sent and received." [MSDN](http://msdn.microsoft.com/en-us/library/ms734675.aspx)
+The **IJsonService** is flexible, stable and maintainable, we can transfer **any** data, because the service contract depends only from WCF's Message class. "The [Message](http://msdn.microsoft.com/en-us/library/system.servicemodel.channels.message.aspx) class is fundamental to Windows Communication Foundation (WCF). All communication between clients and services ultimately results in Message instances being sent and received." ([MSDN](http://msdn.microsoft.com/en-us/library/ms734675.aspx))
 
 ```csharp
 [ServiceContract]
@@ -167,7 +167,7 @@ RestServiceProcessor.Configure(x =>
 });
 ```
 
-ClientProcessor is the same
+ClientProcessor example
 
 ```csharp
 public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
@@ -287,7 +287,7 @@ SoapServiceProcessor.Configure(x =>
 });
 ```
 	
-Processor example
+ClientProcessor is the same as for RESTful
 
 ```csharp
 public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
