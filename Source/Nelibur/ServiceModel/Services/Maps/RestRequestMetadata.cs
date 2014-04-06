@@ -5,7 +5,6 @@ using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
 using System.Xml;
-
 using Nelibur.ServiceModel.Serializers;
 
 namespace Nelibur.ServiceModel.Services.Maps
@@ -74,7 +73,7 @@ namespace Nelibur.ServiceModel.Services.Maps
         private bool IsRequestByUrl()
         {
             return OperationType == Operations.OperationType.Get ||
-                OperationType == Operations.OperationType.Delete;
+                   OperationType == Operations.OperationType.Delete;
         }
     }
 }

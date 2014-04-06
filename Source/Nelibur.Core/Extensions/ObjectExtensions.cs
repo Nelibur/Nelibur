@@ -21,16 +21,16 @@ namespace Nelibur.Core.Extensions
                     sender,
                     eventArgs,
                     ar =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                handlerTemp.EndInvoke(ar);
-                            }
-                            catch (Exception ex)
-                            {
-                                LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
-                            }
-                        },
+                            handlerTemp.EndInvoke(ar);
+                        }
+                        catch (Exception ex)
+                        {
+                            LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
+                        }
+                    },
                     null);
             }
         }
@@ -50,16 +50,16 @@ namespace Nelibur.Core.Extensions
                     sender,
                     eventArgsCreator(),
                     ar =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                handlerTemp.EndInvoke(ar);
-                            }
-                            catch (Exception ex)
-                            {
-                                LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
-                            }
-                        },
+                            handlerTemp.EndInvoke(ar);
+                        }
+                        catch (Exception ex)
+                        {
+                            LogManager.GetLogger(typeof(ObjectExtensions)).Error(ex);
+                        }
+                    },
                     null);
             }
         }

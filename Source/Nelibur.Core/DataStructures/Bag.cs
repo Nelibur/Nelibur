@@ -1,3 +1,5 @@
+using System;
+
 namespace Nelibur.Core.DataStructures
 {
     public sealed class Bag<TValue>

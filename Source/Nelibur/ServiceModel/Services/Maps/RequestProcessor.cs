@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Channels;
-
+using Nelibur.Core;
 using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Maps
@@ -52,7 +52,7 @@ namespace Nelibur.ServiceModel.Services.Maps
                     return DeleteWithResponse(metadata);
                 default:
                     string message = string.Format("Invalid operation type: {0}", metadata.OperationType);
-                    throw new InvalidOperationException(message);
+                    throw Error.InvalidOperation(message);
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Channels;
-
+using Nelibur.Core;
 using Nelibur.ServiceModel.Services.Maps;
 using Nelibur.ServiceModel.Services.Operations;
 
@@ -32,7 +32,7 @@ namespace Nelibur.ServiceModel.Services.Processors
             {
                 if (creator == null)
                 {
-                    throw new ArgumentNullException("creator");
+                    throw Error.ArgumentNull("creator");
                 }
                 _requestProcessors.Add<TRequest, TProcessor>(creator);
                 _requests.Add<TRequest>();

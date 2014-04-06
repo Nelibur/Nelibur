@@ -4,7 +4,7 @@ using System.IO;
 using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Web;
-
+using Nelibur.Core;
 using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Serializers
@@ -22,7 +22,7 @@ namespace Nelibur.ServiceModel.Serializers
         {
             if (value == null)
             {
-                throw new ArgumentNullException();
+                throw Error.ArgumentNull("value");
             }
             return new UrlSerializer(value);
         }
@@ -31,7 +31,7 @@ namespace Nelibur.ServiceModel.Serializers
         {
             if (value == null)
             {
-                throw new ArgumentNullException();
+                throw Error.ArgumentNull("value");
             }
             NameValueCollection collection = CreateQueryParams(value);
             return new UrlSerializer(collection);
@@ -42,7 +42,7 @@ namespace Nelibur.ServiceModel.Serializers
         {
             if (value == null)
             {
-                throw new ArgumentNullException();
+                throw Error.ArgumentNull("value");
             }
             NameValueCollection collection = CreateQueryParams(value);
             return new UrlSerializer(collection);

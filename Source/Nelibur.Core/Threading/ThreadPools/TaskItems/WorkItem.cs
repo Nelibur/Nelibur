@@ -10,7 +10,7 @@ namespace Nelibur.Core.Threading.ThreadPools.TaskItems
         {
             if (taskItem == null)
             {
-                throw new ArgumentNullException("taskItem");
+                throw Error.ArgumentNull("taskItem");
             }
             _taskItem = taskItem;
             Priority = priority;
@@ -41,7 +41,7 @@ namespace Nelibur.Core.Threading.ThreadPools.TaskItems
             {
                 if (action == null)
                 {
-                    throw new ArgumentNullException("action");
+                    throw Error.ArgumentNull("action");
                 }
                 _action = action;
                 Priority = priority;

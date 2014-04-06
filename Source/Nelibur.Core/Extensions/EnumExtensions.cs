@@ -12,7 +12,7 @@ namespace Nelibur.Core.Extensions
             where TAttribute : Attribute
         {
             return GetAttributes<TAttribute>(value).SingleOrDefault()
-                                                   .ToBag();
+                .ToBag();
         }
 
         public static string ToDescription(this Enum value)

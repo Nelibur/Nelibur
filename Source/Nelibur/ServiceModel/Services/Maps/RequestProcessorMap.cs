@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Maps

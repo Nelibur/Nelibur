@@ -36,7 +36,6 @@ namespace Nelibur.Core.Patterns
                 _repository[typeof(T)] = x => action((T)x);
             }
 
-
             public void Visit<T>(T value)
                 where T : TBase
             {

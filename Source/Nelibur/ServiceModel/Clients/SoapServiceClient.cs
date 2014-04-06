@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Configuration;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
-
+using Nelibur.Core;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
 
@@ -21,7 +20,7 @@ namespace Nelibur.ServiceModel.Clients
         {
             if (string.IsNullOrWhiteSpace(endpointConfigurationName))
             {
-                throw new ConfigurationErrorsException("Invalid endpointConfigurationName: Is null or empty");
+                throw Error.ConfigurationError("Invalid endpointConfigurationName: Is null or empty");
             }
             _endpointConfigurationName = endpointConfigurationName;
         }
@@ -109,8 +108,7 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateMessage<TRequest>(
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
-            Message message = Message.CreateMessage(
-                messageVersion, SoapServiceMetadata.Action.Process, request);
+            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -120,10 +118,7 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateMessageWithResponse<TRequest>(
             TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
-            Message message = Message.CreateMessage(
-                messageVersion,
-                SoapServiceMetadata.Action.ProcessWithResponse,
-                request);
+            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
             var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);

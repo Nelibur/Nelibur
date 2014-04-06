@@ -77,7 +77,7 @@ namespace Nelibur.Core.Extensions
         public static IEnumerable<T> ToValue<T>(this IEnumerable<Bag<T>> value)
         {
             return value.Where(x => x.HasValue)
-                        .Select(x => x.Value);
+                .Select(x => x.Value);
         }
     }
 }

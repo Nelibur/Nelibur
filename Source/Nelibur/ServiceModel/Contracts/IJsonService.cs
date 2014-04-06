@@ -2,7 +2,6 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
-
 using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Contracts

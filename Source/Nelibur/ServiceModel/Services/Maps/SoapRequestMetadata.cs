@@ -2,7 +2,6 @@
 using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.Xml;
-
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
 

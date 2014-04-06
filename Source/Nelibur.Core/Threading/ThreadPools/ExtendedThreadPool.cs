@@ -114,8 +114,8 @@ namespace Nelibur.Core.Threading.ThreadPools
                     break;
                 case MultiThreadingCapacity.PerProcessor:
                     int processorCount = Environment.ProcessorCount;
-                    MinThreads = processorCount*builder.MinThreads;
-                    MaxThreads = processorCount*builder.MaxThreads;
+                    MinThreads = processorCount * builder.MinThreads;
+                    MaxThreads = processorCount * builder.MaxThreads;
                     break;
                 default:
                     string error = string.Format(
@@ -132,10 +132,10 @@ namespace Nelibur.Core.Threading.ThreadPools
         private void StartNewWorkThread()
         {
             WorkThread workThread = new WorkThread.Builder
-                {
-                    Name = string.Format("ExtendedThreadPool WorkThread: {0}", _workThreads.Count),
-                    TaskQueueController = _taskQueueController
-                }.Build();
+                                    {
+                                        Name = string.Format("ExtendedThreadPool WorkThread: {0}", _workThreads.Count),
+                                        TaskQueueController = _taskQueueController
+                                    }.Build();
             _workThreads.Add(workThread);
             workThread.Start();
         }

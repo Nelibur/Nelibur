@@ -6,7 +6,7 @@ using System.Runtime.Serialization.Json;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
-
+using Nelibur.Core;
 using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
@@ -183,7 +183,7 @@ namespace Nelibur.ServiceModel.Clients
                 default:
                     string errorMessage = string.Format(
                         "OperationType {0} with void return is absent", operationType);
-                    throw new InvalidOperationException(errorMessage);
+                    throw Error.InvalidOperation(errorMessage);
             }
             return builder.Uri.ToString();
         }
@@ -213,7 +213,7 @@ namespace Nelibur.ServiceModel.Clients
                     default:
                         string errorMessage = string.Format("OperationType {0} with Response return is absent",
                             operationType);
-                        throw new InvalidOperationException(errorMessage);
+                        throw Error.InvalidOperation(errorMessage);
                 }
                 if (!response.IsSuccessStatusCode)
                 {
@@ -244,7 +244,7 @@ namespace Nelibur.ServiceModel.Clients
                         string errorMessage = string.Format(
                             "OperationType {0} with Response return is absent",
                             operationType);
-                        throw new InvalidOperationException(errorMessage);
+                        throw Error.InvalidOperation(errorMessage);
                 }
             }
         }
@@ -290,7 +290,7 @@ namespace Nelibur.ServiceModel.Clients
                     default:
                         string errorMessage = string.Format("OperationType {0} with Response return is absent",
                             operationType);
-                        throw new InvalidOperationException(errorMessage);
+                        throw Error.InvalidOperation(errorMessage);
                 }
                 if (!response.IsSuccessStatusCode)
                 {

@@ -1,4 +1,6 @@
-﻿namespace Nelibur.Core.Threading.ThreadPools.TaskItems
+﻿using System;
+
+namespace Nelibur.Core.Threading.ThreadPools.TaskItems
 {
     public enum TaskItemPriority
     {

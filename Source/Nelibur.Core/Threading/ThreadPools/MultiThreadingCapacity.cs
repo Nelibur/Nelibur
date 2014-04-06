@@ -1,4 +1,6 @@
-﻿namespace Nelibur.Core.Threading.ThreadPools
+﻿using System;
+
+namespace Nelibur.Core.Threading.ThreadPools
 {
     /// <summary>
     ///     Represent threading capacity

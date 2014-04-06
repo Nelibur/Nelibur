@@ -62,10 +62,10 @@ namespace Nelibur.Core.Threading.Processors
         private void Initialise()
         {
             _workThread = new Thread(ProcessTask)
-                {
-                    Name = GetType().Name,
-                    IsBackground = true
-                };
+                          {
+                              Name = GetType().Name,
+                              IsBackground = true
+                          };
             _workThread.Start();
         }
 

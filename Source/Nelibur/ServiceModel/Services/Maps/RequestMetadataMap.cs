@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
-
+using Nelibur.Core;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Headers;
 
@@ -46,7 +46,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             }
             string errorMessage = string.Format(
                 "Binding on {0} is absent. Use the Bind method on an appropriate ServiceProcessor", typeName);
-            throw new InvalidOperationException(errorMessage);
+            throw Error.InvalidOperation(errorMessage);
         }
     }
 }

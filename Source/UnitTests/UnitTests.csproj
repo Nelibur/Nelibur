@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ForTest.cs" />
     <Compile Include="Nelibur.Core\DataStructures\BagTests.cs" />
+    <Compile Include="Nelibur.Core\ErrorTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\BagExtensionsTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Nelibur.Core\Extensions\EnumerableExtensionsTest.cs" />
