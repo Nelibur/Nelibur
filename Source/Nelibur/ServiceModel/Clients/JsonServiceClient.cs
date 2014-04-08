@@ -2,7 +2,6 @@
 using System.Collections.Specialized;
 using System.IO;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
@@ -255,11 +254,9 @@ namespace Nelibur.ServiceModel.Clients
             where TRequest : class
         {
             HttpResponseMessage response = Process(request, operationType);
-
             using (Stream stream = response.Content.ReadAsStreamAsync().Result)
             {
-                var serializer = new DataContractJsonSerializer(typeof(TResponse));
-                return (TResponse)serializer.ReadObject(stream);
+                return JsonDataSerializer.ToValue<TResponse>(stream);
             }
         }
 
@@ -298,8 +295,7 @@ namespace Nelibur.ServiceModel.Clients
                 }
                 using (Stream stream = await response.Content.ReadAsStreamAsync())
                 {
-                    var serializer = new DataContractJsonSerializer(typeof(TResponse));
-                    return (TResponse)serializer.ReadObject(stream);
+                    return JsonDataSerializer.ToValue<TResponse>(stream);
                 }
             }
         }

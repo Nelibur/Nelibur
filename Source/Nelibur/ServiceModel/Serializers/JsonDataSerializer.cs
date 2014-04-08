@@ -16,5 +16,11 @@ namespace Nelibur.ServiceModel.Serializers
                 return Encoding.UTF8.GetString(stream.ToArray());
             }
         }
+
+        public static TResponse ToValue<TResponse>(Stream value)
+        {
+            var serializer = new DataContractJsonSerializer(typeof(TResponse));
+            return (TResponse)serializer.ReadObject(value);
+        }
     }
 }
