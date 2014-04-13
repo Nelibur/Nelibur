@@ -6,7 +6,6 @@ namespace Nelibur.ServiceModel.Contracts
     {
         public static class ParamName
         {
-            public const string Data = "data";
             public const string Type = "type";
         }
 

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Web;
+using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
 using Xunit;
 
@@ -42,6 +44,38 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
             UrlSerializer urlSerializer = UrlSerializer.FromType(actualType);
             Assert.Equal(1, urlSerializer.QueryParams.Count);
             Assert.Equal(actualType.Name, urlSerializer.GetTypeValue());
+        }
+
+        [Fact]
+        public void FromValue_Value_Ok()
+        {
+            var request = new Request { Id = 1, Name = "Nelibur" };
+            UrlSerializer urlSerializer = UrlSerializer.FromValue(request);
+            NameValueCollection actual = urlSerializer.QueryParams;
+            Assert.Equal(3, urlSerializer.QueryParams.Count);
+            var expected = new NameValueCollection
+                           {
+                               { RestServiceMetadata.ParamName.Type, "Request" },
+                               { "Id", "1" },
+                               { "Name", "Nelibur" }
+                           };
+            Assert.Equal(ToKeyValue(expected), ToKeyValue(actual));
+        }
+
+        private List<KeyValuePair<string, string>> ToKeyValue(NameValueCollection value)
+        {
+            var result = new List<KeyValuePair<string, string>>();
+            foreach (string key in value.AllKeys)
+            {
+                result.Add(new KeyValuePair<string, string>(key, value[key]));
+            }
+            return result;
+        }
+
+        private sealed class Request
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
         }
     }
 }

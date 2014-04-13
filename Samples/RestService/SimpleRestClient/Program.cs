@@ -34,7 +34,8 @@ namespace SimpleRestClient
 
             var getClientRequest = new GetClientRequest
                 {
-                    Id = response.Id
+                    Id = response.Id,
+                    Date = DateTime.Now.Date
                 };
             response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
             Console.WriteLine("GET Response: {0}\n", response);

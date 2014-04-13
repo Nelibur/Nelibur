@@ -7,6 +7,9 @@ namespace SimpleRestContracts.Contracts
     public sealed class GetClientRequest
     {
         [DataMember]
+        public DateTime Date { get; set; }
+
+        [DataMember]
         public Guid Id { get; set; }
 
         public override string ToString()
