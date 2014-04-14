@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Reflection.Emit;
 using System.Web;
 using Nelibur.Core;
+using Nelibur.Core.Reflection;
 using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Serializers
@@ -15,17 +13,12 @@ namespace Nelibur.ServiceModel.Serializers
     internal sealed class UrlSerializer
     {
         private static readonly Dictionary<Type, ObjectCreator> _objectCreators = new Dictionary<Type, ObjectCreator>();
+        private static readonly Dictionary<Type, QueryStringCreator> _queryStringCreators = new Dictionary<Type, QueryStringCreator>();
 
         private UrlSerializer(NameValueCollection value)
         {
             QueryParams = value;
         }
-
-        private delegate object ObjectActivator();
-
-        private delegate object PropertyGetter(object target);
-
-        private delegate void PropertySetter(object target, string value);
 
         public NameValueCollection QueryParams { get; private set; }
 
@@ -55,7 +48,13 @@ namespace Nelibur.ServiceModel.Serializers
             {
                 throw Error.ArgumentNull("value");
             }
-            NameValueCollection collection = new QueryStringCreator<T>().GetNameValueCollection(value);
+            QueryStringCreator queryStringCreator;
+            if (!_queryStringCreators.TryGetValue(typeof(T), out queryStringCreator))
+            {
+                queryStringCreator = new QueryStringCreator(typeof(T));
+                _queryStringCreators[typeof(T)] = queryStringCreator;
+            }
+            NameValueCollection collection = queryStringCreator.GetNameValueCollection(value);
             return new UrlSerializer(collection);
         }
 
@@ -103,11 +102,11 @@ namespace Nelibur.ServiceModel.Serializers
 
             public ObjectCreator(Type type)
             {
-                _objectActivator = CreateInstase(type);
+                _objectActivator = DelegateFactory.CreateCtor(type);
                 _setters = type
                     .GetTypeInfo()
                     .GetProperties()
-                    .ToDictionary(x => x.Name, x => CreatePropertySetter(x), StringComparer.OrdinalIgnoreCase);
+                    .ToDictionary(x => x.Name, x => DelegateFactory.CreatePropertySetter(x), StringComparer.OrdinalIgnoreCase);
             }
 
             public object Create(NameValueCollection collection)
@@ -124,52 +123,23 @@ namespace Nelibur.ServiceModel.Serializers
                 }
                 return result;
             }
-
-            private static T ConvertTo<T>(string value)
-            {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
-                return (T)converter.ConvertFrom(value);
-            }
-
-            private static ObjectActivator CreateInstase(Type type)
-            {
-                ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
-                var dynamicMethod = new DynamicMethod("CreateInstance", type, Type.EmptyTypes, true);
-                ILGenerator ilGenerator = dynamicMethod.GetILGenerator();
-                ilGenerator.Emit(OpCodes.Nop);
-                ilGenerator.Emit(OpCodes.Newobj, emptyConstructor);
-                ilGenerator.Emit(OpCodes.Ret);
-                return (ObjectActivator)dynamicMethod.CreateDelegate(typeof(ObjectActivator));
-            }
-
-            private PropertySetter CreatePropertySetter(PropertyInfo property)
-            {
-                ParameterExpression target = Expression.Parameter(typeof(object), "target");
-                ParameterExpression valueParameter = Expression.Parameter(typeof(string), "value");
-                MemberExpression member = Expression.Property(Expression.Convert(target, property.DeclaringType), property);
-                MethodInfo convertTo = typeof(ObjectCreator).GetMethod("ConvertTo", BindingFlags.NonPublic | BindingFlags.Static);
-                MethodInfo genericConvertTo = convertTo.MakeGenericMethod(property.PropertyType);
-                BinaryExpression assignExpression = Expression.Assign(member, Expression.Call(genericConvertTo, valueParameter));
-                Expression<PropertySetter> lambda = Expression.Lambda<PropertySetter>(assignExpression, target, valueParameter);
-                return lambda.Compile();
-            }
         }
 
-        private sealed class QueryStringCreator<T>
-            where T : class
+        private sealed class QueryStringCreator
         {
             private readonly Dictionary<PropertyInfo, PropertyGetter> _getters;
-            private readonly NameValueCollection _typeInfo = CreateQueryParams(typeof(T));
+            private readonly NameValueCollection _typeInfo;
 
-            public QueryStringCreator()
+            public QueryStringCreator(Type value)
             {
-                _getters = typeof(T)
+                _typeInfo = CreateQueryParams(value);
+                _getters = value
                     .GetTypeInfo()
                     .GetProperties()
-                    .ToDictionary(x => x, x => CreatePropertyGetter(x));
+                    .ToDictionary(x => x, x => DelegateFactory.CreatePropertyGetter(x));
             }
 
-            public NameValueCollection GetNameValueCollection(T value)
+            public NameValueCollection GetNameValueCollection(object value)
             {
                 var result = new NameValueCollection(_typeInfo);
                 foreach (KeyValuePair<PropertyInfo, PropertyGetter> item in _getters)
@@ -178,22 +148,6 @@ namespace Nelibur.ServiceModel.Serializers
                     result[item.Key.Name] = itemValue;
                 }
                 return result;
-            }
-
-            private static PropertyGetter CreatePropertyGetter(PropertyInfo property)
-            {
-                var method = new DynamicMethod("Get" + property.Name, typeof(object), new[] { typeof(object) }, true);
-                ILGenerator ilGenerator = method.GetILGenerator();
-                Type propertyType = property.DeclaringType;
-                ilGenerator.Emit(OpCodes.Ldarg_0);
-                ilGenerator.Emit(OpCodes.Castclass, propertyType);
-                ilGenerator.Emit(OpCodes.Callvirt, property.GetGetMethod());
-                if (property.PropertyType.IsValueType)
-                {
-                    ilGenerator.Emit(OpCodes.Box, property.PropertyType);
-                }
-                ilGenerator.Emit(OpCodes.Ret);
-                return (PropertyGetter)method.CreateDelegate(typeof(PropertyGetter));
             }
         }
     }

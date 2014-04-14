@@ -59,6 +59,7 @@
     <Compile Include="Logging\LogManager.cs" />
     <Compile Include="Patterns\Visitor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\DelegateFactory.cs" />
     <Compile Include="Threading\Processors\TaskProcessor.cs" />
     <Compile Include="Threading\ThreadPools\ExtendedThreadPool.cs" />
     <Compile Include="Threading\ThreadPools\IExtendedThreadPool.cs" />
