@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -14,15 +15,20 @@ namespace Nelibur.Core.Reflection
 
     public static class DelegateFactory
     {
+        private static readonly Dictionary<Type, ObjectActivator> _objectActivators = new Dictionary<Type, ObjectActivator>();
+
         public static ObjectActivator CreateCtor(Type type)
         {
-            ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
-            var dynamicMethod = new DynamicMethod("CreateInstance", type, Type.EmptyTypes, true);
-            ILGenerator ilGenerator = dynamicMethod.GetILGenerator();
-            ilGenerator.Emit(OpCodes.Nop);
-            ilGenerator.Emit(OpCodes.Newobj, emptyConstructor);
-            ilGenerator.Emit(OpCodes.Ret);
-            return (ObjectActivator)dynamicMethod.CreateDelegate(typeof(ObjectActivator));
+            lock (_objectActivators)
+            {
+                ObjectActivator result;
+                if (!_objectActivators.TryGetValue(type, out result))
+                {
+                    result = DoCreateCtor(type);
+                    _objectActivators[type] = result;
+                }
+                return result;
+            }
         }
 
         public static PropertyGetter CreatePropertyGetter(PropertyInfo property)
@@ -57,6 +63,17 @@ namespace Nelibur.Core.Reflection
         {
             TypeConverter converter = TypeDescriptor.GetConverter(typeof(T));
             return (T)converter.ConvertFrom(value);
+        }
+
+        private static ObjectActivator DoCreateCtor(Type type)
+        {
+            ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
+            var dynamicMethod = new DynamicMethod("CreateInstance", type, Type.EmptyTypes, true);
+            ILGenerator ilGenerator = dynamicMethod.GetILGenerator();
+            ilGenerator.Emit(OpCodes.Nop);
+            ilGenerator.Emit(OpCodes.Newobj, emptyConstructor);
+            ilGenerator.Emit(OpCodes.Ret);
+            return (ObjectActivator)dynamicMethod.CreateDelegate(typeof(ObjectActivator));
         }
     }
 }

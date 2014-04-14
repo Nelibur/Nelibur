@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
-using System.Web;
 using Nelibur.Core;
 using Nelibur.Core.Reflection;
 using Nelibur.ServiceModel.Contracts;
@@ -72,27 +71,15 @@ namespace Nelibur.ServiceModel.Serializers
         public string GetTypeValue()
         {
             const string Key = RestServiceMetadata.ParamName.Type;
-            return UrlDecode(QueryParams[Key]);
+            return UrlEncoder.Decode(QueryParams[Key]);
         }
 
         private static NameValueCollection CreateQueryParams(Type value)
         {
             return new NameValueCollection
                    {
-                       { RestServiceMetadata.ParamName.Type, UrlEncode(value.Name) },
+                       { RestServiceMetadata.ParamName.Type, UrlEncoder.Encode(value.Name) },
                    };
-        }
-
-        private static string UrlDecode(string value)
-        {
-            return HttpUtility.UrlDecode(value);
-        }
-
-        /// <remarks>http://stackoverflow.com/questions/602642/server-urlencode-vs-httputility-urlencode</remarks>
-        /// <remarks>http://blogs.msdn.com/b/yangxind/archive/2006/11/09/don-t-use-net-system-uri-unescapedatastring-in-url-decoding.aspx</remarks>
-        private static string UrlEncode(string value)
-        {
-            return Uri.EscapeDataString(value);
         }
 
         private sealed class ObjectCreator
@@ -118,7 +105,7 @@ namespace Nelibur.ServiceModel.Serializers
                     {
                         continue;
                     }
-                    string value = UrlDecode(collection[key]);
+                    string value = UrlEncoder.Decode(collection[key]);
                     _setters[key](result, value);
                 }
                 return result;
@@ -144,7 +131,7 @@ namespace Nelibur.ServiceModel.Serializers
                 var result = new NameValueCollection(_typeInfo);
                 foreach (KeyValuePair<PropertyInfo, PropertyGetter> item in _getters)
                 {
-                    string itemValue = UrlEncode(item.Value(value).ToString());
+                    string itemValue = UrlEncoder.Encode(item.Value(value).ToString());
                     result[item.Key.Name] = itemValue;
                 }
                 return result;

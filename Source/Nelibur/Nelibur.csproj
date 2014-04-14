@@ -54,6 +54,7 @@
     <Compile Include="ServiceModel\Contracts\RestServiceMetadata.cs" />
     <Compile Include="ServiceModel\Contracts\SoapServiceMetadata.cs" />
     <Compile Include="ServiceModel\Serializers\JsonDataSerializer.cs" />
+    <Compile Include="ServiceModel\Serializers\UrlEncoder.cs" />
     <Compile Include="ServiceModel\Serializers\UrlSerializer.cs" />
     <Compile Include="ServiceModel\Services\JsonServicePerCall.cs" />
     <Compile Include="ServiceModel\Services\Processors\IConfiguration.cs" />
