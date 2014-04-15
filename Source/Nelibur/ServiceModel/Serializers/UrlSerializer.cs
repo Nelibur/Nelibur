@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
 using Nelibur.Core;
+using Nelibur.Core.DataStructures;
 using Nelibur.Core.Reflection;
 using Nelibur.ServiceModel.Contracts;
 
@@ -11,8 +12,8 @@ namespace Nelibur.ServiceModel.Serializers
 {
     internal sealed class UrlSerializer
     {
-        private static readonly Dictionary<Type, ObjectCreator> _objectCreators = new Dictionary<Type, ObjectCreator>();
-        private static readonly Dictionary<Type, QueryStringCreator> _queryStringCreators = new Dictionary<Type, QueryStringCreator>();
+        private static readonly SafeDictionary<Type, ObjectCreator> _objectCreators = new SafeDictionary<Type, ObjectCreator>();
+        private static readonly SafeDictionary<Type, QueryStringCreator> _queryStringCreators = new SafeDictionary<Type, QueryStringCreator>();
 
         private UrlSerializer(NameValueCollection value)
         {
@@ -47,24 +48,14 @@ namespace Nelibur.ServiceModel.Serializers
             {
                 throw Error.ArgumentNull("value");
             }
-            QueryStringCreator queryStringCreator;
-            if (!_queryStringCreators.TryGetValue(typeof(T), out queryStringCreator))
-            {
-                queryStringCreator = new QueryStringCreator(typeof(T));
-                _queryStringCreators[typeof(T)] = queryStringCreator;
-            }
+            QueryStringCreator queryStringCreator = _queryStringCreators.GetOrAdd(typeof(T), x => new QueryStringCreator(typeof(T)));
             NameValueCollection collection = queryStringCreator.GetNameValueCollection(value);
             return new UrlSerializer(collection);
         }
 
         public object GetRequestValue(Type targetType)
         {
-            ObjectCreator objectCreator;
-            if (!_objectCreators.TryGetValue(targetType, out objectCreator))
-            {
-                objectCreator = new ObjectCreator(targetType);
-                _objectCreators[targetType] = objectCreator;
-            }
+            ObjectCreator objectCreator = _objectCreators.GetOrAdd(targetType, x => new ObjectCreator(targetType));
             return objectCreator.Create(QueryParams);
         }
 
