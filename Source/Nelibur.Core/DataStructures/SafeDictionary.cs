@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Nelibur.Core.DataStructures
 {
-    public sealed class SafeDictionary<TKey, TValue> : ISafeDictionary<TKey, TValue>
+    internal sealed class SafeDictionary<TKey, TValue>
     {
         private readonly Dictionary<TKey, TValue> _dictionary = new Dictionary<TKey, TValue>();
         private readonly object _locker = new object();
@@ -29,10 +29,5 @@ namespace Nelibur.Core.DataStructures
             }
             return newValue;
         }
-    }
-
-    public interface ISafeDictionary<TKey, TValue>
-    {
-        TValue GetOrAdd(TKey key, Func<TKey, TValue> valueFactory);
     }
 }

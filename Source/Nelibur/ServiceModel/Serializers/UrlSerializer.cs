@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Linq;
-using System.Reflection;
 using Nelibur.Core;
 using Nelibur.Core.DataStructures;
-using Nelibur.Core.Reflection;
 using Nelibur.ServiceModel.Contracts;
 
 namespace Nelibur.ServiceModel.Serializers
@@ -48,14 +44,14 @@ namespace Nelibur.ServiceModel.Serializers
             {
                 throw Error.ArgumentNull("value");
             }
-            QueryStringCreator queryStringCreator = _queryStringCreators.GetOrAdd(typeof(T), x => new QueryStringCreator(typeof(T)));
-            NameValueCollection collection = queryStringCreator.GetNameValueCollection(value);
+            QueryStringCreator queryStringCreator = GetQueryStringCreator(typeof(T));
+            NameValueCollection collection = queryStringCreator.Create(value);
             return new UrlSerializer(collection);
         }
 
         public object GetRequestValue(Type targetType)
         {
-            ObjectCreator objectCreator = _objectCreators.GetOrAdd(targetType, x => new ObjectCreator(targetType));
+            ObjectCreator objectCreator = GetObjectCreator(targetType);
             return objectCreator.Create(QueryParams);
         }
 
@@ -73,60 +69,14 @@ namespace Nelibur.ServiceModel.Serializers
                    };
         }
 
-        private sealed class ObjectCreator
+        private static QueryStringCreator GetQueryStringCreator(Type value)
         {
-            private readonly ObjectActivator _objectActivator;
-            private readonly Dictionary<string, PropertySetter> _setters;
-
-            public ObjectCreator(Type type)
-            {
-                _objectActivator = DelegateFactory.CreateCtor(type);
-                _setters = type
-                    .GetTypeInfo()
-                    .GetProperties()
-                    .ToDictionary(x => x.Name, x => DelegateFactory.CreatePropertySetter(x), StringComparer.OrdinalIgnoreCase);
-            }
-
-            public object Create(NameValueCollection collection)
-            {
-                object result = _objectActivator();
-                foreach (string key in collection.AllKeys)
-                {
-                    if (string.Equals(key, RestServiceMetadata.ParamName.Type, StringComparison.OrdinalIgnoreCase))
-                    {
-                        continue;
-                    }
-                    string value = UrlEncoder.Decode(collection[key]);
-                    _setters[key](result, value);
-                }
-                return result;
-            }
+            return _queryStringCreators.GetOrAdd(value, x => new QueryStringCreator(value));
         }
 
-        private sealed class QueryStringCreator
+        private ObjectCreator GetObjectCreator(Type value)
         {
-            private readonly Dictionary<PropertyInfo, PropertyGetter> _getters;
-            private readonly NameValueCollection _typeInfo;
-
-            public QueryStringCreator(Type value)
-            {
-                _typeInfo = CreateQueryParams(value);
-                _getters = value
-                    .GetTypeInfo()
-                    .GetProperties()
-                    .ToDictionary(x => x, x => DelegateFactory.CreatePropertyGetter(x));
-            }
-
-            public NameValueCollection GetNameValueCollection(object value)
-            {
-                var result = new NameValueCollection(_typeInfo);
-                foreach (KeyValuePair<PropertyInfo, PropertyGetter> item in _getters)
-                {
-                    string itemValue = UrlEncoder.Encode(item.Value(value).ToString());
-                    result[item.Key.Name] = itemValue;
-                }
-                return result;
-            }
+            return _objectCreators.GetOrAdd(value, x => new ObjectCreator(value));
         }
     }
 }
