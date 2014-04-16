@@ -24,7 +24,7 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
             string query = string.Format("?type={0}&request={1}", TypeValue, RequestValue);
             NameValueCollection queryParams = HttpUtility.ParseQueryString(query);
 
-            UrlSerializer urlSerializer = UrlSerializer.FromQueryParams(queryParams);
+            IUrlSerializer urlSerializer = UrlSerializer.FromQueryParams(queryParams);
 
             string actualType = urlSerializer.GetTypeValue();
             Assert.Equal(TypeValue, actualType);
@@ -41,7 +41,7 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
         public void FromType_Type_Ok()
         {
             Type actualType = typeof(string);
-            UrlSerializer urlSerializer = UrlSerializer.FromType(actualType);
+            IUrlSerializer urlSerializer = UrlSerializer.FromType(actualType);
             Assert.Equal(1, urlSerializer.QueryParams.Count);
             Assert.Equal(actualType.Name, urlSerializer.GetTypeValue());
         }
@@ -50,7 +50,7 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
         public void FromValue_Value_Ok()
         {
             var request = new Request { Id = 1, Name = "Nelibur" };
-            UrlSerializer urlSerializer = UrlSerializer.FromValue(request);
+            IUrlSerializer urlSerializer = UrlSerializer.FromValue(request);
             NameValueCollection actual = urlSerializer.QueryParams;
             Assert.Equal(3, urlSerializer.QueryParams.Count);
             var expected = new NameValueCollection
