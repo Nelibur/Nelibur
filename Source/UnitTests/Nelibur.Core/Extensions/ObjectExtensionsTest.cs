@@ -4,7 +4,7 @@ using Xunit;
 
 namespace UnitTests.Nelibur.Core.Extensions
 {
-    public sealed class ObjectExtensionsTests
+    public sealed class ObjectExtensionsTest
     {
         [Fact]
         public void IsNotNull_NotNull_True()

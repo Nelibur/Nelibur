@@ -20,8 +20,7 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
         public void FromQueryParams_QueryParams_Ok()
         {
             const string TypeValue = "GetClientRequest";
-            const string RequestValue = "%7B%22Id%22:%22a623219b-62eb-495c-8267-11b5ec6ee96f%22%7D";
-            string query = string.Format("?type={0}&request={1}", TypeValue, RequestValue);
+            string query = string.Format("?type={0}&id=4DA2F891-953F-4637-AE83-6791688EAFA2&country=NL", TypeValue);
             NameValueCollection queryParams = HttpUtility.ParseQueryString(query);
 
             IUrlSerializer urlSerializer = UrlSerializer.FromQueryParams(queryParams);

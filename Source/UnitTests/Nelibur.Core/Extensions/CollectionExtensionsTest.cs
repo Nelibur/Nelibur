@@ -4,7 +4,7 @@ using Xunit;
 
 namespace UnitTests.Nelibur.Core.Extensions
 {
-    public sealed class CollectionExtensionsTests
+    public sealed class CollectionExtensionsTest
     {
         [Fact]
         public void IsEmpty_Empty_True()
