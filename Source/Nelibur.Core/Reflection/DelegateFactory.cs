@@ -10,7 +10,7 @@ namespace Nelibur.Core.Reflection
 
     public delegate object PropertyGetter(object target);
 
-    public delegate void PropertySetter(object target, object value);
+    public delegate void PropertySetter(object target, string value);
 
     public static class DelegateFactory
     {
@@ -56,7 +56,7 @@ namespace Nelibur.Core.Reflection
                 Error.ArgumentNull("property");
             }
             ParameterExpression target = Expression.Parameter(typeof(object), "target");
-            ParameterExpression valueParameter = Expression.Parameter(typeof(object), "value");
+            ParameterExpression valueParameter = Expression.Parameter(typeof(string), "value");
             MemberExpression member = Expression.Property(Expression.Convert(target, property.DeclaringType), property);
             MethodInfo convertTo = typeof(DelegateFactory).GetMethod("ConvertTo", BindingFlags.NonPublic | BindingFlags.Static);
             MethodInfo genericConvertTo = convertTo.MakeGenericMethod(property.PropertyType);
