@@ -1,18 +1,18 @@
 ﻿<div class="container" id="example">
     <div class="col-md-12">
         <div class="row">
-            <h2>Examples</h2>
+            <h3>
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <a data-toggle="collapse" data-target="#rest-service">RESTful service example</a>
+            </h3>
         </div>
-        <div class="row">
-            <h3><a data-toggle="collapse" data-target="#rest-service">REST service</a></h3>
-        </div>
-        <div id="rest-service" class="container collapse">
+        <div id="rest-service" class="container collapse in">
             <div class="row">
-                <h4>Client example</h4>
+                <h4>JsonServiceClient</h4>
             </div>
             <div class="row">
                 <p>
-                    Here is a simple example of a REST service client. It should give you the basic idea of how simple it is to use Nelibur.
+                    Here is a simple example of a RESTful service client. It should give you the basic idea of how simple it is to use Nelibur.
                 </p>
                 <pre class="prettyprint lang-cs">
 var client = new JsonServiceClient("http://localhost:8080/webhost");
