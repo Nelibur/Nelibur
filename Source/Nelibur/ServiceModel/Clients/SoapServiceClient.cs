@@ -8,7 +8,7 @@ using Nelibur.ServiceModel.Services.Headers;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public sealed class SoapServiceClient : ServiceClient
+    public sealed class SoapServiceClient
     {
         private readonly string _endpointConfigurationName;
 
@@ -25,84 +25,100 @@ namespace Nelibur.ServiceModel.Clients
             _endpointConfigurationName = endpointConfigurationName;
         }
 
-        protected override Task DeleteAsyncCore<TRequest>(TRequest request)
-        {
-            return Task.Run(() => DeleteCore(request));
-        }
-
-        protected override Task<TResponse> DeleteAsyncCore<TRequest, TResponse>(TRequest request)
-        {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete));
-        }
-
-        protected override void DeleteCore<TRequest>(TRequest request)
+        public void Delete<TRequest>(TRequest request)
+            where TRequest : class
         {
             Process(request, SoapOperationTypeHeader.Delete);
         }
 
-        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        public TResponse Delete<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete);
         }
 
-        protected override Task GetAsyncCore<TRequest>(TRequest request)
+        public Task DeleteAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => GetCore(request));
+            return Task.Run(() => Process(request, SoapOperationTypeHeader.Delete));
         }
 
-        protected override Task<TResponse> GetAsyncCore<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => GetCore<TRequest, TResponse>(request));
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete));
         }
 
-        protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
-        {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get);
-        }
-
-        protected override void GetCore<TRequest>(TRequest request)
+        public void Get<TRequest>(TRequest request)
+            where TRequest : class
         {
             Process(request, SoapOperationTypeHeader.Get);
         }
 
-        protected override Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
+        public TResponse Get<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post));
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get);
         }
 
-        protected override Task PostAsyncCore<TRequest>(TRequest request)
+        public Task GetAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => PostCore(request));
+            return Task.Run(() => Process(request, SoapOperationTypeHeader.Get));
         }
 
-        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get));
         }
 
-        protected override void PostCore<TRequest>(TRequest request)
+        public void Post<TRequest>(TRequest request)
+            where TRequest : class
         {
             Process(request, SoapOperationTypeHeader.Post);
         }
 
-        protected override Task PutAsyncCore<TRequest>(TRequest request)
+        public TResponse Post<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => PutCore(request));
+            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
         }
 
-        protected override Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put));
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post));
         }
 
-        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
+        public Task PostAsync<TRequest>(TRequest request)
+            where TRequest : class
+        {
+            return Task.Run(() => Process(request, SoapOperationTypeHeader.Post));
+        }
+
+        public void Put<TRequest>(TRequest request)
+            where TRequest : class
+        {
+            Process(request, SoapOperationTypeHeader.Put);
+        }
+
+        public TResponse Put<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
-        protected override void PutCore<TRequest>(TRequest request)
+        public Task PutAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            Process(request, SoapOperationTypeHeader.Put);
+            return Task.Run(() => Put(request));
+        }
+
+        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
+        {
+            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
         private static Message CreateMessage<TRequest>(
