@@ -7,11 +7,11 @@ namespace Nelibur.ServiceModel.Serializers
 {
     internal static class JsonDataSerializer
     {
-        public static string ToString(object value)
+        public static string ToString<T>(T value)
         {
             using (var stream = new MemoryStream())
             {
-                var serializer = new DataContractJsonSerializer(value.GetType());
+                var serializer = new DataContractJsonSerializer(typeof(T));
                 serializer.WriteObject(stream, value);
                 return Encoding.UTF8.GetString(stream.ToArray());
             }

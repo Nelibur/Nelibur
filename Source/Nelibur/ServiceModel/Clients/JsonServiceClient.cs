@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Specialized;
 using System.IO;
 using System.Net.Http;
 using System.ServiceModel.Web;
@@ -13,7 +12,7 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public sealed class JsonServiceClient : ServiceClient
+    public sealed class JsonServiceClient
     {
         private readonly bool _disposeHandler;
         private readonly HttpClientHandler _httpClientHandler;
@@ -47,101 +46,106 @@ namespace Nelibur.ServiceModel.Clients
             _disposeHandler = disposeHandler;
         }
 
-        protected override Task DeleteAsyncCore<TRequest>(TRequest request)
+        public void Delete<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return ProcessAsync(request, OperationType.Delete);
+            Process(request, OperationType.Delete, false);
         }
 
-        protected override Task<TResponse> DeleteAsyncCore<TRequest, TResponse>(TRequest request)
-        {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Delete);
-        }
-
-        protected override void DeleteCore<TRequest>(TRequest request)
-        {
-            Process(request, OperationType.Delete, responseRequired: false);
-        }
-
-        protected override TResponse DeleteCore<TRequest, TResponse>(TRequest request)
+        public TResponse Delete<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Delete);
         }
 
-        protected override Task GetAsyncCore<TRequest>(TRequest request)
+        public Task DeleteAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return ProcessAsync(request, OperationType.Get);
+            return ProcessAsync(request, OperationType.Delete);
         }
 
-        protected override Task<TResponse> GetAsyncCore<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Get);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Delete);
         }
 
-        protected override TResponse GetCore<TRequest, TResponse>(TRequest request)
+        public void Get<TRequest>(TRequest request)
+            where TRequest : class
+        {
+            Process(request, OperationType.Get, false);
+        }
+
+        public TResponse Get<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
         }
 
-        protected override void GetCore<TRequest>(TRequest request)
+        public Task GetAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            Process(request, OperationType.Get, responseRequired: false);
+            return ProcessAsync(request, OperationType.Get);
         }
 
-        protected override Task<TResponse> PostAsyncCore<TRequest, TResponse>(TRequest request)
+        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Post);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Get);
         }
 
-        protected override Task PostAsyncCore<TRequest>(TRequest request)
+        public void Post<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return ProcessAsync(request, OperationType.Post);
+            Process(request, OperationType.Post, false);
         }
 
-        protected override TResponse PostCore<TRequest, TResponse>(TRequest request)
+        public TResponse Post<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Post);
         }
 
-        protected override void PostCore<TRequest>(TRequest request)
+        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
-            Process(request, OperationType.Post, responseRequired: false);
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Post);
         }
 
-        protected override Task PutAsyncCore<TRequest>(TRequest request)
+        public Task PostAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return ProcessAsync(request, OperationType.Put);
+            return ProcessAsync(request, OperationType.Post);
         }
 
-        protected override Task<TResponse> PutAsyncCore<TRequest, TResponse>(TRequest request)
+        public void Put<TRequest>(TRequest request)
+            where TRequest : class
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Put);
+            Process(request, OperationType.Put, false);
         }
 
-        protected override TResponse PutCore<TRequest, TResponse>(TRequest request)
+        public TResponse Put<TRequest, TResponse>(TRequest request)
+            where TRequest : class
         {
             return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Put);
         }
 
-        protected override void PutCore<TRequest>(TRequest request)
+        public Task PutAsync<TRequest>(TRequest request)
+            where TRequest : class
         {
-            Process(request, OperationType.Put, responseRequired: false);
+            return ProcessAsync(request, OperationType.Put);
         }
 
-        private static StringContent CreateContent(object value)
+        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
+            where TRequest : class
+        {
+            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Put);
+        }
+
+        private static StringContent CreateContent<T>(T value)
         {
             string content = JsonDataSerializer.ToString(value);
             return new StringContent(content, Encoding.UTF8, "application/json");
-        }
-
-        private static NameValueCollection CreateQueryCollection<TRequest>(TRequest request)
-            where TRequest : class
-        {
-            return UrlSerializer.FromValue(request).QueryParams;
-        }
-
-        private static NameValueCollection CreateQueryCollection(Type value)
-        {
-            return UrlSerializer.FromType(value).QueryParams;
         }
 
         private HttpClient CreateHttpClient()
@@ -159,25 +163,25 @@ namespace Nelibur.ServiceModel.Clients
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.PostWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Post))
-                        .AddQuery(CreateQueryCollection(typeof(TRequest)));
+                        .AddQuery(UrlSerializer.FromType(typeof(TRequest)).QueryParams);
                     break;
                 case OperationType.Put:
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.PutWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Put))
-                        .AddQuery(CreateQueryCollection(typeof(TRequest)));
+                        .AddQuery(UrlSerializer.FromType(typeof(TRequest)).QueryParams);
                     break;
                 case OperationType.Get:
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.GetWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Get))
-                        .AddQuery(CreateQueryCollection(request));
+                        .AddQuery(UrlSerializer.FromValue(request).QueryParams);
                     break;
                 case OperationType.Delete:
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.DeleteWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Delete))
-                        .AddQuery(CreateQueryCollection(request));
+                        .AddQuery(UrlSerializer.FromValue(request).QueryParams);
                     break;
                 default:
                     string errorMessage = string.Format(
@@ -187,7 +191,8 @@ namespace Nelibur.ServiceModel.Clients
             return builder.Uri.ToString();
         }
 
-        private HttpResponseMessage Process(object request, string operationType, bool responseRequired = true)
+        private HttpResponseMessage Process<TRequest>(TRequest request, string operationType, bool responseRequired = true)
+            where TRequest : class
         {
             string urlRequest = CreateUrlRequest(request, operationType, responseRequired);
             HttpResponseMessage response;
@@ -224,7 +229,7 @@ namespace Nelibur.ServiceModel.Clients
         private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
             where TRequest : class
         {
-            string urlRequest = CreateUrlRequest(request, operationType, responseRequired: false);
+            string urlRequest = CreateUrlRequest(request, operationType, false);
 
             using (HttpClient client = CreateHttpClient())
             {
@@ -248,8 +253,7 @@ namespace Nelibur.ServiceModel.Clients
         }
 
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
-        private TResponse ProcessWithResponse<TRequest, TResponse>(
-            TRequest request, string operationType)
+        private TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, string operationType)
             where TRequest : class
         {
             HttpResponseMessage response = Process(request, operationType);
