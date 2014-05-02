@@ -127,7 +127,7 @@ namespace Nelibur.ServiceModel.Clients
             Process(request, OperationType.Put, responseRequired: false);
         }
 
-        private static StringContent CreateContent<T>(T value)
+        private static StringContent CreateContent(object value)
         {
             string content = JsonDataSerializer.ToString(value);
             return new StringContent(content, Encoding.UTF8, "application/json");
@@ -187,8 +187,7 @@ namespace Nelibur.ServiceModel.Clients
             return builder.Uri.ToString();
         }
 
-        private HttpResponseMessage Process<TRequest>(TRequest request, string operationType, bool responseRequired = true)
-            where TRequest : class
+        private HttpResponseMessage Process(object request, string operationType, bool responseRequired = true)
         {
             string urlRequest = CreateUrlRequest(request, operationType, responseRequired);
             HttpResponseMessage response;
