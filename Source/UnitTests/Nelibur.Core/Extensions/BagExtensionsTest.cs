@@ -81,9 +81,40 @@ namespace UnitTests.Nelibur.Core.Extensions
         }
 
         [Fact]
+        public void Map_NotEmptyBagWithTruePredicate_Executed()
+        {
+            var mock = new Mock<Func<int, string>>();
+            mock.Setup(x => x(1)).Returns("data");
+            Bag<string> result = new Bag<int>(1).Map(x=>true, mock.Object);
+            mock.Verify(x => x(It.IsAny<int>()), Times.Once);
+            Assert.True(result.HasValue);
+        }
+
+        [Fact]
+        public void Map_NotEmptyBagWithFalsePredicate_Executed()
+        {
+            var mock = new Mock<Func<int, string>>();
+            mock.Setup(x => x(1)).Returns("data");
+            Bag<string> result = new Bag<int>(1).Map(x=>false, mock.Object);
+            mock.Verify(x => x(It.IsAny<int>()), Times.Never);
+            Assert.True(result.HasNoValue);
+        }
+
+        [Fact]
         public void ThrowOnEmpty_EmptyBag_ThrowException()
         {
             Assert.ThrowsDelegateWithReturn func = () => Bag<int>.Empty.ThrowOnEmpty(() => new NullReferenceException());
+            Assert.Throws(typeof(NullReferenceException), func);
+        }
+
+        [Fact]
+        public void ThrowOnEmpty_EmptyBag_ThrowCustomException()
+        {
+            Assert.ThrowsDelegateWithReturn func = () =>
+            {
+                var empty = Bag<int>.Empty;
+                return empty.ThrowOnEmpty<int, NullReferenceException>();
+            };
             Assert.Throws(typeof(NullReferenceException), func);
         }
 
