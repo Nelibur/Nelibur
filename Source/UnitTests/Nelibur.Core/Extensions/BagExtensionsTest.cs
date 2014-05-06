@@ -71,6 +71,26 @@ namespace UnitTests.Nelibur.Core.Extensions
         }
 
         [Fact]
+        public void Map_NotEmptyBagWithFalsePredicate_Executed()
+        {
+            var mock = new Mock<Func<int, string>>();
+            mock.Setup(x => x(1)).Returns("data");
+            Bag<string> result = new Bag<int>(1).Map(x => false, mock.Object);
+            mock.Verify(x => x(It.IsAny<int>()), Times.Never);
+            Assert.True(result.HasNoValue);
+        }
+
+        [Fact]
+        public void Map_NotEmptyBagWithTruePredicate_Executed()
+        {
+            var mock = new Mock<Func<int, string>>();
+            mock.Setup(x => x(1)).Returns("data");
+            Bag<string> result = new Bag<int>(1).Map(x => true, mock.Object);
+            mock.Verify(x => x(It.IsAny<int>()), Times.Once);
+            Assert.True(result.HasValue);
+        }
+
+        [Fact]
         public void Map_NotEmptyBag_Executed()
         {
             var mock = new Mock<Func<int, string>>();
@@ -81,23 +101,14 @@ namespace UnitTests.Nelibur.Core.Extensions
         }
 
         [Fact]
-        public void Map_NotEmptyBagWithTruePredicate_Executed()
+        public void ThrowOnEmpty_EmptyBag_ThrowCustomException()
         {
-            var mock = new Mock<Func<int, string>>();
-            mock.Setup(x => x(1)).Returns("data");
-            Bag<string> result = new Bag<int>(1).Map(x=>true, mock.Object);
-            mock.Verify(x => x(It.IsAny<int>()), Times.Once);
-            Assert.True(result.HasValue);
-        }
-
-        [Fact]
-        public void Map_NotEmptyBagWithFalsePredicate_Executed()
-        {
-            var mock = new Mock<Func<int, string>>();
-            mock.Setup(x => x(1)).Returns("data");
-            Bag<string> result = new Bag<int>(1).Map(x=>false, mock.Object);
-            mock.Verify(x => x(It.IsAny<int>()), Times.Never);
-            Assert.True(result.HasNoValue);
+            Assert.ThrowsDelegateWithReturn func = () =>
+            {
+                Bag<int> empty = Bag<int>.Empty;
+                return empty.ThrowOnEmpty<int, NullReferenceException>();
+            };
+            Assert.Throws(typeof(NullReferenceException), func);
         }
 
         [Fact]
@@ -108,20 +119,30 @@ namespace UnitTests.Nelibur.Core.Extensions
         }
 
         [Fact]
-        public void ThrowOnEmpty_EmptyBag_ThrowCustomException()
-        {
-            Assert.ThrowsDelegateWithReturn func = () =>
-            {
-                var empty = Bag<int>.Empty;
-                return empty.ThrowOnEmpty<int, NullReferenceException>();
-            };
-            Assert.Throws(typeof(NullReferenceException), func);
-        }
-
-        [Fact]
         public void ThrowOnEmpty_NotEmptyBag_NotThrowException()
         {
             Assert.DoesNotThrow(() => new Bag<int>(1).ThrowOnEmpty(() => new NullReferenceException()));
+        }
+
+        [Fact]
+        public void Where_EmptyBag_Filtered()
+        {
+            Bag<Item> item = Bag<Item>.Empty;
+            Bag<Item> result = item.Where(x => string.IsNullOrWhiteSpace(x.Data) == false);
+            Assert.True(result.HasNoValue);
+        }
+
+        [Fact]
+        public void Where_NotEmptyBag_Filtered()
+        {
+            Bag<Item> item = new Item { Data = "Data" }.ToBag();
+            Bag<Item> result = item.Where(x => string.IsNullOrWhiteSpace(x.Data) == false);
+            Assert.True(result.HasValue);
+        }
+
+        private sealed class Item
+        {
+            public string Data { get; set; }
         }
     }
 }
