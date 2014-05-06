@@ -20,6 +20,12 @@ namespace UnitTests.Nelibur.Core
         }
 
         [Fact]
+        public void ErrorByType()
+        {
+            Assert.IsType<NotImplementedException>(Error.Type<NotImplementedException>());
+        }
+
+        [Fact]
         public void InvalidOperation()
         {
             Assert.IsType<InvalidOperationException>(Error.InvalidOperation(string.Empty));

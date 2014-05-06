@@ -10,7 +10,7 @@ namespace UnitTests.Nelibur.Core.Reflection
         [Fact]
         public void CreateCtor_Null_ThrowException()
         {
-            Assert.Throws(typeof(NullReferenceException), () => DelegateFactory.CreateCtor(null));
+            Assert.Throws(typeof(ArgumentNullException), () => DelegateFactory.CreateCtor(null));
         }
 
         [Fact]
@@ -32,7 +32,7 @@ namespace UnitTests.Nelibur.Core.Reflection
         [Fact]
         public void CreatePropertyGetter_Null_ThrowException()
         {
-            Assert.Throws(typeof(NullReferenceException), () => DelegateFactory.CreatePropertyGetter(null));
+            Assert.Throws(typeof(ArgumentNullException), () => DelegateFactory.CreatePropertyGetter(null));
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace UnitTests.Nelibur.Core.Reflection
         [Fact]
         public void CreatePropertySetter_Null_ThrowException()
         {
-            Assert.Throws(typeof(NullReferenceException), () => DelegateFactory.CreatePropertySetter(null));
+            Assert.Throws(typeof(ArgumentNullException), () => DelegateFactory.CreatePropertySetter(null));
         }
 
         private sealed class Dummy

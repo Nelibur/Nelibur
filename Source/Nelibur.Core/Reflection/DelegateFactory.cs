@@ -18,7 +18,7 @@ namespace Nelibur.Core.Reflection
         {
             if (type == null)
             {
-                Error.ArgumentNull("type");
+                throw Error.ArgumentNull("type");
             }
             ConstructorInfo emptyConstructor = type.GetConstructor(Type.EmptyTypes);
             var dynamicMethod = new DynamicMethod("CreateInstance", type, Type.EmptyTypes, true);
@@ -29,11 +29,17 @@ namespace Nelibur.Core.Reflection
             return (ObjectActivator)dynamicMethod.CreateDelegate(typeof(ObjectActivator));
         }
 
+        public static Func<T> CreateCtor<T>()
+            where T : new()
+        {
+            return () => new T();
+        }
+
         public static PropertyGetter CreatePropertyGetter(PropertyInfo property)
         {
             if (property == null)
             {
-                Error.ArgumentNull("property");
+                throw Error.ArgumentNull("property");
             }
             var method = new DynamicMethod("Get" + property.Name, typeof(object), new[] { typeof(object) }, true);
             ILGenerator ilGenerator = method.GetILGenerator();
@@ -53,7 +59,7 @@ namespace Nelibur.Core.Reflection
         {
             if (property == null)
             {
-                Error.ArgumentNull("property");
+                throw Error.ArgumentNull("property");
             }
             ParameterExpression target = Expression.Parameter(typeof(object), "target");
             ParameterExpression valueParameter = Expression.Parameter(typeof(string), "value");

@@ -91,8 +91,7 @@ namespace Nelibur.Core.Extensions
             {
                 return value;
             }
-            Func<TException> exception = () => new TException();
-            throw exception();
+            throw Error.Type<TException>();
         }
 
         public static Bag<TValue> ThrowOnEmpty<TValue, TException>(this Bag<TValue> value, Func<TException> func)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using Nelibur.Core.Reflection;
 
 namespace Nelibur.Core
 {
@@ -28,6 +29,12 @@ namespace Nelibur.Core
         public static Exception NotSupported()
         {
             return new NotSupportedException();
+        }
+
+        public static Exception Type<TException>()
+            where TException : Exception, new()
+        {
+            return DelegateFactory.CreateCtor<TException>()();
         }
     }
 }
