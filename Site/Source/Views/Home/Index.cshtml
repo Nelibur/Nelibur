@@ -1,44 +1,47 @@
 ﻿<!DOCTYPE html>
 
 <html>
-<head>
-    <title>Nelibur - the power of WCF at your fingertips</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Message based web service framework on the pure WCF">
-    <meta name="keywords" content="WCF, .NET, message based framework, REST, SOAP">
-</head>
-<body data-spy="scroll" data-target=".navbar-collapse">
-    <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Nelibur</a>
-            </div>
-            <div  class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#home">Home</a></li>
-                    <li><a href="https://github.com/Nelibur/Nelibur">GitHub page</a></li>
-                    <li><a href="#example">Examples</a></li>
-                </ul>
+    <head>
+        <title>Nelibur - the power of WCF at your fingertips</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Message based web service framework on the pure WCF">
+        <meta name="keywords" content="WCF, .NET, Nelibur, REST, SOAP, RESTful service, web service, message based framework">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="Content/nelibur.css">
+    </head>
+    <body data-spy="scroll" data-target=".navbar-collapse">
+        <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <nav class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Nelibur</a>
                 </div>
-            </div>
+                <div  class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#home">Home</a></li>
+                        <li><a href="https://github.com/Nelibur/Nelibur">GitHub page</a></li>
+                        <li><a href="#example">Examples</a></li>
+                    </ul>
+                </div>
+            </nav>
         </header>
-        <div id="home" class="jumbotron" style="padding-top: 50px">
+        <section id="home" class="jumbotron" style="padding-top: 50px">
             <div id="home" class="container">
                 <h1><img src="https://avatars0.githubusercontent.com/u/6294792?s=140" alt="Logo" class="img-rounded"> Nelibur</h1>
                 <p>
                     is message based web service framework on the pure WCF. Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF
                 </p>
             </div>
-        </div>
-        <div class="container">
+        </section>
+        <section class="container">
             <div class="row">
                 <div class="col-md-4">
                     <h2><span class="glyphicon glyphicon-chevron-right"></span> Based on the pure WCF</h2>
@@ -55,8 +58,8 @@
                     <p><a class="btn btn-default" href="https://github.com/Nelibur/Nelibur/wiki">Check out documentation</a></p>
                 </div>
             </div>
-        </div>
-        <div class="container">
+        </section>
+        <section class="container">
             <div class="row">
                 <div class="col-md-6">
                     <h3>
@@ -83,9 +86,8 @@
                     </p>
                 </div>
             </div>
-        </div>
-    @Html.Partial("Examples")
-
+        </section>
+        @Html.Partial("Examples")
         <footer class="panel-footer" style="margin-top: 40px">
             <div class="container">
                 <ul class="list-unstyled">
@@ -97,9 +99,6 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
 
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="Content/nelibur.css">
         <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"> </script>
         <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"> </script>
         <script>
@@ -109,7 +108,7 @@
                     (i[r].q = i[r].q || []).push(arguments);
                 }, i[r].l = 1 * new Date();
                 a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
+                    m = s.getElementsByTagName(o)[0];
                 a.async = 1;
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
