@@ -5,8 +5,7 @@ using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
 using Nelibur.Core;
-using Nelibur.Core.Extensions;
-using Nelibur.ServiceModel.Contracts;
+using Nelibur.ServiceModel.Extensions;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Operations;
 
@@ -153,48 +152,10 @@ namespace Nelibur.ServiceModel.Clients
             return new HttpClient(_httpClientHandler, _disposeHandler);
         }
 
-        private string CreateUrlRequest<TRequest>(TRequest request, string operationType, bool responseRequired = true)
-            where TRequest : class
-        {
-            var builder = new UriBuilder(_serviceAddress);
-            switch (operationType)
-            {
-                case OperationType.Post:
-                    builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.PostWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Post))
-                        .AddQuery(UrlSerializer.FromType(typeof(TRequest)).QueryParams);
-                    break;
-                case OperationType.Put:
-                    builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.PutWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Put))
-                        .AddQuery(UrlSerializer.FromType(typeof(TRequest)).QueryParams);
-                    break;
-                case OperationType.Get:
-                    builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.GetWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Get))
-                        .AddQuery(UrlSerializer.FromValue(request).QueryParams);
-                    break;
-                case OperationType.Delete:
-                    builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.DeleteWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Delete))
-                        .AddQuery(UrlSerializer.FromValue(request).QueryParams);
-                    break;
-                default:
-                    string errorMessage = string.Format(
-                        "OperationType {0} with void return is absent", operationType);
-                    throw Error.InvalidOperation(errorMessage);
-            }
-            return builder.Uri.ToString();
-        }
-
         private HttpResponseMessage Process<TRequest>(TRequest request, string operationType, bool responseRequired = true)
             where TRequest : class
         {
-            string urlRequest = CreateUrlRequest(request, operationType, responseRequired);
+            string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
             HttpResponseMessage response;
 
             using (HttpClient client = CreateHttpClient())
@@ -229,7 +190,7 @@ namespace Nelibur.ServiceModel.Clients
         private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
             where TRequest : class
         {
-            string urlRequest = CreateUrlRequest(request, operationType, false);
+            string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
 
             using (HttpClient client = CreateHttpClient())
             {
@@ -267,7 +228,7 @@ namespace Nelibur.ServiceModel.Clients
             TRequest request, string operationType)
             where TRequest : class
         {
-            string urlRequest = CreateUrlRequest(request, operationType);
+            string urlRequest = request.ToUrl(_serviceAddress, operationType);
 
             using (HttpClient client = CreateHttpClient())
             {

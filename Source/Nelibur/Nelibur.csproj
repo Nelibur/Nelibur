@@ -52,6 +52,7 @@
     <Compile Include="ServiceModel\Contracts\ISoapService.cs" />
     <Compile Include="ServiceModel\Contracts\RestServiceMetadata.cs" />
     <Compile Include="ServiceModel\Contracts\SoapServiceMetadata.cs" />
+    <Compile Include="ServiceModel\Extensions\UrlExtensions.cs" />
     <Compile Include="ServiceModel\Serializers\IUrlSerializer.cs" />
     <Compile Include="ServiceModel\Serializers\JsonDataSerializer.cs" />
     <Compile Include="ServiceModel\Serializers\ObjectCreator.cs" />

@@ -57,10 +57,10 @@
     <Compile Include="Nelibur.Core\Extensions\EnumerableExtensionsTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Nelibur.Core\Extensions\ObjectExtensionsTest.cs" />
-    <Compile Include="Nelibur.Core\Extensions\UriBuilderExtensionsTest.cs" />
     <Compile Include="Nelibur.Core\Patterns\VisitorTests.cs" />
     <Compile Include="Nelibur.Core\Reflection\DelegateFactoryTest.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />
+    <Compile Include="Nelibur\ServiceModel\Extensions\UrlExtensionsTest.cs" />
     <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
