@@ -15,26 +15,26 @@
                     Here is a simple example of a RESTful service client. It should give you the basic idea of how simple it is to use Nelibur.
                 </p>
                 <pre class="prettyprint lang-cs">
-var client = new JsonServiceClient("http://localhost:8080/webhost");
+var client = new JsonServiceClient("http://nelibur.org/service");
 
 var createRequest = new CreateClientRequest
 {
     Email = "email@email.com"
 };
-ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+ClientResponse response = client.Post&lt;CreateClientRequest, ClientResponse&gt;(createRequest);
 
 var updateRequest = new UpdateClientRequest
 {
     Email = "new@email.com",
     Id = response.Id
 };
-response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+response = client.Put&lt;UpdateClientRequest, ClientResponse&gt;(updateRequest);
 
 var getClientRequest = new GetClientRequest
 {
     Id = response.Id
 };
-response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
+response = client.Get&lt;GetClientRequest, ClientResponse&gt;(getClientRequest);
 
 var deleteRequest = new DeleteClientRequest
 {
@@ -51,9 +51,12 @@ client.Delete(deleteRequest);
                     And here is an example of processor that processes requests from the clients.
                 </p>
                 <pre class="prettyprint">
-public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>, IGetWithResponse<GetClientRequest>, IDelete<DeleteClientRequest>, IPutWithResponse<UpdateClientRequest>
+public sealed class ClientProcessor : IGetWithResponse&lt;GetClientRequest&gt;,
+                                      IPostWithResponse&lt;CreateClientRequest&gt;,
+                                      IPutWithResponse&lt;UpdateClientRequest&gt;,
+                                      IDelete&lt;DeleteClientRequest&gt;
 {
-    private static List<Client> _clients = new List<Client>();
+    private static List&lt;Client&gt; _clients = new List&lt;Client&gt;();
 
     public void Delete(DeleteClientRequest request)
     {
