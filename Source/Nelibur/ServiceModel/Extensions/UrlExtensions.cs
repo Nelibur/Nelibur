@@ -10,8 +10,7 @@ namespace Nelibur.ServiceModel.Extensions
 {
     internal static class UrlExtensions
     {
-        internal static string ToUrl<T>(this T value, Uri serviceAddress, string operationType, bool responseRequired = true)
-            where T : class
+        internal static string ToUrl(this object value, Uri serviceAddress, string operationType, bool responseRequired = true)
         {
             var builder = new UriBuilder(serviceAddress);
             switch (operationType)
@@ -20,13 +19,13 @@ namespace Nelibur.ServiceModel.Extensions
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.PostWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Post))
-                        .AddQuery(UrlSerializer.FromType(typeof(T)).QueryParams);
+                        .AddQuery(UrlSerializer.FromType(value.GetType()).QueryParams);
                     break;
                 case OperationType.Put:
                     builder = (responseRequired
                         ? builder.AddPath(RestServiceMetadata.Path.PutWithResponse)
                         : builder.AddPath(RestServiceMetadata.Path.Put))
-                        .AddQuery(UrlSerializer.FromType(typeof(T)).QueryParams);
+                        .AddQuery(UrlSerializer.FromType(value.GetType()).QueryParams);
                     break;
                 case OperationType.Get:
                     builder = (responseRequired

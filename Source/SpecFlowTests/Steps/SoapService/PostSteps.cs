@@ -35,7 +35,7 @@ namespace SpecFlowTests.Steps.SoapService
         {
             Order order = table.CreateSet<Order>().Single();
             SoapServiceClient client = GetClient();
-            bool response = client.PostAsync<Order, bool>(order).Result;
+            bool response = client.PostAsync<bool>(order).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -44,7 +44,7 @@ namespace SpecFlowTests.Steps.SoapService
         {
             Order order = table.CreateSet<Order>().Single();
             SoapServiceClient client = GetClient();
-            bool response = client.Post<Order, bool>(order);
+            bool response = client.Post<bool>(order);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

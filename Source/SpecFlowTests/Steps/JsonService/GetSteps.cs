@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Nelibur.ServiceModel.Clients;
 using SpecFlowTests.Samples.Contracts;
@@ -46,11 +47,11 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenIRequestDataByIdThruGetAsyncAction(int id)
         {
             var request = new GetOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
-            List<Order> response = client.GetAsync<GetOrderById, List<Order>>(request).Result;
+            List<Order> response = client.GetAsync<List<Order>>(request).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -58,11 +59,11 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenIRequestDataByThruIdGetAction(int id)
         {
             var request = new GetOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
-            List<Order> response = client.Get<GetOrderById, List<Order>>(request);
+            var response = client.Get<List<Order>>(request);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

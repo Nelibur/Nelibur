@@ -50,7 +50,7 @@ namespace SpecFlowTests.Steps.SoapService
                     Id = id
                 };
             SoapServiceClient client = GetClient();
-            bool response = client.DeleteAsync<DeleteOrderById, bool>(request).Result;
+            bool response = client.DeleteAsync<bool>(request).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -62,7 +62,7 @@ namespace SpecFlowTests.Steps.SoapService
                     Id = id
                 };
             SoapServiceClient client = GetClient();
-            bool response = client.Delete<DeleteOrderById, bool>(request);
+            bool response = client.Delete<bool>(request);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

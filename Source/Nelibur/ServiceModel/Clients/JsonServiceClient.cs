@@ -45,103 +45,87 @@ namespace Nelibur.ServiceModel.Clients
             _disposeHandler = disposeHandler;
         }
 
-        public void Delete<TRequest>(TRequest request)
-            where TRequest : class
+        public void Delete(object request)
         {
             Process(request, OperationType.Delete, false);
         }
 
-        public TResponse Delete<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Delete<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Delete);
+            return ProcessWithResponse<TResponse>(request, OperationType.Delete);
         }
 
-        public Task DeleteAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task DeleteAsync(object request)
         {
             return ProcessAsync(request, OperationType.Delete);
         }
 
-        public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Delete);
+            return ProcessWithResponseAsync<TResponse>(request, OperationType.Delete);
         }
 
-        public void Get<TRequest>(TRequest request)
-            where TRequest : class
+        public void Get(object request)
         {
             Process(request, OperationType.Get, false);
         }
 
-        public TResponse Get<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Get<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Get);
+            return ProcessWithResponse<TResponse>(request, OperationType.Get);
         }
 
-        public Task GetAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task GetAsync(object request)
         {
             return ProcessAsync(request, OperationType.Get);
         }
 
-        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Get);
+            return ProcessWithResponseAsync<TResponse>(request, OperationType.Get);
         }
 
-        public void Post<TRequest>(TRequest request)
-            where TRequest : class
+        public void Post(object request)
         {
             Process(request, OperationType.Post, false);
         }
 
-        public TResponse Post<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Post<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Post);
+            return ProcessWithResponse<TResponse>(request, OperationType.Post);
         }
 
-        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Post);
+            return ProcessWithResponseAsync<TResponse>(request, OperationType.Post);
         }
 
-        public Task PostAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task PostAsync(object request)
         {
             return ProcessAsync(request, OperationType.Post);
         }
 
-        public void Put<TRequest>(TRequest request)
-            where TRequest : class
+        public void Put(object request)
         {
             Process(request, OperationType.Put, false);
         }
 
-        public TResponse Put<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Put<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, OperationType.Put);
+            return ProcessWithResponse<TResponse>(request, OperationType.Put);
         }
 
-        public Task PutAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task PutAsync(object request)
         {
             return ProcessAsync(request, OperationType.Put);
         }
 
-        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TRequest, TResponse>(request, OperationType.Put);
+            return ProcessWithResponseAsync<TResponse>(request, OperationType.Put);
         }
 
-        private static StringContent CreateContent<T>(T value)
+        private static StringContent CreateContent(object value)
         {
             string content = JsonDataSerializer.ToString(value);
             return new StringContent(content, Encoding.UTF8, "application/json");
@@ -152,8 +136,7 @@ namespace Nelibur.ServiceModel.Clients
             return new HttpClient(_httpClientHandler, _disposeHandler);
         }
 
-        private HttpResponseMessage Process<TRequest>(TRequest request, string operationType, bool responseRequired = true)
-            where TRequest : class
+        private HttpResponseMessage Process(object request, string operationType, bool responseRequired = true)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
             HttpResponseMessage response;
@@ -187,8 +170,7 @@ namespace Nelibur.ServiceModel.Clients
             return response;
         }
 
-        private async Task<HttpResponseMessage> ProcessAsync<TRequest>(TRequest request, string operationType)
-            where TRequest : class
+        private async Task<HttpResponseMessage> ProcessAsync(object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
 
@@ -214,8 +196,7 @@ namespace Nelibur.ServiceModel.Clients
         }
 
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
-        private TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, string operationType)
-            where TRequest : class
+        private TResponse ProcessWithResponse<TResponse>(object request, string operationType)
         {
             HttpResponseMessage response = Process(request, operationType);
             using (Stream stream = response.Content.ReadAsStreamAsync().Result)
@@ -224,9 +205,8 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
-        private async Task<TResponse> ProcessWithResponseAsync<TRequest, TResponse>(
-            TRequest request, string operationType)
-            where TRequest : class
+        private async Task<TResponse> ProcessWithResponseAsync<TResponse>(
+            object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType);
 

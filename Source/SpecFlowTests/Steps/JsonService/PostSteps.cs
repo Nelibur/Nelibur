@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Nelibur.ServiceModel.Clients;
 using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
@@ -35,7 +36,7 @@ namespace SpecFlowTests.Steps.JsonService
         {
             Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
-            bool response = client.PostAsync<Order, bool>(order).Result;
+            bool response = client.PostAsync<bool>(order).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -44,7 +45,7 @@ namespace SpecFlowTests.Steps.JsonService
         {
             Order order = table.CreateSet<Order>().Single();
             JsonServiceClient client = GetClient();
-            bool response = client.Post<Order, bool>(order);
+            var response = client.Post<bool>(order);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

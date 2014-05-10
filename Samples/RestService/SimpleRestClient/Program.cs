@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-using NLog;
 using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Clients;
+using NLog;
 using SimpleRestClient.Properties;
 using SimpleRestContracts.Contracts;
 
@@ -18,32 +18,32 @@ namespace SimpleRestClient
             var client = new JsonServiceClient(Settings.Default.ServiceAddress);
 
             var createRequest = new CreateClientRequest
-                {
-                    Email = "email@email.com"
-                };
-            ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+                                {
+                                    Email = "email@email.com"
+                                };
+            var response = client.Post<ClientResponse>(createRequest);
             Console.WriteLine("POST Response: {0}\n", response);
 
             var updateRequest = new UpdateClientRequest
-                {
-                    Email = "new@email.com",
-                    Id = response.Id
-                };
-            response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+                                {
+                                    Email = "new@email.com",
+                                    Id = response.Id
+                                };
+            response = client.Put<ClientResponse>(updateRequest);
             Console.WriteLine("PUT Response: {0}\n", response);
 
             var getClientRequest = new GetClientRequest
-                {
-                    Id = response.Id,
-                    Date = DateTime.Now.Date
-                };
-            response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
+                                   {
+                                       Id = response.Id,
+                                       Date = DateTime.Now.Date
+                                   };
+            response = client.Get<ClientResponse>(getClientRequest);
             Console.WriteLine("GET Response: {0}\n", response);
 
             var deleteRequest = new DeleteClientRequest
-                {
-                    Id = response.Id
-                };
+                                {
+                                    Id = response.Id
+                                };
             client.Delete(deleteRequest);
 
             Console.ReadKey();
@@ -54,14 +54,14 @@ namespace SimpleRestClient
             var client = new JsonServiceClient(Settings.Default.ServiceAddress);
 
             var createRequest = new CreateClientRequest
-                {
-                    Email = "email@email.com"
-                };
+                                {
+                                    Email = "email@email.com"
+                                };
 
             Stopwatch stopwatch = Stopwatch.StartNew();
 
             1000.Times()
-                .Iter(x => client.Post<CreateClientRequest, ClientResponse>(createRequest));
+                .Iter(x => client.Post<ClientResponse>(createRequest));
 
             Console.WriteLine("Total: {0} ms", stopwatch.Elapsed.TotalMilliseconds);
         }

@@ -30,14 +30,13 @@ namespace Nelibur.ServiceModel.Serializers
             return new UrlSerializerInternal(collection);
         }
 
-        public static IUrlSerializer FromValue<T>(T value)
-            where T : class
+        public static IUrlSerializer FromValue(object value)
         {
             if (value == null)
             {
                 throw Error.ArgumentNull("value");
             }
-            QueryStringCreator queryStringCreator = GetQueryStringCreator(typeof(T));
+            QueryStringCreator queryStringCreator = GetQueryStringCreator(value.GetType());
             NameValueCollection collection = queryStringCreator.Create(value);
             return new UrlSerializerInternal(collection);
         }

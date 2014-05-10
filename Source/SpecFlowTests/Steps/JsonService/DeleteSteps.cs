@@ -1,4 +1,5 @@
-﻿using Nelibur.ServiceModel.Clients;
+﻿using System;
+using Nelibur.ServiceModel.Clients;
 using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
 
@@ -24,9 +25,9 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDeleteRequestByIdThruDeleteAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
             client.Delete(request);
         }
@@ -35,9 +36,9 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDeleteRequestByIdThruDeleteAsyncAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
             client.DeleteAsync(request).Wait();
         }
@@ -46,11 +47,11 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDeleteRequestByIdThruDeleteAsyncWithResponseAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
-            bool response = client.DeleteAsync<DeleteOrderById, bool>(request).Result;
+            bool response = client.DeleteAsync<bool>(request).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -58,11 +59,11 @@ namespace SpecFlowTests.Steps.JsonService
         public void WhenISendDeleteRequestByIdThruDeleteWithResponseAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+                          {
+                              Id = id
+                          };
             JsonServiceClient client = GetClient();
-            bool response = client.Delete<DeleteOrderById, bool>(request);
+            var response = client.Delete<bool>(request);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }

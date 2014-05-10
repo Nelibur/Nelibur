@@ -25,124 +25,107 @@ namespace Nelibur.ServiceModel.Clients
             _endpointConfigurationName = endpointConfigurationName;
         }
 
-        public void Delete<TRequest>(TRequest request)
-            where TRequest : class
+        public void Delete(object request)
         {
             Process(request, SoapOperationTypeHeader.Delete);
         }
 
-        public TResponse Delete<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Delete<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete);
+            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete);
         }
 
-        public Task DeleteAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task DeleteAsync(object request)
         {
             return Task.Run(() => Process(request, SoapOperationTypeHeader.Delete));
         }
 
-        public Task<TResponse> DeleteAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Delete));
+            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete));
         }
 
-        public void Get<TRequest>(TRequest request)
-            where TRequest : class
+        public void Get(object request)
         {
             Process(request, SoapOperationTypeHeader.Get);
         }
 
-        public TResponse Get<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Get<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get);
+            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Get);
         }
 
-        public Task GetAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task GetAsync(object request)
         {
             return Task.Run(() => Process(request, SoapOperationTypeHeader.Get));
         }
 
-        public Task<TResponse> GetAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Get));
+            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Get));
         }
 
-        public void Post<TRequest>(TRequest request)
-            where TRequest : class
+        public void Post(object request)
         {
             Process(request, SoapOperationTypeHeader.Post);
         }
 
-        public TResponse Post<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Post<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post);
+            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Post);
         }
 
-        public Task<TResponse> PostAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Post));
+            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Post));
         }
 
-        public Task PostAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task PostAsync(object request)
         {
             return Task.Run(() => Process(request, SoapOperationTypeHeader.Post));
         }
 
-        public void Put<TRequest>(TRequest request)
-            where TRequest : class
+        public void Put(object request)
         {
             Process(request, SoapOperationTypeHeader.Put);
         }
 
-        public TResponse Put<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public TResponse Put<TResponse>(object request)
         {
-            return ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put);
+            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
-        public Task PutAsync<TRequest>(TRequest request)
-            where TRequest : class
+        public Task PutAsync(object request)
         {
             return Task.Run(() => Put(request));
         }
 
-        public Task<TResponse> PutAsync<TRequest, TResponse>(TRequest request)
-            where TRequest : class
+        public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TRequest, TResponse>(request, SoapOperationTypeHeader.Put));
+            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
-        private static Message CreateMessage<TRequest>(
-            TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
+        private static Message CreateMessage(
+            object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
-            var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
+            var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;
         }
 
-        private static Message CreateMessageWithResponse<TRequest>(
-            TRequest request, MessageHeader actionHeader, MessageVersion messageVersion)
+        private static Message CreateMessageWithResponse(
+            object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
-            var contentTypeHeader = new SoapContentTypeHeader(typeof(TRequest));
+            var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
             return message;
         }
 
-        private void Process<TRequest>(TRequest request, MessageHeader operationType)
-            where TRequest : class
+        private void Process(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
@@ -153,8 +136,7 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
-        private TResponse ProcessWithResponse<TRequest, TResponse>(TRequest request, MessageHeader operationType)
-            where TRequest : class
+        private TResponse ProcessWithResponse<TResponse>(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {

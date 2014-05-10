@@ -15,7 +15,7 @@ namespace SimpleSoapClient
                     Email = "email@email.com"
                 };
             Console.WriteLine("POST Request: {0}", createRequest);
-            ClientResponse response = client.Post<CreateClientRequest, ClientResponse>(createRequest);
+            ClientResponse response = client.Post<ClientResponse>(createRequest);
             Console.WriteLine("POST Response: {0}\n", response);
 
             var updateRequest = new UpdateClientRequest
@@ -25,7 +25,7 @@ namespace SimpleSoapClient
                 };
 
             Console.WriteLine("PUT Request: {0}", updateRequest);
-            response = client.Put<UpdateClientRequest, ClientResponse>(updateRequest);
+            response = client.Put<ClientResponse>(updateRequest);
             Console.WriteLine("PUT Response: {0}\n", response);
 
             var getClientRequest = new GetClientRequest
@@ -33,7 +33,7 @@ namespace SimpleSoapClient
                     Id = response.Id
                 };
             Console.WriteLine("GET Request: {0}", getClientRequest);
-            response = client.Get<GetClientRequest, ClientResponse>(getClientRequest);
+            response = client.Get<ClientResponse>(getClientRequest);
             Console.WriteLine("GET Response: {0}\n", response);
 
             var deleteRequest = new DeleteClientRequest

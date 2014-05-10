@@ -50,7 +50,7 @@ namespace SpecFlowTests.Steps.SoapService
                     Id = id
                 };
             SoapServiceClient client = GetClient();
-            List<Order> response = client.GetAsync<GetOrderById, List<Order>>(request).Result;
+            List<Order> response = client.GetAsync<List<Order>>(request).Result;
             ScenarioContext.Current[ResopnseKey] = response;
         }
 
@@ -62,7 +62,7 @@ namespace SpecFlowTests.Steps.SoapService
                     Id = id
                 };
             SoapServiceClient client = GetClient();
-            List<Order> response = client.Get<GetOrderById, List<Order>>(request);
+            List<Order> response = client.Get<List<Order>>(request);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }
