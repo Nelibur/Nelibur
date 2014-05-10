@@ -110,20 +110,20 @@ var createRequest = new CreateClientRequest
 {
     Email = "email@email.com"
 };
-ClientResponse response = client.Post&lt;CreateClientRequest, ClientResponse&gt;(createRequest);
+ClientResponse response = client.Post&lt;ClientResponse&gt;(createRequest);
 
 var updateRequest = new UpdateClientRequest
 {
     Email = "new@email.com",
     Id = response.Id
 };
-response = client.Put&lt;UpdateClientRequest, ClientResponse&gt;(updateRequest);
+response = client.Put&lt;ClientResponse&gt;(updateRequest);
 
 var getClientRequest = new GetClientRequest
 {
     Id = response.Id
 };
-response = client.Get&lt;GetClientRequest, ClientResponse&gt;(getClientRequest);
+response = client.Get&lt;ClientResponse&gt;(getClientRequest);
 
 var deleteRequest = new DeleteClientRequest
 {
