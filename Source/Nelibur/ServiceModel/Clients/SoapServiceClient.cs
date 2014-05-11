@@ -27,72 +27,72 @@ namespace Nelibur.ServiceModel.Clients
 
         public void Delete(object request)
         {
-            Process(request, SoapOperationTypeHeader.Delete);
+            Send(request, SoapOperationTypeHeader.Delete);
         }
 
         public TResponse Delete<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete);
+            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete);
         }
 
         public Task DeleteAsync(object request)
         {
-            return Task.Run(() => Process(request, SoapOperationTypeHeader.Delete));
+            return Task.Run(() => Send(request, SoapOperationTypeHeader.Delete));
         }
 
         public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete));
+            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete));
         }
 
         public void Get(object request)
         {
-            Process(request, SoapOperationTypeHeader.Get);
+            Send(request, SoapOperationTypeHeader.Get);
         }
 
         public TResponse Get<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Get);
+            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Get);
         }
 
         public Task GetAsync(object request)
         {
-            return Task.Run(() => Process(request, SoapOperationTypeHeader.Get));
+            return Task.Run(() => Send(request, SoapOperationTypeHeader.Get));
         }
 
         public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Get));
+            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Get));
         }
 
         public void Post(object request)
         {
-            Process(request, SoapOperationTypeHeader.Post);
+            Send(request, SoapOperationTypeHeader.Post);
         }
 
         public TResponse Post<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Post);
+            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Post);
         }
 
         public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Post));
+            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Post));
         }
 
         public Task PostAsync(object request)
         {
-            return Task.Run(() => Process(request, SoapOperationTypeHeader.Post));
+            return Task.Run(() => Send(request, SoapOperationTypeHeader.Post));
         }
 
         public void Put(object request)
         {
-            Process(request, SoapOperationTypeHeader.Put);
+            Send(request, SoapOperationTypeHeader.Put);
         }
 
         public TResponse Put<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Put);
+            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
         public Task PutAsync(object request)
@@ -102,7 +102,7 @@ namespace Nelibur.ServiceModel.Clients
 
         public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return Task.Run(() => ProcessWithResponse<TResponse>(request, SoapOperationTypeHeader.Put));
+            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
         private static Message CreateMessage(
@@ -125,7 +125,7 @@ namespace Nelibur.ServiceModel.Clients
             return message;
         }
 
-        private void Process(object request, MessageHeader operationType)
+        private void Send(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
@@ -136,7 +136,7 @@ namespace Nelibur.ServiceModel.Clients
             }
         }
 
-        private TResponse ProcessWithResponse<TResponse>(object request, MessageHeader operationType)
+        private TResponse SendWithResponse<TResponse>(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {

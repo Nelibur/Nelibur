@@ -47,82 +47,82 @@ namespace Nelibur.ServiceModel.Clients
 
         public void Delete(object request)
         {
-            Process(request, OperationType.Delete, false);
+            Send(request, OperationType.Delete, false);
         }
 
         public TResponse Delete<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, OperationType.Delete);
+            return SendWithResponse<TResponse>(request, OperationType.Delete);
         }
 
         public Task DeleteAsync(object request)
         {
-            return ProcessAsync(request, OperationType.Delete);
+            return SendAsync(request, OperationType.Delete);
         }
 
         public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TResponse>(request, OperationType.Delete);
+            return SendWithResponseAsync<TResponse>(request, OperationType.Delete);
         }
 
         public void Get(object request)
         {
-            Process(request, OperationType.Get, false);
+            Send(request, OperationType.Get, false);
         }
 
         public TResponse Get<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, OperationType.Get);
+            return SendWithResponse<TResponse>(request, OperationType.Get);
         }
 
         public Task GetAsync(object request)
         {
-            return ProcessAsync(request, OperationType.Get);
+            return SendAsync(request, OperationType.Get);
         }
 
         public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TResponse>(request, OperationType.Get);
+            return SendWithResponseAsync<TResponse>(request, OperationType.Get);
         }
 
         public void Post(object request)
         {
-            Process(request, OperationType.Post, false);
+            Send(request, OperationType.Post, false);
         }
 
         public TResponse Post<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, OperationType.Post);
+            return SendWithResponse<TResponse>(request, OperationType.Post);
         }
 
         public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TResponse>(request, OperationType.Post);
+            return SendWithResponseAsync<TResponse>(request, OperationType.Post);
         }
 
         public Task PostAsync(object request)
         {
-            return ProcessAsync(request, OperationType.Post);
+            return SendAsync(request, OperationType.Post);
         }
 
         public void Put(object request)
         {
-            Process(request, OperationType.Put, false);
+            Send(request, OperationType.Put, false);
         }
 
         public TResponse Put<TResponse>(object request)
         {
-            return ProcessWithResponse<TResponse>(request, OperationType.Put);
+            return SendWithResponse<TResponse>(request, OperationType.Put);
         }
 
         public Task PutAsync(object request)
         {
-            return ProcessAsync(request, OperationType.Put);
+            return SendAsync(request, OperationType.Put);
         }
 
         public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return ProcessWithResponseAsync<TResponse>(request, OperationType.Put);
+            return SendWithResponseAsync<TResponse>(request, OperationType.Put);
         }
 
         private static StringContent CreateContent(object value)
@@ -136,7 +136,7 @@ namespace Nelibur.ServiceModel.Clients
             return new HttpClient(_httpClientHandler, _disposeHandler);
         }
 
-        private HttpResponseMessage Process(object request, string operationType, bool responseRequired = true)
+        private HttpResponseMessage Send(object request, string operationType, bool responseRequired = true)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
             HttpResponseMessage response;
@@ -170,7 +170,7 @@ namespace Nelibur.ServiceModel.Clients
             return response;
         }
 
-        private async Task<HttpResponseMessage> ProcessAsync(object request, string operationType)
+        private async Task<HttpResponseMessage> SendAsync(object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
 
@@ -196,16 +196,16 @@ namespace Nelibur.ServiceModel.Clients
         }
 
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
-        private TResponse ProcessWithResponse<TResponse>(object request, string operationType)
+        private TResponse SendWithResponse<TResponse>(object request, string operationType)
         {
-            HttpResponseMessage response = Process(request, operationType);
+            HttpResponseMessage response = Send(request, operationType);
             using (Stream stream = response.Content.ReadAsStreamAsync().Result)
             {
                 return JsonDataSerializer.ToValue<TResponse>(stream);
             }
         }
 
-        private async Task<TResponse> ProcessWithResponseAsync<TResponse>(
+        private async Task<TResponse> SendWithResponseAsync<TResponse>(
             object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType);
