@@ -60,14 +60,14 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             var service = (IDeleteOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.Delete(request);
+            service.DeleteOneWay(request);
         }
 
         private Message DeleteWithResponse(RequestMetadata metadata)
         {
             var service = (IDelete<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            object result = service.DeleteWithResponse(request);
+            object result = service.Delete(request);
             return metadata.CreateResponse(result);
         }
 
@@ -75,14 +75,14 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             var service = (IGetOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.Get(request);
+            service.GetOneWay(request);
         }
 
         private Message GetWithResponse(RequestMetadata metadata)
         {
             var service = (IGet<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            object result = service.GetWithResponse(request);
+            object result = service.Get(request);
             return metadata.CreateResponse(result);
         }
 
@@ -90,14 +90,14 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             var service = (IPostOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.Post(request);
+            service.PostOneWay(request);
         }
 
         private Message PostWithResponse(RequestMetadata metadata)
         {
             var service = (IPost<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            object result = service.PostWithResponse(request);
+            object result = service.Post(request);
             return metadata.CreateResponse(result);
         }
 
@@ -105,14 +105,14 @@ namespace Nelibur.ServiceModel.Services.Maps
         {
             var service = (IPutOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.Put(request);
+            service.PutOneWay(request);
         }
 
         private Message PutWithResponse(RequestMetadata metadata)
         {
             var service = (IPut<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            object result = service.PutWithResponse(request);
+            object result = service.Put(request);
             return metadata.CreateResponse(result);
         }
     }

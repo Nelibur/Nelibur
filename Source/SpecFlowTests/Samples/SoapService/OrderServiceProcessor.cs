@@ -15,42 +15,42 @@ namespace SpecFlowTests.Samples.SoapService
     {
         private static List<Order> _repository = new List<Order>();
 
-        public void Delete(DeleteOrderById request)
+        public void DeleteOneWay(DeleteOrderById request)
         {
             _repository = _repository.Where(x => x.Id != request.Id).ToList();
         }
 
-        public object DeleteWithResponse(DeleteOrderById request)
+        public object Delete(DeleteOrderById request)
         {
-            Delete(request);
+            DeleteOneWay(request);
             return true;
         }
 
-        public object GetWithResponse(GetOrderById request)
+        public object Get(GetOrderById request)
         {
             return _repository.Where(x => x.Id == request.Id).ToList();
         }
 
-        public void Post(Order request)
+        public void PostOneWay(Order request)
         {
             _repository.Add(request);
         }
 
-        public object PostWithResponse(Order request)
+        public object Post(Order request)
         {
-            Post(request);
+            PostOneWay(request);
             return true;
         }
 
-        public void Put(UpdateOrder request)
+        public void PutOneWay(UpdateOrder request)
         {
             Order order = _repository.Single(x => x.Id == request.Id);
             order.Quantity = request.Quantity;
         }
 
-        public object PutWithResponse(UpdateOrder request)
+        public object Put(UpdateOrder request)
         {
-            Put(request);
+            PutOneWay(request);
             return true;
         }
     }
