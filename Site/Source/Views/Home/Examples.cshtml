@@ -51,25 +51,20 @@ client.Delete(deleteRequest);
                     And here is an example of processor that processes requests from the clients.
                 </p>
                 <pre class="prettyprint">
-public sealed class ClientProcessor : IGetWithResponse&lt;GetClientRequest&gt;,
-                                      IPostWithResponse&lt;CreateClientRequest&gt;,
-                                      IPutWithResponse&lt;UpdateClientRequest&gt;,
-                                      IDelete&lt;DeleteClientRequest&gt;
+public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
+                                      IPost&lt;CreateClientRequest&gt;,
+                                      IPut&lt;UpdateClientRequest&gt;,
+                                      IDeleteOneWay&lt;DeleteClientRequest&gt;
 {
     private static List&lt;Client&gt; _clients = new List&lt;Client&gt;();
 
-    public void Delete(DeleteClientRequest request)
-    {
-        _clients = _clients.Where(x => x.Id != request.Id).ToList();
-    }
-
-    public object GetWithResponse(GetClientRequest request)
+    public object Get(GetClientRequest request)
     {        
         Client client = _clients.Single(x => x.Id == request.Id);
         return new ClientResponse { Id = client.Id, Email = client.Email };
     }
 
-    public object PostWithResponse(CreateClientRequest request)
+    public object Post(CreateClientRequest request)
     {
         var client = new Client
             {
@@ -80,11 +75,16 @@ public sealed class ClientProcessor : IGetWithResponse&lt;GetClientRequest&gt;,
         return new ClientResponse { Id = client.Id, Email = client.Email };
     }
 
-    public object PutWithResponse(UpdateClientRequest request)
+    public object Put(UpdateClientRequest request)
     {
         Client client = _clients.Single(x => x.Id == request.Id);
         client.Email = request.Email;
         return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
+
+    public void DeleteOneWay(DeleteClientRequest request)
+    {
+        _clients = _clients.Where(x => x.Id != request.Id).ToList();
     }
 }
 </pre>
