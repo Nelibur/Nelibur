@@ -5,13 +5,13 @@ using SpecFlowTests.Samples.Contracts;
 
 namespace SpecFlowTests.Samples.JsonService
 {
-    public sealed class OrderServiceProcessor : IPost<Order>,
-        IPostWithResponse<Order>,
-        IGetWithResponse<GetOrderById>,
+    public sealed class OrderServiceProcessor : IPostOneWay<Order>,
+        IPost<Order>,
+        IGet<GetOrderById>,
+        IDeleteOneWay<DeleteOrderById>,
         IDelete<DeleteOrderById>,
-        IDeleteWithResponse<DeleteOrderById>,
-        IPut<UpdateOrder>,
-        IPutWithResponse<UpdateOrder>
+        IPutOneWay<UpdateOrder>,
+        IPut<UpdateOrder>
     {
         private static List<Order> _repository = new List<Order>();
 

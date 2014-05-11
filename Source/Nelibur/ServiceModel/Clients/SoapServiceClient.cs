@@ -27,72 +27,72 @@ namespace Nelibur.ServiceModel.Clients
 
         public void Delete(object request)
         {
-            Send(request, SoapOperationTypeHeader.Delete);
+            SendOneWay(request, SoapOperationTypeHeader.Delete);
         }
 
         public TResponse Delete<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete);
+            return Send<TResponse>(request, SoapOperationTypeHeader.Delete);
         }
 
         public Task DeleteAsync(object request)
         {
-            return Task.Run(() => Send(request, SoapOperationTypeHeader.Delete));
+            return Task.Run(() => SendOneWay(request, SoapOperationTypeHeader.Delete));
         }
 
         public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Delete));
+            return Task.Run(() => Send<TResponse>(request, SoapOperationTypeHeader.Delete));
         }
 
         public void Get(object request)
         {
-            Send(request, SoapOperationTypeHeader.Get);
+            SendOneWay(request, SoapOperationTypeHeader.Get);
         }
 
         public TResponse Get<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Get);
+            return Send<TResponse>(request, SoapOperationTypeHeader.Get);
         }
 
         public Task GetAsync(object request)
         {
-            return Task.Run(() => Send(request, SoapOperationTypeHeader.Get));
+            return Task.Run(() => SendOneWay(request, SoapOperationTypeHeader.Get));
         }
 
         public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Get));
+            return Task.Run(() => Send<TResponse>(request, SoapOperationTypeHeader.Get));
         }
 
         public void Post(object request)
         {
-            Send(request, SoapOperationTypeHeader.Post);
+            SendOneWay(request, SoapOperationTypeHeader.Post);
         }
 
         public TResponse Post<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Post);
+            return Send<TResponse>(request, SoapOperationTypeHeader.Post);
         }
 
         public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Post));
+            return Task.Run(() => Send<TResponse>(request, SoapOperationTypeHeader.Post));
         }
 
         public Task PostAsync(object request)
         {
-            return Task.Run(() => Send(request, SoapOperationTypeHeader.Post));
+            return Task.Run(() => SendOneWay(request, SoapOperationTypeHeader.Post));
         }
 
         public void Put(object request)
         {
-            Send(request, SoapOperationTypeHeader.Put);
+            SendOneWay(request, SoapOperationTypeHeader.Put);
         }
 
         public TResponse Put<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Put);
+            return Send<TResponse>(request, SoapOperationTypeHeader.Put);
         }
 
         public Task PutAsync(object request)
@@ -102,20 +102,10 @@ namespace Nelibur.ServiceModel.Clients
 
         public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return Task.Run(() => SendWithResponse<TResponse>(request, SoapOperationTypeHeader.Put));
+            return Task.Run(() => Send<TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
         private static Message CreateMessage(
-            object request, MessageHeader actionHeader, MessageVersion messageVersion)
-        {
-            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
-            var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
-            message.Headers.Add(contentTypeHeader);
-            message.Headers.Add(actionHeader);
-            return message;
-        }
-
-        private static Message CreateMessageWithResponse(
             object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
             Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
@@ -125,26 +115,36 @@ namespace Nelibur.ServiceModel.Clients
             return message;
         }
 
-        private void Send(object request, MessageHeader operationType)
+        private static Message CreateOneWayMessage(
+            object request, MessageHeader actionHeader, MessageVersion messageVersion)
+        {
+            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
+            var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
+            message.Headers.Add(contentTypeHeader);
+            message.Headers.Add(actionHeader);
+            return message;
+        }
+
+        private TResponse Send<TResponse>(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateMessage(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                channel.Process(message);
+                Message result = channel.ProcessWithResponse(message);
+                return result.GetBody<TResponse>();
             }
         }
 
-        private TResponse SendWithResponse<TResponse>(object request, MessageHeader operationType)
+        private void SendOneWay(object request, MessageHeader operationType)
         {
             using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
             {
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
-                Message message = CreateMessageWithResponse(request, operationType, messageVersion);
+                Message message = CreateOneWayMessage(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                Message result = channel.ProcessWithResponse(message);
-                return result.GetBody<TResponse>();
+                channel.Process(message);
             }
         }
     }

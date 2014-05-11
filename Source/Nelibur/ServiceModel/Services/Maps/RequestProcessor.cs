@@ -58,14 +58,14 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         private void Delete(RequestMetadata metadata)
         {
-            var service = (IDelete<TRequest>)_creator();
+            var service = (IDeleteOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Delete(request);
         }
 
         private Message DeleteWithResponse(RequestMetadata metadata)
         {
-            var service = (IDeleteWithResponse<TRequest>)_creator();
+            var service = (IDelete<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.DeleteWithResponse(request);
             return metadata.CreateResponse(result);
@@ -73,14 +73,14 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         private void Get(RequestMetadata metadata)
         {
-            var service = (IGet<TRequest>)_creator();
+            var service = (IGetOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Get(request);
         }
 
         private Message GetWithResponse(RequestMetadata metadata)
         {
-            var service = (IGetWithResponse<TRequest>)_creator();
+            var service = (IGet<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.GetWithResponse(request);
             return metadata.CreateResponse(result);
@@ -88,14 +88,14 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         private void Post(RequestMetadata metadata)
         {
-            var service = (IPost<TRequest>)_creator();
+            var service = (IPostOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Post(request);
         }
 
         private Message PostWithResponse(RequestMetadata metadata)
         {
-            var service = (IPostWithResponse<TRequest>)_creator();
+            var service = (IPost<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PostWithResponse(request);
             return metadata.CreateResponse(result);
@@ -103,14 +103,14 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         private void Put(RequestMetadata metadata)
         {
-            var service = (IPut<TRequest>)_creator();
+            var service = (IPutOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             service.Put(request);
         }
 
         private Message PutWithResponse(RequestMetadata metadata)
         {
-            var service = (IPutWithResponse<TRequest>)_creator();
+            var service = (IPut<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.PutWithResponse(request);
             return metadata.CreateResponse(result);

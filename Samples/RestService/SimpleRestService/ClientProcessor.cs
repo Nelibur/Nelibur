@@ -6,10 +6,10 @@ using SimpleRestContracts.Contracts;
 
 namespace SimpleRestService
 {
-    public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
-        IGetWithResponse<GetClientRequest>,
-        IDelete<DeleteClientRequest>,
-        IPutWithResponse<UpdateClientRequest>
+    public sealed class ClientProcessor : IPost<CreateClientRequest>,
+        IGet<GetClientRequest>,
+        IDeleteOneWay<DeleteClientRequest>,
+        IPut<UpdateClientRequest>
     {
         private static List<Client> _clients = new List<Client>();
 
@@ -30,10 +30,10 @@ namespace SimpleRestService
         {
             Console.WriteLine("PostWithResponse Request: {0}", request);
             var client = new Client
-                {
-                    Id = Guid.NewGuid(),
-                    Email = request.Email
-                };
+                         {
+                             Id = Guid.NewGuid(),
+                             Email = request.Email
+                         };
             _clients.Add(client);
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }

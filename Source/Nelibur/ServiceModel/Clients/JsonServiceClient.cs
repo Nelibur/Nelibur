@@ -47,82 +47,82 @@ namespace Nelibur.ServiceModel.Clients
 
         public void Delete(object request)
         {
-            Send(request, OperationType.Delete, false);
+            SendOneWay(request, OperationType.Delete, false);
         }
 
         public TResponse Delete<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, OperationType.Delete);
+            return Send<TResponse>(request, OperationType.Delete);
         }
 
         public Task DeleteAsync(object request)
         {
-            return SendAsync(request, OperationType.Delete);
+            return SendOneWayAsync(request, OperationType.Delete);
         }
 
         public Task<TResponse> DeleteAsync<TResponse>(object request)
         {
-            return SendWithResponseAsync<TResponse>(request, OperationType.Delete);
+            return SendAsync<TResponse>(request, OperationType.Delete);
         }
 
         public void Get(object request)
         {
-            Send(request, OperationType.Get, false);
+            SendOneWay(request, OperationType.Get, false);
         }
 
         public TResponse Get<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, OperationType.Get);
+            return Send<TResponse>(request, OperationType.Get);
         }
 
         public Task GetAsync(object request)
         {
-            return SendAsync(request, OperationType.Get);
+            return SendOneWayAsync(request, OperationType.Get);
         }
 
         public Task<TResponse> GetAsync<TResponse>(object request)
         {
-            return SendWithResponseAsync<TResponse>(request, OperationType.Get);
+            return SendAsync<TResponse>(request, OperationType.Get);
         }
 
         public void Post(object request)
         {
-            Send(request, OperationType.Post, false);
+            SendOneWay(request, OperationType.Post, false);
         }
 
         public TResponse Post<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, OperationType.Post);
+            return Send<TResponse>(request, OperationType.Post);
         }
 
         public Task<TResponse> PostAsync<TResponse>(object request)
         {
-            return SendWithResponseAsync<TResponse>(request, OperationType.Post);
+            return SendAsync<TResponse>(request, OperationType.Post);
         }
 
         public Task PostAsync(object request)
         {
-            return SendAsync(request, OperationType.Post);
+            return SendOneWayAsync(request, OperationType.Post);
         }
 
         public void Put(object request)
         {
-            Send(request, OperationType.Put, false);
+            SendOneWay(request, OperationType.Put, false);
         }
 
         public TResponse Put<TResponse>(object request)
         {
-            return SendWithResponse<TResponse>(request, OperationType.Put);
+            return Send<TResponse>(request, OperationType.Put);
         }
 
         public Task PutAsync(object request)
         {
-            return SendAsync(request, OperationType.Put);
+            return SendOneWayAsync(request, OperationType.Put);
         }
 
         public Task<TResponse> PutAsync<TResponse>(object request)
         {
-            return SendWithResponseAsync<TResponse>(request, OperationType.Put);
+            return SendAsync<TResponse>(request, OperationType.Put);
         }
 
         private static StringContent CreateContent(object value)
@@ -136,76 +136,17 @@ namespace Nelibur.ServiceModel.Clients
             return new HttpClient(_httpClientHandler, _disposeHandler);
         }
 
-        private HttpResponseMessage Send(object request, string operationType, bool responseRequired = true)
-        {
-            string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
-            HttpResponseMessage response;
-
-            using (HttpClient client = CreateHttpClient())
-            {
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        response = client.GetAsync(urlRequest).Result;
-                        break;
-                    case OperationType.Post:
-                        response = client.PostAsync(urlRequest, CreateContent(request)).Result;
-                        break;
-                    case OperationType.Put:
-                        response = client.PutAsync(urlRequest, CreateContent(request)).Result;
-                        break;
-                    case OperationType.Delete:
-                        response = client.DeleteAsync(urlRequest).Result;
-                        break;
-                    default:
-                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
-                            operationType);
-                        throw Error.InvalidOperation(errorMessage);
-                }
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new WebFaultException(response.StatusCode);
-                }
-            }
-            return response;
-        }
-
-        private async Task<HttpResponseMessage> SendAsync(object request, string operationType)
-        {
-            string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
-
-            using (HttpClient client = CreateHttpClient())
-            {
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        return await client.GetAsync(urlRequest);
-                    case OperationType.Post:
-                        return await client.PostAsync(urlRequest, CreateContent(request));
-                    case OperationType.Put:
-                        return await client.PutAsync(urlRequest, CreateContent(request));
-                    case OperationType.Delete:
-                        return await client.DeleteAsync(urlRequest);
-                    default:
-                        string errorMessage = string.Format(
-                            "OperationType {0} with Response return is absent",
-                            operationType);
-                        throw Error.InvalidOperation(errorMessage);
-                }
-            }
-        }
-
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
-        private TResponse SendWithResponse<TResponse>(object request, string operationType)
+        private TResponse Send<TResponse>(object request, string operationType)
         {
-            HttpResponseMessage response = Send(request, operationType);
+            HttpResponseMessage response = SendOneWay(request, operationType);
             using (Stream stream = response.Content.ReadAsStreamAsync().Result)
             {
                 return JsonDataSerializer.ToValue<TResponse>(stream);
             }
         }
 
-        private async Task<TResponse> SendWithResponseAsync<TResponse>(
+        private async Task<TResponse> SendAsync<TResponse>(
             object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType);
@@ -240,6 +181,65 @@ namespace Nelibur.ServiceModel.Clients
                 using (Stream stream = await response.Content.ReadAsStreamAsync())
                 {
                     return JsonDataSerializer.ToValue<TResponse>(stream);
+                }
+            }
+        }
+
+        private HttpResponseMessage SendOneWay(object request, string operationType, bool responseRequired = true)
+        {
+            string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
+            HttpResponseMessage response;
+
+            using (HttpClient client = CreateHttpClient())
+            {
+                switch (operationType)
+                {
+                    case OperationType.Get:
+                        response = client.GetAsync(urlRequest).Result;
+                        break;
+                    case OperationType.Post:
+                        response = client.PostAsync(urlRequest, CreateContent(request)).Result;
+                        break;
+                    case OperationType.Put:
+                        response = client.PutAsync(urlRequest, CreateContent(request)).Result;
+                        break;
+                    case OperationType.Delete:
+                        response = client.DeleteAsync(urlRequest).Result;
+                        break;
+                    default:
+                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
+                            operationType);
+                        throw Error.InvalidOperation(errorMessage);
+                }
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new WebFaultException(response.StatusCode);
+                }
+            }
+            return response;
+        }
+
+        private async Task<HttpResponseMessage> SendOneWayAsync(object request, string operationType)
+        {
+            string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
+
+            using (HttpClient client = CreateHttpClient())
+            {
+                switch (operationType)
+                {
+                    case OperationType.Get:
+                        return await client.GetAsync(urlRequest);
+                    case OperationType.Post:
+                        return await client.PostAsync(urlRequest, CreateContent(request));
+                    case OperationType.Put:
+                        return await client.PutAsync(urlRequest, CreateContent(request));
+                    case OperationType.Delete:
+                        return await client.DeleteAsync(urlRequest);
+                    default:
+                        string errorMessage = string.Format(
+                            "OperationType {0} with Response return is absent",
+                            operationType);
+                        throw Error.InvalidOperation(errorMessage);
                 }
             }
         }

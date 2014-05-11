@@ -9,49 +9,49 @@ namespace Nelibur.ServiceModel.Services.Operations
     {
     }
 
-    public interface IDelete<in TRequest> : IRequestOperation
+    public interface IDeleteOneWay<in TRequest> : IRequestOperation
         where TRequest : class
     {
         void Delete(TRequest request);
     }
 
-    public interface IGet<in TRequest> : IRequestOperation
+    public interface IGetOneWay<in TRequest> : IRequestOperation
         where TRequest : class
     {
         void Get(TRequest request);
     }
 
-    public interface IPost<in TRequest> : IRequestOperation
+    public interface IPostOneWay<in TRequest> : IRequestOperation
         where TRequest : class
     {
         void Post(TRequest request);
     }
 
-    public interface IPut<in TRequest> : IRequestOperation
+    public interface IPutOneWay<in TRequest> : IRequestOperation
         where TRequest : class
     {
         void Put(TRequest request);
     }
 
-    public interface IDeleteWithResponse<in TRequest> : IRequestOperation
+    public interface IDelete<in TRequest> : IRequestOperation
         where TRequest : class
     {
         object DeleteWithResponse(TRequest request);
     }
 
-    public interface IGetWithResponse<in TRequest> : IRequestOperation
+    public interface IGet<in TRequest> : IRequestOperation
         where TRequest : class
     {
         object GetWithResponse(TRequest request);
     }
 
-    public interface IPostWithResponse<in TRequest> : IRequestOperation
+    public interface IPost<in TRequest> : IRequestOperation
         where TRequest : class
     {
         object PostWithResponse(TRequest request);
     }
 
-    public interface IPutWithResponse<in TRequest> : IRequestOperation
+    public interface IPut<in TRequest> : IRequestOperation
         where TRequest : class
     {
         object PutWithResponse(TRequest request);
