@@ -21,7 +21,7 @@ namespace SimpleRestService
 
         public object Get(GetClientRequest request)
         {
-            Console.WriteLine("GetWithResponse Request: {0}", request);
+            Console.WriteLine("Get Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }
@@ -30,10 +30,10 @@ namespace SimpleRestService
         {
             Console.WriteLine("Post Request: {0}", request);
             var client = new Client
-                         {
-                             Id = Guid.NewGuid(),
-                             Email = request.Email
-                         };
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email
+            };
             _clients.Add(client);
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }

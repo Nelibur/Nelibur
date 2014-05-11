@@ -7,7 +7,7 @@ namespace Nelibur.ServiceModel.Services.Headers
     internal sealed class SoapContentTypeHeader : MessageHeader
     {
         private const string NameValue = "nelibur-content-type";
-        private const string NamespaceValue = "http://nelibur/" + NameValue;
+        private const string NamespaceValue = "http://nelibur.org/" + NameValue;
         private readonly string _contentType;
 
         public SoapContentTypeHeader(Type contentType)

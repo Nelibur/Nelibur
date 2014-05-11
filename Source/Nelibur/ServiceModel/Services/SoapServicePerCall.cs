@@ -10,15 +10,6 @@ namespace Nelibur.ServiceModel.Services
     public sealed class SoapServicePerCall : ISoapService
     {
         /// <summary>
-        ///     Process message without response.
-        /// </summary>
-        /// <param name="message">Request message.</param>
-        public void ProcessOneWay(Message message)
-        {
-            SoapServiceProcessor.Process(message);
-        }
-
-        /// <summary>
         ///     Process message with response.
         /// </summary>
         /// <param name="message">Request message.</param>
@@ -26,6 +17,15 @@ namespace Nelibur.ServiceModel.Services
         public Message Process(Message message)
         {
             return SoapServiceProcessor.ProcessWithResponse(message);
+        }
+
+        /// <summary>
+        ///     Process message without response.
+        /// </summary>
+        /// <param name="message">Request message.</param>
+        public void ProcessOneWay(Message message)
+        {
+            SoapServiceProcessor.Process(message);
         }
     }
 }

@@ -44,9 +44,9 @@ namespace Nelibur.ServiceModel.Serializers
         private static NameValueCollection CreateQueryParams(Type value)
         {
             return new NameValueCollection
-                   {
-                       { RestServiceMetadata.ParamName.Type, UrlEncoder.Encode(value.Name) },
-                   };
+            {
+                { RestServiceMetadata.ParamName.Type, UrlEncoder.Encode(value.Name) },
+            };
         }
 
         private static ObjectCreator GetObjectCreator(Type value)
