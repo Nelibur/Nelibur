@@ -15,7 +15,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Delete);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.DeleteWithResponse, item.QueryData());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.Delete, item.QueryData());
             Assert.Equal(expected, actual);
         }
 
@@ -24,7 +24,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Delete, false);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.Delete, item.QueryData());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.DeleteOneWay, item.QueryData());
             Assert.Equal(expected, actual);
         }
 
@@ -33,7 +33,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Get);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.GetWithResponse, item.QueryData());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.Get, item.QueryData());
             Assert.Equal(expected, actual);
         }
 
@@ -42,7 +42,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Get, false);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.Get, item.QueryData());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.GetOneWay, item.QueryData());
             Assert.Equal(expected, actual);
         }
 
@@ -51,7 +51,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Post);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.PostWithResponse, item.QueryType());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.Post, item.QueryType());
             Assert.Equal(expected, actual);
         }
 
@@ -60,7 +60,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Post, false);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.Post, item.QueryType());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.PostOneWay, item.QueryType());
             Assert.Equal(expected, actual);
         }
 
@@ -69,7 +69,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Put);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.PutWithResponse, item.QueryType());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.Put, item.QueryType());
             Assert.Equal(expected, actual);
         }
 
@@ -78,7 +78,7 @@ namespace UnitTests.Nelibur.ServiceModel.Extensions
         {
             var item = new Data { Id = 1 };
             string actual = item.ToUrl(_serviceAddress, OperationType.Put, false);
-            string expected = GetExpectedUrl(RestServiceMetadata.Path.Put, item.QueryType());
+            string expected = GetExpectedUrl(RestServiceMetadata.Path.PutOneWay, item.QueryType());
             Assert.Equal(expected, actual);
         }
 

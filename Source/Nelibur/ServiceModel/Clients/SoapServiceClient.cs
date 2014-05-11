@@ -108,7 +108,7 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateMessage(
             object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
-            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.ProcessWithResponse, request);
+            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
             var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -118,7 +118,7 @@ namespace Nelibur.ServiceModel.Clients
         private static Message CreateOneWayMessage(
             object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
-            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.Process, request);
+            Message message = Message.CreateMessage(messageVersion, SoapServiceMetadata.Action.ProcessOneWay, request);
             var contentTypeHeader = new SoapContentTypeHeader(request.GetType());
             message.Headers.Add(contentTypeHeader);
             message.Headers.Add(actionHeader);
@@ -132,7 +132,7 @@ namespace Nelibur.ServiceModel.Clients
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateMessage(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                Message result = channel.ProcessWithResponse(message);
+                Message result = channel.Process(message);
                 return result.GetBody<TResponse>();
             }
         }
@@ -144,7 +144,7 @@ namespace Nelibur.ServiceModel.Clients
                 MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
                 Message message = CreateOneWayMessage(request, operationType, messageVersion);
                 ISoapService channel = factory.CreateChannel();
-                channel.Process(message);
+                channel.ProcessOneWay(message);
             }
         }
     }

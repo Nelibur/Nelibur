@@ -13,7 +13,7 @@ namespace Nelibur.ServiceModel.Services
         ///     Process message without response.
         /// </summary>
         /// <param name="message">Request message.</param>
-        public void Process(Message message)
+        public void ProcessOneWay(Message message)
         {
             SoapServiceProcessor.Process(message);
         }
@@ -23,7 +23,7 @@ namespace Nelibur.ServiceModel.Services
         /// </summary>
         /// <param name="message">Request message.</param>
         /// <returns>Response message.</returns>
-        public Message ProcessWithResponse(Message message)
+        public Message Process(Message message)
         {
             return SoapServiceProcessor.ProcessWithResponse(message);
         }

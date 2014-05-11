@@ -17,26 +17,26 @@ namespace Nelibur.ServiceModel.Extensions
             {
                 case OperationType.Post:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.PostWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Post))
+                        ? builder.AddPath(RestServiceMetadata.Path.Post)
+                        : builder.AddPath(RestServiceMetadata.Path.PostOneWay))
                         .AddQuery(UrlSerializer.FromType(value.GetType()).QueryParams);
                     break;
                 case OperationType.Put:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.PutWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Put))
+                        ? builder.AddPath(RestServiceMetadata.Path.Put)
+                        : builder.AddPath(RestServiceMetadata.Path.PutOneWay))
                         .AddQuery(UrlSerializer.FromType(value.GetType()).QueryParams);
                     break;
                 case OperationType.Get:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.GetWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Get))
+                        ? builder.AddPath(RestServiceMetadata.Path.Get)
+                        : builder.AddPath(RestServiceMetadata.Path.GetOneWay))
                         .AddQuery(UrlSerializer.FromValue(value).QueryParams);
                     break;
                 case OperationType.Delete:
                     builder = (responseRequired
-                        ? builder.AddPath(RestServiceMetadata.Path.DeleteWithResponse)
-                        : builder.AddPath(RestServiceMetadata.Path.Delete))
+                        ? builder.AddPath(RestServiceMetadata.Path.Delete)
+                        : builder.AddPath(RestServiceMetadata.Path.DeleteOneWay))
                         .AddQuery(UrlSerializer.FromValue(value).QueryParams);
                     break;
                 default:

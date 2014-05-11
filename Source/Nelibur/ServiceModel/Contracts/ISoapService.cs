@@ -8,19 +8,19 @@ namespace Nelibur.ServiceModel.Contracts
     public interface ISoapService
     {
         /// <summary>
-        ///     Process message without response.
-        /// </summary>
-        /// <param name="message">Request message.</param>
-        [OperationContract(Action = SoapServiceMetadata.Action.Process)]
-        void Process(Message message);
-
-        /// <summary>
         ///     Process message with response.
         /// </summary>
         /// <param name="message">Request message.</param>
         /// <returns>Response message.</returns>
-        [OperationContract(Action = SoapServiceMetadata.Action.ProcessWithResponse,
+        [OperationContract(Action = SoapServiceMetadata.Action.Process,
             ReplyAction = SoapServiceMetadata.Action.ProcessResponse)]
-        Message ProcessWithResponse(Message message);
+        Message Process(Message message);
+
+        /// <summary>
+        ///     Process message without response.
+        /// </summary>
+        /// <param name="message">Request message.</param>
+        [OperationContract(Action = SoapServiceMetadata.Action.ProcessOneWay)]
+        void ProcessOneWay(Message message);
     }
 }

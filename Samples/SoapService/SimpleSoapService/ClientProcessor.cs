@@ -21,14 +21,14 @@ namespace SimpleSoapService
 
         public object GetWithResponse(GetClientRequest request)
         {
-            Console.WriteLine("GetWithResponse Request: {0}", request);
+            Console.WriteLine("Get Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }
 
         public object PostWithResponse(CreateClientRequest request)
         {
-            Console.WriteLine("PostWithResponse Request: {0}", request);
+            Console.WriteLine("Post Request: {0}", request);
             var client = new Client
                 {
                     Id = Guid.NewGuid(),
@@ -40,7 +40,7 @@ namespace SimpleSoapService
 
         public object PutWithResponse(UpdateClientRequest request)
         {
-            Console.WriteLine("PutWithResponse Request: {0}", request);
+            Console.WriteLine("Put Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
             client.Email = request.Email;
             return new ClientResponse { Id = client.Id, Email = client.Email };
