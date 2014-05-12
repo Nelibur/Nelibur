@@ -63,92 +63,94 @@ public interface IJsonService
     [WebInvoke(Method = OperationType.Delete,
         UriTemplate = RestServiceMetadata.Path.Delete,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    void Delete(Message message);
+    Message Delete(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Delete,
-        UriTemplate = RestServiceMetadata.Path.DeleteWithResponse,
+        UriTemplate = RestServiceMetadata.Path.DeleteOneWay,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    Message DeleteWithResponse(Message message);
+    void DeleteOneWay(Message message);
 
     [OperationContract]
     [WebGet(UriTemplate = RestServiceMetadata.Path.Get,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    void Get(Message message);
+    Message Get(Message message);
 
     [OperationContract]
-    [WebGet(UriTemplate = RestServiceMetadata.Path.GetWithResponse,
+    [WebGet(UriTemplate = RestServiceMetadata.Path.GetOneWay,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    Message GetWithResponse(Message message);
+    void GetOneWay(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Post,
         UriTemplate = RestServiceMetadata.Path.Post,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    void Post(Message message);
+    Message Post(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Post,
-        UriTemplate = RestServiceMetadata.Path.PostWithResponse,
+        UriTemplate = RestServiceMetadata.Path.PostOneWay,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    Message PostWithResponse(Message message);
+    void PostOneWay(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Put,
         UriTemplate = RestServiceMetadata.Path.Put,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    void Put(Message message);
+    Message Put(Message message);
 
     [OperationContract]
     [WebInvoke(Method = OperationType.Put,
-        UriTemplate = RestServiceMetadata.Path.PutWithResponse,
+        UriTemplate = RestServiceMetadata.Path.PutOneWay,
         RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-    Message PutWithResponse(Message message);
+    void PutOneWay(Message message);
 }
 ```
 
 WCF's RESTful service
 
+Nelibur already contains `JsonServicePerCall`, but you can create your own custom Service for instance
+
 ```csharp
 [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
 public sealed class SampleWebService : IJsonService
 {
-    public void Delete(Message message)
+    public void DeleteOneWay(Message message)
     {
         RestServiceProcessor.Process(message);
     }
 
-    public Message DeleteWithResponse(Message message)
+    public Message Delete(Message message)
     {
         return RestServiceProcessor.ProcessWithResponse(message);
     }
 
-    public void Get(Message message)
+    public void GetOneWay(Message message)
     {
         RestServiceProcessor.Process(message);
     }
 
-    public Message GetWithResponse(Message message)
+    public Message Get(Message message)
     {
         return RestServiceProcessor.ProcessWithResponse(message);
     }
 
-    public void Post(Message message)
+    public void PostOneWay(Message message)
     {
         RestServiceProcessor.Process(message);
     }
 
-    public Message PostWithResponse(Message message)
+    public Message Post(Message message)
     {
         return RestServiceProcessor.ProcessWithResponse(message);
     }
 
-    public void Put(Message message)
+    public void PutOneWay(Message message)
     {
         RestServiceProcessor.Process(message);
     }
 
-    public Message PutWithResponse(Message message)
+    public Message Put(Message message)
     {
         return RestServiceProcessor.ProcessWithResponse(message);
     }
@@ -170,36 +172,36 @@ RestServiceProcessor.Configure(x =>
 ClientProcessor example
 
 ```csharp
-public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
-                                    IGetWithResponse<GetClientRequest>,
-                                    IDelete<DeleteClientRequest>,
-                                    IPutWithResponse<UpdateClientRequest>
+public sealed class ClientProcessor : IPost<CreateClientRequest>,
+									 IGet<GetClientRequest>,
+									 IDeleteOneWay<DeleteClientRequest>,
+									 IPut<UpdateClientRequest>
 {
     private static List<Client> _clients = new List<Client>();
 
-    public void Delete(DeleteClientRequest request)
+    public void DeleteOneWay(DeleteClientRequest request)
     {
         _clients = _clients.Where(x => x.Id != request.Id).ToList();
     }
 
-    public object GetWithResponse(GetClientRequest request)
-    {        
+    public object Get(GetClientRequest request)
+    {
         Client client = _clients.Single(x => x.Id == request.Id);
         return new ClientResponse { Id = client.Id, Email = client.Email };
     }
 
-    public object PostWithResponse(CreateClientRequest request)
+    public object Post(CreateClientRequest request)
     {
         var client = new Client
-            {
-                Id = Guid.NewGuid(),
-                Email = request.Email
-            };
+        {
+            Id = Guid.NewGuid(),
+            Email = request.Email
+        };
         _clients.Add(client);
         return new ClientResponse { Id = client.Id, Email = client.Email };
     }
 
-    public object PutWithResponse(UpdateClientRequest request)
+    public object Put(UpdateClientRequest request)
     {
         Client client = _clients.Single(x => x.Id == request.Id);
         client.Email = request.Email;
@@ -248,12 +250,13 @@ WCF's ServiceContract
 [ServiceContract]
 public interface ISoapService
 {
-	[OperationContract(Action = ServiceMetadata.Action.Process)]
-	void Process(Message message);
 
-	[OperationContract(Action = ServiceMetadata.Action.ProcessWithResponse,
-		ReplyAction = ServiceMetadata.Action.ProcessResponse)]
-	Message ProcessWithResponse(Message message);
+    [OperationContract(Action = SoapServiceMetadata.Action.Process,
+        ReplyAction = SoapServiceMetadata.Action.ProcessResponse)]
+    Message Process(Message message);
+
+    [OperationContract(Action = SoapServiceMetadata.Action.ProcessOneWay)]
+    void ProcessOneWay(Message message);
 }
 ```
 	
@@ -263,15 +266,15 @@ WCF's SOAP service
 [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
 public sealed class SampleSoapService : ISoapService
 {
-	public void Process(Message message)
-	{
-		SoapServiceProcessor.Process(message);
-	}
+    public Message Process(Message message)
+    {
+        return SoapServiceProcessor.ProcessWithResponse(message);
+    }
 
-	public Message ProcessWithResponse(Message message)
-	{
-		return SoapServiceProcessor.ProcessWithResponse(message);
-	}
+    public void ProcessOneWay(Message message)
+    {
+        SoapServiceProcessor.Process(message);
+    }
 }
 ```
 
@@ -290,41 +293,41 @@ SoapServiceProcessor.Configure(x =>
 ClientProcessor is the same as for RESTful
 
 ```csharp
-public sealed class ClientProcessor : IPostWithResponse<CreateClientRequest>,
-									IGetWithResponse<GetClientRequest>,
-									IDelete<DeleteClientRequest>,
-									IPutWithResponse<UpdateClientRequest>
+public sealed class ClientProcessor : IPost<CreateClientRequest>,
+									 IGet<GetClientRequest>,
+									 IDeleteOneWay<DeleteClientRequest>,
+									 IPut<UpdateClientRequest>
 {
-	private static List<Client> _clients = new List<Client>();
+    private static List<Client> _clients = new List<Client>();
 
-	public void Delete(DeleteClientRequest request)
-	{
-		_clients = _clients.Where(x => x.Id != request.Id).ToList();
-	}
+    public void DeleteOneWay(DeleteClientRequest request)
+    {
+        _clients = _clients.Where(x => x.Id != request.Id).ToList();
+    }
 
-	public object GetWithResponse(GetClientRequest request)
-	{
-		Client client = _clients.Single(x => x.Id == request.Id);
-		return new ClientResponse { Id = client.Id, Email = client.Email };
-	}
+    public object Get(GetClientRequest request)
+    {
+        Client client = _clients.Single(x => x.Id == request.Id);
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
 
-	public object PostWithResponse(CreateClientRequest request)
-	{
-		var client = new Client
-			{
-				Id = Guid.NewGuid(),
-				Email = request.Email
-			};
-		_clients.Add(client);
-		return new ClientResponse { Id = client.Id, Email = client.Email };
-	}
+    public object Post(CreateClientRequest request)
+    {
+        var client = new Client
+        {
+            Id = Guid.NewGuid(),
+            Email = request.Email
+        };
+        _clients.Add(client);
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
 
-	public object PutWithResponse(UpdateClientRequest request)
-	{
-		Client client = _clients.Single(x => x.Id == request.Id);
-		client.Email = request.Email;
-		return new ClientResponse { Id = client.Id, Email = client.Email };
-	}
+    public object Put(UpdateClientRequest request)
+    {
+        Client client = _clients.Single(x => x.Id == request.Id);
+        client.Email = request.Email;
+        return new ClientResponse { Id = client.Id, Email = client.Email };
+    }
 }
 ```	
 
