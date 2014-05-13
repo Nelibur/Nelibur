@@ -27,7 +27,12 @@ namespace Nelibur.ServiceModel.Serializers
             var result = new NameValueCollection(_typeInfo);
             foreach (KeyValuePair<string, PropertyGetter> item in _getters)
             {
-                string itemValue = UrlEncoder.Encode(item.Value(value).ToString());
+                object rawValue = item.Value(value);
+                if (rawValue == null)
+                {
+                    continue;
+                }
+                string itemValue = UrlEncoder.Encode(rawValue.ToString());
                 result[item.Key] = itemValue;
             }
             return result;
