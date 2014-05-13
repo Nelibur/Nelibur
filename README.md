@@ -109,7 +109,7 @@ public interface IJsonService
 
 WCF's RESTful service
 
-Nelibur already contains `JsonServicePerCall`, but you can create your own custom Service for instance
+Nelibur already contains `JsonServicePerCall`, but you can create your own custom Service, for instance
 
 ```csharp
 [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
