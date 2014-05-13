@@ -75,6 +75,7 @@ namespace UnitTests.Nelibur.ServiceModel.Serializers
         {
             public int Id { get; set; }
             public string Name { get; set; }
+            public string Null { get; set; }
         }
     }
 }
