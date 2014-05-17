@@ -18,6 +18,6 @@
         <tags>JSON SOAP REST Web Service Framework WCF Nelibur</tags>
     </metadata>
 	<files>
-		<file src="install.ps1" target="tools\install.ps1" />
+		<file src="Source\Nelibur\install.ps1" target="tools\install.ps1" />
 	</files>
 </package>
