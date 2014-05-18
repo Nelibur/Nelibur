@@ -1,4 +1,6 @@
-﻿namespace VisitorSample
+﻿using System;
+
+namespace VisitorSample
 {
     public abstract class Letter
     {

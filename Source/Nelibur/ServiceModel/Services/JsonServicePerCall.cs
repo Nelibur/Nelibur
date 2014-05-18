@@ -9,17 +9,12 @@ namespace Nelibur.ServiceModel.Services
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public sealed class JsonServicePerCall : IJsonService
     {
-        public void DeleteOneWay(Message message)
-        {
-            RestServiceProcessor.Process(message);
-        }
-
         public Message Delete(Message message)
         {
             return RestServiceProcessor.ProcessWithResponse(message);
         }
 
-        public void GetOneWay(Message message)
+        public void DeleteOneWay(Message message)
         {
             RestServiceProcessor.Process(message);
         }
@@ -29,7 +24,7 @@ namespace Nelibur.ServiceModel.Services
             return RestServiceProcessor.ProcessWithResponse(message);
         }
 
-        public void PostOneWay(Message message)
+        public void GetOneWay(Message message)
         {
             RestServiceProcessor.Process(message);
         }
@@ -39,7 +34,7 @@ namespace Nelibur.ServiceModel.Services
             return RestServiceProcessor.ProcessWithResponse(message);
         }
 
-        public void PutOneWay(Message message)
+        public void PostOneWay(Message message)
         {
             RestServiceProcessor.Process(message);
         }
@@ -47,6 +42,11 @@ namespace Nelibur.ServiceModel.Services
         public Message Put(Message message)
         {
             return RestServiceProcessor.ProcessWithResponse(message);
+        }
+
+        public void PutOneWay(Message message)
+        {
+            RestServiceProcessor.Process(message);
         }
     }
 }

@@ -18,10 +18,10 @@ namespace Nelibur.Core.Threading.ThreadPools
         {
             _taskQueueController = builder.TaskQueueController;
             _thread = new Thread(DoWork)
-                      {
-                          Name = builder.Name,
-                          IsBackground = true,
-                      };
+            {
+                Name = builder.Name,
+                IsBackground = true,
+            };
         }
 
         public void Start()

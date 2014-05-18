@@ -30,10 +30,10 @@ namespace SimpleSoapService
         {
             Console.WriteLine("Post Request: {0}", request);
             var client = new Client
-                {
-                    Id = Guid.NewGuid(),
-                    Email = request.Email
-                };
+            {
+                Id = Guid.NewGuid(),
+                Email = request.Email
+            };
             _clients.Add(client);
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }

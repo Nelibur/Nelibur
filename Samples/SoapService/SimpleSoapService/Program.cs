@@ -1,9 +1,7 @@
 ﻿using System;
 using System.ServiceModel;
-
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Processors;
-
 using SimpleSoapContracts.Contracts;
 
 namespace SimpleSoapService

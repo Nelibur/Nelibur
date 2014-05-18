@@ -11,7 +11,8 @@ namespace Nelibur.Core.Extensions
         public static Bag<TAttribute> GetAttribute<TAttribute>(this Enum value)
             where TAttribute : Attribute
         {
-            return GetAttributes<TAttribute>(value).SingleOrDefault()
+            return GetAttributes<TAttribute>(value)
+                .SingleOrDefault()
                 .ToBag();
         }
 
