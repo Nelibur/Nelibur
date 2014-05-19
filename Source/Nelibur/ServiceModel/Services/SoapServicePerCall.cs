@@ -16,7 +16,7 @@ namespace Nelibur.ServiceModel.Services
         /// <returns>Response message.</returns>
         public Message Process(Message message)
         {
-            return SoapServiceProcessor.ProcessWithResponse(message);
+            return NeliburSoapService.Process(message);
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Nelibur.ServiceModel.Services
         /// <param name="message">Request message.</param>
         public void ProcessOneWay(Message message)
         {
-            SoapServiceProcessor.Process(message);
+            NeliburSoapService.ProcessOneWay(message);
         }
     }
 }

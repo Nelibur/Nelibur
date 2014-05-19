@@ -74,8 +74,8 @@
     <Compile Include="ServiceModel\Services\Maps\RestRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
     <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
-    <Compile Include="ServiceModel\Services\Processors\RestServiceProcessor.cs" />
-    <Compile Include="ServiceModel\Services\Processors\SoapServiceProcessor.cs" />
+    <Compile Include="ServiceModel\Services\Processors\NeliburRestService.cs" />
+    <Compile Include="ServiceModel\Services\Processors\NeliburSoapService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">

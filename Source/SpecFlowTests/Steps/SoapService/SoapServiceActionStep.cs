@@ -33,7 +33,7 @@ namespace SpecFlowTests.Steps.SoapService
 
         private static void BindRequestToProcessors()
         {
-            SoapServiceProcessor.Configure(x =>
+            NeliburSoapService.Configure(x =>
             {
                 x.Bind<Order, OrderServiceProcessor>();
                 x.Bind<GetOrderById, OrderServiceProcessor>();

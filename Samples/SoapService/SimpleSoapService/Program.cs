@@ -12,7 +12,7 @@ namespace SimpleSoapService
 
         private static void BindRequestToProcessors()
         {
-            SoapServiceProcessor.Configure(x =>
+            NeliburSoapService.Configure(x =>
             {
                 x.Bind<CreateClientRequest, ClientProcessor>();
                 x.Bind<UpdateClientRequest, ClientProcessor>();

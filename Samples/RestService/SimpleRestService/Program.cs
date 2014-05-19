@@ -12,7 +12,7 @@ namespace SimpleRestService
 
         private static void BindRequestToProcessors()
         {
-            RestServiceProcessor.Configure(x =>
+            NeliburRestService.Configure(x =>
             {
                 x.Bind<CreateClientRequest, ClientProcessor>();
                 x.Bind<UpdateClientRequest, ClientProcessor>();

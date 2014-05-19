@@ -16,54 +16,47 @@ namespace Nelibur.ServiceModel.Services.Maps
             _creator = creator;
         }
 
-        public void ProcessOneWay(RequestMetadata metadata)
-        {
-            switch (metadata.OperationType)
-            {
-                case OperationType.Get:
-                    Get(metadata);
-                    break;
-                case OperationType.Post:
-                    Post(metadata);
-                    break;
-                case OperationType.Put:
-                    Put(metadata);
-                    break;
-                case OperationType.Delete:
-                    Delete(metadata);
-                    break;
-                default:
-                    string message = string.Format("Invalid operation type: {0}", metadata.OperationType);
-                    throw new InvalidOperationException(message);
-            }
-        }
-
         public Message Process(RequestMetadata metadata)
         {
             switch (metadata.OperationType)
             {
                 case OperationType.Get:
-                    return GetWithResponse(metadata);
+                    return Get(metadata);
                 case OperationType.Post:
-                    return PostWithResponse(metadata);
+                    return Post(metadata);
                 case OperationType.Put:
-                    return PutWithResponse(metadata);
+                    return Put(metadata);
                 case OperationType.Delete:
-                    return DeleteWithResponse(metadata);
+                    return Delete(metadata);
                 default:
                     string message = string.Format("Invalid operation type: {0}", metadata.OperationType);
                     throw Error.InvalidOperation(message);
             }
         }
 
-        private void Delete(RequestMetadata metadata)
+        public void ProcessOneWay(RequestMetadata metadata)
         {
-            var service = (IDeleteOneWay<TRequest>)_creator();
-            var request = metadata.GetRequest<TRequest>();
-            service.DeleteOneWay(request);
+            switch (metadata.OperationType)
+            {
+                case OperationType.Get:
+                    GetOneWay(metadata);
+                    break;
+                case OperationType.Post:
+                    PostOneWay(metadata);
+                    break;
+                case OperationType.Put:
+                    PutOneWay(metadata);
+                    break;
+                case OperationType.Delete:
+                    DeleteOneWay(metadata);
+                    break;
+                default:
+                    string message = string.Format("Invalid operation type: {0}", metadata.OperationType);
+                    throw Error.InvalidOperation(message);
+            }
         }
 
-        private Message DeleteWithResponse(RequestMetadata metadata)
+        private Message Delete(RequestMetadata metadata)
         {
             var service = (IDelete<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
@@ -71,14 +64,14 @@ namespace Nelibur.ServiceModel.Services.Maps
             return metadata.CreateResponse(result);
         }
 
-        private void Get(RequestMetadata metadata)
+        private void DeleteOneWay(RequestMetadata metadata)
         {
-            var service = (IGetOneWay<TRequest>)_creator();
+            var service = (IDeleteOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.GetOneWay(request);
+            service.DeleteOneWay(request);
         }
 
-        private Message GetWithResponse(RequestMetadata metadata)
+        private Message Get(RequestMetadata metadata)
         {
             var service = (IGet<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
@@ -86,14 +79,14 @@ namespace Nelibur.ServiceModel.Services.Maps
             return metadata.CreateResponse(result);
         }
 
-        private void Post(RequestMetadata metadata)
+        private void GetOneWay(RequestMetadata metadata)
         {
-            var service = (IPostOneWay<TRequest>)_creator();
+            var service = (IGetOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.PostOneWay(request);
+            service.GetOneWay(request);
         }
 
-        private Message PostWithResponse(RequestMetadata metadata)
+        private Message Post(RequestMetadata metadata)
         {
             var service = (IPost<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
@@ -101,19 +94,26 @@ namespace Nelibur.ServiceModel.Services.Maps
             return metadata.CreateResponse(result);
         }
 
-        private void Put(RequestMetadata metadata)
+        private void PostOneWay(RequestMetadata metadata)
         {
-            var service = (IPutOneWay<TRequest>)_creator();
+            var service = (IPostOneWay<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
-            service.PutOneWay(request);
+            service.PostOneWay(request);
         }
 
-        private Message PutWithResponse(RequestMetadata metadata)
+        private Message Put(RequestMetadata metadata)
         {
             var service = (IPut<TRequest>)_creator();
             var request = metadata.GetRequest<TRequest>();
             object result = service.Put(request);
             return metadata.CreateResponse(result);
+        }
+
+        private void PutOneWay(RequestMetadata metadata)
+        {
+            var service = (IPutOneWay<TRequest>)_creator();
+            var request = metadata.GetRequest<TRequest>();
+            service.PutOneWay(request);
         }
     }
 }

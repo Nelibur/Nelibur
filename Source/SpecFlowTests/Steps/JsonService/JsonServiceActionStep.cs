@@ -38,7 +38,7 @@ namespace SpecFlowTests.Steps.JsonService
 
         private static void BindRequestToProcessors()
         {
-            RestServiceProcessor.Configure(x =>
+            NeliburRestService.Configure(x =>
             {
                 x.Bind<Order, OrderServiceProcessor>();
                 x.Bind<GetOrderById, OrderServiceProcessor>();

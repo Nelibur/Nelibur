@@ -4,9 +4,9 @@ using Nelibur.ServiceModel.Services.Maps;
 
 namespace Nelibur.ServiceModel.Services.Processors
 {
-    public sealed class SoapServiceProcessor : NeliburService
+    public sealed class NeliburSoapService : NeliburService
     {
-        private SoapServiceProcessor()
+        private NeliburSoapService()
         {
         }
 
@@ -16,16 +16,16 @@ namespace Nelibur.ServiceModel.Services.Processors
             return _configuration;
         }
 
-        public static void Process(Message message)
-        {
-            RequestMetadata metadata = _requests.FromSoapMessage(message);
-            ProcessOneWay(metadata);
-        }
-
-        public static Message ProcessWithResponse(Message message)
+        public static Message Process(Message message)
         {
             RequestMetadata metadata = _requests.FromSoapMessage(message);
             return Process(metadata);
+        }
+
+        public static void ProcessOneWay(Message message)
+        {
+            RequestMetadata metadata = _requests.FromSoapMessage(message);
+            ProcessOneWay(metadata);
         }
     }
 }
