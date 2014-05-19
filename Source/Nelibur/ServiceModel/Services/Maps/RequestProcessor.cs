@@ -16,7 +16,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             _creator = creator;
         }
 
-        public void Process(RequestMetadata metadata)
+        public void ProcessOneWay(RequestMetadata metadata)
         {
             switch (metadata.OperationType)
             {
@@ -38,7 +38,7 @@ namespace Nelibur.ServiceModel.Services.Maps
             }
         }
 
-        public Message ProcessWithResponse(RequestMetadata metadata)
+        public Message Process(RequestMetadata metadata)
         {
             switch (metadata.OperationType)
             {

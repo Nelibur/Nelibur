@@ -4,7 +4,7 @@ using Nelibur.ServiceModel.Services.Maps;
 
 namespace Nelibur.ServiceModel.Services.Processors
 {
-    public sealed class SoapServiceProcessor : ServiceProcessor
+    public sealed class SoapServiceProcessor : NeliburService
     {
         private SoapServiceProcessor()
         {
@@ -19,13 +19,13 @@ namespace Nelibur.ServiceModel.Services.Processors
         public static void Process(Message message)
         {
             RequestMetadata metadata = _requests.FromSoapMessage(message);
-            Process(metadata);
+            ProcessOneWay(metadata);
         }
 
         public static Message ProcessWithResponse(Message message)
         {
             RequestMetadata metadata = _requests.FromSoapMessage(message);
-            return ProcessWithResponse(metadata);
+            return Process(metadata);
         }
     }
 }

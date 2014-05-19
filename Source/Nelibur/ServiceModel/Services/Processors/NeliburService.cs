@@ -6,22 +6,22 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Services.Processors
 {
-    public abstract class ServiceProcessor
+    public abstract class NeliburService
     {
         internal static readonly RequestMetadataMap _requests = new RequestMetadataMap();
         protected static readonly Configuration _configuration = new Configuration();
         private static readonly RequestProcessorMap _requestProcessors = new RequestProcessorMap();
 
-        protected static void Process(RequestMetadata requestMetaData)
+        protected static void ProcessOneWay(RequestMetadata requestMetaData)
         {
             IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
-            processor.Process(requestMetaData);
+            processor.ProcessOneWay(requestMetaData);
         }
 
-        protected static Message ProcessWithResponse(RequestMetadata requestMetaData)
+        protected static Message Process(RequestMetadata requestMetaData)
         {
             IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
-            return processor.ProcessWithResponse(requestMetaData);
+            return processor.Process(requestMetaData);
         }
 
         protected sealed class Configuration : IConfiguration

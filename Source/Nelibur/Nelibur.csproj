@@ -62,7 +62,7 @@
     <Compile Include="ServiceModel\Services\JsonServicePerCall.cs" />
     <Compile Include="ServiceModel\Services\Processors\IConfiguration.cs" />
     <Compile Include="ServiceModel\Services\SoapServicePerCall.cs" />
-    <Compile Include="ServiceModel\Services\Processors\ServiceProcessor.cs" />
+    <Compile Include="ServiceModel\Services\Processors\NeliburService.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapContentTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapOperationTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessor.cs" />

@@ -45,7 +45,7 @@ namespace Nelibur.ServiceModel.Services.Maps
                 return result;
             }
             string errorMessage = string.Format(
-                "Binding on {0} is absent. Use the Bind method on an appropriate ServiceProcessor", typeName);
+                "Binding on {0} is absent. Use the Bind method on an appropriate NeliburService", typeName);
             throw Error.InvalidOperation(errorMessage);
         }
     }
