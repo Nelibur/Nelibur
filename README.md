@@ -117,42 +117,42 @@ public sealed class SampleWebService : IJsonService
 {
     public void DeleteOneWay(Message message)
     {
-        RestServiceProcessor.Process(message);
+        NeliburRestService.ProcessOneWay(message);
     }
 
     public Message Delete(Message message)
     {
-        return RestServiceProcessor.ProcessWithResponse(message);
+        return NeliburRestService.Process(message);
     }
 
     public void GetOneWay(Message message)
     {
-        RestServiceProcessor.Process(message);
+        NeliburRestService.ProcessOneWay(message);
     }
 
     public Message Get(Message message)
     {
-        return RestServiceProcessor.ProcessWithResponse(message);
+        return NeliburRestService.Process(message);
     }
 
     public void PostOneWay(Message message)
     {
-        RestServiceProcessor.Process(message);
+        NeliburRestService.ProcessOneWay(message);
     }
 
     public Message Post(Message message)
     {
-        return RestServiceProcessor.ProcessWithResponse(message);
+        return NeliburRestService.Process(message);
     }
 
     public void PutOneWay(Message message)
     {
-        RestServiceProcessor.Process(message);
+        NeliburRestService.ProcessOneWay(message);
     }
 
     public Message Put(Message message)
     {
-        return RestServiceProcessor.ProcessWithResponse(message);
+        return NeliburRestService.Process(message);
     }
 }
 ```
@@ -160,7 +160,7 @@ public sealed class SampleWebService : IJsonService
 Request binding on appropriate Processor
 
 ```csharp
-RestServiceProcessor.Configure(x =>
+NeliburRestService.Configure(x =>
 {
     x.Bind<CreateClientRequest, ClientProcessor>();
     x.Bind<UpdateClientRequest, ClientProcessor>();
@@ -268,12 +268,12 @@ public sealed class SampleSoapService : ISoapService
 {
     public Message Process(Message message)
     {
-        return SoapServiceProcessor.ProcessWithResponse(message);
+        return NeliburSoapService.Process(message);
     }
 
     public void ProcessOneWay(Message message)
     {
-        SoapServiceProcessor.Process(message);
+        NeliburSoapService.ProcessOneWay(message);
     }
 }
 ```
@@ -281,7 +281,7 @@ public sealed class SampleSoapService : ISoapService
 Request binding on appropriate Processor
 
 ```csharp
-SoapServiceProcessor.Configure(x =>
+NeliburSoapService.Configure(x =>
 {
     x.Bind<CreateClientRequest, ClientProcessor>();
     x.Bind<UpdateClientRequest, ClientProcessor>();
