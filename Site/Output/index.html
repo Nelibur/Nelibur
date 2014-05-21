@@ -8,10 +8,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Message based web service framework on the pure WCF">
         <meta name="keywords" content="WCF, .NET, Nelibur, REST, SOAP, RESTful service, web service, message based framework">
-		<meta name="msvalidate.01" content="E131468FC70A729451F8D412ECD7F5C0" />
+        <meta name="msvalidate.01" content="E131468FC70A729451F8D412ECD7F5C0" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="Content/nelibur.css">
+        
     </head>
     <body data-spy="scroll" data-target=".navbar-collapse">
         <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -208,7 +209,7 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
                     (i[r].q = i[r].q || []).push(arguments);
                 }, i[r].l = 1 * new Date();
                 a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
+                m = s.getElementsByTagName(o)[0];
                 a.async = 1;
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
@@ -216,5 +217,21 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
             ga('create', 'UA-49279005-1', 'nelibur.org');
             ga('send', 'pageview');
         </script>
+        <script type="text/javascript">
+            ($(document).ready(function () {
+                if (navigator.userAgent.indexOf("MSIE") == -1) {
+                    return;
+                }
+                var ieVersion = navigator.userAgent.match("MSIE (.|)")[1];
+                if (ieVersion > 8) {
+                    return;
+                }
+                $("#example").html("<h2>Please open this page with proper browser to see examples here</h2><a>http://nelibur.org</a>");
+            }));
+        </script>
+        <script>
+            
+        </script>
+        
     </body>
 </html>
