@@ -15,7 +15,7 @@
         <iconUrl>http://gravatar.com/avatar/d480d09db613465e3ad18b7552dfef4b</iconUrl>
         <summary>Opensource message based web service framework on the pure WCF</summary>
         <language>en-US</language>
-        <tags>JSON SOAP REST Web Service Framework WCF Nelibur</tags>
+        <tags>JSON SOAP XML REST Web Service Framework WCF Nelibur</tags>
     </metadata>
 	<files>
 		<file src="Source\Nelibur\install.ps1" target="tools\install.ps1" />
