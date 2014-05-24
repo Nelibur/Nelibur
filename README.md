@@ -333,7 +333,12 @@ public sealed class ClientProcessor : IPost<CreateClientRequest>,
 
 Contributing
 ===================
-To contribute please follow these guidelines:
+
+### Before you do anything else
+
+ * Before reporting an issue or creating a pull request, please discuss it in the [Google Group](https://groups.google.com/group/nelibur)
+
+### To contribute please follow these guidelines:
 
 * Fork the project
 * Spaces, not Tabs and no regions
