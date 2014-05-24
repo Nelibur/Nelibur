@@ -59,10 +59,10 @@
     <Compile Include="ServiceModel\Serializers\QueryStringCreator.cs" />
     <Compile Include="ServiceModel\Serializers\UrlEncoder.cs" />
     <Compile Include="ServiceModel\Serializers\UrlSerializer.cs" />
-    <Compile Include="ServiceModel\Services\JsonServicePerCall.cs" />
-    <Compile Include="ServiceModel\Services\Processors\IConfiguration.cs" />
-    <Compile Include="ServiceModel\Services\SoapServicePerCall.cs" />
-    <Compile Include="ServiceModel\Services\Processors\NeliburService.cs" />
+    <Compile Include="ServiceModel\Services\Default\JsonServicePerCall.cs" />
+    <Compile Include="ServiceModel\Services\IConfiguration.cs" />
+    <Compile Include="ServiceModel\Services\Default\SoapServicePerCall.cs" />
+    <Compile Include="ServiceModel\Services\NeliburService.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapContentTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Headers\SoapOperationTypeHeader.cs" />
     <Compile Include="ServiceModel\Services\Maps\IRequestProcessor.cs" />
@@ -74,8 +74,8 @@
     <Compile Include="ServiceModel\Services\Maps\RestRequestMetadata.cs" />
     <Compile Include="ServiceModel\Services\Operations\OperationType.cs" />
     <Compile Include="ServiceModel\Services\Operations\RequestOperations.cs" />
-    <Compile Include="ServiceModel\Services\Processors\NeliburRestService.cs" />
-    <Compile Include="ServiceModel\Services\Processors\NeliburSoapService.cs" />
+    <Compile Include="ServiceModel\Services\NeliburRestService.cs" />
+    <Compile Include="ServiceModel\Services\NeliburSoapService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">

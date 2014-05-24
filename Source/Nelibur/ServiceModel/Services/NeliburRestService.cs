@@ -2,11 +2,11 @@
 using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Services.Maps;
 
-namespace Nelibur.ServiceModel.Services.Processors
+namespace Nelibur.ServiceModel.Services
 {
-    public sealed class NeliburSoapService : NeliburService
+    public sealed class NeliburRestService : NeliburService
     {
-        private NeliburSoapService()
+        private NeliburRestService()
         {
         }
 
@@ -18,13 +18,13 @@ namespace Nelibur.ServiceModel.Services.Processors
 
         public static Message Process(Message message)
         {
-            RequestMetadata metadata = _requests.FromSoapMessage(message);
+            RequestMetadata metadata = _requests.FromRestMessage(message);
             return Process(metadata);
         }
 
         public static void ProcessOneWay(Message message)
         {
-            RequestMetadata metadata = _requests.FromSoapMessage(message);
+            RequestMetadata metadata = _requests.FromRestMessage(message);
             ProcessOneWay(metadata);
         }
     }

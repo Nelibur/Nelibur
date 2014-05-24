@@ -1,7 +1,7 @@
 ﻿using System.ServiceModel;
 using Nelibur.ServiceModel.Clients;
 using Nelibur.ServiceModel.Services;
-using Nelibur.ServiceModel.Services.Processors;
+using Nelibur.ServiceModel.Services.Default;
 using SpecFlowTests.Samples.Contracts;
 using SpecFlowTests.Samples.SoapService;
 

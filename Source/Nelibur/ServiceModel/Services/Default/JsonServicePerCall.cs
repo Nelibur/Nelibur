@@ -2,9 +2,8 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Contracts;
-using Nelibur.ServiceModel.Services.Processors;
 
-namespace Nelibur.ServiceModel.Services
+namespace Nelibur.ServiceModel.Services.Default
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
     public sealed class JsonServicePerCall : IJsonService

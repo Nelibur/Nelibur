@@ -4,7 +4,7 @@ using Nelibur.Core;
 using Nelibur.ServiceModel.Services.Maps;
 using Nelibur.ServiceModel.Services.Operations;
 
-namespace Nelibur.ServiceModel.Services.Processors
+namespace Nelibur.ServiceModel.Services
 {
     public abstract class NeliburService
     {

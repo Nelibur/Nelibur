@@ -1,7 +1,7 @@
 ﻿using System;
 using Nelibur.ServiceModel.Services.Operations;
 
-namespace Nelibur.ServiceModel.Services.Processors
+namespace Nelibur.ServiceModel.Services
 {
     public interface IConfiguration
     {

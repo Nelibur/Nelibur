@@ -3,8 +3,7 @@ using System.ServiceModel.Web;
 
 using Nelibur.ServiceModel.Clients;
 using Nelibur.ServiceModel.Services;
-using Nelibur.ServiceModel.Services.Processors;
-
+using Nelibur.ServiceModel.Services.Default;
 using SpecFlowTests.Properties;
 using SpecFlowTests.Samples.Contracts;
 using SpecFlowTests.Samples.JsonService;
