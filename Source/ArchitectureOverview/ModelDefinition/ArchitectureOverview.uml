@@ -34,7 +34,7 @@
             <coveredLifelines>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </coveredLifelines>
             <finish>
@@ -98,7 +98,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -118,7 +118,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -178,7 +178,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -198,7 +198,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -296,7 +296,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -316,7 +316,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -402,7 +402,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -530,7 +530,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -568,7 +568,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </messageOccurrenceSpecification>
@@ -596,7 +596,7 @@
             <covered>
               <lifelineMoniker
                 Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-                LastKnownName="SoapServiceProcessor"
+                LastKnownName="NeliburSoapService"
                 LastKnownLocation="ArchitectureOverview.uml" />
             </covered>
           </executionOccurrenceSpecification>
@@ -620,9 +620,9 @@
           </lifeline>
           <lifeline
             Id="51a0837f-d7f7-4e33-b778-a393503422b5"
-            name="SoapServiceProcessor"
+            name="NeliburSoapService"
             isActor="false"
-            lifelineDisplayName="SoapServiceProcessor">
+            lifelineDisplayName="NeliburSoapService">
             <topLevelOccurrences>
               <executionOccurrenceSpecificationMoniker
                 Id="ec56c97b-5e8a-4d61-873d-c3ecfbf98941"
@@ -702,7 +702,7 @@
         <messages>
           <message
             Id="e233d46e-2b19-4a1b-9b4d-d53ac8568e5e"
-            name="ProcessWithResponse"
+            name="Process"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
@@ -797,7 +797,7 @@
           </message>
           <message
             Id="35984ee7-accb-482e-a3b6-e95e1ed3409e"
-            name="ProcessWithResponse"
+            name="Process"
             messageKind="Complete"
             messageSort="SynchCall"
             createSelfMessage="false">
