@@ -29,6 +29,13 @@
       <SubType>Content</SubType>
       <DependentUpon>Nelibur\ServiceModel\ProcessSoapMessage.sequencediagram</DependentUpon>
     </Content>
+    <Content Include="Nelibur\ServiceModel\RequestOperations.classdiagram">
+      <SubType>Content</SubType>
+    </Content>
+    <Content Include="Nelibur\ServiceModel\RequestOperations.classdiagram.layout">
+      <SubType>Content</SubType>
+      <DependentUpon>Nelibur\ServiceModel\RequestOperations.classdiagram</DependentUpon>
+    </Content>
     <Folder Include="ModelDefinition\" />
     <Content Include="ModelDefinition\ArchitectureOverview.uml">
       <SubType>Content</SubType>

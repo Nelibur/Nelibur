@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/VisualStudio/TeamArchitect/SequenceDesigner"
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
   dslVersion="1.0.0.0"
   Id="30d66e5c-39e8-4851-be38-9db48fb14a4b"
   name="ArchitectureOverview" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
@@ -942,6 +942,184 @@
       <executionEvent
         Id="b1974119-1339-42f5-9e35-b0883a9ef96c"
         name="ExecutionEvent" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="9569a0db-b044-4a80-b2df-a98e1d11317f"
+        name="Class1"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="df34ecfa-bded-47f0-bf53-1d1e89f68538"
+        name="Class2"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <generalsInternal>
+          <generalization
+            Id="1f249cae-2cfc-427a-833d-b4af346f0c42"
+            isSubstitutable="false">
+            <classMoniker
+              Id="9569a0db-b044-4a80-b2df-a98e1d11317f"
+              LastKnownName="Class1"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+        name="IRequestOperation"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="2578df2f-eae1-4f7d-91d8-4c5ef1bc2a56"
+        name="IDeleteOneWay&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="aaa680c1-320f-4640-8754-752cac0ba82e"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="fffa92b7-b816-4f29-8bb3-3fd5bb23ba70"
+        name="IGetOneWay&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="4aaeb8eb-edd4-4b93-b56b-778a67bca4d0"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="82329703-dbff-4681-af35-13bd8a25f35c"
+        name="IPostOneWay&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="d64458f4-69d0-4a36-b899-4eee0122daed"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="9dce4b95-df0f-4ba7-beb1-2e4daa69f138"
+        name="IPutOneWay&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="020b97f5-a223-4512-8550-e6d7c35f1b26"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="d254cf16-9ccc-4897-bdc0-70d6b4a58a10"
+        name="IDelete&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="859dac27-f78d-4515-9cd8-914eb24302bd"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="213cd922-07f1-4c59-bffa-f1dbe123efdb"
+        name="IGet&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="2fc40f9d-d389-40bd-b16e-d4d8102645d4"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="cfdff327-15bd-425a-9c89-fb3021e7913d"
+        name="IPost&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="dcf748fe-979f-4e28-8d8e-00a742d58521"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="185e5f1f-47b4-4dfa-8a5d-4d2c9a3a0048"
+        name="IPut&lt;TRequest&gt;"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="6d3ac99f-6e57-4681-b5da-b165e2ea617a"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948"
+              LastKnownName="IRequestOperation"
+              LastKnownLocation="ArchitectureOverview.uml" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType

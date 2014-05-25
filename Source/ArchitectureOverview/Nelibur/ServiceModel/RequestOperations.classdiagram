@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5abb451a-273c-42c8-848d-8ed03c1ba386" name="RequestOperations" linkedPackageId="e8204c63-7a24-4b5a-8e7a-e80b855950b5" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="011839e3-5b55-414d-ae23-983d770f59a2">
+      <profileInstance Id="b6dc95e4-4f8a-413c-9b11-2b380cde413c" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="2babedcc-6775-4372-b3d9-1e4b7b5fbe40">
+      <profileInstance Id="966c6031-b204-46b5-aefc-c9cabd12aaac" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" name="IRequestOperation" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="320206e5-1d46-42ea-9e5d-b30bfe4e9948" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="98599e16-81c0-46fb-917c-bed3aaeb4b10" name="IDeleteOneWay&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="2578df2f-eae1-4f7d-91d8-4c5ef1bc2a56" />
+        <generalsInternal>
+          <generalization Id="404bf38b-78f8-4c0a-956e-a03d8084a948" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="aaa680c1-320f-4640-8754-752cac0ba82e" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="8087eb8c-538d-466e-807b-0850a593e183" name="IGetOneWay&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fffa92b7-b816-4f29-8bb3-3fd5bb23ba70" />
+        <generalsInternal>
+          <generalization Id="34b6aaaa-bd4b-4d99-b076-f8afd192e350" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="4aaeb8eb-edd4-4b93-b56b-778a67bca4d0" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="aec867b4-5ab7-4d7a-a259-50bfe01572f6" name="IPostOneWay&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="82329703-dbff-4681-af35-13bd8a25f35c" />
+        <generalsInternal>
+          <generalization Id="bc6b5704-163f-4e40-89e7-680ed7795761" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="d64458f4-69d0-4a36-b899-4eee0122daed" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="1e74aa56-e6b2-4e2b-80c2-0a9eec9cf8f1" name="IPutOneWay&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="9dce4b95-df0f-4ba7-beb1-2e4daa69f138" />
+        <generalsInternal>
+          <generalization Id="48367940-c58b-4f26-af35-0f970220df6d" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="020b97f5-a223-4512-8550-e6d7c35f1b26" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="53712830-39e0-4526-9617-dde2896543a7" name="IDelete&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d254cf16-9ccc-4897-bdc0-70d6b4a58a10" />
+        <generalsInternal>
+          <generalization Id="81cd92a0-19e2-465e-aba2-8ed4754d1f1f" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="859dac27-f78d-4515-9cd8-914eb24302bd" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="3e4ae2fb-04ec-48be-9671-617db6d36112" name="IGet&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="213cd922-07f1-4c59-bffa-f1dbe123efdb" />
+        <generalsInternal>
+          <generalization Id="1026b591-6b57-40f5-8f03-ae851151f271" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="2fc40f9d-d389-40bd-b16e-d4d8102645d4" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="4214aad7-c010-4d93-bc40-8e76805488ae" name="IPost&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="cfdff327-15bd-425a-9c89-fb3021e7913d" />
+        <generalsInternal>
+          <generalization Id="fe2a09a4-de41-48ef-ae6c-91febfb442e9" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="dcf748fe-979f-4e28-8d8e-00a742d58521" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="6c90ee3e-819e-448a-9a0f-e64f03ef428f" name="IPut&lt;TRequest&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="185e5f1f-47b4-4dfa-8a5d-4d2c9a3a0048" />
+        <generalsInternal>
+          <generalization Id="c38e3f89-5d01-4a7f-83ac-e6ccf25cbeb2" isSubstitutable="false">
+            <interfaceMoniker Id="5fdfbb23-3a49-4fa7-b007-bfb419fb7747" LastKnownName="IRequestOperation" />
+            <elementDefinition Id="6d3ac99f-6e57-4681-b5da-b165e2ea617a" />
+          </generalization>
+        </generalsInternal>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="e8204c63-7a24-4b5a-8e7a-e80b855950b5" name="ArchitectureOverview">
+    <elementDefinition Id="30d66e5c-39e8-4851-be38-9db48fb14a4b" />
+  </package>
+</logicalClassDesignerModel>
