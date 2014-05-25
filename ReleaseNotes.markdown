@@ -1,5 +1,12 @@
 # Nelibur Release Notes
 
+## 3.0.2
+
+### Improvements
+
+* JsonServicePerCall, SoapServicePerCall -> Services/Default
+* SoapServiceProcessor -> NeliburSoapService
+
 ## 3.0.1-beta2
 
 ### New Features/Improvements
