@@ -7,12 +7,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Message based web service framework on the pure WCF">
-        <meta name="keywords" content="WCF, .NET, Nelibur, REST, SOAP, RESTful service, web service, message based framework">
+        <meta name="keywords" content="WCF, .NET, Nelibur, REST, SOAP, JSON, RESTful service, web service, message based framework, JsonServiceClient, SoapServiceClient">
         <meta name="msvalidate.01" content="E131468FC70A729451F8D412ECD7F5C0" />
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="Content/nelibur.css">
-        
+        <link href="Content/bootstrap-social.css" rel="stylesheet" />
+
     </head>
     <body data-spy="scroll" data-target=".navbar-collapse">
         <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -81,7 +83,10 @@
                 <div class="col-md-6">
                     <h3>
                         <span class="glyphicon glyphicon-ok"></span>
-                        Source code is available at <a href="https://github.com/Nelibur/Nelibur">GitHub</a>
+                        Source code is available at 
+                        <a class="btn btn-github btn-social" href="https://github.com/Nelibur/Nelibur">
+                            <i class="fa fa-github"></i>GitHub
+                        </a>
                     </h3>
                     <p>
                         As well as latest examples and other useful stuff
@@ -185,7 +190,10 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
             </div>
             <div class="row">
                 <p>
-                    For additional information please get aquianted with the docs on our <a href="https://github.com/Nelibur/Nelibur#simple-soap-message-based-client">GitHub page</a>
+                    For additional information please get aquianted with the docs on our 
+                    <a class="btn btn-github btn-social" href="https://github.com/Nelibur/Nelibur#simple-soap-message-based-client">
+                        <i class="fa fa-github"></i>GitHub page
+                    </a>
                 </p>
             </div>
         </div>
@@ -193,9 +201,17 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
 </section>
         <footer class="panel-footer" style="margin-top: 40px">
             <div class="container">
-                <ul class="list-unstyled">
-                    <li><a href="https://twitter.com/Nelibur">Follow us on Twitter</a></li>
-                    <li><a href="https://groups.google.com/forum/#!forum/nelibur">Checkout Google Groups page</a></li>
+                <ul class="list-unstyled buttons-social">
+                    <li>
+                        <a class="btn btn-twitter btn-social" href="https://twitter.com/Nelibur">
+                            <i class="fa fa-twitter"></i>Follow us on Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-google-plus btn-social" href="https://groups.google.com/forum/#!forum/nelibur">
+                            <i class="fa fa-google"></i>Checkout Google Groups page
+                        </a>
+                    </li>
                 </ul>
             </div>
         </footer>
@@ -209,7 +225,7 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
                     (i[r].q = i[r].q || []).push(arguments);
                 }, i[r].l = 1 * new Date();
                 a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
+                    m = s.getElementsByTagName(o)[0];
                 a.async = 1;
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
@@ -218,7 +234,7 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
             ga('send', 'pageview');
         </script>
         <script type="text/javascript">
-            ($(document).ready(function () {
+            ($(document).ready(function() {
                 if (navigator.userAgent.indexOf("MSIE") == -1) {
                     return;
                 }
@@ -229,9 +245,5 @@ public sealed class ClientProcessor : IGet&lt;GetClientRequest&gt;,
                 $("#example").html("<h2>Please open this page with proper browser to see examples here</h2><a>http://nelibur.org</a>");
             }));
         </script>
-        <script>
-            
-        </script>
-        
     </body>
 </html>

@@ -122,6 +122,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\bootstrap-social.css" />
     <Content Include="Content\nelibur.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

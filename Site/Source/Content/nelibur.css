@@ -1,5 +1,4 @@
-﻿.nuget-badge
-{
+﻿.nuget-badge {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     background-color: #202020;
@@ -16,4 +15,9 @@
 
 body > .container {
     margin-top: 20px;
+}
+
+.buttons-social li {
+    display:inline;
+    margin: 15px;
 }
