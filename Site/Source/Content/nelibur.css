@@ -17,7 +17,15 @@ body > .container {
     margin-top: 20px;
 }
 
+.buttons-social {
+    float: right;
+}
+
 .buttons-social li {
     display:inline;
-    margin: 15px;
+    margin-left: 15px;
+}
+
+.buttons-social li a {
+    margin-top: 8px;
 }
