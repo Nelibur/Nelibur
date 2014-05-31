@@ -29,3 +29,7 @@ body > .container {
 .buttons-social li a {
     margin-top: 8px;
 }
+
+img.nuget-btn-img {
+    height: 34px;
+}
