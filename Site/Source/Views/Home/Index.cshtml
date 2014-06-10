@@ -135,7 +135,7 @@
                 if (navigator.userAgent.indexOf("MSIE") == -1) {
                     return;
                 }
-                var ieVersion = navigator.userAgent.match("MSIE (.|)")[1];
+                var ieVersion = navigator.userAgent.match("MSIE ([0-9]+)")[1];
                 if (ieVersion > 8) {
                     return;
                 }
