@@ -123,7 +123,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\bootstrap-social.css" />
+    <Content Include="Content\images\blobs.png" />
+    <Content Include="Content\images\dust.png" />
     <Content Include="Content\images\nuget.png" />
+    <Content Include="Content\images\texts.png" />
     <Content Include="Content\nelibur.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />

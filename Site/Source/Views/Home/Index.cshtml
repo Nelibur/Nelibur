@@ -14,133 +14,141 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
         <link href="Content/bootstrap-social.css" rel="stylesheet" />
         <link rel="stylesheet" href="Content/nelibur.css">
+        <link rel="stylesheet" href="Content/intro.css">
 
     </head>
-    <body data-spy="scroll" data-target=".navbar-collapse">
-        <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-            <nav class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">Nelibur</a>
-                </div>
-                <div  class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#home">Home</a></li>
-                        <li><a href="#example">Examples</a></li>
-                        <li><a href="https://github.com/Nelibur/Nelibur" target="_blank">GitHub page</a></li>
-                    </ul>
-                    <ul class="list-unstyled buttons-social">
-                        <li>
-                            <a class="btn btn-twitter btn-social" href="https://twitter.com/Nelibur" target="_blank">
-                                <i class="fa fa-twitter"></i>Follow us on Twitter
-                            </a>
-                        </li>
-                        <li>
-                            <a class="btn btn-google-plus btn-social" href="https://groups.google.com/forum/#!forum/nelibur" target="_blank">
-                                <i class="fa fa-google"></i>Checkout Google Group
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <section id="home" class="jumbotron" style="padding-top: 50px">
-            <div class="container">
-                <h1><img src="https://avatars0.githubusercontent.com/u/6294792?s=140" alt="Logo" class="img-rounded"> Nelibur</h1>
+<body data-spy="scroll" data-target=".navbar-collapse">
+    <header class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <nav class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Nelibur</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#home">Home</a></li>
+                    <li><a href="#example">Examples</a></li>
+                    <li><a href="https://github.com/Nelibur/Nelibur" target="_blank">GitHub page</a></li>
+                </ul>
+                <ul class="list-unstyled buttons-social">
+                    <li>
+                        <a class="btn btn-twitter btn-social" href="https://twitter.com/Nelibur" target="_blank">
+                            <i class="fa fa-twitter"></i>Follow us on Twitter
+                        </a>
+                    </li>
+                    <li>
+                        <a class="btn btn-google-plus btn-social" href="https://groups.google.com/forum/#!forum/nelibur" target="_blank">
+                            <i class="fa fa-google"></i>Checkout Google Group
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <section>
+        <div id="home" class="container">
+            <div class="title-text">
+                <h2>Nelibur</h2>
+                <p>Something that will make you feel better</p>
+            </div>
+        </div>
+        <div id="dust"></div>
+        <div id="texts"></div>
+        <div id="blobs"></div>
+        <div style="background: #0066aa center; height:400px"></div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <h3>Nelibur is message based web service framework on the pure WCF. Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF</h3>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <h2><span class="glyphicon glyphicon-chevron-right"></span> Based on the pure WCF</h2>
+                <p>Nelibur uses only standart WCF implementation with no modifications</p>
+            </div>
+            <div class="col-md-4">
+                <h2><span class="glyphicon glyphicon-chevron-right"></span> Extremely fast</h2>
+                <p>Framework is virtually as fast as WCF itself</p>
+                <p><a class="btn btn-default">See comparison</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2><span class="glyphicon glyphicon-chevron-right"></span> REST and SOAP</h2>
+                <p>You can build powerful services both SOAP and REST based services</p>
+                <p><a class="btn btn-default" href="https://github.com/Nelibur/Nelibur/wiki" target="_blank">Check out documentation</a></p>
+            </div>
+        </div>
+    </section>
+    <section class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Nelibur Package is available on
+                    <a href="http://www.nuget.org/packages/Nelibur/" target="_blank">
+                        <img src="Content/images/nuget.png" class="nuget-btn-img" alt="Nuget.org" />
+                    </a>
+                </h3>
                 <p>
-                    is message based web service framework on the pure WCF. Nelibur simplifies creating high-performance and message based web services and you certainly have all the power of the WCF
+                    Or you can install it via <a href="http://docs.nuget.org/docs/start-here/using-the-package-manager-console" target="_blank">Package Manager Console</a>
+                </p>
+                <div class="col-md-11">
+                    <code class="nuget-badge">
+                        PM> Install-Package Nelibur
+                    </code>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <h3>
+                    <span class="glyphicon glyphicon-ok"></span>
+                    Source code is available on
+                    <a class="btn btn-github btn-social" href="https://github.com/Nelibur/Nelibur" target="_blank">
+                        <i class="fa fa-github"></i>GitHub
+                    </a>
+                </h3>
+                <p>
+                    As well as latest examples and other useful stuff
                 </p>
             </div>
-        </section>
-        <section class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h2><span class="glyphicon glyphicon-chevron-right"></span> Based on the pure WCF</h2>
-                    <p>Nelibur uses only standart WCF implementation with no modifications</p>
-                </div>
-                <div class="col-md-4">
-                    <h2><span class="glyphicon glyphicon-chevron-right"></span> Extremely fast</h2>
-                    <p>Framework is virtually as fast as WCF itself</p>
-                    <p><a class="btn btn-default">See comparison</a></p>
-                </div>
-                <div class="col-md-4">
-                    <h2><span class="glyphicon glyphicon-chevron-right"></span> REST and SOAP</h2>
-                    <p>You can build powerful services both SOAP and REST based services</p>
-                    <p><a class="btn btn-default" href="https://github.com/Nelibur/Nelibur/wiki" target="_blank">Check out documentation</a></p>
-                </div>
-            </div>
-        </section>
-        <section class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>
-                        <span class="glyphicon glyphicon-ok"></span>
-                        Nelibur Package is available on 
-                        <a href="http://www.nuget.org/packages/Nelibur/" target="_blank">
-                            <img src="Content/images/nuget.png" class="nuget-btn-img" alt="Nuget.org" />
-                        </a>
-                    </h3>
-                    <p>
-                        Or you can install it via <a href="http://docs.nuget.org/docs/start-here/using-the-package-manager-console" target="_blank">Package Manager Console</a>
-                    </p>
-                    <div class="col-md-11">
-                        <code class="nuget-badge">
-                            PM> Install-Package Nelibur
-                        </code>
-                    </div>
-                </div>
+        </div>
+    </section>
+    @Html.Partial("Examples")
+    <footer class="panel-footer" style="margin-top: 40px"></footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"> </script>
+    <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"> </script>
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments);
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-49279005-1', 'nelibur.org');
+        ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        ($(document).ready(function () {
+            if (navigator.userAgent.indexOf("MSIE") == -1) {
+                return;
+            }
+            var ieVersion = navigator.userAgent.match("MSIE ([0-9]+)")[1];
+            if (ieVersion > 8) {
+                return;
+            }
+            $("#example").html("<h2>Please open this page with proper browser to see examples here</h2><a>http://nelibur.org</a>");
+        }));
+    </script>
+</body>
 
-                <div class="col-md-6">
-                    <h3>
-                        <span class="glyphicon glyphicon-ok"></span>
-                        Source code is available on 
-                        <a class="btn btn-github btn-social" href="https://github.com/Nelibur/Nelibur" target="_blank">
-                            <i class="fa fa-github"></i>GitHub
-                        </a>
-                    </h3>
-                    <p>
-                        As well as latest examples and other useful stuff
-                    </p>
-                </div>
-            </div>
-        </section>
-        @Html.Partial("Examples")
-        <footer class="panel-footer" style="margin-top: 40px">
-        </footer>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"> </script>
-        <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"> </script>
-        <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=desert"> </script>
-        <script>
-            (function(i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function() {
-                    (i[r].q = i[r].q || []).push(arguments);
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-49279005-1', 'nelibur.org');
-            ga('send', 'pageview');
-        </script>
-        <script type="text/javascript">
-            ($(document).ready(function() {
-                if (navigator.userAgent.indexOf("MSIE") == -1) {
-                    return;
-                }
-                var ieVersion = navigator.userAgent.match("MSIE ([0-9]+)")[1];
-                if (ieVersion > 8) {
-                    return;
-                }
-                $("#example").html("<h2>Please open this page with proper browser to see examples here</h2><a>http://nelibur.org</a>");
-            }));
-        </script>
-    </body>
 </html>
