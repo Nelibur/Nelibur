@@ -1,4 +1,6 @@
-﻿.nuget-badge {
+﻿@import url(http://fonts.googleapis.com/css?family=PT+Sans+Caption);
+
+.nuget-badge {
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
     background-color: #202020;
@@ -21,15 +23,19 @@ body > .container {
     float: right;
 }
 
-.buttons-social li {
-    display:inline;
-    margin-left: 15px;
-}
+    .buttons-social li {
+        display: inline;
+        margin-left: 15px;
+    }
 
-.buttons-social li a {
-    margin-top: 8px;
-}
+        .buttons-social li a {
+            margin-top: 8px;
+        }
 
 img.nuget-btn-img {
     height: 34px;
+}
+
+.navbar-inverse {
+    background: black;
 }

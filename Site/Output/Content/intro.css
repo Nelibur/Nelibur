@@ -1,0 +1,268 @@
+﻿#dust,
+#texts,
+#blobs {
+    width: 100%;
+    background-size: cover;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#texts {
+    background: url("images/texts.png");
+    background-repeat: repeat-x;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+#dust {
+    background: url("images/dust.png");
+    background-repeat: repeat-x;
+    -webkit-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+}
+
+#blobs {
+    background: url("images/blobs.png");
+    background-repeat: repeat-x;
+}
+
+#home {
+    position: absolute;
+    height: 400px;
+    width: 100%;
+}
+
+    #home .title-text {
+        right: 20%;
+        float: right;
+        color: white;
+        position: relative;
+        top: 50%;
+        -moz-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        -o-transform: translateY(-50%);
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+        text-align: center;
+        text-rendering: optimizeLegibility;
+        -webkit-filter: blur(0.5px);
+        -webkit-font-smoothing: antialiased;
+        text-shadow: -1px -1px 1px rgba(255,255,255,0.2),1px 1px 1px rgba(255,255,255,0.2),1px 1px 1px rgba(0,0,0,0.7)
+    }
+
+    #home h2 {
+        font-size: 64pt;
+        font-family: 'PT Sans Caption', sans-serif;
+        filter: blur(1px);
+        margin-bottom: 0;
+        letter-spacing: 0.5em;
+    }
+
+    #home p {
+        font-family: 'PT Sans Caption', sans-serif;
+        left: 0;
+    }
+
+
+@media (min-width: 768px) {
+    #texts {
+        -webkit-animation: texts-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), texts-opacity 5s 3s cubic-bezier(0.645, 0.045, 0.355, 1) infinite alternate;
+        -ms-animation: texts-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), texts-opacity 5s 3s cubic-bezier(0.645, 0.045, 0.355, 1) infinite alternate;
+        animation: texts-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), texts-opacity 5s 3s cubic-bezier(0.645, 0.045, 0.355, 1) infinite alternate;
+    }
+
+    @-webkit-keyframes texts-appear {
+        0% {
+            opacity: 0.7;
+            -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+        }
+
+        20% {
+            opacity: 0.9;
+            -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+        }
+
+        100% {
+            opacity: 0.1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @keyframes texts-appear {
+        0% {
+            opacity: 0.7;
+            -ms-transform: scale(0.7);
+            transform: scale(0.7);
+        }
+
+        20% {
+            opacity: 0.9;
+            -ms-transform: scale(0.7);
+            transform: scale(0.7);
+        }
+
+        100% {
+            opacity: 0.1;
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @-webkit-keyframes texts-opacity {
+        0% {
+            opacity: 0.1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        100% {
+            opacity: 0.7;
+            -webkit-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+    }
+
+    @keyframes texts-opacity {
+        0% {
+            opacity: 0.1;
+        }
+
+        100% {
+            opacity: 0.7;
+        }
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    #dust {
+        -webkit-animation: dust-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), dust-move 8s 3s ease-in-out infinite alternate;
+        animation: dust-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), dust-move 8s 3s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes dust-appear {
+        0% {
+            opacity: 0;
+            -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+        }
+
+        100% {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+    }
+
+    @keyframes dust-appear {
+        0% {
+            opacity: 0;
+            -ms-transform: scale(1);
+            transform: scale(1);
+        }
+
+
+        100% {
+            opacity: 1;
+            -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+        }
+    }
+
+    @-webkit-keyframes dust-move {
+        0% {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        100% {
+            -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+    }
+
+    @keyframes dust-move {
+        0% {
+            -ms-transform: scale(1);
+            transform: scale(1);
+             opacity: 1;
+        }
+
+        100% {
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+    }
+}
+
+
+
+@media (min-width: 768px) {
+    #blobs {
+        -webkit-animation: introduction-layer3-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), introduction-layer3-move 8s 3s ease-in-out infinite alternate;
+        animation: introduction-layer3-appear 3s cubic-bezier(0.215, 0.61, 0.355, 1), introduction-layer3-move 8s 3s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes introduction-layer3-appear {
+        0% {
+            opacity: 0;
+        }
+
+        30% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes introduction-layer3-appear {
+        0% {
+            opacity: 0;
+        }
+
+        30% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 0.6;
+        }
+    }
+
+    @-webkit-keyframes introduction-layer3-move {
+        0% {
+            opacity: 0.6;
+        }
+
+        100% {
+            opacity: 0.3;
+        }
+    }
+
+    @keyframes introduction-layer3-move {
+        0% {
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        100% {
+            -ms-transform: scale(1.15);
+            transform: scale(1.15);
+        }
+    }
+}
