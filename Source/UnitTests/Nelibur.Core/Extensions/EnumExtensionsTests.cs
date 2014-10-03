@@ -17,15 +17,15 @@ namespace UnitTests.Nelibur.Core.Extensions
         [Fact]
         public void GetAttribute_WithAttribute_Success()
         {
-            Bag<DescriptionAttribute> bag = Test.Test1.GetAttribute<DescriptionAttribute>();
-            Assert.True(bag.HasValue);
+            Option<DescriptionAttribute> option = Test.Test1.GetAttribute<DescriptionAttribute>();
+            Assert.True(option.HasValue);
         }
 
         [Fact]
         public void GetAttribute_WithoutAttribute_Success()
         {
-            Bag<DescriptionAttribute> bag = Test.Test2.GetAttribute<DescriptionAttribute>();
-            Assert.False(bag.HasValue);
+            Option<DescriptionAttribute> option = Test.Test2.GetAttribute<DescriptionAttribute>();
+            Assert.False(option.HasValue);
         }
 
         [Fact]

@@ -25,14 +25,14 @@ namespace UnitTests.Nelibur.Core.Extensions
         [Fact]
         public void ToValue_EmptyBag_Empty()
         {
-            IEnumerable<int> result = new List<Bag<int>> { Bag<int>.Empty }.ToValue();
+            IEnumerable<int> result = new List<Option<int>> { Option<int>.Empty }.ToValue();
             Assert.True(!result.Any());
         }
 
         [Fact]
         public void ToValue_NotEmptyBag_Empty()
         {
-            IEnumerable<int> result = new List<Bag<int>> { new Bag<int>(1) }.ToValue();
+            IEnumerable<int> result = new List<Option<int>> { new Option<int>(1) }.ToValue();
             Assert.True(result.Any());
         }
     }

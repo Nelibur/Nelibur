@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ForTest.cs" />
-    <Compile Include="Nelibur.Core\DataStructures\BagTests.cs" />
+    <Compile Include="Nelibur.Core\DataStructures\OptionTests.cs" />
     <Compile Include="Nelibur.Core\ErrorTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\BagExtensionsTest.cs" />
     <Compile Include="Nelibur.Core\Extensions\CollectionExtensionsTest.cs" />

@@ -2,18 +2,18 @@ using System;
 
 namespace Nelibur.Core.DataStructures
 {
-    public sealed class Bag<TValue>
+    public sealed class Option<TValue>
     {
-        private static readonly Bag<TValue> _empty = new Bag<TValue>(default(TValue), false);
+        private static readonly Option<TValue> _empty = new Option<TValue>(default(TValue), false);
         private readonly bool _hasValue;
 
-        public Bag(TValue value, bool hasValue = true)
+        public Option(TValue value, bool hasValue = true)
         {
             _hasValue = hasValue;
             Value = value;
         }
 
-        public static Bag<TValue> Empty
+        public static Option<TValue> Empty
         {
             get { return _empty; }
         }

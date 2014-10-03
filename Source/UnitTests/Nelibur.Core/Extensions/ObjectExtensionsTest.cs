@@ -34,20 +34,20 @@ namespace UnitTests.Nelibur.Core.Extensions
         [Fact]
         public void ToBag_Null_Empty()
         {
-            Assert.False(((object)(null)).ToBag().HasValue);
+            Assert.False(((object)(null)).ToOption().HasValue);
         }
 
         [Fact]
         public void ToBag_Null_NotEmpty()
         {
-            Assert.True(new object().ToBag().HasValue);
+            Assert.True(new object().ToOption().HasValue);
         }
 
         [Fact]
         public void ToType_InvalidType_HasNoValue()
         {
             object value = 1;
-            Bag<bool> result = value.ToType<bool>();
+            Option<bool> result = value.ToType<bool>();
             Assert.True(result.HasNoValue);
         }
 
@@ -55,7 +55,7 @@ namespace UnitTests.Nelibur.Core.Extensions
         public void ToType_ValidType_HasValue()
         {
             object value = true;
-            Bag<bool> result = value.ToType<bool>();
+            Option<bool> result = value.ToType<bool>();
             Assert.True(result.HasValue);
         }
     }

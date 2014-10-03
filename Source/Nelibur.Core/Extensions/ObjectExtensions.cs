@@ -105,22 +105,22 @@ namespace Nelibur.Core.Extensions
             eventToRaise(sender, eventArgsCreator());
         }
 
-        public static Bag<T> ToBag<T>(this T value)
+        public static Option<T> ToOption<T>(this T value)
         {
             if (typeof(T).IsValueType == false && ReferenceEquals(value, null))
             {
-                return Bag<T>.Empty;
+                return Option<T>.Empty;
             }
-            return new Bag<T>(value);
+            return new Option<T>(value);
         }
 
-        public static Bag<TResult> ToType<TResult>(this object obj)
+        public static Option<TResult> ToType<TResult>(this object obj)
         {
             if (obj is TResult)
             {
-                return new Bag<TResult>((TResult)obj);
+                return new Option<TResult>((TResult)obj);
             }
-            return Bag<TResult>.Empty;
+            return Option<TResult>.Empty;
         }
     }
 }
