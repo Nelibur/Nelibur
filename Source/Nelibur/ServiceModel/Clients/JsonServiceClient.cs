@@ -13,8 +13,7 @@ namespace Nelibur.ServiceModel.Clients
 {
     public sealed class JsonServiceClient
     {
-        private readonly bool _disposeHandler;
-        private readonly HttpClientHandler _httpClientHandler;
+        private readonly HttpClient _httpClient;
         private readonly Uri _serviceAddress;
 
         /// <summary>
@@ -41,8 +40,7 @@ namespace Nelibur.ServiceModel.Clients
         public JsonServiceClient(string serviceAddress, HttpClientHandler httpClientHandler, bool disposeHandler)
         {
             _serviceAddress = new Uri(serviceAddress);
-            _httpClientHandler = httpClientHandler;
-            _disposeHandler = disposeHandler;
+            _httpClient = new HttpClient(httpClientHandler, disposeHandler);
         }
 
         public void Delete(object request)
@@ -131,11 +129,6 @@ namespace Nelibur.ServiceModel.Clients
             return new StringContent(content, Encoding.UTF8, "application/json");
         }
 
-        private HttpClient CreateHttpClient()
-        {
-            return new HttpClient(_httpClientHandler, _disposeHandler);
-        }
-
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
         private TResponse Send<TResponse>(object request, string operationType)
         {
@@ -151,37 +144,33 @@ namespace Nelibur.ServiceModel.Clients
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType);
 
-            using (HttpClient client = CreateHttpClient())
+            HttpResponseMessage response;
+            switch (operationType)
             {
-                HttpResponseMessage response;
-
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        response = await client.GetAsync(urlRequest);
-                        break;
-                    case OperationType.Post:
-                        response = await client.PostAsync(urlRequest, CreateContent(request));
-                        break;
-                    case OperationType.Put:
-                        response = await client.PutAsync(urlRequest, CreateContent(request));
-                        break;
-                    case OperationType.Delete:
-                        response = await client.DeleteAsync(urlRequest);
-                        break;
-                    default:
-                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
-                            operationType);
-                        throw Error.InvalidOperation(errorMessage);
-                }
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new WebFaultException(response.StatusCode);
-                }
-                using (Stream stream = await response.Content.ReadAsStreamAsync())
-                {
-                    return JsonDataSerializer.ToValue<TResponse>(stream);
-                }
+                case OperationType.Get:
+                    response = await _httpClient.GetAsync(urlRequest);
+                    break;
+                case OperationType.Post:
+                    response = await _httpClient.PostAsync(urlRequest, CreateContent(request));
+                    break;
+                case OperationType.Put:
+                    response = await _httpClient.PutAsync(urlRequest, CreateContent(request));
+                    break;
+                case OperationType.Delete:
+                    response = await _httpClient.DeleteAsync(urlRequest);
+                    break;
+                default:
+                    string errorMessage = string.Format("OperationType {0} with Response return is absent",
+                        operationType);
+                    throw Error.InvalidOperation(errorMessage);
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new WebFaultException(response.StatusCode);
+            }
+            using (Stream stream = await response.Content.ReadAsStreamAsync())
+            {
+                return JsonDataSerializer.ToValue<TResponse>(stream);
             }
         }
 
@@ -189,32 +178,28 @@ namespace Nelibur.ServiceModel.Clients
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, responseRequired);
             HttpResponseMessage response;
-
-            using (HttpClient client = CreateHttpClient())
+            switch (operationType)
             {
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        response = client.GetAsync(urlRequest).Result;
-                        break;
-                    case OperationType.Post:
-                        response = client.PostAsync(urlRequest, CreateContent(request)).Result;
-                        break;
-                    case OperationType.Put:
-                        response = client.PutAsync(urlRequest, CreateContent(request)).Result;
-                        break;
-                    case OperationType.Delete:
-                        response = client.DeleteAsync(urlRequest).Result;
-                        break;
-                    default:
-                        string errorMessage = string.Format("OperationType {0} with Response return is absent",
-                            operationType);
-                        throw Error.InvalidOperation(errorMessage);
-                }
-                if (!response.IsSuccessStatusCode)
-                {
-                    throw new WebFaultException(response.StatusCode);
-                }
+                case OperationType.Get:
+                    response = _httpClient.GetAsync(urlRequest).Result;
+                    break;
+                case OperationType.Post:
+                    response = _httpClient.PostAsync(urlRequest, CreateContent(request)).Result;
+                    break;
+                case OperationType.Put:
+                    response = _httpClient.PutAsync(urlRequest, CreateContent(request)).Result;
+                    break;
+                case OperationType.Delete:
+                    response = _httpClient.DeleteAsync(urlRequest).Result;
+                    break;
+                default:
+                    string errorMessage = string.Format("OperationType {0} with Response return is absent",
+                        operationType);
+                    throw Error.InvalidOperation(errorMessage);
+            }
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new WebFaultException(response.StatusCode);
             }
             return response;
         }
@@ -222,25 +207,21 @@ namespace Nelibur.ServiceModel.Clients
         private async Task<HttpResponseMessage> SendOneWayAsync(object request, string operationType)
         {
             string urlRequest = request.ToUrl(_serviceAddress, operationType, false);
-
-            using (HttpClient client = CreateHttpClient())
+            switch (operationType)
             {
-                switch (operationType)
-                {
-                    case OperationType.Get:
-                        return await client.GetAsync(urlRequest);
-                    case OperationType.Post:
-                        return await client.PostAsync(urlRequest, CreateContent(request));
-                    case OperationType.Put:
-                        return await client.PutAsync(urlRequest, CreateContent(request));
-                    case OperationType.Delete:
-                        return await client.DeleteAsync(urlRequest);
-                    default:
-                        string errorMessage = string.Format(
-                            "OperationType {0} with Response return is absent",
-                            operationType);
-                        throw Error.InvalidOperation(errorMessage);
-                }
+                case OperationType.Get:
+                    return await _httpClient.GetAsync(urlRequest);
+                case OperationType.Post:
+                    return await _httpClient.PostAsync(urlRequest, CreateContent(request));
+                case OperationType.Put:
+                    return await _httpClient.PutAsync(urlRequest, CreateContent(request));
+                case OperationType.Delete:
+                    return await _httpClient.DeleteAsync(urlRequest);
+                default:
+                    string errorMessage = string.Format(
+                                                        "OperationType {0} with Response return is absent",
+                        operationType);
+                    throw Error.InvalidOperation(errorMessage);
             }
         }
     }

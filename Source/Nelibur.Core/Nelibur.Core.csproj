@@ -40,11 +40,11 @@
     <Compile Include="..\..\GlobalAssemblyInfo.cs">
       <Link>Properties\GlobalAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="DataStructures\Bag.cs" />
+    <Compile Include="DataStructures\Option.cs" />
     <Compile Include="DataStructures\Queues\BlockingQueue.cs" />
     <Compile Include="DataStructures\SafeDictionary.cs" />
     <Compile Include="Error.cs" />
-    <Compile Include="Extensions\BagExtensions.cs" />
+    <Compile Include="Extensions\OptionExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\DisposableExtensions.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />

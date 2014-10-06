@@ -8,12 +8,12 @@ namespace Nelibur.Core.Extensions
 {
     public static class EnumExtensions
     {
-        public static Bag<TAttribute> GetAttribute<TAttribute>(this Enum value)
+        public static Option<TAttribute> GetAttribute<TAttribute>(this Enum value)
             where TAttribute : Attribute
         {
             return GetAttributes<TAttribute>(value)
                 .SingleOrDefault()
-                .ToBag();
+                .ToOption();
         }
 
         public static string ToDescription(this Enum value)
