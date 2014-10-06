@@ -11,10 +11,11 @@ using Nelibur.ServiceModel.Services.Operations;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public sealed class JsonServiceClient
+    public sealed class JsonServiceClient : IDisposable
     {
         private readonly HttpClient _httpClient;
         private readonly Uri _serviceAddress;
+        private bool _disposed = false;
 
         /// <summary>
         ///     Create new instanse of <see cref="JsonServiceClient" />.
@@ -123,10 +124,29 @@ namespace Nelibur.ServiceModel.Clients
             return SendAsync<TResponse>(request, OperationType.Put);
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         private static StringContent CreateContent(object value)
         {
             string content = JsonDataSerializer.ToString(value);
             return new StringContent(content, Encoding.UTF8, "application/json");
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (!disposing || _disposed)
+            {
+                return;
+            }
+            if (_httpClient != null)
+            {
+                _httpClient.Dispose();
+            }
+            _disposed = true;
         }
 
         //http://stackoverflow.com/questions/12739114/asp-net-mvc-4-async-child-action
@@ -219,7 +239,7 @@ namespace Nelibur.ServiceModel.Clients
                     return await _httpClient.DeleteAsync(urlRequest);
                 default:
                     string errorMessage = string.Format(
-                                                        "OperationType {0} with Response return is absent",
+                        "OperationType {0} with Response return is absent",
                         operationType);
                     throw Error.InvalidOperation(errorMessage);
             }
