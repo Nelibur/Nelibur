@@ -45,5 +45,11 @@ namespace SimpleRestService
             client.Email = request.Email;
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }
+
+        private sealed class Client
+        {
+            public string Email { get; set; }
+            public Guid Id { get; set; }
+        }
     }
 }
