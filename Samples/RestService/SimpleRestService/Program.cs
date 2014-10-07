@@ -15,6 +15,7 @@ namespace SimpleRestService
             NeliburRestService.Configure(x =>
             {
                 x.Bind<CreateClientRequest, ClientProcessor>();
+                x.Bind<CreateClientPerformanceRequest, ClientProcessor>();
                 x.Bind<UpdateClientRequest, ClientProcessor>();
                 x.Bind<DeleteClientRequest, ClientProcessor>();
                 x.Bind<GetClientRequest, ClientProcessor>();
