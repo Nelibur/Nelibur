@@ -18,12 +18,60 @@ namespace Performance.Nelibur.Client
 
                 PostOneWay_SingleClient(TenK);
                 PutOneWay_SingleClient(TenK);
+                DeleteOneWay_SingleClient(TenK);
 
                 Console.WriteLine(Environment.NewLine);
 
+                Get_SingleClient(TenK);
                 Post_SingleClient(TenK);
                 Put_SingleClient(TenK);
+                Delete_SingleClient(TenK);
             }
+        }
+
+        private void DeleteOneWay_SingleClient(int batchSize)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            using (var client = new JsonServiceClient(ServiceAddress))
+            {
+                for (int i = 0; i < batchSize; i++)
+                {
+                    client.Delete(new DataRequest());
+                }
+            }
+            timer.Stop();
+            Console.WriteLine("{0} took {1} ms, BatchSize: {2}", "DeleteOneWay_SingleClient", timer.ElapsedMilliseconds, batchSize);
+        }
+
+        private void Delete_SingleClient(int batchSize)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            using (var client = new JsonServiceClient(ServiceAddress))
+            {
+                for (int i = 0; i < batchSize; i++)
+                {
+                    client.Delete<DataResponse>(new DataRequest());
+                }
+            }
+            timer.Stop();
+            Console.WriteLine("{0} took {1} ms, BatchSize: {2}", "Delete_SingleClient", timer.ElapsedMilliseconds, batchSize);
+        }
+
+        private void Get_SingleClient(int batchSize)
+        {
+            var timer = new Stopwatch();
+            timer.Start();
+            using (var client = new JsonServiceClient(ServiceAddress))
+            {
+                for (int i = 0; i < batchSize; i++)
+                {
+                    client.Get<DataResponse>(new DataRequest());
+                }
+            }
+            timer.Stop();
+            Console.WriteLine("{0} took {1} ms, BatchSize: {2}", "Get_SingleClient", timer.ElapsedMilliseconds, batchSize);
         }
 
         private void PostOneWay_SingleClient(int batchSize)

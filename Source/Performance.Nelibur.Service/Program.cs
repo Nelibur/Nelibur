@@ -28,10 +28,27 @@ namespace Performance.Nelibur.Service
         }
 
         private sealed class DataItemProcessor : IPostOneWay<DataRequest>,
+            IGet<DataRequest>,
             IPost<DataRequest>,
             IPut<DataRequest>,
-            IPutOneWay<DataRequest>
+            IPutOneWay<DataRequest>,
+            IDeleteOneWay<DataRequest>,
+            IDelete<DataRequest>
         {
+            public object Delete(DataRequest request)
+            {
+                return new DataResponse();
+            }
+
+            public void DeleteOneWay(DataRequest request)
+            {
+            }
+
+            public object Get(DataRequest request)
+            {
+                return new DataResponse();
+            }
+
             public object Post(DataRequest request)
             {
                 return new DataResponse();
