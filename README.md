@@ -125,7 +125,7 @@ public interface IJsonService
 	<tr>
 		<td>Get</td>
 		<td>3767 ms</td>
-		<td rowspan="7">10 000 messages. Default WebServiceHost settings.
+		<td rowspan="7" width="40%">10 000 messages. Default WebServiceHost settings.
 		JsonServiceClient sends messages in one thread.
 		Win x64. Intel Core i7-2600 3.4 GHz. RAM 16 GB.</td>
 	</tr>
