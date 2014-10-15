@@ -59,7 +59,7 @@ var service = new WebServiceHost(typeof(JsonServicePerCall));
 service.Open();
 ```
 
-`JsonServicePerCall` - is predefined which implements following interface **IJsonService**
+`JsonServicePerCall` - is predefined service which implements following interface **IJsonService**
 
 The **IJsonService** is flexible, stable and maintainable, we can transfer **any** data, because the service contract depends only from WCF's Message class. "The [Message](http://msdn.microsoft.com/en-us/library/system.servicemodel.channels.message.aspx) class is fundamental to Windows Communication Foundation (WCF). All communication between clients and services ultimately results in Message instances being sent and received." ([MSDN](http://msdn.microsoft.com/en-us/library/ms734675.aspx))
 
@@ -114,7 +114,7 @@ public interface IJsonService
     void PutOneWay(Message message);
 }
 ```
-### Performance of CRUD operations.
+### Performance of CRUD operations
 
 <table>
 	<tr>
