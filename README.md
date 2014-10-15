@@ -114,7 +114,7 @@ public interface IJsonService
     void PutOneWay(Message message);
 }
 ```
-### Performance of CRUD operations
+### Performance of CRUD operations - `JsonServiceClient`
 
 <table>
 	<tr>
