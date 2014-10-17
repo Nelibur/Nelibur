@@ -7,6 +7,7 @@ using SimpleRestContracts.Contracts;
 namespace SimpleRestService
 {
     public sealed class ClientProcessor : IPost<CreateClientRequest>,
+        IPost<CreateClientPerformanceRequest>,
         IGet<GetClientRequest>,
         IDeleteOneWay<DeleteClientRequest>,
         IPut<UpdateClientRequest>
@@ -24,6 +25,11 @@ namespace SimpleRestService
             Console.WriteLine("Get Request: {0}", request);
             Client client = _clients.Single(x => x.Id == request.Id);
             return new ClientResponse { Id = client.Id, Email = client.Email };
+        }
+
+        public object Post(CreateClientPerformanceRequest request)
+        {
+            return new ClientResponse { Id = Guid.NewGuid(), Email = request.Email };
         }
 
         public object Post(CreateClientRequest request)
@@ -45,7 +51,7 @@ namespace SimpleRestService
             client.Email = request.Email;
             return new ClientResponse { Id = client.Id, Email = client.Email };
         }
-
+        
         private sealed class Client
         {
             public string Email { get; set; }
