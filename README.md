@@ -54,13 +54,6 @@ client.Delete(deleteRequest);
 Simple RESTful Message based service on the pure WCF
 ===================
 
-```csharp
-var service = new WebServiceHost(typeof(JsonServicePerCall));
-service.Open();
-```
-
-`JsonServicePerCall` - is predefined service which implements following interface **IJsonService**
-
 The **IJsonService** is flexible, stable and maintainable, we can transfer **any** data, because the service contract depends only from WCF's Message class. "The [Message](http://msdn.microsoft.com/en-us/library/system.servicemodel.channels.message.aspx) class is fundamental to Windows Communication Foundation (WCF). All communication between clients and services ultimately results in Message instances being sent and received." ([MSDN](http://msdn.microsoft.com/en-us/library/ms734675.aspx))
 
 ```csharp
@@ -114,50 +107,10 @@ public interface IJsonService
     void PutOneWay(Message message);
 }
 ```
-### Performance of CRUD operations - `JsonServiceClient`
-
-<table>
-	<tr>
-		<th>Method</th>
-		<th>Duration</th>		
-		<th>Remarks</th>
-	</tr>
-	<tr>
-		<td>Get</td>
-		<td>3767 ms</td>
-		<td rowspan="7" width="40%">10 000 messages. Default WebServiceHost settings.
-		JsonServiceClient sends messages in one thread.
-		Win x64. Intel Core i7-2600 3.4 GHz.</td>
-	</tr>
-	<tr>
-		<td>Post with void return</td>
-		<td>4546 ms</td>
-	</tr>
-	<tr>
-		<td>Post</td>
-		<td>5323 ms</td>
-	</tr>
-	<tr>
-		<td>Put with void return</td>
-		<td>4521 ms</td>
-	</tr>
-	<tr>
-		<td>Put</td>
-		<td>5334 ms</td>
-	</tr>
-	<tr>
-		<td>Delete with void return</td>
-		<td>3243 ms</td>
-	</tr>
-	<tr>
-		<td>Delete</td>
-		<td>3807 ms</td>
-	</tr>
-</table>
 
 WCF's RESTful service
 
-Nelibur already contains `JsonServicePerCall` service, but you can create your own custom Service, for instance
+Nelibur already contains `JsonServicePerCall`, but you can create your own custom Service, for instance
 
 ```csharp
 [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]

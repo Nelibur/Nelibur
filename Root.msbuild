@@ -8,7 +8,8 @@
         <TradeMarkInfo>Nelibur Framework</TradeMarkInfo>
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
         <AssemblyInformationalVersion Condition="'$(BUILD_NUMBER)' == ''">Compiled By $(USERNAME)</AssemblyInformationalVersion>
-        <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0.0</BUILD_NUMBER>
+        <AssemblyInformationalVersion Condition="'$(BUILD_NUMBER)' != ''">$(BUILD_NUMBER)</AssemblyInformationalVersion>
+        <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0</BUILD_NUMBER>
     </PropertyGroup>
 
     <Target Name = "Rebuild" DependsOnTargets="Version">

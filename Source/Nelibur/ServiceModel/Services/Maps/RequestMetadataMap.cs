@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
-using Nelibur.Core;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Headers;
+using Nelibur.Sword;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {

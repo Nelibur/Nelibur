@@ -1,5 +1,5 @@
 ﻿using System;
-using Nelibur.Core.Patterns;
+using Nelibur.Sword.Patterns;
 
 namespace VisitorSample
 {

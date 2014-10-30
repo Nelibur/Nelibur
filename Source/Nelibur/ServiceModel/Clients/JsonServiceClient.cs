@@ -4,10 +4,10 @@ using System.Net.Http;
 using System.ServiceModel.Web;
 using System.Text;
 using System.Threading.Tasks;
-using Nelibur.Core;
 using Nelibur.ServiceModel.Extensions;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Operations;
+using Nelibur.Sword;
 
 namespace Nelibur.ServiceModel.Clients
 {

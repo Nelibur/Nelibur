@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Specialized;
-using Nelibur.Core;
-using Nelibur.Core.DataStructures;
 using Nelibur.ServiceModel.Contracts;
+using Nelibur.Sword;
+using Nelibur.Sword.DataStructures;
 
 namespace Nelibur.ServiceModel.Serializers
 {

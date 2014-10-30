@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -29,9 +29,10 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;PERFORMANCE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NLog">
@@ -60,9 +61,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\Nelibur.Core\Nelibur.Core.csproj">
+    <ProjectReference Include="..\..\..\Source\Nelibur.Sword\Nelibur.Sword.csproj">
       <Project>{71FF2315-9038-4F0C-A145-00CADF3E881B}</Project>
-      <Name>Nelibur.Core</Name>
+      <Name>Nelibur.Sword</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\Source\Nelibur\Nelibur.csproj">
       <Project>{FD85B6D0-7260-4991-804B-981F8DB6592E}</Project>
