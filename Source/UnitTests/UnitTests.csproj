@@ -57,6 +57,7 @@
     <Compile Include="Nelibur.Sword\Extensions\EnumerableExtensionsTests.cs" />
     <Compile Include="Nelibur.Sword\Extensions\EnumExtensionsTests.cs" />
     <Compile Include="Nelibur.Sword\Extensions\ObjectExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\FuncComparerTests.cs" />
     <Compile Include="Nelibur.Sword\Patterns\VisitorTests.cs" />
     <Compile Include="Nelibur.Sword\Reflection\DelegateFactoryTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />

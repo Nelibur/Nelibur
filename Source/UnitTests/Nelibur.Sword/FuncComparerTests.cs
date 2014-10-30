@@ -1,8 +1,8 @@
 ﻿using System;
-using Nelibur.Core;
+using Nelibur.Sword;
 using Xunit;
 
-namespace UnitTests.Nelibur.Core
+namespace UnitTests.Nelibur.Sword
 {
     public sealed class FuncComparerTests
     {
@@ -24,7 +24,6 @@ namespace UnitTests.Nelibur.Core
 
             Assert.False(compare.Equals(value1, value2));
         }
-
 
         private class A
         {

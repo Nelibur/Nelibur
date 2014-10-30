@@ -51,6 +51,7 @@
     <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Extensions\IntExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="FuncComparer.cs" />
     <Compile Include="IFluent.cs" />
     <Compile Include="Logging\InternalLoggers\NullLogFactory.cs" />
     <Compile Include="Logging\ILog.cs" />
