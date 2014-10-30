@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Nelibur.Core")]
+[assembly: AssemblyTitle("Nelibur.Sword")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCulture("")]
 
