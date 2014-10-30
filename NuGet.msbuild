@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="Build">
+    <PropertyGroup>
+        <NuGet>.nuget\nuget.exe</NuGet>
+        <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
+        <PackageOutDir>out\$(Configuration)\Packages</PackageOutDir>
+        <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0</BUILD_NUMBER>
+        <PackageVersion Condition="'$(PackageVersion)' == ''">$(BUILD_NUMBER)</PackageVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <NuGetProjects Include="Source\Nelibur.Sword\Nelibur.Sword.csproj"/>
+        <NuGetProjects Include="Source\Nelibur\Nelibur.csproj"/>
+    </ItemGroup>
+
+    <Target Name="Build" DependsOnTargets="Clean">
+        <MakeDir Directories="$(PackageOutDir)" />
+        <Exec Command='$(NuGet) pack "%(NuGetProjects.FullPath)" -Version $(PackageVersion) -OutputDirectory "$(PackageOutDir)" -Properties "Configuration=$(Configuration)"  -IncludeReferencedProjects'/>
+    </Target>
+
+    <Target Name="Clean">        
+        <RemoveDir Directories="$(PackageOutDir)" />        
+    </Target>    
+</Project>

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using Nelibur.Core.Extensions;
 using Nelibur.ServiceModel.Clients;
+using Nelibur.Sword.Extensions;
 using NLog;
 using SimpleRestClient.Properties;
 using SimpleRestContracts.Contracts;

@@ -49,9 +49,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\Nelibur.Core\Nelibur.Core.csproj">
+    <ProjectReference Include="..\..\..\Source\Nelibur.Sword\Nelibur.Sword.csproj">
       <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
-      <Name>Nelibur.Core</Name>
+      <Name>Nelibur.Sword</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

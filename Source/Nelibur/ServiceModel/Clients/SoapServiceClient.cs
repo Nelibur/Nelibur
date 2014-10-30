@@ -2,9 +2,9 @@
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading.Tasks;
-using Nelibur.Core;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
+using Nelibur.Sword;
 
 namespace Nelibur.ServiceModel.Clients
 {

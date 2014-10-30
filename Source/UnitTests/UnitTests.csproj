@@ -49,28 +49,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ForTest.cs" />
-    <Compile Include="Nelibur.Core\DataStructures\OptionTests.cs" />
-    <Compile Include="Nelibur.Core\ErrorTest.cs" />
-    <Compile Include="Nelibur.Core\Extensions\BagExtensionsTest.cs" />
-    <Compile Include="Nelibur.Core\Extensions\CollectionExtensionsTest.cs" />
-    <Compile Include="Nelibur.Core\Extensions\EnumerableExtensionsTest.cs" />
-    <Compile Include="Nelibur.Core\Extensions\EnumExtensionsTests.cs" />
-    <Compile Include="Nelibur.Core\Extensions\ObjectExtensionsTest.cs" />
-    <Compile Include="Nelibur.Core\Patterns\VisitorTests.cs" />
-    <Compile Include="Nelibur.Core\Reflection\DelegateFactoryTest.cs" />
+    <Compile Include="ForTests.cs" />
+    <Compile Include="Nelibur.Sword\DataStructures\OptionTests.cs" />
+    <Compile Include="Nelibur.Sword\ErrorTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\BagExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\CollectionExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\EnumerableExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\EnumExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\ObjectExtensionsTests.cs" />
+    <Compile Include="Nelibur.Sword\Patterns\VisitorTests.cs" />
+    <Compile Include="Nelibur.Sword\Reflection\DelegateFactoryTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />
-    <Compile Include="Nelibur\ServiceModel\Extensions\UrlExtensionsTest.cs" />
-    <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTest.cs" />
+    <Compile Include="Nelibur\ServiceModel\Extensions\UrlExtensionsTests.cs" />
+    <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
+    <ProjectReference Include="..\Nelibur.Sword\Nelibur.Sword.csproj">
       <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
-      <Name>Nelibur.Core</Name>
+      <Name>Nelibur.Sword</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nelibur\Nelibur.csproj">
       <Project>{fd85b6d0-7260-4991-804b-981f8db6592e}</Project>
