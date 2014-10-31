@@ -16,6 +16,9 @@
         <summary>Opensource message based web service framework on the pure WCF</summary>
         <language>en-US</language>
         <tags>JSON SOAP XML REST Web Service Framework WCF Nelibur</tags>
+		<dependencies>		
+			<dependency id="Nelibur.Sword" version="$version$"/>
+        </dependencies> 
     </metadata>
 	<files>
 		<file src="install.ps1" target="tools\install.ps1" />
