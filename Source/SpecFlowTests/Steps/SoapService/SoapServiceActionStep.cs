@@ -27,8 +27,7 @@ namespace SpecFlowTests.Steps.SoapService
 
         protected SoapServiceClient GetClient()
         {
-            var client = new SoapServiceClient(EndpointConfigurationName);
-            return client;
+            return new SoapServiceClient(EndpointConfigurationName);
         }
 
         private static void BindRequestToProcessors()

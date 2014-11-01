@@ -8,9 +8,10 @@ using Nelibur.Sword;
 
 namespace Nelibur.ServiceModel.Clients
 {
-    public sealed class SoapServiceClient
+    public sealed class SoapServiceClient : IDisposable
     {
-        private readonly string _endpointConfigurationName;
+        private readonly ChannelFactory<ISoapService> _channelFactory;
+        private bool _disposed = false;
 
         /// <summary>
         ///     Create new instance of <see cref="SoapServiceClient" /> .
@@ -22,7 +23,7 @@ namespace Nelibur.ServiceModel.Clients
             {
                 throw Error.ConfigurationError("Invalid endpointConfigurationName: Is null or empty");
             }
-            _endpointConfigurationName = endpointConfigurationName;
+            _channelFactory = new ChannelFactory<ISoapService>(endpointConfigurationName);
         }
 
         public void Delete(object request)
@@ -105,6 +106,12 @@ namespace Nelibur.ServiceModel.Clients
             return Task.Run(() => Send<TResponse>(request, SoapOperationTypeHeader.Put));
         }
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
         private static Message CreateMessage(
             object request, MessageHeader actionHeader, MessageVersion messageVersion)
         {
@@ -125,27 +132,34 @@ namespace Nelibur.ServiceModel.Clients
             return message;
         }
 
+        private void Dispose(bool disposing)
+        {
+            if (!disposing || _disposed)
+            {
+                return;
+            }
+            if (_channelFactory != null)
+            {
+                ((IDisposable)_channelFactory).Dispose();
+            }
+            _disposed = true;
+        }
+
         private TResponse Send<TResponse>(object request, MessageHeader operationType)
         {
-            using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
-            {
-                MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
-                Message message = CreateMessage(request, operationType, messageVersion);
-                ISoapService channel = factory.CreateChannel();
-                Message result = channel.Process(message);
-                return result.GetBody<TResponse>();
-            }
+            MessageVersion messageVersion = _channelFactory.Endpoint.Binding.MessageVersion;
+            Message message = CreateMessage(request, operationType, messageVersion);
+            ISoapService channel = _channelFactory.CreateChannel();
+            Message result = channel.Process(message);
+            return result.GetBody<TResponse>();
         }
 
         private void SendOneWay(object request, MessageHeader operationType)
         {
-            using (var factory = new ChannelFactory<ISoapService>(_endpointConfigurationName))
-            {
-                MessageVersion messageVersion = factory.Endpoint.Binding.MessageVersion;
-                Message message = CreateOneWayMessage(request, operationType, messageVersion);
-                ISoapService channel = factory.CreateChannel();
-                channel.ProcessOneWay(message);
-            }
+            MessageVersion messageVersion = _channelFactory.Endpoint.Binding.MessageVersion;
+            Message message = CreateOneWayMessage(request, operationType, messageVersion);
+            ISoapService channel = _channelFactory.CreateChannel();
+            channel.ProcessOneWay(message);
         }
     }
 }

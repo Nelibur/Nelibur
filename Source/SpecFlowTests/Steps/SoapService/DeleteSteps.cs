@@ -1,4 +1,5 @@
-﻿using Nelibur.ServiceModel.Clients;
+﻿using System;
+using Nelibur.ServiceModel.Clients;
 using SpecFlowTests.Samples.Contracts;
 using TechTalk.SpecFlow;
 
@@ -24,31 +25,35 @@ namespace SpecFlowTests.Steps.SoapService
         public void WhenISendDeleteRequestByIdThruDeleteAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
-            SoapServiceClient client = GetClient();
-            client.Delete(request);
+            {
+                Id = id
+            };
+            using (SoapServiceClient client = GetClient())
+            {
+                client.Delete(request);
+            }
         }
 
         [When(@"I send delete request by Id '(.*)' thru DeleteAsync action")]
         public void WhenISendDeleteRequestByIdThruDeleteAsyncAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
-            SoapServiceClient client = GetClient();
-            client.DeleteAsync(request).Wait();
+            {
+                Id = id
+            };
+            using (SoapServiceClient client = GetClient())
+            {
+                client.DeleteAsync(request).Wait();
+            }
         }
 
         [When(@"I send delete request by Id '(.*)' thru DeleteAsync with response action")]
         public void WhenISendDeleteRequestByIdThruDeleteAsyncWithResponseAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+            {
+                Id = id
+            };
             SoapServiceClient client = GetClient();
             bool response = client.DeleteAsync<bool>(request).Result;
             ScenarioContext.Current[ResopnseKey] = response;
@@ -58,11 +63,11 @@ namespace SpecFlowTests.Steps.SoapService
         public void WhenISendDeleteRequestByIdThruDeleteWithResponseAction(int id)
         {
             var request = new DeleteOrderById
-                {
-                    Id = id
-                };
+            {
+                Id = id
+            };
             SoapServiceClient client = GetClient();
-            bool response = client.Delete<bool>(request);
+            var response = client.Delete<bool>(request);
             ScenarioContext.Current[ResopnseKey] = response;
         }
     }
