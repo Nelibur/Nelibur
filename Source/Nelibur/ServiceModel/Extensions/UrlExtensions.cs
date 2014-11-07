@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.Linq;
-using Nelibur.Core;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Operations;
+using Nelibur.Sword;
 
 namespace Nelibur.ServiceModel.Extensions
 {

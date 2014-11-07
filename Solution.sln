@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur.Core", "Source\Nelibur.Core\Nelibur.Core.csproj", "{71FF2315-9038-4F0C-A145-00CADF3E881B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur.Sword", "Source\Nelibur.Sword\Nelibur.Sword.csproj", "{71FF2315-9038-4F0C-A145-00CADF3E881B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur", "Source\Nelibur\Nelibur.csproj", "{FD85B6D0-7260-4991-804B-981F8DB6592E}"
 EndProject
@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{7D59BB
 		.nuget\NuGet.Config = .nuget\NuGet.Config
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
+		nuspec.xsd = nuspec.xsd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{1CFC4D1F-73AE-4FE7-BB52-95DCEFC34A7E}"
@@ -49,6 +50,19 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance.Nelibur.Service", "Source\Performance.Nelibur.Service\Performance.Nelibur.Service.csproj", "{FCB7BE1A-934B-4E34-B6EC-6B9F2EFD5356}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Performance.Nelibur.Contracts", "Source\Performance.Nelibur.Contracts\Performance.Nelibur.Contracts.csproj", "{D2E87969-FBAA-479A-A9F3-6D40059D4471}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{26B5BB85-6C4A-4CAF-BBAF-92251E07B9AE}"
+	ProjectSection(SolutionItems) = preProject
+		FactTest.msbuild = FactTest.msbuild
+		NuGet.msbuild = NuGet.msbuild
+		Root.msbuild = Root.msbuild
+		SpecFlowTest.msbuild = SpecFlowTest.msbuild
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89F3704D-FC6A-42FE-AA27-39679B50F0FC}"
+	ProjectSection(SolutionItems) = preProject
+		ReleaseNotes.markdown = ReleaseNotes.markdown
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

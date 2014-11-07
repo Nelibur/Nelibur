@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reflection;
-using Nelibur.Core.Reflection;
 using Nelibur.ServiceModel.Contracts;
+using Nelibur.Sword.Reflection;
 
 namespace Nelibur.ServiceModel.Serializers
 {

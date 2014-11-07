@@ -33,7 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -78,12 +77,15 @@
     <Compile Include="ServiceModel\Services\NeliburSoapService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
+    <ProjectReference Include="..\Nelibur.Sword\Nelibur.Sword.csproj">
       <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
-      <Name>Nelibur.Core</Name>
+      <Name>Nelibur.Sword</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="nuget\tools\install.ps1" />
+    <None Include="nuget\nelibur.nuspec" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

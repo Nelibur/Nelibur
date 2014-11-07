@@ -168,11 +168,10 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Nelibur.Core\Nelibur.Core.csproj">
+    <ProjectReference Include="..\Nelibur.Sword\Nelibur.Sword.csproj">
       <Project>{71ff2315-9038-4f0c-a145-00cadf3e881b}</Project>
-      <Name>Nelibur.Core</Name>
+      <Name>Nelibur.Sword</Name>
     </ProjectReference>
     <ProjectReference Include="..\Nelibur\Nelibur.csproj">
       <Project>{fd85b6d0-7260-4991-804b-981f8db6592e}</Project>

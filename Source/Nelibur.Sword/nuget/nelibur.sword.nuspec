@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Nelibur.Sword</id>
+        <version>$version$</version>
+        <authors>Sergey Morenko, Sergey Rykov</authors>
+        <owners>Sergey Morenko</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <licenseUrl>https://github.com/Nelibur/Nelibur/blob/master/LICENSE</licenseUrl>
+        <projectUrl>http://nelibur.org/</projectUrl>
+        <description>
+            Nelibur.Sword is a library to take with you in the battle of Clean Code.
+        </description>
+        <iconUrl>http://gravatar.com/avatar/d480d09db613465e3ad18b7552dfef4b</iconUrl>
+        <language>en-US</language>
+        <tags>Nelibur Sword Option MayBe Threading ThreadPool Extensions Patterns</tags>
+    </metadata>
+    <files>
+        <file src="lib\**\*.*" target="lib" />
+    </files>
+</package>
