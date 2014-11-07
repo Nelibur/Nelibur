@@ -1,24 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="Build">
+    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
     <PropertyGroup>
         <NuGet>.nuget\nuget.exe</NuGet>
+        
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
-        <PackageOutDir>out\$(Configuration)\Packages</PackageOutDir>
-        <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0</BUILD_NUMBER>
-        <PackageVersion Condition="'$(PackageVersion)' == ''">$(BUILD_NUMBER)</PackageVersion>
+        <OutDir>out\$(Configuration)</OutDir>
+        
+        <PackageVersion Condition="'$(PackageVersion)' == ''">1.0.0-internal</PackageVersion>   
+        
+        <NuGetPackagesDir>$(OutDir)\NuGet</NuGetPackagesDir>
+        <PackageOutDir>$(OutDir)\Packages</PackageOutDir>
     </PropertyGroup>
 
     <ItemGroup>
-        <NuGetProjects Include="Source\Nelibur.Sword\Nelibur.Sword.csproj"/>
-        <NuGetProjects Include="Source\Nelibur\Nelibur.csproj"/>
+        <NuSpecFiles  Include="$(NuGetPackagesDir)/**/*.nuspec" />        
     </ItemGroup>
-
-    <Target Name="Build" DependsOnTargets="Clean">
-        <MakeDir Directories="$(PackageOutDir)" />
-        <Exec Command='$(NuGet) pack "%(NuGetProjects.FullPath)" -Version $(PackageVersion) -OutputDirectory "$(PackageOutDir)" -Properties "Configuration=$(Configuration)"  -IncludeReferencedProjects'/>
+    
+    <Target Name="Build" DependsOnTargets="Clean;CopyBinaries;UpdateVersion;Pack">
     </Target>
 
-    <Target Name="Clean">        
-        <RemoveDir Directories="$(PackageOutDir)" />        
+    <Target Name="Pack">
+        <MakeDir Directories="$(PackageOutDir)" />
+        <Exec Command='$(NuGet) pack "%(NuSpecFiles.FullPath)" -OutputDirectory "$(PackageOutDir)"'/>
+    </Target>
+    
+    <Target Name="UpdateVersion">
+        <Message Text="Updating version to $(PackageVersion) ..." />
+        <FileUpdate Files="@(NuSpecFiles)" Regex='\$version\$' ReplacementText='$(PackageVersion)' />
+    </Target>
+    
+    <ItemGroup>
+        <!-- Nelibur -->
+        <PackageBinaries Include="Source\Nelibur\nuget\**\*.*">
+            <Package>Nelibur</Package>
+        </PackageBinaries>
+        <PackageBinaries Include='$(OutDir)\Nelibur\Nelibur.dll'>
+            <Package>Nelibur</Package>
+            <Destination>lib\net45</Destination>
+        </PackageBinaries>
+        <!-- Nelibur.Sword -->
+        <PackageBinaries Include='Source\Nelibur.Sword\nuget\**\*.*'>
+            <Package>Nelibur.Sword</Package>
+        </PackageBinaries>
+        <PackageBinaries Include='$(OutDir)\Nelibur.Sword\Nelibur.Sword.dll'>
+            <Package>Nelibur.Sword</Package>
+            <Destination>lib\net45</Destination>
+        </PackageBinaries>        
+    </ItemGroup>
+
+    <Target Name="CopyBinaries" Inputs="%(PackageBinaries.Identity)" Outputs="_DO_IT_">
+        <Message Text="Copying binaries for %(PackageBinaries.Package) ..." />
+        <PropertyGroup>
+            <PackageDir>$(NuGetPackagesDir)\%(PackageBinaries.Package)</PackageDir>
+            <BinariesDestinationDir>$(PackageDir)\%(PackageBinaries.Destination)</BinariesDestinationDir>
+        </PropertyGroup>
+        <MakeDir Directories="$(BinariesDestinationDir)" />
+        <Copy SourceFiles="%(PackageBinaries.Identity)" DestinationFolder="$(BinariesDestinationDir)\%(PackageBinaries.RecursiveDir)" />
+    </Target>
+
+    <Target Name="Clean">
+        <RemoveDir Directories="$(PackageOutDir);$(NuGetPackagesDir)" />        
     </Target>    
 </Project>

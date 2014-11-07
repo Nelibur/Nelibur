@@ -79,7 +79,7 @@
     <Compile Include="Threading\ThreadPools\WorkThread.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nelibur.sword.nuspec" />
+    <None Include="nuget\nelibur.sword.nuspec" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
