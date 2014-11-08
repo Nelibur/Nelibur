@@ -1,6 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="Build">
-    <Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets"/>
+    <PropertyGroup>
+        <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildTasks\tools</MSBuildCommunityTasksPath>
+    </PropertyGroup>
+    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+    
     <PropertyGroup>
         <NuGet>.nuget\nuget.exe</NuGet>
         
