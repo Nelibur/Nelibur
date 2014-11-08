@@ -40,7 +40,16 @@
     
     <Target Name="UpdateVersion">
         <Message Text="Updating version to $(PackageVersion) ..." />
-        <FileUpdate Files="@(NuSpecFiles)" Regex='\$version\$' ReplacementText='$(PackageVersion)' />
+<!--        <FileUpdate Files="@(NuSpecFiles)" Regex='\$version\$' ReplacementText='$(PackageVersion)' />-->
+        <XmlUpdate XmlFileName="%(NuSpecFiles.Identity)"
+               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
+               XPath="/d:package/d:metadata/d:version"
+               Value="$(PackageVersion)" />
+        
+        <XmlUpdate XmlFileName="%(NuSpecFiles.Identity)"
+               Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
+               XPath="/d:package/d:metadata/d:dependencies/d:dependency[@version='$version$']/@version"
+               Value="$(PackageVersion)" />
     </Target>
     
     <ItemGroup>
