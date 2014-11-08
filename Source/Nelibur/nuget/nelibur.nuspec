@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Nelibur</id>
@@ -20,7 +20,8 @@
 			<dependency id="Nelibur.Sword" version="$version$"/>
         </dependencies> 
     </metadata>
-	<files>
-		<file src="install.ps1" target="tools\install.ps1" />
-	</files>
+    <files>
+        <file src="tools\**\*.*" target="tools" />
+        <file src="lib\**\*.*" target="lib" />
+    </files>
 </package>
