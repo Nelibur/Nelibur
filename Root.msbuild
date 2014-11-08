@@ -10,18 +10,19 @@
         <Error Condition="!Exists('$(MSBuildCommunityTasksPath)')"
                Text="Execute 'restore.cmd' to obtain required nuget packages" />
 
-        <Warning Condition="'$(BUILD_NUMBER)' == '' OR '$(BuildVersion)' == '0.0.0.0'"
+        <Warning Condition="'$(BUILD_NUMBER)' == '' OR '$(BuildVersion)' == '$(DefaultBuildVersion)'"
                  Text="Specify property BuildVersion or BUILD_NUMBER" />
     </Target>
 
     <PropertyGroup>
         <ProductInfo>Nelibur Framework</ProductInfo>
-        <CopyrightInfo>Copyright © Sergey Morenko 2014</CopyrightInfo>
+        <CopyrightInfo>Copyright © Sergey Morenko. Since 2014</CopyrightInfo>
         <TradeMarkInfo>Nelibur Framework</TradeMarkInfo>
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
         <AssemblyInformationalVersion Condition="'$(BUILD_NUMBER)' == ''">Compiled By $(USERNAME)</AssemblyInformationalVersion>
         <BuildVersion Condition="'$(BuildVersion)' == ''">$(BUILD_NUMBER)</BuildVersion>
-        <BuildVersion Condition="'$(BuildVersion)' == ''">0.0.0.0</BuildVersion>
+        <DefaultBuildVersion>0.0.0.0</DefaultBuildVersion>
+        <BuildVersion Condition="'$(BuildVersion)' == ''">$(DefaultBuildVersion)</BuildVersion>
     </PropertyGroup>
 
     <ItemGroup>
