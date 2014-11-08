@@ -27,13 +27,20 @@
         <PackageOutDir>$(OutDir)\Packages</PackageOutDir>
     </PropertyGroup>
 
-    <ItemGroup>
-        <NuSpecFiles  Include="$(NuGetPackagesDir)/**/*.nuspec" />        
-    </ItemGroup>
+    <PropertyGroup>
+        <NuSpecFiles>$(NuGetPackagesDir)/**/*.nuspec</NuSpecFiles>
+    </PropertyGroup>
     
-    <Target Name="Build" DependsOnTargets="Clean;CopyBinaries;UpdateVersion;Pack">
+    <Target Name="Build" DependsOnTargets="Clean;CopyBinaries;CollectNuspecs;UpdateVersion;Pack">
     </Target>
 
+    <Target Name="CollectNuspecs">
+        <ItemGroup>
+            <NuSpecFiles Include="$(NuSpecFiles)" />
+        </ItemGroup>
+        <Message Text="Nuspec: %(NuSpecFiles.Identity)" />
+    </Target>
+    
     <Target Name="Pack">
         <MakeDir Directories="$(PackageOutDir)" />
         <Exec Command='$(NuGet) pack "%(NuSpecFiles.FullPath)" -OutputDirectory "$(PackageOutDir)"'/>
@@ -41,7 +48,6 @@
     
     <Target Name="UpdateVersion" Inputs="%(NuSpecFiles.Identity)" Outputs="_DO_IT_ANYWAY_">
         <Message Text="Updating package %(NuSpecFiles.Identity) to version $(PackageVersion) ..." />
-<!--        <FileUpdate Files="@(NuSpecFiles)" Regex='\$version\$' ReplacementText='$(PackageVersion)' />-->
         <XmlUpdate XmlFileName="%(NuSpecFiles.FullPath)"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:version"
@@ -69,7 +75,7 @@
         <PackageBinaries Include='$(OutDir)\Nelibur.Sword\Nelibur.Sword.dll'>
             <Package>Nelibur.Sword</Package>
             <Destination>lib\net45</Destination>
-        </PackageBinaries>        
+        </PackageBinaries>  
     </ItemGroup>
 
     <Target Name="CopyBinaries" Inputs="%(PackageBinaries.Identity)" Outputs="_DO_IT_">
