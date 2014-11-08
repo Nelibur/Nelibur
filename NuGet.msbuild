@@ -10,7 +10,7 @@
         <Error Condition="!Exists('$(MSBuildCommunityTasksPath)')"
                Text="Execute 'restore.cmd' to obtain required nuget packages" />
 
-        <Warning Condition="'$(PackageVersion)' == '' OR '$(PackageVersion)' == '1.0.0-internal'"
+        <Warning Condition="'$(PackageVersion)' == '' OR '$(PackageVersion)' == '$(DefaultPackageVersion)'"
                  Text="Specify property PackageVersion to create package for publishing. See semver.org for naming conventions." />
     </Target>
     
@@ -20,7 +20,8 @@
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
         <OutDir>out\$(Configuration)</OutDir>
         
-        <PackageVersion Condition="'$(PackageVersion)' == ''">1.0.0-internal</PackageVersion>   
+        <DefaultPackageVersion>1.0.0-internal</DefaultPackageVersion>   
+        <PackageVersion Condition="'$(PackageVersion)' == ''">$(DefaultPackageVersion)</PackageVersion>   
         
         <NuGetPackagesDir>$(OutDir)\NuGet</NuGetPackagesDir>
         <PackageOutDir>$(OutDir)\Packages</PackageOutDir>
@@ -38,15 +39,15 @@
         <Exec Command='$(NuGet) pack "%(NuSpecFiles.FullPath)" -OutputDirectory "$(PackageOutDir)"'/>
     </Target>
     
-    <Target Name="UpdateVersion">
-        <Message Text="Updating version to $(PackageVersion) ..." />
+    <Target Name="UpdateVersion" Inputs="%(NuSpecFiles.Identity)" Outputs="_DO_IT_ANYWAY_">
+        <Message Text="Updating package %(NuSpecFiles.Identity) to version $(PackageVersion) ..." />
 <!--        <FileUpdate Files="@(NuSpecFiles)" Regex='\$version\$' ReplacementText='$(PackageVersion)' />-->
-        <XmlUpdate XmlFileName="%(NuSpecFiles.Identity)"
+        <XmlUpdate XmlFileName="%(NuSpecFiles.FullPath)"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:version"
                Value="$(PackageVersion)" />
         
-        <XmlUpdate XmlFileName="%(NuSpecFiles.Identity)"
+        <XmlUpdate XmlFileName="%(NuSpecFiles.FullPath)"
                Prefix="d" Namespace="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd"
                XPath="/d:package/d:metadata/d:dependencies/d:dependency[@version='$version$']/@version"
                Value="$(PackageVersion)" />
