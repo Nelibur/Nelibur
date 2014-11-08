@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur.Sword", "Source\Nelibur.Sword\Nelibur.Sword.csproj", "{71FF2315-9038-4F0C-A145-00CADF3E881B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur", "Source\Nelibur\Nelibur.csproj", "{FD85B6D0-7260-4991-804B-981F8DB6592E}"
