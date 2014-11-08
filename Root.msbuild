@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="Rebuild">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" InitialTargets="CheckPrerequisites" DefaultTargets="Rebuild">
     <PropertyGroup>
         <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildTasks\tools</MSBuildCommunityTasksPath>
     </PropertyGroup>
-    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" />
+    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"
+        Condition="Exists('$(MSBuildCommunityTasksPath)')"/>
+
+    <Target Name="CheckPrerequisites">
+        <Error Condition="!Exists('$(MSBuildCommunityTasksPath)')"
+               Text="Execute 'restore.cmd' to obtain required nuget packages" />
+
+        <Warning Condition="'$(BUILD_NUMBER)' == '' OR '$(BuildVersion)' == '0.0.0.0'"
+                 Text="Specify property BuildVersion or BUILD_NUMBER" />
+    </Target>
 
     <PropertyGroup>
         <ProductInfo>Nelibur Framework</ProductInfo>
@@ -11,11 +20,16 @@
         <TradeMarkInfo>Nelibur Framework</TradeMarkInfo>
         <Configuration Condition="'$(Configuration)' == ''">Release</Configuration>
         <AssemblyInformationalVersion Condition="'$(BUILD_NUMBER)' == ''">Compiled By $(USERNAME)</AssemblyInformationalVersion>
-        <BUILD_NUMBER Condition="'$(BUILD_NUMBER)' == ''">0.0.0.0</BUILD_NUMBER>
+        <BuildVersion Condition="'$(BuildVersion)' == ''">$(BUILD_NUMBER)</BuildVersion>
+        <BuildVersion Condition="'$(BuildVersion)' == ''">0.0.0.0</BuildVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+        <Solutions Include="Solution.sln"/>
+    </ItemGroup>
+    
     <Target Name = "Rebuild" DependsOnTargets="Version">
-        <MSBuild Projects="@(Solution)" Properties="Platform=Any CPU;Configuration=$(Configuration)" Targets="Build"/>
+        <MSBuild Projects="@(Solutions)" Properties="Platform=Any CPU;Configuration=$(Configuration)" Targets="Build"/>
     </Target>
 
     <Target Name="Version">
@@ -26,12 +40,8 @@
           AssemblyCopyright="$(CopyrightInfo)"
           AssemblyTrademark="$(TrademarkInfo)"
           AssemblyConfiguration="$(Configuration)"
-          AssemblyVersion="$(BUILD_NUMBER)"
-          AssemblyFileVersion="$(BUILD_NUMBER)"
+          AssemblyVersion="$(BuildVersion)"
+          AssemblyFileVersion="$(BuildVersion)"
           AssemblyInformationalVersion="$(AssemblyInformationalVersion)" />
     </Target>
-
-    <ItemGroup>
-        <Solution Include="Solution.sln"/>
-    </ItemGroup>
 </Project>

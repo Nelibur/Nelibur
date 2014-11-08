@@ -1,9 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" DefaultTargets="Build">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5" InitialTargets="CheckPrerequisites" DefaultTargets="Build">
     <PropertyGroup>
         <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\Tools\MSBuildTasks\tools</MSBuildCommunityTasksPath>
     </PropertyGroup>
-    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+    <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets" 
+            Condition="Exists('$(MSBuildCommunityTasksPath)')"/>
+
+    <Target Name="CheckPrerequisites">
+        <Error Condition="!Exists('$(MSBuildCommunityTasksPath)')"
+               Text="Execute 'restore.cmd' to obtain required nuget packages" />
+
+        <Warning Condition="'$(PackageVersion)' == '' OR '$(PackageVersion)' == '1.0.0-internal'"
+                 Text="Specify property PackageVersion to create package for publishing. See semver.org for naming conventions." />
+    </Target>
     
     <PropertyGroup>
         <NuGet>.nuget\nuget.exe</NuGet>
