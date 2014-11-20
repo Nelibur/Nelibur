@@ -11,6 +11,7 @@ follow [@Nelibur](http://twitter.com/Nelibur) for project updates.
 What to read
 ============
 
+ * [Advantages of message based web services](https://github.com/ServiceStack/ServiceStack/wiki/Advantages-of-message-based-web-services)
  * [Getting Started with RESTful WCF Powered by Nelibur](http://www.codeproject.com/Articles/780654/Getting-Started-with-RESTful-WCF-Powered-by-Nelibu)
  * [Building RESTful Message Based Web Services with WCF](http://www.codeproject.com/Articles/712689/Building-RESTful-Message-Based-Web-Services-with-W)
  * [Building SOAP Message Based Web Services with WCF](http://www.codeproject.com/Articles/598157/Message-based-web-service-in-WCF)
