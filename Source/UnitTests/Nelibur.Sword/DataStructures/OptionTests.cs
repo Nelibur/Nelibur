@@ -105,6 +105,30 @@ namespace UnitTests.Nelibur.Sword.DataStructures
             mock.Verify(x => x.OnMatch(option.Value), Times.Never());
         }
 
+        [Fact]
+        public void ThrowOnEmpty_Empty_ThrowCustomException()
+        {
+            Assert.ThrowsDelegateWithReturn func = () =>
+            {
+                Option<int> empty = Option<int>.Empty;
+                return empty.ThrowOnEmpty<NullReferenceException>();
+            };
+            Assert.Throws(typeof(NullReferenceException), func);
+        }
+
+        [Fact]
+        public void ThrowOnEmpty_Empty_ThrowException()
+        {
+            Assert.ThrowsDelegateWithReturn func = () => Option<int>.Empty.ThrowOnEmpty(() => new NullReferenceException());
+            Assert.Throws(typeof(NullReferenceException), func);
+        }
+
+        [Fact]
+        public void ThrowOnEmpty_NotEmpty_NotThrowException()
+        {
+            Assert.DoesNotThrow(() => new Option<int>(1).ThrowOnEmpty(() => new NullReferenceException()));
+        }
+
         protected virtual void OnMatch(int value)
         {
         }
