@@ -83,26 +83,6 @@ namespace Nelibur.Sword.Extensions
             return Option<TResult>.Empty;
         }
 
-        public static Option<T> ThrowOnEmpty<T, TException>(this Option<T> value)
-            where TException : Exception, new()
-        {
-            if (value.HasValue)
-            {
-                return value;
-            }
-            throw Error.Type<TException>();
-        }
-
-        public static Option<T> ThrowOnEmpty<T, TException>(this Option<T> value, Func<TException> func)
-            where TException : Exception
-        {
-            if (value.HasValue)
-            {
-                return value;
-            }
-            throw func();
-        }
-
         public static Option<T> Where<T>(this Option<T> value, Func<T, bool> predicate)
         {
             if (value.HasNoValue)

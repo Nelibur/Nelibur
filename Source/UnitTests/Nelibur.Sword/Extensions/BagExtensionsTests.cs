@@ -106,7 +106,7 @@ namespace UnitTests.Nelibur.Sword.Extensions
             Assert.ThrowsDelegateWithReturn func = () =>
             {
                 Option<int> empty = Option<int>.Empty;
-                return empty.ThrowOnEmpty<int, NullReferenceException>();
+                return empty.ThrowOnEmpty<NullReferenceException>();
             };
             Assert.Throws(typeof(NullReferenceException), func);
         }
