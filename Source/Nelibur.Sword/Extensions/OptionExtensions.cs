@@ -5,7 +5,7 @@ namespace Nelibur.Sword.Extensions
 {
     public static class OptionExtensions
     {
-        public static Option<TInput> Do<TInput>(this Option<TInput> value, Action<TInput> action)
+        public static Option<T> Do<T>(this Option<T> value, Action<T> action)
         {
             if (value.HasValue)
             {
@@ -14,8 +14,7 @@ namespace Nelibur.Sword.Extensions
             return value;
         }
 
-        public static Option<TInput> Do<TInput>(
-            this Option<TInput> value, Func<TInput, bool> predicate, Action<TInput> action)
+        public static Option<T> Do<T>(this Option<T> value, Func<T, bool> predicate, Action<T> action)
         {
             if (value.HasNoValue)
             {
@@ -28,7 +27,7 @@ namespace Nelibur.Sword.Extensions
             return value;
         }
 
-        public static Option<TInput> DoOnEmpty<TInput>(this Option<TInput> value, Action action)
+        public static Option<T> DoOnEmpty<T>(this Option<T> value, Action action)
         {
             if (value.HasNoValue)
             {
@@ -37,7 +36,7 @@ namespace Nelibur.Sword.Extensions
             return value;
         }
 
-        public static Option<TInput> Finally<TInput>(this Option<TInput> value, Action<TInput> action)
+        public static Option<T> Finally<T>(this Option<T> value, Action<T> action)
         {
             action(value.Value);
             return value;
@@ -84,7 +83,7 @@ namespace Nelibur.Sword.Extensions
             return Option<TResult>.Empty;
         }
 
-        public static Option<TValue> ThrowOnEmpty<TValue, TException>(this Option<TValue> value)
+        public static Option<T> ThrowOnEmpty<T, TException>(this Option<T> value)
             where TException : Exception, new()
         {
             if (value.HasValue)
@@ -94,7 +93,7 @@ namespace Nelibur.Sword.Extensions
             throw Error.Type<TException>();
         }
 
-        public static Option<TValue> ThrowOnEmpty<TValue, TException>(this Option<TValue> value, Func<TException> func)
+        public static Option<T> ThrowOnEmpty<T, TException>(this Option<T> value, Func<TException> func)
             where TException : Exception
         {
             if (value.HasValue)
@@ -104,13 +103,13 @@ namespace Nelibur.Sword.Extensions
             throw func();
         }
 
-        public static Option<TInput> Where<TInput>(this Option<TInput> value, Func<TInput, bool> predicate)
+        public static Option<T> Where<T>(this Option<T> value, Func<T, bool> predicate)
         {
             if (value.HasNoValue)
             {
-                return Option<TInput>.Empty;
+                return Option<T>.Empty;
             }
-            return predicate(value.Value) ? value : Option<TInput>.Empty;
+            return predicate(value.Value) ? value : Option<T>.Empty;
         }
     }
 }
