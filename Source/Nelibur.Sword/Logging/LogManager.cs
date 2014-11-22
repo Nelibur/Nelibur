@@ -3,7 +3,7 @@ using Nelibur.Sword.Logging.InternalLoggers;
 
 namespace Nelibur.Sword.Logging
 {
-    public static class LogManager
+    internal static class LogManager
     {
         private static readonly ILogFactory _logFactory = new NullLogFactory();
 

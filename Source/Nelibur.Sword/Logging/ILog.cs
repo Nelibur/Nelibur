@@ -2,7 +2,7 @@
 
 namespace Nelibur.Sword.Logging
 {
-    public interface ILog
+    internal interface ILog
     {
         bool IsDebugEnabled { get; }
 
