@@ -89,9 +89,10 @@ namespace UnitTests.Nelibur.Sword.DataStructures
             var option = new Option<int>(1);
             var mock = new Mock<OptionTests>();
 
-            option.Match(x => x == 1, mock.Object.OnMatch);
+            var result = option.Match(x => x == 1, mock.Object.OnMatch);
 
-            mock.Verify(x => x.OnMatch(option.Value));
+            mock.Verify(x => x.OnMatch(option.Value), Times.Once);
+            Assert.Equal(1, result.Value);
         }
 
         [Fact]
@@ -100,9 +101,10 @@ namespace UnitTests.Nelibur.Sword.DataStructures
             Option<int> option = Option<int>.Empty;
             var mock = new Mock<OptionTests>();
 
-            option.Match(x => x == 1, mock.Object.OnMatch);
+            var result = option.Match(x => x == 1, mock.Object.OnMatch);
 
             mock.Verify(x => x.OnMatch(option.Value), Times.Never());
+            Assert.Equal(default(int), result.Value);
         }
 
         [Fact]

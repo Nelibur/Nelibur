@@ -36,11 +36,10 @@ namespace Nelibur.Sword.DataStructures
             {
                 return Empty;
             }
-            if (predicate(Value) == false)
+            if (predicate(Value))
             {
-                return this;
+                action(Value);
             }
-            action(Value);
             return this;
         }
 
