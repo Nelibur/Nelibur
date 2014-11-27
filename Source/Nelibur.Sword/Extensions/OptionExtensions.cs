@@ -74,13 +74,13 @@ namespace Nelibur.Sword.Extensions
             return func(value.Value).ToOption();
         }
 
-        public static Option<TResult> MapOnEmpty<TInput, TResult>(this Option<TInput> value, Func<TResult> func)
+        public static Option<T> MapOnEmpty<T>(this Option<T> value, Func<T> func)
         {
             if (value.HasNoValue)
             {
                 return func().ToOption();
             }
-            return Option<TResult>.Empty;
+            return value;
         }
 
         public static Option<T> Where<T>(this Option<T> value, Func<T, bool> predicate)
