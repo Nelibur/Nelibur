@@ -47,8 +47,7 @@ namespace Nelibur.Sword.Extensions
             return func(value.Value).ToOption();
         }
 
-        public static Option<TResult> Map<TInput, TResult>(
-            this Option<TInput> value, Func<TInput, bool> predicate, Func<TInput, TResult> func)
+        public static Option<TResult> Map<TInput, TResult>(this Option<TInput> value, Func<TInput, bool> predicate, Func<TInput, TResult> func)
         {
             if (value.HasNoValue)
             {
