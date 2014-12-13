@@ -69,6 +69,11 @@ namespace Nelibur.Sword.Extensions
             return value;
         }
 
+        public static Option<V> SelectMany<T, U, V>(this Option<T> value, Func<T, Option<U>> func, Func<T, U, V> selector)
+        {
+            return value.Map(x => func(x).Map(y => selector(x, y).ToOption()));
+        }
+
         public static Option<T> Where<T>(this Option<T> value, Func<T, bool> predicate)
         {
             if (value.HasNoValue)

@@ -164,6 +164,26 @@ namespace UnitTests.Nelibur.Sword.Extensions
         }
 
         [Fact]
+        public void SelectMany_Empty_Ok()
+        {
+            Option<int> result = from x in 5.ToOption()
+                                 from y in Option<int>.Empty
+                                 select x + y;
+            Assert.True(result.HasNoValue);
+        }
+
+        [Fact]
+        public void SelectMany_NotEmpty_Ok()
+        {
+            Option<int> result = from x in 5.ToOption()
+                                 from y in 2.ToOption()
+                                 from z in 3.ToOption()
+                                 select x + y + z;
+            Assert.True(result.HasValue);
+            Assert.Equal(10, result.Value);
+        }
+
+        [Fact]
         public void Where_Empty_Filtered()
         {
             Option<Item> item = Option<Item>.Empty;
