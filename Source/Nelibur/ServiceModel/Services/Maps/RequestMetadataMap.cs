@@ -6,6 +6,7 @@ using System.ServiceModel.Web;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Headers;
 using Nelibur.Sword;
+using Nelibur.Sword.Core;
 
 namespace Nelibur.ServiceModel.Services.Maps
 {

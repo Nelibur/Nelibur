@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
+using Nelibur.Sword.Core;
 
 namespace Nelibur.Sword.Reflection
 {

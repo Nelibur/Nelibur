@@ -1,4 +1,5 @@
 using System;
+using Nelibur.Sword.Core;
 
 namespace Nelibur.Sword.DataStructures
 {
