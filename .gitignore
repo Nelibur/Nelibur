@@ -3,7 +3,7 @@ Out
 obj
 bin
 .idea
-_ReSharper.*
+_ReSharper*
 *.dotCover
 *.suo
 *.user
