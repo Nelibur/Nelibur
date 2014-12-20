@@ -21,3 +21,4 @@ using System.Runtime.InteropServices;
 
 [assembly: Guid("d3fa8a1e-7aa7-4f68-be1d-b83679db4080")]
 [assembly: InternalsVisibleTo("Nelibur")]
+[assembly: InternalsVisibleTo("UnitTests")]

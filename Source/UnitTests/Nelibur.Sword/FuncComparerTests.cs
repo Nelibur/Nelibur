@@ -1,5 +1,6 @@
 ﻿using System;
 using Nelibur.Sword;
+using Nelibur.Sword.Core;
 using Xunit;
 
 namespace UnitTests.Nelibur.Sword

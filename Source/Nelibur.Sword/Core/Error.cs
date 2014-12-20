@@ -4,7 +4,7 @@ using Nelibur.Sword.Reflection;
 
 namespace Nelibur.Sword.Core
 {
-    public static class Error
+    internal static class Error
     {
         public static Exception ArgumentNull(string paramName)
         {
