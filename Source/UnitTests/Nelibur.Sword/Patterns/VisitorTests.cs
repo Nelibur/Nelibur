@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using Nelibur.Sword.Patterns;
 using Xunit;
 
@@ -13,6 +14,7 @@ namespace UnitTests.Nelibur.Sword.Patterns
 
             IActionVisitor<Letter> visitor = Visitor.For<Letter>();
             visitor.Register<A>(mock.Object.VisitAction);
+            visitor.Register<B>(mock.Object.VisitAction);
             var value = new A();
 
             visitor.Visit(value);
@@ -25,7 +27,9 @@ namespace UnitTests.Nelibur.Sword.Patterns
             var mock = new Mock<VisitorTests>();
 
             IFuncVisitor<Letter, int> visitor = Visitor.For<Letter, int>();
-            visitor.Register<A>(mock.Object.VisitFunc);
+            visitor.Register<A>(mock.Object.VisitFunc)
+                   .Register<B>(mock.Object.VisitFunc);
+
             var value = new A();
 
             visitor.Visit(value);
@@ -36,12 +40,25 @@ namespace UnitTests.Nelibur.Sword.Patterns
         {
         }
 
+        protected virtual void VisitAction(B value)
+        {
+        }
+
         protected virtual int VisitFunc(A value)
         {
             return 1;
         }
 
+        protected virtual int VisitFunc(B value)
+        {
+            return 1;
+        }
+
         protected sealed class A : Letter
+        {
+        }
+
+        protected sealed class B : Letter
         {
         }
 
