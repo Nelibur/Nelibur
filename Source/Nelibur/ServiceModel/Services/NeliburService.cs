@@ -2,7 +2,6 @@
 using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Services.Maps;
 using Nelibur.ServiceModel.Services.Operations;
-using Nelibur.Sword;
 using Nelibur.Sword.Core;
 
 namespace Nelibur.ServiceModel.Services
@@ -13,16 +12,16 @@ namespace Nelibur.ServiceModel.Services
         protected static readonly Configuration _configuration = new Configuration();
         private static readonly RequestProcessorMap _requestProcessors = new RequestProcessorMap();
 
-        protected static void ProcessOneWay(RequestMetadata requestMetaData)
-        {
-            IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
-            processor.ProcessOneWay(requestMetaData);
-        }
-
         protected static Message Process(RequestMetadata requestMetaData)
         {
             IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
             return processor.Process(requestMetaData);
+        }
+
+        protected static void ProcessOneWay(RequestMetadata requestMetaData)
+        {
+            IRequestProcessor processor = _requestProcessors.Get(requestMetaData.Type);
+            processor.ProcessOneWay(requestMetaData);
         }
 
         protected sealed class Configuration : IConfiguration

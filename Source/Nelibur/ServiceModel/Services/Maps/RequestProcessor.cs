@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ServiceModel.Channels;
 using Nelibur.ServiceModel.Services.Operations;
-using Nelibur.Sword;
 using Nelibur.Sword.Core;
 
 namespace Nelibur.ServiceModel.Services.Maps

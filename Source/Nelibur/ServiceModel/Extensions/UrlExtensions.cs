@@ -4,7 +4,6 @@ using System.Linq;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Serializers;
 using Nelibur.ServiceModel.Services.Operations;
-using Nelibur.Sword;
 using Nelibur.Sword.Core;
 
 namespace Nelibur.ServiceModel.Extensions

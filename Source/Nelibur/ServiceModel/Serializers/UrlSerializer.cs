@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Specialized;
 using Nelibur.ServiceModel.Contracts;
-using Nelibur.Sword;
 using Nelibur.Sword.Core;
 using Nelibur.Sword.DataStructures;
 
