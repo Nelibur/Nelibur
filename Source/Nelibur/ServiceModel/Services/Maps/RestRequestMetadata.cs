@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Specialized;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Json;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Web;
@@ -11,6 +12,8 @@ namespace Nelibur.ServiceModel.Services.Maps
 {
     internal sealed class RestRequestMetadata : RequestMetadata
     {
+        private const string ContentTypeHeader = "Content-Type";
+        private const string OctetStreamContentType = "application/octet-stream";
         private readonly object _request;
         private readonly WebOperationContext _webOperationContext;
 
@@ -25,8 +28,13 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public override Message CreateResponse(object response)
         {
-            var serializer = new DataContractJsonSerializer(response.GetType());
-            return _webOperationContext.CreateJsonResponse(response, serializer);
+            var stream = response as Stream;
+            if (stream == null)
+            {
+                var serializer = new DataContractJsonSerializer(response.GetType());
+                return _webOperationContext.CreateJsonResponse(response, serializer);
+            }
+            return _webOperationContext.CreateStreamResponse(stream, GetResponseContentType());
         }
 
         public override TRequest GetRequest<TRequest>()
@@ -68,6 +76,17 @@ namespace Nelibur.ServiceModel.Services.Maps
             }
 
             return CreateRequestFromContent(message, targetType);
+        }
+
+        private string GetResponseContentType()
+        {
+            string[] allKeys = _webOperationContext.OutgoingResponse.Headers.AllKeys;
+            string contentTypeKey = allKeys.FirstOrDefault(x => string.Equals(x, ContentTypeHeader, StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrWhiteSpace(contentTypeKey))
+            {
+                return OctetStreamContentType;
+            }
+            return _webOperationContext.OutgoingResponse.Headers[contentTypeKey];
         }
 
         private bool IsRequestByUrl()

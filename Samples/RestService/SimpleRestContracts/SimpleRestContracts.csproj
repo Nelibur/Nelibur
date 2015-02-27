@@ -38,6 +38,7 @@
     <Compile Include="Contracts\ClientResponse.cs" />
     <Compile Include="Contracts\CreateClientRequest.cs" />
     <Compile Include="Contracts\DeleteClientRequest.cs" />
+    <Compile Include="Contracts\GetCertificateById.cs" />
     <Compile Include="Contracts\GetClientRequest.cs" />
     <Compile Include="Contracts\UpdateClientRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
