@@ -64,17 +64,25 @@
         <PackageBinaries Include="Source\Nelibur\nuget\**\*.*">
             <Package>Nelibur</Package>
         </PackageBinaries>
-        <PackageBinaries Include='$(OutDir)\Nelibur\Nelibur.dll'>
+        <PackageBinaries Include='$(OutDir)\Nelibur\4.5\Nelibur.dll'>
             <Package>Nelibur</Package>
             <Destination>lib\net45</Destination>
+        </PackageBinaries>
+        <PackageBinaries Include='$(OutDir)\Nelibur\4.0\Nelibur.dll'>
+            <Package>Nelibur</Package>
+            <Destination>lib\net40</Destination>
         </PackageBinaries>
         <!-- Nelibur.Sword -->
         <PackageBinaries Include='Source\Nelibur.Sword\nuget\**\*.*'>
             <Package>Nelibur.Sword</Package>
         </PackageBinaries>
-        <PackageBinaries Include='$(OutDir)\Nelibur.Sword\Nelibur.Sword.dll'>
+        <PackageBinaries Include='$(OutDir)\Nelibur.Sword\4.5\Nelibur.Sword.dll'>
             <Package>Nelibur.Sword</Package>
             <Destination>lib\net45</Destination>
+        </PackageBinaries>  
+        <PackageBinaries Include='$(OutDir)\Nelibur.Sword\4.0\Nelibur.Sword.dll'>
+            <Package>Nelibur.Sword</Package>
+            <Destination>lib\net40</Destination>
         </PackageBinaries>  
     </ItemGroup>
 

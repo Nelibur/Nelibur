@@ -37,7 +37,7 @@ namespace Nelibur.Sword.Threading.ThreadPools
         void AddTask(ITaskItem taskItem, TaskItemPriority priority = TaskItemPriority.Normal);
 
         /// <summary>
-        ///     Add new task as <see cref="Action" />.
+        ///     Add new task.
         /// </summary>
         /// <param name="action">Represent task.</param>
         /// <param name="priority">Task priority.</param>

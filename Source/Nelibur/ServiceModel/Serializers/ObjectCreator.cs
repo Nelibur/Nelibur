@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
-using System.Reflection;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.Sword.Reflection;
 
@@ -16,10 +15,8 @@ namespace Nelibur.ServiceModel.Serializers
         public ObjectCreator(Type type)
         {
             _objectActivator = DelegateFactory.CreateCtor(type);
-            _setters = type
-                .GetTypeInfo()
-                .GetProperties()
-                .ToDictionary(x => x.Name, x => DelegateFactory.CreatePropertySetter(x), StringComparer.OrdinalIgnoreCase);
+            _setters = type.GetProperties()
+                           .ToDictionary(x => x.Name, x => DelegateFactory.CreatePropertySetter(x), StringComparer.OrdinalIgnoreCase);
         }
 
         public object Create(NameValueCollection collection)

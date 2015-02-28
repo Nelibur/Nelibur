@@ -58,7 +58,7 @@ namespace Nelibur.Sword.Threading.ThreadPools
         }
 
         /// <summary>
-        ///     Add new task as <see cref="Action" />.
+        ///     Add new task.
         /// </summary>
         /// <param name="action">Represent task.</param>
         /// <param name="priority">Task priority.</param>
