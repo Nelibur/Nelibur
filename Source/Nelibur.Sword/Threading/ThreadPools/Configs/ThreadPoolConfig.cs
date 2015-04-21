@@ -7,7 +7,7 @@ namespace Nelibur.Sword.Threading.ThreadPools.Configs
 {
     internal sealed class ThreadPoolConfig : IThreadPoolConfig
     {
-        public ThreadPoolConfig()
+        internal ThreadPoolConfig()
         {
             Name = "TinyThreadPool";
             MinThreads = 1;

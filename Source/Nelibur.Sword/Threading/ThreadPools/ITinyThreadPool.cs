@@ -1,10 +1,9 @@
 ﻿using System;
-using Nelibur.Sword.Core;
 using Nelibur.Sword.Threading.ThreadPools.TaskItems;
 
 namespace Nelibur.Sword.Threading.ThreadPools
 {
-    public interface ITinyThreadPool : IFluent, IDisposable
+    public interface ITinyThreadPool : IDisposable
     {
         /// <summary>
         ///     MaxThreads per processor.

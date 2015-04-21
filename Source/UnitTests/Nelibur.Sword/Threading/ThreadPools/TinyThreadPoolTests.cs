@@ -64,6 +64,7 @@ namespace UnitTests.Nelibur.Sword.Threading.ThreadPools
             Assert.Equal(MinThreads, threadPool.MinThreads);
             Assert.Equal(MaxThreads, threadPool.MaxThreads);
             Assert.Equal(Name, threadPool.Name);
+            Console.WriteLine(threadPool.ToString());
         }
 
         [Fact]
@@ -71,8 +72,8 @@ namespace UnitTests.Nelibur.Sword.Threading.ThreadPools
         {
             ITinyThreadPool threadPool = TinyThreadPool.Default;
             Assert.Equal(MultiThreadingCapacity.PerProcessor, threadPool.MultiThreadingCapacity);
-            Assert.Equal(1, threadPool.MinThreads);
-            Assert.Equal(5, threadPool.MaxThreads);
+            Assert.Equal(Environment.ProcessorCount * 1, threadPool.MinThreads);
+            Assert.Equal(Environment.ProcessorCount * 5, threadPool.MaxThreads);
             Assert.Equal("TinyThreadPool", threadPool.Name);
             threadPool.Dispose();
             threadPool.Dispose();

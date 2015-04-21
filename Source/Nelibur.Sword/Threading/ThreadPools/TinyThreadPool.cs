@@ -54,9 +54,8 @@ namespace Nelibur.Sword.Threading.ThreadPools
             internal ThreadPool(ThreadPoolConfig config)
             {
                 config.Validate();
+                SetThreadingRange(config);
                 Name = config.Name;
-                MinThreads = config.MinThreads;
-                MaxThreads = config.MaxThreads;
                 MultiThreadingCapacity = config.MultiThreadingCapacity;
                 _taskQueueController = config.TaskQueueController;
             }
@@ -65,6 +64,18 @@ namespace Nelibur.Sword.Threading.ThreadPools
             public int MinThreads { get; private set; }
             public MultiThreadingCapacity MultiThreadingCapacity { get; private set; }
             public string Name { get; private set; }
+
+            /// <summary>
+            ///     Returns a <see cref="System.String" /> that represents this instance.
+            /// </summary>
+            /// <returns>
+            ///     A <see cref="System.String" /> that represents this instance.
+            /// </returns>
+            public override string ToString()
+            {
+                return string.Format("ThreadPool Name: {0}, MultiThreadingCapacity: {1} MinThreads: {2}, MaxThreads: {3}",
+                    Name, MultiThreadingCapacity, MinThreads, MaxThreads);
+            }
 
             /// <summary>
             ///     Stops ThreadPool.
@@ -80,18 +91,6 @@ namespace Nelibur.Sword.Threading.ThreadPools
                     Stop();
                     _isDisposed = true;
                 }
-            }
-
-            /// <summary>
-            ///     Returns a <see cref="System.String" /> that represents this instance.
-            /// </summary>
-            /// <returns>
-            ///     A <see cref="System.String" /> that represents this instance.
-            /// </returns>
-            public override string ToString()
-            {
-                return string.Format("ThreadPool Name: {0}, MultiThreadingCapacity: {1} MinThreads: {2}, MaxThreads: {3}",
-                    Name, MultiThreadingCapacity, MinThreads, MaxThreads);
             }
 
             public void AddTask(ITaskItem taskItem, TaskItemPriority priority = TaskItemPriority.Normal)
@@ -124,6 +123,26 @@ namespace Nelibur.Sword.Threading.ThreadPools
                     return _taskQueueController.ConsumersWaiting == 0;
                 }
                 return false;
+            }
+
+            private void SetThreadingRange(ThreadPoolConfig config)
+            {
+                switch (config.MultiThreadingCapacity)
+                {
+                    case MultiThreadingCapacity.Global:
+                        MinThreads = config.MinThreads;
+                        MaxThreads = config.MaxThreads;
+                        break;
+                    case MultiThreadingCapacity.PerProcessor:
+                        int processorCount = Environment.ProcessorCount;
+                        MinThreads = processorCount * config.MinThreads;
+                        MaxThreads = processorCount * config.MaxThreads;
+                        break;
+                    default:
+                        string error = string.Format(
+                            "Invalid MultiThreadingCapacity: {0}", config.MultiThreadingCapacity);
+                        throw new ArgumentOutOfRangeException(error);
+                }
             }
 
             private void StartNewWorkThread()
