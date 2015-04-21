@@ -45,10 +45,5 @@ namespace Nelibur.Sword.Threading.ThreadPools
         ///     Default task priority is <see cref="TaskItemPriority.Normal" />.
         /// </remarks>
         void AddTask(Action action, TaskItemPriority priority = TaskItemPriority.Normal);
-
-        /// <summary>
-        ///     Stop the ThreadPool.
-        /// </summary>
-        void Stop();
     }
 }

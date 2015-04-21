@@ -106,26 +106,6 @@ namespace Nelibur.Sword.Threading.ThreadPools
                 AddWorkItem(workItem);
             }
 
-            public void Stop()
-            {
-                lock (_locker)
-                {
-                    if (_workThreads.IsNullOrEmpty())
-                    {
-                        return;
-                    }
-                    foreach (WorkThread workThread in _workThreads)
-                    {
-                        if (workThread == null)
-                        {
-                            continue;
-                        }
-                        workThread.Stop();
-                    }
-                    _workThreads = new List<WorkThread>();
-                }
-            }
-
             internal void Start()
             {
                 MinThreads.Times(StartNewWorkThread);
@@ -171,6 +151,23 @@ namespace Nelibur.Sword.Threading.ThreadPools
                     }
                     StartNewWorkThread();
                 }
+            }
+
+            private void Stop()
+            {
+                if (_workThreads.IsNullOrEmpty())
+                {
+                    return;
+                }
+                foreach (WorkThread workThread in _workThreads)
+                {
+                    if (workThread == null)
+                    {
+                        continue;
+                    }
+                    workThread.Stop();
+                }
+                _workThreads = new List<WorkThread>();
             }
         }
     }

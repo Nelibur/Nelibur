@@ -40,12 +40,12 @@ namespace Nelibur.Sword.Threading.ThreadPools.Configs
             if (MinThreads <= 0)
             {
                 string error = string.Format("MinThreads {0} should not be greater zero", MinThreads);
-                throw new ArgumentException(error);
+                throw new ConfigurationErrorsException(error);
             }
             if (MinThreads > MaxThreads)
             {
-                string error = string.Format("MinThreads {0} should be less MaxThreads {1}", MinThreads, MaxThreads);
-                throw new ArgumentException(error);
+                string error = string.Format("MinThreads {0} should be less or equal MaxThreads {1}", MinThreads, MaxThreads);
+                throw new ConfigurationErrorsException(error);
             }
         }
     }
