@@ -82,6 +82,18 @@ namespace Nelibur.Sword.Threading.ThreadPools
                 }
             }
 
+            /// <summary>
+            ///     Returns a <see cref="System.String" /> that represents this instance.
+            /// </summary>
+            /// <returns>
+            ///     A <see cref="System.String" /> that represents this instance.
+            /// </returns>
+            public override string ToString()
+            {
+                return string.Format("ThreadPool Name: {0}, MultiThreadingCapacity: {1} MinThreads: {2}, MaxThreads: {3}",
+                    Name, MultiThreadingCapacity, MinThreads, MaxThreads);
+            }
+
             public void AddTask(ITaskItem taskItem, TaskItemPriority priority = TaskItemPriority.Normal)
             {
                 IWorkItem workItem = WorkItem.FromTaskItem(taskItem, priority);

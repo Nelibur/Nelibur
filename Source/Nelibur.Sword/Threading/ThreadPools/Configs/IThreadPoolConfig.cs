@@ -1,4 +1,5 @@
 ﻿using System;
+using Nelibur.Sword.Core;
 using Nelibur.Sword.Threading.ThreadPools.TaskQueueControllers;
 
 namespace Nelibur.Sword.Threading.ThreadPools.Configs
@@ -6,7 +7,7 @@ namespace Nelibur.Sword.Threading.ThreadPools.Configs
     /// <summary>
     ///     ThreadPool config.
     /// </summary>
-    public interface IThreadPoolConfig
+    public interface IThreadPoolConfig : IFluent
     {
         /// <summary>
         ///     MaxThreads per processor.

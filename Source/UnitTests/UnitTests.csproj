@@ -78,6 +78,7 @@
     <Compile Include="Nelibur.Sword\FuncComparerTests.cs" />
     <Compile Include="Nelibur.Sword\Patterns\VisitorTests.cs" />
     <Compile Include="Nelibur.Sword\Reflection\DelegateFactoryTests.cs" />
+    <Compile Include="Nelibur.Sword\Threading\ThreadPools\TinyThreadPoolTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />
     <Compile Include="Nelibur\ServiceModel\Extensions\UrlExtensionsTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTests.cs" />
