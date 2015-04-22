@@ -73,7 +73,7 @@ namespace Nelibur.Sword.Threading.ThreadPools
             /// </returns>
             public override string ToString()
             {
-                return string.Format("ThreadPool Name: {0}, MultiThreadingCapacity: {1} MinThreads: {2}, MaxThreads: {3}",
+                return string.Format("ThreadPool Name: {0}, MultiThreadingCapacity: {1}, MinThreads: {2}, MaxThreads: {3}",
                     Name, MultiThreadingCapacity, MinThreads, MaxThreads);
             }
 
