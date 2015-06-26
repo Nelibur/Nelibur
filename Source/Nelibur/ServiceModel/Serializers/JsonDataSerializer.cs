@@ -19,6 +19,10 @@ namespace Nelibur.ServiceModel.Serializers
 
         public static TResponse ToValue<TResponse>(Stream value)
         {
+            if (typeof(TResponse) == typeof(MemoryStream))
+            {
+                return ((TResponse)(object)value);
+            }
             var serializer = new DataContractJsonSerializer(typeof(TResponse));
             return (TResponse)serializer.ReadObject(value);
         }
