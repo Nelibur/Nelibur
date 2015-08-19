@@ -34,6 +34,38 @@ namespace UnitTests.Nelibur.Sword.Patterns
 
             visitor.Visit(value);
             mock.Verify(x => x.VisitFunc(value));
+        }      
+        
+        [Fact]
+        public void FuncVisitor_DefaultVisit_Success()
+        {
+            var mock = new Mock<VisitorTests>();
+
+            IFuncVisitor<Letter, int> visitor = Visitor.For<Letter, int>();
+            visitor.Register<A>(mock.Object.VisitFunc)
+                   .Register<B>(mock.Object.VisitFunc)
+                   .Default(mock.Object.VisitFunc);
+
+            var value = new C();
+
+            visitor.Visit(value);
+            mock.Verify(x => x.VisitFunc());
+        }
+
+        [Fact]
+        public void ActionVisitor_VisitDefault_Success()
+        {
+            var mock = new Mock<VisitorTests>();
+
+            IActionVisitor<Letter> visitor = Visitor.For<Letter>();
+            visitor.Default(mock.Object.VisitAction);
+            visitor.Register<A>(mock.Object.VisitAction);
+            visitor.Register<B>(mock.Object.VisitAction);
+            
+            var value = new C();
+
+            visitor.Visit(value);
+            mock.Verify(x => x.VisitAction());
         }
 
         protected virtual void VisitAction(A value)
@@ -44,25 +76,42 @@ namespace UnitTests.Nelibur.Sword.Patterns
         {
         }
 
+        protected virtual void VisitAction()
+        {
+        }
+
         protected virtual int VisitFunc(A value)
         {
             return 1;
         }
 
+        protected virtual int VisitFunc()
+        {
+            return 1;
+        }   
+        
         protected virtual int VisitFunc(B value)
         {
             return 1;
         }
 
+
         protected sealed class A : Letter
         {
         }
+
 
         protected sealed class B : Letter
         {
         }
 
-        protected abstract class Letter
+
+        protected sealed class C : Letter
+        {
+        }
+
+
+        protected class Letter
         {
         }
     }

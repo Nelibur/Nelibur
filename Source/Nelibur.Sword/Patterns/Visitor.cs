@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Nelibur.Sword.Core;
+using Nelibur.Sword.DataStructures;
+using Nelibur.Sword.Extensions;
 
 namespace Nelibur.Sword.Patterns
 {
@@ -25,11 +27,14 @@ namespace Nelibur.Sword.Patterns
             return new ActionVisitor<TBase>();
         }
 
+
         private sealed class ActionVisitor<TBase> : IActionVisitor<TBase>
             where TBase : class
         {
             private readonly Dictionary<Type, Action<TBase>> _repository =
                 new Dictionary<Type, Action<TBase>>();
+
+            private Option<Action> defaultAction = Option<Action>.Empty;
 
             public IActionVisitor<TBase> Register<T>(Action<T> action)
                 where T : TBase
@@ -41,16 +46,30 @@ namespace Nelibur.Sword.Patterns
             public void Visit<T>(T value)
                 where T : TBase
             {
+                if (_repository.ContainsKey(value.GetType()) == false)
+                {
+                    defaultAction.Do(x => x());
+                    return;
+                }
                 Action<TBase> action = _repository[value.GetType()];
                 action(value);
             }
+
+            public IActionVisitor<TBase> Default(Action action)
+            {
+                defaultAction = action.ToOption();
+                return this;
+            }
         }
+
 
         private sealed class FuncVisitor<TBase, TResult> : IFuncVisitor<TBase, TResult>
             where TBase : class
         {
             private readonly Dictionary<Type, Func<TBase, TResult>> _repository =
                 new Dictionary<Type, Func<TBase, TResult>>();
+
+            private Option<Func<TResult>> defaultAction = Option<Func<TResult>>.Empty;
 
             public IFuncVisitor<TBase, TResult> Register<T>(Func<T, TResult> action)
                 where T : TBase
@@ -62,11 +81,22 @@ namespace Nelibur.Sword.Patterns
             public TResult Visit<T>(T value)
                 where T : TBase
             {
+                if (_repository.ContainsKey(value.GetType()) == false)
+                {
+                    return defaultAction.Map(x => x()).Value;
+                }
                 Func<TBase, TResult> action = _repository[value.GetType()];
                 return action(value);
             }
+
+            public IFuncVisitor<TBase, TResult> Default(Func<TResult> action)
+            {
+                defaultAction = action.ToOption();
+                return this;
+            }
         }
     }
+
 
     public interface IFuncVisitor<in TBase, TResult> : IFluent
         where TBase : class
@@ -86,7 +116,15 @@ namespace Nelibur.Sword.Patterns
         /// <returns>Result value.</returns>
         TResult Visit<T>(T value)
             where T : TBase;
+
+        /// <summary>
+        ///     Register default action.
+        /// </summary>
+        /// <param name="action">Action.</param>
+        /// <returns>Result value.</returns>
+        IFuncVisitor<TBase, TResult> Default(Func<TResult> action);
     }
+
 
     public interface IActionVisitor<in TBase> : IFluent
         where TBase : class
@@ -105,5 +143,11 @@ namespace Nelibur.Sword.Patterns
         /// <param name="value">Type to visit.</param>
         void Visit<T>(T value)
             where T : TBase;
+
+        /// <summary>
+        ///     Register default action.
+        /// </summary>
+        /// <param name="action">Action.</param>
+        IActionVisitor<TBase> Default(Action action);
     }
 }
