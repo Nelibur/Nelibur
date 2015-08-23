@@ -1,6 +1,9 @@
 [Nelibur](http://nelibur.org/) - Message based web service framework on the pure WCF
 =======
 
+[![Nuget downloads](http://img.shields.io/nuget/dt/nelibur.svg)](https://www.nuget.org/packages/Nelibur/)
+
+
 Nelibur is message based web service framework on the pure [**WCF**](http://msdn.microsoft.com/en-us/library/ms731082.aspx). Nelibur simplifies creating high-performance and message based web services and you certainly have **all the power of the WCF**
 
 Use the [Google Group](https://groups.google.com/forum/#!forum/nelibur) for feature requests and
