@@ -14,6 +14,19 @@ namespace Nelibur.Sword.Extensions
             return value;
         }
 
+        public static Option<T> Do<T>(this Option<T> value, Func<T, bool> predicate, Action<T> action)
+        {
+            if (value.HasNoValue)
+            {
+                return value;
+            }
+            if (predicate(value.Value))
+            {
+                action(value.Value);
+            }
+            return value;
+        }
+
         public static Option<T> DoOnEmpty<T>(this Option<T> value, Action action)
         {
             if (value.HasNoValue)

@@ -51,6 +51,26 @@ namespace UnitTests.Nelibur.Sword.Extensions
         }
 
         [Fact]
+        public void Do_TruePredicate_Executed()
+        {
+            var mock = new Mock<Action<int>>();
+            var result = new Option<int>(5).Do(x => true, mock.Object);
+
+            mock.Verify(x => x(It.IsAny<int>()), Times.Once);
+            Assert.NotEqual(default(int), result.Value);
+        }
+
+        [Fact]
+        public void Do_FalsePredicate_NotExecuted()
+        {
+            var mock = new Mock<Action<int>>();
+            Option<int> result = Option<int>.Empty.Do(x => false, mock.Object);
+
+            mock.Verify(x => x(It.IsAny<int>()), Times.Never);
+            Assert.Equal(default(int), result.Value);
+        }
+
+        [Fact]
         public void Do_NotEmpty_NotExecuted()
         {
             var mock = new Mock<Action<int>>();
@@ -167,8 +187,8 @@ namespace UnitTests.Nelibur.Sword.Extensions
         public void SelectMany_Empty_Ok()
         {
             Option<int> result = from x in 5.ToOption()
-                                 from y in Option<int>.Empty
-                                 select x + y;
+                from y in Option<int>.Empty
+                select x + y;
             Assert.True(result.HasNoValue);
         }
 
@@ -176,9 +196,9 @@ namespace UnitTests.Nelibur.Sword.Extensions
         public void SelectMany_NotEmpty_Ok()
         {
             Option<int> result = from x in 5.ToOption()
-                                 from y in 2.ToOption()
-                                 from z in 3.ToOption()
-                                 select x + y + z;
+                from y in 2.ToOption()
+                from z in 3.ToOption()
+                select x + y + z;
             Assert.True(result.HasValue);
             Assert.Equal(10, result.Value);
         }
