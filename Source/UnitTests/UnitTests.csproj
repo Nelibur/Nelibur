@@ -70,6 +70,7 @@
     <Compile Include="ForTests.cs" />
     <Compile Include="Nelibur.Sword\DataStructures\OptionTests.cs" />
     <Compile Include="Nelibur.Sword\ErrorTests.cs" />
+    <Compile Include="Nelibur.Sword\Extensions\DictionaryExtensionsTests.cs" />
     <Compile Include="Nelibur.Sword\Extensions\OptionExtensionsTests.cs" />
     <Compile Include="Nelibur.Sword\Extensions\CollectionExtensionsTests.cs" />
     <Compile Include="Nelibur.Sword\Extensions\EnumerableExtensionsTests.cs" />

@@ -66,6 +66,7 @@
     <Compile Include="DataStructures\Queues\BlockingQueue.cs" />
     <Compile Include="DataStructures\SafeDictionary.cs" />
     <Compile Include="Core\Error.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
     <Compile Include="Extensions\OptionExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\DisposableExtensions.cs" />
