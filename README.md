@@ -4,6 +4,7 @@
 [![Nuget downloads](http://img.shields.io/nuget/dt/nelibur.svg)](https://www.nuget.org/packages/Nelibur/)
 [![Source Browser](https://img.shields.io/badge/Browse-Source-green.svg)](http://sourcebrowser.io/Browse/Nelibur/Nelibur/)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Nelibur/Nelibur/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
 
 Nelibur is message based web service framework on the pure [**WCF**](http://msdn.microsoft.com/en-us/library/ms731082.aspx). Nelibur simplifies creating high-performance and message based web services and you certainly have **all the power of the WCF**
 
