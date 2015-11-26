@@ -28,6 +28,11 @@ namespace Nelibur.ServiceModel.Services.Maps
 
         public override Message CreateResponse(object response)
         {
+            if (response == null)
+            {
+                return _webOperationContext.CreateStreamResponse(Stream.Null, GetResponseContentType());
+            }
+
             var stream = response as Stream;
             if (stream == null)
             {

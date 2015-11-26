@@ -34,6 +34,13 @@ namespace SpecFlowTests.Steps.JsonService
             Assert.True(expected.Equals(actual.Single()));
         }
 
+        [Then(@"I get no data")]
+        public void ThenIGetNoData()
+        {
+            var actual = (List<Order>)ScenarioContext.Current[ResopnseKey];
+            Assert.Equal(0, actual.Count);
+        }
+
         [Then(@"I request data thru Get action")]
         public void ThenIRequestDataThruGetAction(Table table)
         {

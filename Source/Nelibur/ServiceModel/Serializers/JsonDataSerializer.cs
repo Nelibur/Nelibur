@@ -19,6 +19,10 @@ namespace Nelibur.ServiceModel.Serializers
 
         public static TResponse ToValue<TResponse>(Stream value)
         {
+            if (value.Length == 0)
+            {
+                return default(TResponse);
+            }
             if (typeof(TResponse) == typeof(MemoryStream))
             {
                 return ((TResponse)(object)value);
