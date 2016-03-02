@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
+using System.ServiceModel.Description;
 using System.Threading.Tasks;
 using Nelibur.ServiceModel.Contracts;
 using Nelibur.ServiceModel.Services.Headers;
@@ -24,6 +25,26 @@ namespace Nelibur.ServiceModel.Clients
                 throw Error.ConfigurationError("Invalid endpointConfigurationName: Is null or empty");
             }
             _channelFactory = new ChannelFactory<ISoapService>(endpointConfigurationName);
+        }
+        
+        /// <summary>
+        ///     Create new instance of <see cref="SoapServiceClient" /> .
+        /// </summary>
+        /// <param name="binding">WCF binding.</param>
+        /// <param name="endPointAddress">The endpoint address. e.g.: net.tcp://localhost:9999/service</param>
+        public SoapServiceClient(Binding binding, string endPointAddress)
+        {
+            if (string.IsNullOrWhiteSpace(endPointAddress))
+            {
+                throw Error.ConfigurationError("Invalid endPointAddress: Is null or empty");
+            }
+            if (binding == null)
+            {
+                throw Error.ConfigurationError("Invalid binding: Null");
+            }
+            var epAddress = new EndpointAddress(endPointAddress);
+            var serviceEndpoint = new ServiceEndpoint(ContractDescription.GetContract(typeof(ISoapService)), binding, epAddress);
+            _channelFactory = new ChannelFactory<ISoapService>(serviceEndpoint);
         }
 
         public void Delete(object request)
