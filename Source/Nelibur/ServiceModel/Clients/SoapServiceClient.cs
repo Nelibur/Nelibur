@@ -46,8 +46,6 @@ namespace Nelibur.ServiceModel.Clients
             var serviceEndpoint = new ServiceEndpoint(ContractDescription.GetContract(typeof(ISoapService)), binding, epAddress);
             _channelFactory = new ChannelFactory<ISoapService>(serviceEndpoint);
         }
-        
-        public SoapServiceClient()
 
         public void Delete(object request)
         {
