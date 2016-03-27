@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nelibur.Sword", "Source\Nelibur.Sword\Nelibur.Sword.csproj", "{71FF2315-9038-4F0C-A145-00CADF3E881B}"
 EndProject
@@ -40,8 +40,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRestContracts", "Samples\RestService\SimpleRestContracts\SimpleRestContracts.csproj", "{E44B77B9-1517-44F7-BE98-72DE9F5C2A09}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleRestClient", "Samples\RestService\SimpleRestClient\SimpleRestClient.csproj", "{DB6A84B8-0658-4B63-8BD0-BB30E8C576C4}"
-EndProject
-Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ArchitectureOverview", "Source\ArchitectureOverview\ArchitectureOverview.modelproj", "{685B309C-BE23-47AF-965B-8D80EB44D1BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpecFlowTests", "Source\SpecFlowTests\SpecFlowTests.csproj", "{606698F0-75EF-43C6-8CC1-D29C951F69B5}"
 EndProject
@@ -161,14 +159,6 @@ Global
 		{DB6A84B8-0658-4B63-8BD0-BB30E8C576C4}.Release 4.0|Any CPU.Build.0 = Release 4.0|Any CPU
 		{DB6A84B8-0658-4B63-8BD0-BB30E8C576C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB6A84B8-0658-4B63-8BD0-BB30E8C576C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Debug 4.0|Any CPU.ActiveCfg = Debug 4.0|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Debug 4.0|Any CPU.Build.0 = Debug 4.0|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release 4.0|Any CPU.ActiveCfg = Release 4.0|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release 4.0|Any CPU.Build.0 = Release 4.0|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{685B309C-BE23-47AF-965B-8D80EB44D1BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Debug 4.0|Any CPU.ActiveCfg = Debug 4.0|Any CPU
 		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Debug 4.0|Any CPU.Build.0 = Debug 4.0|Any CPU
 		{606698F0-75EF-43C6-8CC1-D29C951F69B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

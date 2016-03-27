@@ -3,7 +3,7 @@ using Nelibur.Sword.Core;
 
 namespace Nelibur.Sword.DataStructures
 {
-    public sealed class Option<T>
+    public struct Option<T>
     {
         private static readonly Option<T> _empty = new Option<T>(default(T), false);
         private readonly bool _hasValue;
