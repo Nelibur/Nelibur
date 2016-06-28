@@ -1,7 +1,7 @@
 [Nelibur](http://nelibur.org/) - Message based web service framework on the pure WCF
 =======
 
-[![Nuget downloads](http://img.shields.io/nuget/dt/nelibur.svg)](https://www.nuget.org/packages/Nelibur/)
+[![Nuget downloads](https://img.shields.io/nuget/v/nelibur.svg)](https://www.nuget.org/packages/Nelibur/)
 [![Source Browser](https://img.shields.io/badge/Browse-Source-green.svg)](http://sourcebrowser.io/Browse/Nelibur/Nelibur/)
 [![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Nelibur/Nelibur/blob/master/LICENSE)
 [![GitHub license](https://img.shields.io/badge/first--timers--only-friendly-blue.svg)](http://www.firsttimersonly.com/)
@@ -387,10 +387,6 @@ public sealed class ClientProcessor : IPost<CreateClientRequest>,
 
 Contributing
 ===================
-
-### Before you do anything else
-
- * Before reporting an issue or creating a pull request, please discuss it in the [Google Group](https://groups.google.com/group/nelibur)
 
 ### To contribute please follow these guidelines:
 
