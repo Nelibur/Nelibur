@@ -20,7 +20,7 @@ namespace SimpleRestService
                 x.Bind<DeleteClientRequest, ClientProcessor>();
                 x.Bind<GetClientRequest, ClientProcessor>();
                 x.Bind<GetCertificateById, ClientProcessor>();
-                x.Bind<MemoryStream, ClientProcessor>();
+                x.Bind<UploadRequest, ClientProcessor>();
             });
         }
 

@@ -59,6 +59,7 @@
     <Compile Include="Contracts\GetCertificateById.cs" />
     <Compile Include="Contracts\GetClientRequest.cs" />
     <Compile Include="Contracts\UpdateClientRequest.cs" />
+    <Compile Include="Contracts\UploadRequest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

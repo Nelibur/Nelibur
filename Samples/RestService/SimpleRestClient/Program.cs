@@ -48,7 +48,14 @@ namespace SimpleRestClient
             client.Delete(deleteRequest);
 
             var certificate = new MemoryStream(File.ReadAllBytes("Certificate.cer"));
-            client.Post(certificate);
+
+            var uploadRequest = new UploadRequest
+            {
+                FileContents = certificate.ToArray(),
+                OriginalFileName = "MyFileName.cert",
+                UploaderId = Guid.NewGuid().ToString()
+            };
+            client.Post(uploadRequest);
 
             Console.ReadKey();
         }

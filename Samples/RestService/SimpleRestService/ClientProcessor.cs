@@ -14,7 +14,7 @@ namespace SimpleRestService
         IDeleteOneWay<DeleteClientRequest>,
         IPut<UpdateClientRequest>,
         IGet<GetCertificateById>,
-        IPostOneWay<MemoryStream>
+        IPostOneWay<UploadRequest>
     {
         private static List<Client> _clients = new List<Client>();
 
@@ -71,10 +71,10 @@ namespace SimpleRestService
             public Guid Id { get; set; }
         }
 
-        public void PostOneWay(MemoryStream request)
+        public void PostOneWay(UploadRequest request)
         {
-            var certificate = new X509Certificate2(request.ToArray());
-            Console.WriteLine(string.Format("Thumbprint: {0}", certificate.Thumbprint));
+            var certificate = new X509Certificate2(request.FileContents);
+            Console.WriteLine(string.Format("Thumbprint: {0}, UploaderId: {1}", certificate.Thumbprint, request.UploaderId));
         }
     }
 }
