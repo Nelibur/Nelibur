@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.ServiceModel.Web;
 using Nelibur.ServiceModel.Services;
 using Nelibur.ServiceModel.Services.Default;
@@ -19,6 +20,7 @@ namespace SimpleRestService
                 x.Bind<DeleteClientRequest, ClientProcessor>();
                 x.Bind<GetClientRequest, ClientProcessor>();
                 x.Bind<GetCertificateById, ClientProcessor>();
+                x.Bind<MemoryStream, ClientProcessor>();
             });
         }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel.Web;
 using Nelibur.ServiceModel.Services.Operations;
 using SimpleRestContracts.Contracts;
@@ -12,7 +13,8 @@ namespace SimpleRestService
         IGet<GetClientRequest>,
         IDeleteOneWay<DeleteClientRequest>,
         IPut<UpdateClientRequest>,
-        IGet<GetCertificateById>
+        IGet<GetCertificateById>,
+        IPostOneWay<MemoryStream>
     {
         private static List<Client> _clients = new List<Client>();
 
@@ -67,6 +69,12 @@ namespace SimpleRestService
         {
             public string Email { get; set; }
             public Guid Id { get; set; }
+        }
+
+        public void PostOneWay(MemoryStream request)
+        {
+            var certificate = new X509Certificate2(request.ToArray());
+            Console.WriteLine(string.Format("Thumbprint: {0}", certificate.Thumbprint));
         }
     }
 }

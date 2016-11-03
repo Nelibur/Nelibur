@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using Nelibur.ServiceModel.Clients;
 using Nelibur.Sword.Extensions;
 using NLog;
@@ -46,8 +47,12 @@ namespace SimpleRestClient
             };
             client.Delete(deleteRequest);
 
+            var certificate = new MemoryStream(File.ReadAllBytes("Certificate.cer"));
+            client.Post(certificate);
+
             Console.ReadKey();
         }
+
 
         private static void PerformanceTest()
         {
