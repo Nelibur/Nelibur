@@ -202,17 +202,51 @@ namespace Nelibur.ServiceModel.Clients
         {
             MessageVersion messageVersion = _channelFactory.Endpoint.Binding.MessageVersion;
             Message message = CreateMessage(request, operationType, messageVersion);
-            ISoapService channel = _channelFactory.CreateChannel();
-            Message result = channel.Process(message);
-            return result.GetBody<TResponse>();
+            ISoapService service = _channelFactory.CreateChannel();
+            using (var channel = service as IClientChannel)
+            {
+                try
+                {
+                    Message result = service.Process(message);
+                    return result.GetBody<TResponse>();
+                }
+                finally
+                {
+                    if (channel.State == CommunicationState.Faulted)
+                    {
+                        channel.Abort();
+                    }
+                    else
+                    {
+                        channel.Close();
+                    }
+                }
+            }
         }
 
         private void SendOneWay(object request, MessageHeader operationType)
         {
             MessageVersion messageVersion = _channelFactory.Endpoint.Binding.MessageVersion;
             Message message = CreateOneWayMessage(request, operationType, messageVersion);
-            ISoapService channel = _channelFactory.CreateChannel();
-            channel.ProcessOneWay(message);
+            ISoapService service = _channelFactory.CreateChannel();
+            using (var channel = service as IClientChannel)
+            {
+                try
+                {
+                    service.ProcessOneWay(message);
+                }
+                finally
+                {
+                    if (channel.State == CommunicationState.Faulted)
+                    {
+                        channel.Abort();
+                    }
+                    else
+                    {
+                        channel.Close();
+                    }
+                }
+            }
         }
     }
 }
