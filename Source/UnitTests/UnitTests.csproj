@@ -82,6 +82,7 @@
     <Compile Include="Nelibur.Sword\Threading\ThreadPools\TinyThreadPoolTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Clients\SoapServiceClientTest.cs" />
     <Compile Include="Nelibur\ServiceModel\Extensions\UrlExtensionsTests.cs" />
+    <Compile Include="Nelibur\ServiceModel\Serializers\ObjectCreatorTests.cs" />
     <Compile Include="Nelibur\ServiceModel\Serializers\UrlSerializerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

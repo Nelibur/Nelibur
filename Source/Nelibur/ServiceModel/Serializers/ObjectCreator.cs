@@ -28,7 +28,7 @@ namespace Nelibur.ServiceModel.Serializers
                 {
                     continue;
                 }
-                string value = UrlEncoder.Decode(collection[key]);
+                string value = collection[key];
                 _setters[key](result, value);
             }
             return result;
