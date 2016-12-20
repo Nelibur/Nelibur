@@ -15,6 +15,12 @@ Scenario: Get data with response
 	| 107  | 105        | 5B1706AC-F33C-43B5-8ACF-BAEB2E73BB95 |
 	And the Soap service was stopped
 
+Scenario: Get data with empty response
+	Given the Soap service was started
+	When I request data by Id '0' thru Get action
+	Then I get no data
+	And the Soap service was stopped
+
 Scenario: GetAsync data with response
 	Given the Soap service was started
 	And I sent data thru Post action
@@ -24,4 +30,10 @@ Scenario: GetAsync data with response
 	Then I get data
 	| Id | Quantity | ProductId                            |
 	| 2  | 7        | 5695F19D-2DFF-401A-8F34-EBC161A6EBB5 |
+	And the Soap service was stopped
+
+Scenario: GetAsync data with empty response
+	Given the Soap service was started
+	When I request data by Id '0' thru GetAsync action
+	Then I get no data
 	And the Soap service was stopped
