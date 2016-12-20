@@ -394,7 +394,7 @@ Contributing
 
 
 ## Contributors
-A big thanks to all of TinyMapper's contributors:
+A big thanks to all of Nelibur's contributors:
  
  
  * [nomailme](https://github.com/nomailme)
