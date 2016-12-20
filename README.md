@@ -391,3 +391,13 @@ Contributing
 * Spaces, not Tabs and no regions
 * Make a branch for each thing you want to do
 * Send a pull request
+
+
+## Contributors
+A big thanks to all of TinyMapper's contributors:
+ 
+ 
+ * [nomailme](https://github.com/nomailme)
+ * [sergiorykov](https://github.com/sergiorykov)
+ * [pushrbx](https://github.com/pushrbx)
+ * [gobixm](https://github.com/gobixm)
