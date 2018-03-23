@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nelibur.Sword", "Source\Nelibur.Sword\Nelibur.Sword.csproj", "{AC806563-F866-4E73-B4C0-CE47440B3D51}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+		VS|Any CPU = VS|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.VS|Any CPU.ActiveCfg = VS|Any CPU
+		{AC806563-F866-4E73-B4C0-CE47440B3D51}.VS|Any CPU.Build.0 = VS|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {54D280F2-5385-4662-BAE0-9D65A8891E0A}
+	EndGlobalSection
+EndGlobal

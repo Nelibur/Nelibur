@@ -28,7 +28,7 @@ namespace Nelibur.Sword.Threading.ThreadPools.Configs
             {
                 throw new ConfigurationErrorsException("TaskQueueController is null");
             }
-            if (string.IsNullOrWhiteSpace(Name))
+            if (string.IsNullOrEmpty(Name))
             {
                 throw new ConfigurationErrorsException("Name is null or white space");
             }

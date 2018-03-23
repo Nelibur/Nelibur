@@ -78,7 +78,7 @@ namespace Nelibur.Sword.Threading.ThreadPools
                 {
                     throw new NullReferenceException();
                 }
-                if (string.IsNullOrWhiteSpace(Name))
+                if (string.IsNullOrEmpty(Name))
                 {
                     throw new ConfigurationErrorsException("WorkThread Name is null or whitespace");
                 }
