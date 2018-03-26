@@ -59,6 +59,18 @@ namespace Nelibur.Sword.Threading.ThreadPools.TaskQueueControllers
             EnqueueCore(item);
         }
 
+        /// <inheritdoc />
+        public bool HasTasks
+        {
+            get
+            {
+                lock (_locker)
+                {
+                    return _taskQueue.Count != 0;
+                }
+            }
+        }
+
         protected abstract IWorkItem DequeueCore();
         protected abstract void EnqueueCore(IWorkItem item);
     }

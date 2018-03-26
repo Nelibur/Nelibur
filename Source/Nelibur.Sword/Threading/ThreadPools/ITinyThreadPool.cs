@@ -21,6 +21,14 @@ namespace Nelibur.Sword.Threading.ThreadPools
         MultiThreadingCapacity MultiThreadingCapacity { get; }
 
         /// <summary>
+        ///     Gets a value indicating whether this instance has tasks.
+        /// </summary>
+        /// <value>
+        ///     <c>true</c> if this instance has tasks; otherwise, <c>false</c>.
+        /// </value>
+        bool HasTasks { get; }
+
+        /// <summary>
         ///     Thread pool name.
         /// </summary>
         string Name { get; }

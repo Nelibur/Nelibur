@@ -63,6 +63,10 @@ namespace Nelibur.Sword.Threading.ThreadPools
             public int MaxThreads { get; private set; }
             public int MinThreads { get; private set; }
             public MultiThreadingCapacity MultiThreadingCapacity { get; private set; }
+
+            /// <inheritdoc />
+            public bool HasTasks => _taskQueueController.HasTasks;
+
             public string Name { get; private set; }
 
             /// <summary>
