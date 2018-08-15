@@ -27,6 +27,48 @@ namespace Nelibur.Sword.Patterns
             return new ActionVisitor<TBase>();
         }
 
+        public static IActionVisitor<TBase, TContext> ForWithContext<TBase, TContext>()
+            where TBase : class
+        {
+            return new ActionVisitor<TBase, TContext>();
+        }
+
+        private sealed class ActionVisitor<TBase, TContext> : IActionVisitor<TBase, TContext>
+            where TBase : class
+        {
+            private readonly Dictionary<Type, Action<TBase, TContext>> _repository =
+                new Dictionary<Type, Action<TBase, TContext>>();
+
+            private Option<Action> _defaultAction = Option<Action>.Empty;
+
+            public IActionVisitor<TBase, TContext> Default(Action action)
+            {
+                _defaultAction = action.ToOption();
+                return this;
+            }
+
+            /// <inheritdoc />
+            public IActionVisitor<TBase, TContext> Register<T>(Action<T, TContext> action)
+                where T : TBase
+            {
+                _repository[typeof(T)] = (x, y) => action((T)x, y);
+                return this;
+            }
+
+            /// <inheritdoc />
+            public void Visit<T>(T value, TContext context)
+                where T : TBase
+            {
+                if (_repository.ContainsKey(value.GetType()) == false)
+                {
+                    _defaultAction.Do(x => x());
+                    return;
+                }
+                Action<TBase, TContext> action = _repository[value.GetType()];
+                action(value, context);
+            }
+        }
+
         private sealed class ActionVisitor<TBase> : IActionVisitor<TBase>
             where TBase : class
         {
@@ -144,6 +186,32 @@ namespace Nelibur.Sword.Patterns
         /// </summary>
         /// <param name="value">Type to visit.</param>
         void Visit<T>(T value)
+            where T : TBase;
+    }
+
+    public interface IActionVisitor<in TBase, TContext> : IFluent
+        where TBase : class
+    {
+        /// <summary>
+        ///     Register default action.
+        /// </summary>
+        /// <param name="action">Action.</param>
+        IActionVisitor<TBase, TContext> Default(Action action);
+
+        /// <summary>
+        ///     Register action on <see cref="T" />.
+        /// </summary>
+        /// <typeparam name="T">Concrete type.</typeparam>
+        /// <param name="action">Action.</param>
+        IActionVisitor<TBase, TContext> Register<T>(Action<T, TContext> action)
+            where T : TBase;
+
+        /// <summary>
+        ///     Visit concrete type.
+        /// </summary>
+        /// <param name="value">Type to visit.</param>
+        /// <param name="context">Context.</param>
+        void Visit<T>(T value, TContext context)
             where T : TBase;
     }
 }
